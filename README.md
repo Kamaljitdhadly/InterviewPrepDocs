@@ -28,6 +28,12 @@ Every topic is written to help you **confidently answer questions out loud** in 
 | 🧩 **Microservices** | Communication, data, gateway, resilience, observability, CQRS | [docs/microservices](docs/microservices/README.md) |
 | 🏗️ **System Design** | Scalability, load balancing, caching, sharding, CAP, queues, framework | [docs/system-design](docs/system-design/README.md) |
 
+### Computer Science Foundations
+
+| Track | Topics | Index |
+|-------|--------|-------|
+| 🧮 **Data Structures** | Big-O, arrays, linked lists, stacks/queues, hash tables, trees, heaps, graphs, sorting | [docs/data-structures](docs/data-structures/README.md) |
+
 ---
 
 ## 🧭 How to use this repo
@@ -55,6 +61,7 @@ Every topic is written to help you **confidently answer questions out loud** in 
 | **Week 6** | Azure Cloud (compute, storage, identity, messaging) |
 | **Week 7** | Microservices (communication, data, resilience, observability) |
 | **Week 8** | System Design (building blocks + practice the framework on real prompts) |
+| **Ongoing** | Data Structures (Big-O + core structures) — revise alongside coding practice |
 
 > Tip: After each topic, close the file and try to explain it out loud from memory. If you can't, re-read the **Quick Recap**.
 

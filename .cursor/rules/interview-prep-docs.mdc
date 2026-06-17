@@ -8,7 +8,7 @@ alwaysApply: false
 
 Build a Markdown-only interview prep knowledge base covering these tracks:
 `csharp`, `dotnet`, `javascript`, `sql-server`, `angular`, `docker`, `kubernetes`, `azure`,
-`microservices`, `system-design`. No build tooling — files must render on GitHub.
+`microservices`, `system-design`, `data-structures`. No build tooling — files must render on GitHub.
 
 ## Structure
 
@@ -33,5 +33,5 @@ Build a Markdown-only interview prep knowledge base covering these tracks:
 
 ## Build order
 
-C# → .NET → JavaScript → SQL Server → Angular → Docker → Kubernetes → Azure → Microservices → System Design.
+C# → .NET → JavaScript → SQL Server → Angular → Docker → Kubernetes → Azure → Microservices → System Design → Data Structures.
 Finish all of a track's topics before moving on; summarize after each track.
