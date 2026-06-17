@@ -5,6 +5,7 @@ import { formatFile as formatAngularClean } from './format-angular-clean.mjs';
 import { formatFile as formatJavascriptClean } from './format-javascript-clean.mjs';
 import { formatFile as formatSqlServerClean } from './format-sqlserver-clean.mjs';
 import { formatFile as formatMicroservicesClean } from './format-microservices-clean.mjs';
+import { formatFile as formatSystemDesignClean } from './format-systemdesign-clean.mjs';
 
 const args = process.argv.slice(2);
 const topicIdx = args.indexOf('--topic');
@@ -22,7 +23,9 @@ const CODE_LANG = topicLower.includes('c#') || topicLower === 'csharp'
       ? 'sql'
       : topicLower.includes('microservices')
         ? 'json'
-        : 'typescript';
+        : topicLower.includes('system design')
+          ? 'json'
+          : 'typescript';
 
 fs.mkdirSync(OUT, { recursive: true });
 
@@ -313,6 +316,7 @@ for (const f of files) {
   else if (topicLower.includes('javascript')) cleaned = formatJavascriptClean(cleaned, baseName);
   else if (topicLower.includes('sql')) cleaned = formatSqlServerClean(cleaned, baseName);
   else if (topicLower.includes('microservices')) cleaned = formatMicroservicesClean(cleaned, baseName);
+  else if (topicLower.includes('system design')) cleaned = formatSystemDesignClean(cleaned, baseName);
   fs.writeFileSync(path.join(OUT, f), cleaned, 'utf8');
   console.log(`cleaned: ${f} (${raw.length} -> ${cleaned.length})`);
 }
