@@ -11,6 +11,7 @@ import { formatFile as formatKubernetesClean } from './format-kubernetes-clean.m
 import { formatFile as formatImportantConceptsClean } from './format-importantconcepts-clean.mjs';
 import { formatFile as formatAzureCloudClean } from './format-azurecloud-clean.mjs';
 import { formatFile as formatGenericClean } from './format-generic-clean.mjs';
+import { formatFile as formatDsaClean } from './format-dsa-clean.mjs';
 
 const args = process.argv.slice(2);
 const topicIdx = args.indexOf('--topic');
@@ -38,7 +39,9 @@ const CODE_LANG = topicLower.includes('c#') || topicLower === 'csharp'
                 ? 'text'
                 : topicLower.includes('testing')
                   ? 'csharp'
-                  : topicLower.includes('azure')
+                  : topicLower.includes('data structures')
+                    ? 'csharp'
+                    : topicLower.includes('azure')
                     ? 'bash'
                     : topicLower.includes('certificates') || topicLower.includes('git') || topicLower === 'bash'
                       ? 'bash'
@@ -385,6 +388,7 @@ for (const f of files) {
   const baseName = f.replace(/\.md$/i, '');
   let cleaned = normalize(raw, baseName);
   if (topicLower.includes('testing')) cleaned = formatGenericClean(cleaned, baseName);
+  else if (topicLower.includes('data structures')) cleaned = formatDsaClean(cleaned, baseName);
   else if (CODE_LANG === 'csharp') cleaned = formatCSharpClean(cleaned);
   else if (topicLower === 'angular') cleaned = formatAngularClean(cleaned, baseName);
   else if (topicLower.includes('javascript')) cleaned = formatJavascriptClean(cleaned, baseName);
