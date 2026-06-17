@@ -3,6 +3,7 @@ import path from 'node:path';
 import { formatFile as formatCSharpClean } from './format-csharp-clean.mjs';
 import { formatFile as formatAngularClean } from './format-angular-clean.mjs';
 import { formatFile as formatJavascriptClean } from './format-javascript-clean.mjs';
+import { formatFile as formatSqlServerClean } from './format-sqlserver-clean.mjs';
 
 const args = process.argv.slice(2);
 const topicIdx = args.indexOf('--topic');
@@ -16,7 +17,9 @@ const CODE_LANG = topicLower.includes('c#') || topicLower === 'csharp'
   ? 'csharp'
   : topicLower.includes('javascript') || topicLower === 'js'
     ? 'javascript'
-    : 'typescript';
+    : topicLower.includes('sql')
+      ? 'sql'
+      : 'typescript';
 
 fs.mkdirSync(OUT, { recursive: true });
 
@@ -67,9 +70,28 @@ const CODE_STRONG_JS = [
   /\.then\s*\(/, /\.catch\s*\(/, /\.map\s*\(/, /\.filter\s*\(/, /\bPromise\./,
   /\blocalStorage/, /\bsessionStorage/, /\bfetch\s*\(/, /\bJSON\./,
 ];
+const CODE_STRONG_SQL = [
+  /\bSELECT\b/i, /\bINSERT\b/i, /\bUPDATE\b/i, /\bDELETE\b/i,
+  /\bCREATE\s+(TABLE|PROCEDURE|FUNCTION|VIEW|INDEX|TRIGGER|DATABASE|SCHEMA)\b/i,
+  /\bALTER\s+(TABLE|PROCEDURE|FUNCTION|VIEW|INDEX|DATABASE)\b/i, /\bDROP\s+(TABLE|PROCEDURE|FUNCTION|VIEW|INDEX|DATABASE)\b/i,
+  /\bFROM\b/i, /\bWHERE\b/i, /\b(INNER|LEFT|RIGHT|FULL|CROSS)\s+JOIN\b/i, /\bJOIN\b/i,
+  /\bDECLARE\b/i, /\bSET\s+@/i, /\bBEGIN\b/i, /\bEND\b/i, /\bGO\b/i,
+  /\bEXEC(UTE)?\b/i, /\bCOLLATE\b/i, /\bTHROW\b/i, /\bRAISERROR\b/i,
+  /\bWITH\s*\(/i, /\bON\s+DELETE\b/i, /\bON\s+UPDATE\b/i,
+  /\bFOREIGN\s+KEY\b/i, /\bPRIMARY\s+KEY\b/i, /\bCONSTRAINT\b/i,
+  /\bINTO\b/i, /\bVALUES\b/i, /\bGROUP\s+BY\b/i, /\bORDER\s+BY\b/i, /\bHAVING\b/i,
+  /\bUNION\b/i, /\bEXCEPT\b/i, /\bINTERSECT\b/i, /\bEXISTS\b/i,
+  /\bBACKUP\b/i, /\bRESTORE\b/i, /\bCHECKPOINT\b/i, /\bDBCC\b/i,
+  /\bUSE\s+\[/i, /\bUSE\s+\w+/i, /\bsp_\w+/i, /\bxp_\w+/i,
+  /^\s*--/, /\bTRY\b/i, /\bCATCH\b/i, /\bTRAN(SACTION)?\b/i, /\bCOMMIT\b/i, /\bROLLBACK\b/i,
+  /\bPARTITION\b/i, /\bFILESTREAM\b/i, /\bMERGE\b/i, /\bOUTPUT\b/i,
+];
 const CODE_STRONG = [
   ...CODE_STRONG_COMMON,
-  ...(CODE_LANG === 'csharp' ? CODE_STRONG_CS : CODE_LANG === 'javascript' ? CODE_STRONG_JS : CODE_STRONG_TS),
+  ...(CODE_LANG === 'csharp' ? CODE_STRONG_CS
+    : CODE_LANG === 'javascript' ? CODE_STRONG_JS
+      : CODE_LANG === 'sql' ? CODE_STRONG_SQL
+        : CODE_STRONG_TS),
 ];
 
 const CODE_WEAK = [
@@ -91,6 +113,28 @@ function looksProse(line) {
   if (!l) return false;
   const words = l.split(/\s+/).length;
   return words >= 6 && /[.:!?]$/.test(l) && !/[{};=]|=>|\$/.test(l);
+}
+
+function isBlockquotePara(p) {
+  return /^>\s?/.test(p) || p.split('\n').every((l) => /^>\s?/.test(l) || l.trim() === '' || /^>$/.test(l.trim()));
+}
+
+function blockquoteLines(p) {
+  const codeLines = [];
+  p.split('\n').forEach((l) => {
+    const stripped = l.replace(/^>\s?/, '').replace(/^>$/, '');
+    codeLines.push(unescapeCommon(stripped));
+  });
+  return codeLines.filter((l) => l.trim() !== '');
+}
+
+function blockquoteLooksLikeCode(lines) {
+  if (!lines.length) return false;
+  if (lines.some((l) => looksStrongCode(l) || looksWeakCode(l))) return true;
+  if (lines.some((l) => /^\s*--/.test(l))) return true;
+  const joined = lines.join(' ');
+  if (/^(Example|Output|Result|Syntax|Usage|Step \d+)/i.test(stripBold(joined)) && lines.length <= 2) return false;
+  return lines.length > 2;
 }
 
 // ---- main per-file transform ----------------------------------------------
@@ -126,6 +170,13 @@ function normalize(raw, fileBaseName) {
   } else if (fileBaseName) {
     out.push(`# ${fileBaseName}`);
     out.push('');
+  }
+
+  // Skip blockquote section titles (e.g. > **SQL Basics**) before TOC
+  while (i < paras.length && isBlockquotePara(paras[i])) {
+    const bq = blockquoteLines(paras[i]);
+    if (blockquoteLooksLikeCode(bq)) break;
+    i++;
   }
 
   // Collect TOC numbered items (may include **bold** questions)
@@ -170,18 +221,24 @@ function normalize(raw, fileBaseName) {
       continue;
     }
 
-    if (/^>\s?/.test(p) || p.split('\n').every((l) => /^>\s?/.test(l) || l.trim() === '' || /^>$/.test(l.trim()))) {
+    if (isBlockquotePara(p)) {
       const codeLines = [];
-      while (j < rest.length && rest[j].split('\n').every((l) => /^>/.test(l.trim()) || l.trim() === '')) {
-        rest[j].split('\n').forEach((l) => {
-          const stripped = l.replace(/^>\s?/, '').replace(/^>$/, '');
-          codeLines.push(unescapeCommon(stripped));
-        });
+      while (j < rest.length && isBlockquotePara(rest[j])) {
+        codeLines.push(...blockquoteLines(rest[j]));
         j++;
       }
-      const code = codeLines.filter((l) => l.trim() !== '');
+      if (!blockquoteLooksLikeCode(codeLines)) {
+        for (const l of codeLines) {
+          const t = l.trim();
+          if (!t) continue;
+          if (isBoldOnly(t)) out.push(`### ${unescapeCommon(boldText(t)).replace(/:+$/, '')}`);
+          else out.push(unescapeCommon(l));
+        }
+        out.push('');
+        continue;
+      }
       out.push('```' + CODE_LANG);
-      out.push(...code);
+      out.push(...codeLines);
       out.push('```');
       out.push('');
       continue;
@@ -241,6 +298,7 @@ for (const f of files) {
   if (CODE_LANG === 'csharp') cleaned = formatCSharpClean(cleaned);
   else if (topicLower === 'angular') cleaned = formatAngularClean(cleaned, baseName);
   else if (topicLower.includes('javascript')) cleaned = formatJavascriptClean(cleaned, baseName);
+  else if (topicLower.includes('sql')) cleaned = formatSqlServerClean(cleaned, baseName);
   fs.writeFileSync(path.join(OUT, f), cleaned, 'utf8');
   console.log(`cleaned: ${f} (${raw.length} -> ${cleaned.length})`);
 }

@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-const FENCE_LANGS = ['typescript', 'html', 'javascript', 'json', 'bash', 'css', 'scss'];
+const FENCE_LANGS = ['typescript', 'html', 'javascript', 'json', 'bash', 'css', 'scss', 'sql'];
 const INDENT_LANGS = ['typescript', 'javascript', 'csharp'];
 
 // ---- helpers ---------------------------------------------------------------
@@ -42,7 +42,10 @@ function isCodeishLine(line) {
     /^\{/.test(t) ||
     /\*ng[A-Z]/.test(t) ||
     /^\)\s*$/.test(t) ||
-    /^template:\s*`/.test(t)
+    /^template:\s*`/.test(t) ||
+    /^(SELECT|INSERT|UPDATE|DELETE|CREATE|ALTER|DROP|DECLARE|SET|BEGIN|END|GO|EXEC|WITH|USE)\b/i.test(t) ||
+    /^\s*--/.test(t) ||
+    /\b(FROM|WHERE|JOIN|INTO|VALUES|COLLATE|GROUP BY|ORDER BY|HAVING|UNION|EXCEPT|INTERSECT)\b/i.test(t)
   ) return true;
   return false;
 }
