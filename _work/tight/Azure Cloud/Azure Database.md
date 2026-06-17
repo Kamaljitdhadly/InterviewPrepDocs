@@ -1,0 +1,135 @@
+# Azure Database
+
+<img src="_work/md/Azure Cloud/media/media/image1.png" style="width:6.5in;height:4.0768in" />
+
+<img src="_work/md/Azure Cloud/media/media/image2.png" style="width:6.5in;height:3.64562in" />
+
+<img src="_work/md/Azure Cloud/media/media/image3.png" style="width:6.5in;height:4.20334in" />
+
+<img src="_work/md/Azure Cloud/media/media/image4.png" style="width:5.92153in;height:3.97083in" />
+
+<img src="_work/md/Azure Cloud/media/media/image5.png" style="width:7.14722in;height:6.46111in" />
+
+<img src="_work/md/Azure Cloud/media/media/image6.png" style="width:9in;height:5.78147in" />
+
+<img src="_work/md/Azure Cloud/media/media/image7.png" style="width:9in;height:5.22207in" />
+
+<img src="_work/md/Azure Cloud/media/media/image8.png" style="width:8.61736in;height:5.55903in" />
+
+<img src="_work/md/Azure Cloud/media/media/image9.png" style="width:7.21597in;height:6.45069in" />
+
+<img src="_work/md/Azure Cloud/media/media/image10.png" style="width:7.99028in;height:5.56875in" />
+
+<img src="_work/md/Azure Cloud/media/media/image11.png" style="width:7.99028in;height:3.83333in" />
+
+<img src="_work/md/Azure Cloud/media/media/image12.png" style="width:9in;height:4.31161in" />
+
+<img src="_work/md/Azure Cloud/media/media/image13.png" style="width:9in;height:4.8122in" />
+
+<img src="_work/md/Azure Cloud/media/media/image14.png" style="width:9in;height:3.99342in" />
+
+<img src="_work/md/Azure Cloud/media/media/image15.png" style="width:9in;height:5.12557in" />
+
+<img src="_work/md/Azure Cloud/media/media/image16.png" style="width:9in;height:2.5677in" />
+
+<img src="_work/md/Azure Cloud/media/media/image17.png" style="width:8.25486in;height:4.72569in" />
+
+<img src="_work/md/Azure Cloud/media/media/image18.png" style="width:9in;height:5.24951in" />
+
+<img src="_work/md/Azure Cloud/media/media/image19.png" style="width:9in;height:4.94615in" />
+
+<img src="_work/md/Azure Cloud/media/media/image20.png" style="width:9in;height:5.12615in" />
+
+<img src="_work/md/Azure Cloud/media/media/image21.png" style="width:9in;height:5.62636in" />
+
+<img src="_work/md/Azure Cloud/media/media/image22.png" style="width:9in;height:5.34554in" />
+
+<img src="_work/md/Azure Cloud/media/media/image23.png" style="width:9in;height:5.69552in" />
+
+<img src="_work/md/Azure Cloud/media/media/image24.png" style="width:9in;height:4.35395in" />
+
+<img src="_work/md/Azure Cloud/media/media/image25.png" style="width:7.94097in;height:3.09792in" />
+
+<img src="_work/md/Azure Cloud/media/media/image26.png" style="width:6.94097in;height:5.77431in" />
+
+<img src="_work/md/Azure Cloud/media/media/image27.png" style="width:9in;height:5.02851in" />
+
+<img src="_work/md/Azure Cloud/media/media/image28.png" style="width:9in;height:4.82435in" />
+
+<img src="_work/md/Azure Cloud/media/media/image29.png" style="width:8.16667in;height:6.18611in" />
+
+<img src="_work/md/Azure Cloud/media/media/image30.png" style="width:8.02917in;height:5.04931in" />
+
+<img src="_work/md/Azure Cloud/media/media/image31.png" style="width:7.60764in;height:3.75486in" />
+
+<img src="_work/md/Azure Cloud/media/media/image32.png" style="width:9in;height:4.91778in" />
+
+<img src="_work/md/Azure Cloud/media/media/image33.png" style="width:9in;height:6.00934in" />
+
+<img src="_work/md/Azure Cloud/media/media/image34.png" style="width:9in;height:3.33383in" />
+
+<img src="_work/md/Azure Cloud/media/media/image35.png" style="width:9in;height:5.0927in" />
+
+<img src="_work/md/Azure Cloud/media/media/image36.png" style="width:9in;height:5.21378in" />
+
+<img src="_work/md/Azure Cloud/media/media/image37.png" style="width:9in;height:2.43238in" />
+
+<img src="_work/md/Azure Cloud/media/media/image38.png" style="width:9in;height:5.26908in" />
+
+<img src="_work/md/Azure Cloud/media/media/image39.png" style="width:9in;height:5.30024in" />
+
+<img src="_work/md/Azure Cloud/media/media/image40.png" style="width:8.85278in;height:3.11736in" />
+
+<img src="_work/md/Azure Cloud/media/media/image41.png" style="width:9in;height:4.50398in" />
+
+<img src="_work/md/Azure Cloud/media/media/image42.png" style="width:7.39236in;height:6.06875in" />
+
+<img src="_work/md/Azure Cloud/media/media/image43.png" style="width:8.78403in;height:5.95069in" />
+
+<img src="_work/md/Azure Cloud/media/media/image44.png" style="width:7.99028in;height:5.17639in" />
+
+<img src="_work/md/Azure Cloud/media/media/image45.png" style="width:8.1375in;height:4.37222in" />
+
+<img src="_work/md/Azure Cloud/media/media/image46.png" style="width:9in;height:4.36043in" />
+
+<img src="_work/md/Azure Cloud/media/media/image47.png" style="width:9in;height:4.86016in" />
+
+<img src="_work/md/Azure Cloud/media/media/image48.png" style="width:6.99028in;height:6.17639in" />
+
+<img src="_work/md/Azure Cloud/media/media/image49.png" style="width:8.80417in;height:5.59792in" />
+
+<img src="_work/md/Azure Cloud/media/media/image50.png" style="width:7.77431in;height:5.05903in" />
+
+<img src="_work/md/Azure Cloud/media/media/image51.png" style="width:5.59792in;height:3.14722in" />
+
+<img src="_work/md/Azure Cloud/media/media/image52.png" style="width:9in;height:4.70212in" />
+
+<img src="_work/md/Azure Cloud/media/media/image53.png" style="width:7.81389in;height:5.95069in" />
+
+<img src="_work/md/Azure Cloud/media/media/image54.png" style="width:9in;height:4.95732in" />
+
+<img src="_work/md/Azure Cloud/media/media/image55.png" style="width:9in;height:4.43489in" />
+
+<img src="_work/md/Azure Cloud/media/media/image56.png" style="width:9in;height:5.84581in" />
+
+<img src="_work/md/Azure Cloud/media/media/image57.png" style="width:8.11736in;height:6.20556in" />
+
+<img src="_work/md/Azure Cloud/media/media/image58.png" style="width:8.83333in;height:4.89236in" />
+
+<img src="_work/md/Azure Cloud/media/media/image59.png" style="width:9in;height:5.08693in" />
+
+<img src="_work/md/Azure Cloud/media/media/image60.png" style="width:9in;height:5.96113in" />
+
+<img src="_work/md/Azure Cloud/media/media/image61.png" style="width:8.50972in;height:4.70556in" />
+
+<img src="_work/md/Azure Cloud/media/media/image62.png" style="width:9in;height:5.22062in" />
+
+<img src="_work/md/Azure Cloud/media/media/image63.png" style="width:9in;height:4.64308in" />
+
+<img src="_work/md/Azure Cloud/media/media/image64.png" style="width:9in;height:5.73689in" />
+
+<img src="_work/md/Azure Cloud/media/media/image65.png" style="width:6.83333in;height:4.80417in" />
+
+<img src="_work/md/Azure Cloud/media/media/image66.png" style="width:9in;height:5.12051in" />
+
+<img src="_work/md/Azure Cloud/media/media/image67.png" style="width:9in;height:5.02639in" />

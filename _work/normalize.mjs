@@ -9,6 +9,7 @@ import { formatFile as formatSystemDesignClean } from './format-systemdesign-cle
 import { formatFile as formatDockerClean } from './format-docker-clean.mjs';
 import { formatFile as formatKubernetesClean } from './format-kubernetes-clean.mjs';
 import { formatFile as formatImportantConceptsClean } from './format-importantconcepts-clean.mjs';
+import { formatFile as formatAzureCloudClean } from './format-azurecloud-clean.mjs';
 
 const args = process.argv.slice(2);
 const topicIdx = args.indexOf('--topic');
@@ -34,7 +35,9 @@ const CODE_LANG = topicLower.includes('c#') || topicLower === 'csharp'
               ? 'yaml'
               : topicLower.includes('important concepts')
                 ? 'text'
-                : 'typescript';
+                : topicLower.includes('azure')
+                  ? 'bash'
+                  : 'typescript';
 
 fs.mkdirSync(OUT, { recursive: true });
 
@@ -135,12 +138,20 @@ const CODE_STRONG_TEXT = [
   /^Copy code$/i,
   /^html$/i, /^javascript$/i, /^sql$/i, /^csharp$/i,
 ];
+const CODE_STRONG_AZURE = [
+  /\baz\s+\w+/i, /\baz\s+login\b/i, /\baz\s+account\b/i, /\baz\s+group\b/i,
+  /\baz\s+vm\b/i, /\baz\s+storage\b/i, /\baz\s+network\b/i, /\baz\s+aks\b/i,
+  /\b--resource-group\b/i, /\b--subscription\b/i, /\b--location\b/i,
+  /\bGet-Az\w+/i, /\bConnect-AzAccount\b/i, /\bNew-Az\w+/i,
+  /\$resourceGroup/i, /\$subscription/i,
+];
+const CODE_STRONG_BASH = [...CODE_STRONG_DOCKER, ...CODE_STRONG_AZURE];
 const CODE_STRONG = [
   ...CODE_STRONG_COMMON,
   ...(CODE_LANG === 'csharp' ? CODE_STRONG_CS
     : CODE_LANG === 'javascript' ? CODE_STRONG_JS
       : CODE_LANG === 'sql' ? CODE_STRONG_SQL
-        : CODE_LANG === 'bash' ? CODE_STRONG_DOCKER
+        : CODE_LANG === 'bash' ? CODE_STRONG_BASH
           : CODE_LANG === 'json' ? CODE_STRONG_MS
             : CODE_LANG === 'yaml' ? CODE_STRONG_K8S
               : CODE_LANG === 'text' ? CODE_STRONG_TEXT
@@ -371,6 +382,7 @@ for (const f of files) {
   else if (topicLower.includes('docker')) cleaned = formatDockerClean(cleaned, baseName);
   else if (topicLower.includes('kubernetes')) cleaned = formatKubernetesClean(cleaned, baseName);
   else if (topicLower.includes('important concepts')) cleaned = formatImportantConceptsClean(cleaned, baseName);
+  else if (topicLower.includes('azure')) cleaned = formatAzureCloudClean(cleaned, baseName);
   fs.writeFileSync(path.join(OUT, f), cleaned, 'utf8');
   console.log(`cleaned: ${f} (${raw.length} -> ${cleaned.length})`);
 }
