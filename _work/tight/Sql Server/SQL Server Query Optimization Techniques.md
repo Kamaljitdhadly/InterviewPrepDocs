@@ -75,7 +75,7 @@ ON Employees (LastName, FirstName);
 
 These are the optimizer's data-access methods — efficiency depends on indexes, selectivity, and data size.
 
-## 1. **Table Scan**
+### Table Scan
 
 Reads **every row** in the table. Occurs when no usable index exists, or the optimizer judges a full scan cheaper (small table or large result set).
 
@@ -90,7 +90,7 @@ Without an index on `Salary`, SQL Server scans all rows.
 
 **Best for:** very small tables.
 
-## 2. **Index Scan**
+### Index Scan
 
 Reads **all entries** in an index. Used when an index exists but the query doesn't narrow results enough for seeks.
 
@@ -105,7 +105,7 @@ Broad range on indexed `DepartmentID` may trigger index scan.
 
 **Best for:** queries returning a large percentage of rows.
 
-## 3. **Index Seek**
+### Index Seek
 
 Navigates the B-tree **directly** to matching rows — most efficient for selective queries.
 
@@ -126,6 +126,33 @@ With an index on `EmployeeID`, SQL Server seeks directly to the row.
 | Index Scan | All index entries | Medium | Index exists; broad range |
 | Index Seek | Targeted rows | Highest | Selective filter on index |
 
+## How can you determine if an index is being used or not?
+
+Use a combination of execution plans, DMVs, and I/O statistics:
+
+1. **Actual Execution Plan** (SSMS) — verify **Index Seek** or **Index Scan** on the expected index vs a table scan.
+2. **sys.dm_db_index_usage_stats** — `user_seeks`, `user_scans`, `user_lookups`, `user_updates` since last restart (reset when index is dropped/recreated).
+3. **sys.dm_db_index_operational_stats** — operational-level seeks/scans/lookups.
+4. **SET STATISTICS IO ON** — compare logical reads with and without the index.
+5. **Query Store** — plan history and regressions after index changes.
+
+```sql
+SELECT
+  OBJECT_NAME(s.object_id) AS TableName,
+  i.name AS IndexName,
+  s.user_seeks,
+  s.user_scans,
+  s.user_lookups,
+  s.user_updates,
+  s.last_user_seek,
+  s.last_user_scan
+FROM sys.dm_db_index_usage_stats AS s
+INNER JOIN sys.indexes AS i
+  ON s.object_id = i.object_id AND s.index_id = i.index_id
+WHERE OBJECT_NAME(s.object_id) = 'YourTableName';
+```
+
+If `user_seeks` and `user_scans` stay at zero while queries filter on indexed columns, the optimizer may be ignoring the index (stale statistics, low selectivity, or implicit conversions).
 ## What are filtered indexes, and when would you use them?
 
 A **filtered index** is a non-clustered index on a **subset** of rows (via `WHERE`), reducing size and maintenance cost while speeding targeted queries.
@@ -418,7 +445,7 @@ Likely shows Index Seek on `DepartmentID`, possible Nested Loops for joins, and 
 
 ## What is statistics in SQL Server and execution plan?
 
-## 1. What is Statistics in SQL Server?
+### What is Statistics in SQL Server?
 
 **Statistics** are metadata describing data distribution in tables/indexes — the optimizer uses them to estimate row counts and choose efficient plans.
 

@@ -492,4 +492,3 @@ Both provide HA/DR, but they differ in protection level and architecture:
 
 - **Use FCI when** you need instance-level HA, rely on SAN/shared-storage redundancy, and want system DBs/jobs/logins protected too.
 - **Use Availability Groups when** you need database-level protection, read-scale (readable secondaries), redundancy across nodes, and flexibility with synchronous/asynchronous replication and DR.
-

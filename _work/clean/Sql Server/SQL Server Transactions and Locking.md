@@ -213,7 +213,7 @@ A lock timeout occurs when a transaction waits too long for a lock to be release
 
 Understanding these lock types and their behaviors can help you optimize SQL Server performance and avoid concurrency issues.
 
-## Explain different types of lock?
+## what is no-lock in sql server?
 
 In SQL Server, NOLOCK is a table hint that allows a query to read data without acquiring locks on the data being read. This can be useful for improving query performance by reducing locking contention, but it comes with trade-offs in terms of data consistency. Here’s a detailed overview:
 
@@ -232,7 +232,9 @@ You can use NOLOCK as a table hint in your SQL queries:
 ```sql
 SELECT *
 FROM Orders WITH (NOLOCK);
-Alternatively, you can use it within the FROM clause for specific tables:
+```
+
+```sql
 SELECT o.OrderID, o.CustomerID, o.OrderDate
 FROM Orders o WITH (NOLOCK)
 JOIN Customers c WITH (NOLOCK) ON o.CustomerID = c.CustomerID
@@ -289,7 +291,7 @@ This query will execute without waiting for locks and without placing locks, whi
 
 The NOLOCK table hint allows for non-blocking reads by avoiding locks on the data being read, which can improve query performance in high-traffic environments. However, it introduces risks related to data consistency, such as dirty reads and non-repeatable reads. Use NOLOCK judiciously and consider alternatives like Read Committed Snapshot Isolation or Snapshot Isolation for better data consistency with less impact on performance.
 
-## Explain isolation levels in SQL Server.
+## Explain isolation levels in SQL Server?
 
 **Isolation levels** - in SQL Server control how transactions interact with each other, particularly concerning the visibility of changes made by one transaction to other transactions. They balance the trade-off between data consistency and system performance by defining how sensitive a transaction is to changes made by other transactions. Here’s a simplified explanation of each isolation level:
 
@@ -429,7 +431,7 @@ To minimize the impact of locking, it's important to keep transactions as short 
 
 ### /////////////////////////////////////////////////////////////////////////////////////////////////////
 
-## What is Phantom Read
+## What is Phantom Read?
 
 **Phantom Read** - A **phantom read** occurs in database systems when a transaction reads a set of rows that satisfy a certain condition, but a subsequent read within the same transaction finds additional rows (or sees some rows disappear) that satisfy the condition due to concurrent modifications by other transactions. This can happen in lower isolation levels such as **Read Committed** and **Repeatable Read**, but it is prevented in the **Serializable** isolation level.
 
@@ -502,8 +504,7 @@ COMMIT TRANSACTION;
 
   - **Serializable**: Prevents phantom reads by acquiring range locks on the set of rows that match the query criteria, thereby preventing other transactions from inserting new rows into the range during the transaction.
 
-### What is Non-repeatable read
-
+## Non-repeatable read ?
 **Non-repeatable read -** A **non-repeatable read** occurs when a transaction reads the same row twice and finds different values due to another concurrent transaction modifying the data in between those reads. This phenomenon is common in isolation levels like **Read Committed** but is prevented in **Repeatable Read** and higher isolation levels.
 
 ### Example of Non-Repeatable Read
@@ -677,7 +678,7 @@ COMMIT TRANSACTION;
 
 - **Not Always Serializable**: Although it avoids many of the anomalies seen in other isolation levels, snapshot isolation is not the same as serializable and can still have issues with certain complex transactions.
 
-### Deadlocks in SQL Server
+## What is a deadlock, and how do you prevent it?
 
 A **deadlock** occurs when two or more transactions are each waiting for resources held by the other, creating a cycle of dependencies that prevents any of the transactions from proceeding. Essentially, each transaction holds a lock that the other transactions need, leading to a standstill where none of the transactions can complete.
 

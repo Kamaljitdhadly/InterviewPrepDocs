@@ -896,7 +896,7 @@ By using SQL Server Agent, you can automate backups with a high degree of contro
 
 5.  **Review and Save** the job.
 
-### Example for backup and recovery model
+## Example for backup and recovery model? Important
 
 To better understand the full, differential, and transaction log backup model, let's use an example scenario. This will illustrate how these backups work together to protect data and facilitate recovery.
 

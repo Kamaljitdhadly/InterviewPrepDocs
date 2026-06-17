@@ -41,7 +41,7 @@
 5. **Reports** — SQL Task runs report SP; export Excel/PDF
 6. **Schedule** — SQL Server Agent runs package nightly
 
-## What is SQL Server Analysis Services (SSAS)?
+## What is SQL Server Analysis Services (SSAS)(Data Warehouse database)?
 
 **SSAS** provides **OLAP** and **data mining** for fast multidimensional analysis on large datasets.
 

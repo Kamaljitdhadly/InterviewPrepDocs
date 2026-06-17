@@ -581,7 +581,7 @@ Normalization vs. Denormalization
 
 - Denormalization: Involves combining tables and adding redundancy to improve read performance in certain scenarios, such as data warehousing or reporting, where speed is prioritized over normalization.
 
-### What are the different types of joins in SQL Server?
+## What are the different types of joins in SQL Server?
 
 In SQL Server, there are several types of joins that you can use to combine rows from two or more tables based on related columns. Here’s a brief overview of each type:
 
@@ -1823,9 +1823,7 @@ GROUP BY MONTH(OrderDate);
 
 - **Using Views**: Once created, views are used in SQL queries just like tables. You can select from views, join them with other tables or views, and use them in various SQL operations.
 
-```sql
 ## What are indexed(a materialized view) views, and how do they differ from regular views?
-```
 
 ### 1. **Indexed Views**
 
@@ -2094,7 +2092,7 @@ SELECT * FROM dbo.GetEmployeeByDepartment('Sales');
 
 - **Functions**: Designed for returning computed values or data. They can be used within SQL queries and should not have side effects.
 
-### What is a trigger? Different Types of trigger
+## What is a trigger? Can you give an example of when to use it?
 
 A trigger in SQL Server is a special kind of stored procedure that automatically executes in response to specific events on a table or view. Triggers are used to enforce business rules, maintain data integrity, and automatically perform tasks when data changes.
 

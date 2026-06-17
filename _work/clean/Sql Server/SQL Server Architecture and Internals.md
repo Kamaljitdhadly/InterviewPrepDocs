@@ -8,7 +8,7 @@
 4. What is the purpose of the tempdb database? How is it used internally?
 5. How does SQL Server handle I/O operations for read and write?
 
-## 1. What is the SQL Server database engine?
+## What is the SQL Server database engine?
 
 The **SQL Server database engine** is the core service for storing, processing, and securing data. It provides controlled access and rapid transaction processing. The engine can handle any data size, from small applications to large enterprise systems, and supports both relational databases (tables) and advanced data structures like JSON, XML, and spatial data.
 
@@ -22,7 +22,7 @@ The SQL Server engine is responsible for:
 
 - **Security**: Provides encryption, authentication, and authorization services.
 
-### 2. Explain the SQL Server architecture, including the role of the storage engine and query processor.
+## Explain the SQL Server architecture, including the role of the storage engine and query processor.
 
 The SQL Server architecture consists of multiple components, primarily divided into:
 
@@ -50,7 +50,7 @@ These two engines work together to ensure efficient querying and storage:
 
 - **Storage Engine**: Manages the physical placement and retrieval of data from disk.
 
-## 3. What are data pages, extents, and allocation units in SQL Server?
+## What are data pages, extents, and allocation units in SQL Server?
 
 In SQL Server, data pages, extents, and allocation units are fundamental concepts related to how data is stored and managed on disk. Understanding these concepts is crucial for database performance tuning and efficient data management. Here’s a detailed explanation:
 
@@ -118,7 +118,7 @@ When you create a table with both regular columns and LOB columns, SQL Server us
 
 These concepts are integral to SQL Server's storage architecture, influencing how data is stored, managed, and retrieved. Understanding them can help you optimize performance and manage your database more effectively.
 
-## 4. What is the purpose of the tempdb database? How is it used internally?
+## What is the purpose of the tempdb database? How is it used internally?
 
 The **tempdb** database is a system database used to store temporary objects and intermediate results. It is re-created each time SQL Server is restarted, meaning it doesn’t persist data between sessions.
 
@@ -134,7 +134,7 @@ The tempdb database is used for:
 
 Internally, **tempdb** helps SQL Server by offloading certain operations that require intermediate or temporary storage, reducing the load on the main databases.
 
-## 5. How does SQL Server handle I/O operations for read and write?
+## How does SQL Server handle I/O operations for read and write?
 
 SQL Server employs several mechanisms to manage **I/O operations**:
 

@@ -29,11 +29,10 @@ WHERE Salary < (SELECT MAX(Salary) FROM Employees);
 
 You can use the ROW_NUMBER() window function to rank the salaries and select the second-highest:
 
-WITH SalaryRank AS (
-
 ```sql
-SELECT Salary, ROW_NUMBER() OVER (ORDER BY Salary DESC) AS Rank
-FROM Employees
+WITH SalaryRank AS (
+  SELECT Salary, ROW_NUMBER() OVER (ORDER BY Salary DESC) AS Rank
+  FROM Employees
 )
 SELECT Salary AS SecondHighestSalary
 FROM SalaryRank
@@ -50,11 +49,10 @@ WHERE Rank = 2;
 
 If multiple employees have the same salary, and you want to find the second distinct salary (considering duplicates), use DENSE_RANK():
 
-WITH SalaryRank AS (
-
 ```sql
-SELECT Salary, DENSE_RANK() OVER (ORDER BY Salary DESC) AS Rank
-FROM Employees
+WITH SalaryRank AS (
+  SELECT Salary, DENSE_RANK() OVER (ORDER BY Salary DESC) AS Rank
+  FROM Employees
 )
 SELECT Salary AS SecondHighestSalary
 FROM SalaryRank
@@ -177,7 +175,9 @@ Subqueries (especially correlated subqueries) can be expensive. Whenever possibl
 
 ```sql
 SELECT Name FROM Employees WHERE DepartmentID = (SELECT DepartmentID FROM Departments WHERE DepartmentName = 'HR');
-Use:
+```
+
+```sql
 SELECT e.Name
 FROM Employees e
 JOIN Departments d ON e.DepartmentID = d.DepartmentID
@@ -243,10 +243,10 @@ Monitoring resource consumption can help identify bottlenecks. High disk I/O or 
 
 ```sql
 SELECT TOP 10
-total_worker_time/execution_count AS AvgCPUTime,
-execution_count,
-total_elapsed_time/execution_count AS AvgElapsedTime,
-query_hash
+  total_worker_time/execution_count AS AvgCPUTime,
+  execution_count,
+  total_elapsed_time/execution_count AS AvgElapsedTime,
+  query_hash
 FROM sys.dm_exec_query_stats
 ORDER BY AvgCPUTime DESC;
 ```

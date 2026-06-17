@@ -152,7 +152,9 @@ Deadlocks occur when transactions circularly wait on each other's locks — SQL 
 ```sql
 SELECT *
 FROM Orders WITH (NOLOCK);
-Alternatively, you can use it within the FROM clause for specific tables:
+```
+
+```sql
 SELECT o.OrderID, o.CustomerID, o.OrderDate
 FROM Orders o WITH (NOLOCK)
 JOIN Customers c WITH (NOLOCK) ON o.CustomerID = c.CustomerID

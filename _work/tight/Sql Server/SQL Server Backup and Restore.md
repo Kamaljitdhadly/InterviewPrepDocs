@@ -447,4 +447,3 @@ TO DISK = 'C:\Backups\YourDatabase_Log.trn';
 - **Full** = baseline
 - **Differential** = since-last-full changes (faster restore than replaying everything)
 - **Log backups** = point-in-time recovery window
-

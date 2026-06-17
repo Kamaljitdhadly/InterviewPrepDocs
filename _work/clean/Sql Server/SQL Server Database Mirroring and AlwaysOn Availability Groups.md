@@ -12,6 +12,8 @@
 8. How do you set up and configure AlwaysOn in SQL Server?
 9. What is the difference between AlwaysOn Failover Cluster Instances (FCI) and AlwaysOn Availability Groups?
 
+## Difference between High Availability (HA) and Disaster Recovery (DR)
+
 **High Availability (HA)** and **Disaster Recovery (DR)** are two crucial concepts in ensuring the continuity of services and minimizing downtime in IT systems, particularly databases like SQL Server. Though they are related, they address different aspects of system reliability.
 
 ### 1. High Availability (HA)

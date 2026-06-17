@@ -135,7 +135,7 @@ The SSIS package can be scheduled to run every night using **SQL Server Agent**,
 
 This real-world example showcases how SSIS can streamline data consolidation, transformation, and reporting in a large-scale retail operation.
 
-## What is SQL Server Analysis Services (SSAS)?
+## What is SQL Server Analysis Services (SSAS)(Data Warehouse database)?
 
 **SQL Server Analysis Services (SSAS)** is a component of Microsoft SQL Server used for **online analytical processing (OLAP)** and **data mining**. SSAS helps businesses analyze large amounts of data and gain insights for decision-making. It enables the creation of **multidimensional models**, **tabular models**, and **data mining models**, allowing users to analyze data from multiple perspectives.
 
@@ -249,15 +249,17 @@ SSAS is crucial for businesses that need fast, efficient analysis of **large vol
 
 4.  **Define a Data Source**: The data source is where the report will pull its data from. Right-click the **Data Sources** folder in Solution Explorer and choose "Add Data Source." Specify the connection string to connect to a SQL Server or another database.
 
+**Example connection string:**
+
 ```sql
-Example connection string:
 Data Source=YourServerName;Initial Catalog=YourDatabaseName;
 ```
 
 5.  **Create a Dataset**: The dataset defines the query or data that will be used in the report. Right-click the **Datasets** folder, select "Add Dataset," and define the SQL query or stored procedure that retrieves the data.
 
+**Example query:**
+
 ```sql
-Example query:
 SELECT ProductName, SUM(SalesAmount) AS TotalSales
 FROM Sales
 GROUP BY ProductName;
@@ -342,9 +344,9 @@ CREATE DATABASE SalesDataWarehouse;
 
 ```sql
 CREATE TABLE Product_Dim (
-ProductID INT PRIMARY KEY,
-ProductName NVARCHAR(100),
-Category NVARCHAR(50)
+  ProductID INT PRIMARY KEY,
+  ProductName NVARCHAR(100),
+  Category NVARCHAR(50)
 );
 ```
 
@@ -352,11 +354,11 @@ Category NVARCHAR(50)
 
 ```sql
 CREATE TABLE Sales_Fact (
-SalesID INT PRIMARY KEY,
-ProductID INT FOREIGN KEY REFERENCES Product_Dim(ProductID),
-CustomerID INT,
-SalesDate DATE,
-SalesAmount DECIMAL(18, 2)
+  SalesID INT PRIMARY KEY,
+  ProductID INT FOREIGN KEY REFERENCES Product_Dim(ProductID),
+  CustomerID INT,
+  SalesDate DATE,
+  SalesAmount DECIMAL(18, 2)
 );
 ```
 

@@ -243,4 +243,3 @@ EXEC msdb.dbo.sp_add_alert
 ### Summary
 
 Configure **Database Mail** first, then create **Operators** and **Alerts**, and finally connect them to jobs via the job **Notifications** settings so you get timely, actionable failure alerts.
-
