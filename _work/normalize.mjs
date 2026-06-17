@@ -10,6 +10,7 @@ import { formatFile as formatDockerClean } from './format-docker-clean.mjs';
 import { formatFile as formatKubernetesClean } from './format-kubernetes-clean.mjs';
 import { formatFile as formatImportantConceptsClean } from './format-importantconcepts-clean.mjs';
 import { formatFile as formatAzureCloudClean } from './format-azurecloud-clean.mjs';
+import { formatFile as formatAzureDevOpsClean } from './format-azuredevops-clean.mjs';
 import { formatFile as formatGenericClean } from './format-generic-clean.mjs';
 import { formatFile as formatDsaClean } from './format-dsa-clean.mjs';
 
@@ -41,8 +42,10 @@ const CODE_LANG = topicLower.includes('c#') || topicLower === 'csharp'
                   ? 'csharp'
                   : topicLower.includes('data structures')
                     ? 'csharp'
-                    : topicLower.includes('azure')
-                    ? 'bash'
+                    : topicLower.includes('devops')
+                      ? 'yaml'
+                      : topicLower.includes('azure')
+                        ? 'bash'
                     : topicLower.includes('certificates') || topicLower.includes('git') || topicLower === 'bash'
                       ? 'bash'
                       : 'typescript';
@@ -159,6 +162,12 @@ const CODE_STRONG_GIT = [
   /\bgenpkey\b/i, /\breq\s+-new\b/i, /\bx509\b/i,
   /^\s*(ls|cd|pwd|mkdir|rm|cp|mv|cat|grep|chmod|chown|sudo|curl|wget|ssh|echo|export|head|tail|find|sort|uniq|wc|df|du|ps|kill|tar|gzip)\b/i,
 ];
+const CODE_STRONG_DEVOPS = [
+  /^trigger:/i, /^pool:/i, /^variables:/i, /^stages:/i, /^jobs:/i, /^steps:/i,
+  /vmImage:/i, /displayName:/i, /^\s*-\s+task:/i, /^\s*-\s+script:/i,
+  /kubernetesServiceEndpoint:/i, /containerRegistry:/i, /azure-pipelines/i,
+  /Docker@\d/i, /Kubernetes@\d/i, /UseDotNet@\d/i,
+];
 const CODE_STRONG_BASH = [...CODE_STRONG_DOCKER, ...CODE_STRONG_AZURE, ...CODE_STRONG_GIT];
 const CODE_STRONG = [
   ...CODE_STRONG_COMMON,
@@ -167,7 +176,7 @@ const CODE_STRONG = [
       : CODE_LANG === 'sql' ? CODE_STRONG_SQL
         : CODE_LANG === 'bash' ? CODE_STRONG_BASH
           : CODE_LANG === 'json' ? CODE_STRONG_MS
-            : CODE_LANG === 'yaml' ? CODE_STRONG_K8S
+            : CODE_LANG === 'yaml' ? [...CODE_STRONG_K8S, ...CODE_STRONG_DEVOPS]
               : CODE_LANG === 'text' ? CODE_STRONG_TEXT
                 : CODE_STRONG_TS),
 ];
@@ -398,6 +407,7 @@ for (const f of files) {
   else if (topicLower.includes('docker')) cleaned = formatDockerClean(cleaned, baseName);
   else if (topicLower.includes('kubernetes')) cleaned = formatKubernetesClean(cleaned, baseName);
   else if (topicLower.includes('important concepts')) cleaned = formatImportantConceptsClean(cleaned, baseName);
+  else if (topicLower.includes('azure') && topicLower.includes('devops')) cleaned = formatAzureDevOpsClean(cleaned, baseName);
   else if (topicLower.includes('azure')) cleaned = formatAzureCloudClean(cleaned, baseName);
   else if (topicLower.includes('certificates') || topicLower.includes('git') || topicLower === 'bash') {
     cleaned = formatGenericClean(cleaned, baseName);
