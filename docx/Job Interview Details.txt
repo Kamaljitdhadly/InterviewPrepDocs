@@ -1,0 +1,538 @@
+CMMI Level 5 Companies:
+Infosys
+HCL
+Capgemini
+Mphasis
+LTIMindtree
+Tech Mahindra
+Hexaware Technologies
+Infogain
+CESLTD
+
+
+
+Likely CMMI Level 3 or Unknown Level:
+Virtusa
+Incedo
+Iris Software
+EvalueServe / AgreeYa
+Concentrix
+Publicis Resources
+R1 RCM
+EY Talent Acquisition
+Programming.com
+Damco Solutions
+iLink Digital
+Harbinger Group
+Saven Nova Technologies
+Net Connect
+Qualfon
+ISCS
+Novigo Solutions
+Dyne Hawell
+NextGen Event
+iBridge TechSoft Pvt Ltd
+Ntrix Innovation
+Xceedance
+Iris Idea Tech Solution
+TalentoHR
+Catalyst IT
+BuzzClan
+Netcarrots
+Zcon Solutions
+
+=========================================================================================================
+
+Company : Programming.com 
+Interview Schedule -  12/10/2024 5:00 PM
+First round done
+
+Company : Qualfon 
+Interview Schedule -  14/10/2024 5:00 PM,  15/10/2024 7:30 PM
+First round done
+
+
+Company : Infogain
+Interview Schedule -  14/10/2024 Today 3:00 PM
+First round done
+
+
+
+Company : R1 RCM
+Interview Schedule -  14/10/2024 6:00 PM
+screening done
+
+========================================
+
+
+Company : Programming.com 
+Test Completed -  15/10/2024 
+
+
+
+Company : Damco Solutions
+Test Completed -  15/10/2024 
+
+
+=====================================
+
+
+Company : Iris Idea Tech Solution
+Interview Schedule -  16/10/2024 11: 00 AM
+
+
+Company : publicis resources
+Interview Schedule -  16/10/2024 1:00 PM
+
+
+Company : Damco Solutions
+Interview Schedule -  16/10/2024 2:00 PM
+
+
+Company : CESLTD
+Interview Schedule -  16/10/2024 3: 00 PM
+
+
+
+=====================================
+
+Company : Capgemini
+Interview Schedule -  17/10/2024 12: 00 PM
+
+
+Company : iBridge TechSoft
+Interview Schedule -  17/10/2024 1: 00 PM
+
+
+Company : Iris Software
+Interview Schedule -  17/10/2024 2: 30 PM
+
+
+Company : CESLTD
+Interview Schedule -  17/10/2024 3: 30 PM
+
+
+Company : programming.com
+Interview Schedule -  17/10/2024 4: 30 PM
+
+
+=====================================
+
+
+Company : CES LTD
+Interview Schedule - 18/10/2024 11:00 AM
+
+
+Company : EvalueServe /AgreeYa
+Interview Schedule - 18/10/2024 3: 00 PM (cancelled)
+
+
+Company : publicis resources
+Interview Schedule - 18/10/2024 3: 30 PM 
+
+
+
+Company : Capgemini
+Interview Schedule - 18/10/2024 4: 00 PM   (re-Schedule)
+
+=======================================
+
+
+Company : Ntrix Innovation
+Interview Schedule -  19/10/2024 face to face
+
+
+Company : Virtusa
+Interview Schedule -  19/10/2024 2:00 PM
+
+
+=====================================
+
+
+Company : Iris Idea Tech Solution
+Interview Schedule -  21/10/2024 04: 00 PM
+
+
+Company : Qualfon
+Interview Schedule -  21/10/2024 6: 00 PM
+
+
+
+=====================================
+
+
+
+Company : Infosys Limited
+Interview Schedule -  22/10/2024 11: 00 AM
+
+
+=====================================
+
+
+
+=========================================================================================================
+
+
+
+Infosys
+Client : Infosys
+Company : Infosys
+Location: Gurugram
+
+
+------------------------------------------------------------------------
+
+
+Sai Sankar Shirdi Tangella
+Client : Infosys
+Company : SAGE IT
+Location: Mohali
+
+------------------------------------------------------------------------
+
+
+Deepalakshmi
+Client : Infosys
+Company : Bahwan CyberTek Consulting
+Location: Mohali
+
+
+------------------------------------------------------------------------
+
+
+Naman Jain
+Client : Infosys
+Company : Consign Space Solutions
+Location: Mohali
+
+
+------------------------------------------------------------------------
+
+
+Subash Swaminathan (Careernet)
+Client : hcl (careernet payroll)
+Company : careernet payroll
+Location: 
+
+------------------------------------------------------------------------
+
+
+
+Kalpana Dagar 
+Client : LTIMINDTREE
+Company : LTIMINDTREE
+Location: 
+
+
+------------------------------------------------------------------------
+
+
+Sudhakar Bhoomarao
+Client : Tech Mahindra
+Company : Tech Mahindra
+Location: 
+
+-----------------------------------------------------------------------
+
+EY Talent Acquisition
+Client : EY Talent Acquisition
+Company : EY Talent Acquisition
+Location: Hybrid(Gurgaon)
+
+------------------------------------------------------------------------
+
+
+Payal Shah IHRS India
+Client : Mphasis
+Company : Mphasis
+Location: Gurugram  (Hybrid)
+
+----------------------------------------------------------------------
+
+
+Menna
+Client : Infogain
+Company : Consulting
+Location: 
+
+-----------------------------------------------------------------------
+
+Damco Solutions
+Client : Damco Solutions
+Company : Damco Solutions
+Location: Gurugram, Noida
+
+
+-----------------------------------------------------------------------
+
+Akshay Tutoo
+Client : AgreeYa Solution
+Company : AgreeYa Solution
+Location: Gurgaon Hybrid
+
+----------------------------------------------------------------------
+
+
+StatusNeo
+Client : StatusNeo
+Company : StatusNeo
+Location: 
+
+-----------------------------------------------------------------------
+
+sneha
+Client : Qualfon
+Company : Qualfon
+Location: Remote 
+Shift timings:- 2 to 11 PM (UK Shift)
+Position Type:- Permanent
+
+
+----------------------------------------------------------------------
+
+
+
+Net Connect
+Client : Net Connect
+Company : Net Connect
+Location: 
+
+
+----------------------------------------------------------------------
+
+
+Programming.com
+Client : Harbinger Group
+Company : Programming.com
+Location: 
+
+------------------------------------------------------------------------
+
+
+
+
+Pallavi
+Client : Harbinger Group
+Company : Harbinger Group
+Location: 
+
+
+----------------------------------------------------------------------
+
+
+
+Dyne Hawell
+Client : Dyne Hawell
+Company : Dyne Hawell
+Location: 
+
+------------------------------------------------------------------------
+
+
+Suresh Kommani 
+Client : NTT DATA
+Company : SAVEN NOVA TECHNOLOGIES
+Location: Noida
+
+
+
+------------------------------------------------------------------------
+
+
+Saumya
+Client : R1 RCM
+Company : R1 RCM
+Location: NOIDA(Hybrid)
+Shift timings:- 12:00 PM TO 9:00 PM
+
+
+------------------------------------------------------------------------
+
+
+Pandurang Tukaram Pawar
+Client : Capgemini
+Company : Capgemini
+Location: Pune(need to discuss)
+Interview Schedule - 4:30PM
+
+
+------------------------------------------------------------------------
+
+
+Nandu
+Client : iLink Digital
+Company : iLink Digital
+Location: 
+
+
+------------------------------------------------------------------------
+
+
+NextGen Event
+Client : NextGen Event
+Company : NextGen Event
+Location: 
+
+
+------------------------------------------------------------------------
+
+
+Hexaware Technologies
+Client : Hexaware Technologies
+Company : Hexaware Technologies
+Location: Noida
+
+
+
+----------------------------------------------------------------------
+
+
+
+Nikhil Tyagi
+Client : iBridge TechSoft Pvt Ltd
+Company : iBridge TechSoft Pvt Ltd
+Location: Gurgaon
+
+
+
+---------------------------------------------------------------------
+
+
+Rita
+Client : Xceedance
+Company : Xceedance
+Location: Gurgaon/Noida
+
+
+
+---------------------------------------------------------------------
+
+
+
+Kavibharathi
+Client : CESLTD
+Company : CESLTD
+Location: remote
+
+
+
+---------------------------------------------------------------------
+
+
+Concentrix
+Client : Concentrix
+Company : Concentrix
+Location: remote
+
+
+
+---------------------------------------------------------------------
+
+
+Rajshree
+Client : Ntrix Innovation
+Company : Ntrix Innovation
+Location: remote
+
+
+---------------------------------------------------------------------
+
+
+Iris Idea Tech Solution
+Client : Iris Idea Tech Solution
+Company : Iris Idea Tech Solution
+Location: remote
+
+
+---------------------------------------------------------------------
+
+
+Virtusa
+Client : Virtusa
+Company : Consulting
+Location: Hybrid(Gurgaon)
+
+
+---------------------------------------------------------------------
+
+
+
+nihan
+Client : Intelegencia
+Company : talentohr
+Location: Noida,Sector 63
+
+
+---------------------------------------------------------------------
+
+
+Catalyst IT
+Client : Catalyst IT
+Company : Catalyst IT
+Location: remote
+
+
+---------------------------------------------------------------------
+
+
+Iris Software
+Client : Iris Software
+Company : Iris Software
+Location: hybrid(delhi)
+
+
+---------------------------------------------------------------------
+
+
+
+BuzzClan
+Client : BuzzClan
+Company : BuzzClan
+Location: Mohali(Night Shift)
+
+
+---------------------------------------------------------------------
+
+
+umabharathi.muthky
+Client : HCL
+Company : ISCS
+Location: Noida
+
+
+---------------------------------------------------------------------
+
+
+
+Preshant
+Client : Incedo
+Company : Incedo
+Location: 
+
+---------------------------------------------------------------------
+
+
+
+Vinoth 
+Client : Novigo Solutions
+Company : Novigo Solutions
+Location: Remote
+
+---------------------------------------------------------------------
+
+
+Harshleen
+Client : Netcarrots 
+Company : Netcarrots 
+Location: Noida
+
+
+---------------------------------------------------------------------
+
+Shoban Samuel 
+Client : Zcon Solutions
+Company : Zcon Solutions
+Location: Remote
+
+
+---------------------------------------------------------------------

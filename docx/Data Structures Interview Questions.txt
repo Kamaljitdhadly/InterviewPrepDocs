@@ -1,0 +1,110 @@
+Data Structure Basics
+What are the basic types of data structures?
+Explain the concept of a data structure and its importance.
+How do you decide which data structure to use for a given problem?
+What are the time complexities of basic operations (insertion, deletion, search) in common data structures?
+
+
+
+Arrays
+What is an array?
+How do you implement a dynamic array?
+What are the advantages and disadvantages of using arrays?
+Explain how to find the maximum and minimum elements in an array.
+How do you reverse an array?
+How do you remove duplicates from an array?
+How do you find the intersection of two arrays?
+How do you find the union of two arrays?
+What are the methods to find the "Kth" largest/smallest element in an array?
+Explain the concept of "sliding window" and how it's used in array problems.
+
+
+
+Linked Lists
+What is a linked list?
+Explain the difference between singly linked lists and doubly linked lists.
+How do you reverse a linked list?
+How do you detect a cycle in a linked list?
+What is the difference between a linked list and an array?
+How do you merge two sorted linked lists?
+How do you find the middle element of a linked list?
+What is a skip list, and how does it improve search operations compared to a regular linked list?
+How do you remove the Nth node from the end of a linked list?
+
+
+
+Stacks
+What is a stack?
+How do you implement a stack using arrays or linked lists?
+Explain the stack operations (push, pop, peek) and their complexities.
+What are some real-world applications of stacks?
+How do you use a stack to check for balanced parentheses in an expression?
+How can you implement a stack using two queues?
+How can you implement a queue using two stacks?
+How do you evaluate a postfix expression using a stack?
+
+
+
+Queues
+What is a queue?
+How do you implement a queue using arrays or linked lists?
+Explain the queue operations (enqueue, dequeue, front) and their complexities.
+What is the difference between a queue and a stack?
+What are circular queues and priority queues?
+What is a double-ended queue (deque), and how is it different from a regular queue?
+How do you implement a circular buffer using a queue?
+How do you perform a level-order traversal of a binary tree using a queue?
+
+
+
+Trees
+What is a binary tree?
+Explain the difference between binary trees and binary search trees (BST).
+How do you perform an inorder, preorder, and postorder traversal of a binary tree?
+What is a balanced tree?
+How do you find the height of a binary tree?
+What is a heap, and how is it different from a binary search tree?
+How do you convert a binary search tree (BST) to a doubly linked list?
+What is a red-black tree, and what are its properties?
+What is an AVL tree, and how does it maintain balance?
+Explain the concept of a B-tree and where it is commonly used.
+
+
+
+
+Graphs
+What is a graph?
+Explain the difference between directed and undirected graphs.
+How do you represent a graph in memory (adjacency matrix vs. adjacency list)?
+What are graph traversal algorithms (BFS, DFS)?
+How do you detect a cycle in a graph?
+What is the difference between a weighted and unweighted graph?
+What is Dijkstra's algorithm, and how is it used for finding the shortest path in a weighted graph?
+Explain Bellman-Ford algorithm and how it handles negative weights.
+What is Floyd-Warshall algorithm and its use in finding shortest paths between all pairs of vertices?
+How do you find the Minimum Spanning Tree (MST) using Prim's or Kruskal's algorithm?
+
+
+
+
+Hashing
+What is hashing?
+Explain hash functions and their properties.
+What are hash tables, and how do they handle collisions?
+What is the difference between linear probing and separate chaining in hash tables?
+What is a perfect hash function, and why is it important?
+Explain the concept of double hashing in open addressing for hash tables.
+How do you handle hash collisions in a cryptographic hash function?
+
+
+
+Miscellaneous
+How do you design a data structure that supports insert, delete, getRandom in constant time?
+What are the differences between a priority queue and a regular queue?
+How do you implement an auto-complete feature using a data structure?
+What is a Bloom filter, and what are its use cases?
+How do you design a data structure that supports insertions and deletions while keeping track of the maximum element?
+What is a Trie, and where is it used?
+Explain the concept of a segment tree and its use cases.
+What is a disjoint-set data structure (union-find), and how does it work?
+How do you implement a LRU (Least Recently Used) cache?

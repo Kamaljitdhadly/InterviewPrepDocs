@@ -1,0 +1,135 @@
+Azure Cloud Basics
+What are the various models available for cloud deployment?
+What is Azure?
+Explain the core services provided by Azure.
+What is Account and Subscription?
+What are Azure Resource Groups?
+What is the Azure Portal, and how is it used?
+What is Azure Resource Manager (ARM)?
+What are the different types of Azure subscriptions?
+Explain the concept of Azure regions and availability zones.
+What is the difference between SaaS, PaaS, and IaaS?
+Define Azure Service Level Agreements (SLA)?
+Explain Setting Budget in Azure?
+
+
+
+
+Azure Compute
+What are Azure Virtual Machines?
+Explain Azure App Services and their use cases.
+What is Azure Functions and how does it work?
+What are Azure Kubernetes Services (AKS)?
+What is Azure Batch, and how is it used?
+How does Azure Functions integrate with other Azure services?
+
+
+
+Azure Storage
+What are the different types of Azure Storage accounts?
+Explain the types of storage available in Azure (Blob, Table, Queue, File).
+What is Azure Blob Storage, and what are its types?
+How does Azure File Storage differ from Azure Blob Storage?
+What is Azure Disk Storage?
+
+
+
+
+Azure Networking
+What is Azure Virtual Network (VNet)?
+Explain the concept of Network Security Groups (NSG).
+What is Azure VPN Gateway?
+What are Azure Load Balancers and Application Gateways?
+What is Azure CDN and how does it work?
+
+
+
+
+Azure Security
+What is Azure Active Directory (AD)?
+Explain Azure Key Vault and its use cases.
+What are Azure Security Center and Azure Sentinel?
+How does Azure implement identity and access management?
+What are Azure Policies and Azure Blueprints?
+
+
+
+
+Azure Databases
+What is Azure SQL Database?
+Explain Azure Cosmos DB and its benefits.
+What is Azure Database for MySQL/PostgreSQL?
+How does Azure SQL Data Warehouse differ from Azure SQL Database?
+What are Azure Table Storage and Azure Redis Cache?
+
+
+
+
+
+Azure Messaging
+What is Azure Storage Queue?
+Explain the concept of Azure Event Grid and its use cases?
+What is Azure Service Bus and how does it differ from Azure Event Hubs?
+What are Azure Logic Apps and how are they used for workflow automation?
+
+
+
+
+Azure Monitoring and Management
+What is Azure Monitor?
+Explain the role of Azure Log Analytics.
+How does Azure Automation work?
+What are Azure Advisor recommendations?
+What is Application Insights and how is it used?
+
+
+
+
+Azure Governance
+What is Azure Management Groups and how does it help with governance?
+How do Azure Tags assist in resource management?
+What are Azure Blueprints and how do they help in managing Azure environments?
+What is Azure Cost Management and how do you use it to manage and optimize costs?
+
+
+
+
+
+Azure Scalability and Performance
+What are Azure Autoscale and how does it work?
+How can you optimize performance in Azure Virtual Machines?
+What are Azure Resource Limits and Quotas?
+Explain Azure Traffic Manager and its role in traffic distribution.
+
+
+
+
+Azure Backup and Disaster Recovery
+What is Azure Backup and how does it work?
+How does Azure Site Recovery provide disaster recovery solutions?
+What are the different backup options available in Azure?
+How do you configure and manage backup policies in Azure Backup?
+
+
+
+Azure Compliance and Security
+What are Azure Security Best Practices?
+Explain the shared responsibility model in Azure security.
+What is Azure Policy and how does it help enforce compliance?
+How do Azure Security Center and Azure Sentinel help with threat detection and response?
+
+
+
+Azure Migration
+What are the common strategies for migrating on-premises workloads to Azure?
+How does Azure Migrate assist with the migration process?
+What are Azure Data Box and Azure Site Recovery used for in migration scenarios?
+How do you plan and execute a cloud migration strategy using Azure tools?
+
+
+
+Azure Architecture and Design
+What are some best practices for designing highly available solutions in Azure?
+Explain the concept of microservices architecture in the context of Azure.
+How do you design a cost-effective architecture using Azure services?
+What are the considerations for designing secure and compliant solutions in Azure?

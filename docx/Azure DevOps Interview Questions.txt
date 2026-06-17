@@ -1,0 +1,79 @@
+Azure DevOps Basics
+What is Azure DevOps, and what are its main components?
+How does Azure DevOps differ from traditional software development methods?
+Explain the key benefits of using Azure DevOps.
+
+
+
+
+Azure DevOps Pipelines
+What are Azure Pipelines, and how do they support CI/CD?
+How do you create a build pipeline in Azure DevOps?
+What is the purpose of a release pipeline in Azure DevOps?
+Describe the difference between YAML and Classic pipelines in Azure DevOps.
+How do you handle multi-stage pipelines in Azure DevOps?
+
+
+
+
+Azure DevOps Source Control
+What types of source control systems does Azure DevOps support?
+How do you integrate Git repositories with Azure DevOps?
+Explain how branching and merging work in Azure Repos.
+
+
+
+Azure DevOps Work Items and Boards
+What are work items in Azure DevOps, and how are they used?
+How do you set up and manage boards in Azure DevOps?
+Describe the process of creating and managing user stories, tasks, and bugs.
+
+
+
+
+Azure DevOps Artifact Management
+What are Azure Artifacts, and how do they fit into the DevOps lifecycle?
+How do you publish and consume packages using Azure Artifacts?
+Describe how to use NuGet, npm, and Maven feeds in Azure DevOps.
+
+
+
+Azure DevOps Configuration and Deployment
+What is Infrastructure as Code (IaC), and how is it implemented in Azure DevOps?
+How do you deploy applications to Azure using Azure DevOps?
+Explain the use of deployment groups in Azure DevOps.
+
+
+
+Azure DevOps Security and Compliance
+How do you manage security and access controls in Azure DevOps?
+What are Service Connections in Azure DevOps, and how are they used?
+Describe how Azure DevOps supports compliance and auditing requirements.
+
+
+
+
+Azure DevOps Monitoring and Logging
+How can you monitor the performance and health of your pipelines?
+What are some best practices for logging and troubleshooting issues in Azure DevOps?
+
+
+
+
+Azure DevOps Advanced Topics
+How do you implement automated testing in Azure DevOps pipelines?
+What is the role of Azure DevOps Extensions, and how can you use them?
+Describe how to integrate Azure DevOps with other tools and services.
+Explain Continuous Integration, Continuous Delivery, Continuous Deployment (CI/CD)
+How does Azure DevOps facilitate Continuous Integration (CI)?
+What strategies can be used for Continuous Deployment (CD) in Azure DevOps?
+How do you manage deployments across multiple environments using Azure DevOps?
+
+
+
+
+Azure DevOps Practices
+Explain the concept of "shifting left" in the context of Azure DevOps.
+How do you incorporate security practices into your DevOps pipelines?
+Describe a scenario where you optimized a pipeline for better performance.
+How would you handle a failed deployment in Azure DevOps?

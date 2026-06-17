@@ -1,0 +1,191 @@
+Microservices Basics
+What are microservices, and how do they differ from monolithic architecture?
+What are the advantages and disadvantages of using microservices?
+How do you decide whether to use microservices in a system design?
+What is service granularity, and how do you define the right size of a microservice?
+How do you ensure high cohesion and low coupling in microservices?
+What role does domain-driven design (DDD) play in microservices architecture?
+
+
+
+
+2. Communication in Microservices
+What are the different ways microservices can communicate with each other?
+Can you explain synchronous vs. asynchronous communication in microservices?
+How would you handle inter-service communication failures?
+What are the trade-offs between using HTTP APIs and message queues for communication?
+How do you handle network latency in microservices communication?
+What is the role of circuit breaking and retry policies in communication resilience?
+
+
+
+
+3. Microservices Communication Design Patterns - API Gateways
+What is an API Gateway, and what role does it play in microservices architecture?
+How does an API Gateway differ from a reverse proxy?
+What responsibilities does an API Gateway have (e.g., routing, security, caching)?
+What is the Backend for Frontend (BFF) pattern, and how does it differ from API Gateway?
+How do you implement rate-limiting, throttling, and caching in an API Gateway?
+
+
+
+
+4. Service Discovery
+What is service discovery, and why is it important in microservices?
+How does client-side discovery differ from server-side discovery?
+What are some popular service discovery tools (e.g., Eureka, Consul)?
+
+
+
+
+5. Asynchronous Message-Based Communication
+What are the benefits of asynchronous communication in microservices?
+How do you implement message-based communication using brokers like RabbitMQ or Kafka?
+How do you ensure message reliability and durability in asynchronous communication?
+How do you handle idempotency in message processing?
+What are dead-letter queues, and how do they help handle failed messages?
+
+
+
+
+6. Kafka and RabbitMQ Architecture
+What are the key differences between Kafka and RabbitMQ?
+How does Kafka handle message persistence and ordering?
+How do RabbitMQ exchanges and queues work, and what are their types?
+When would you prefer Kafka over RabbitMQ, and vice versa?
+
+
+
+
+7. Data Management in Microservices
+What is the “Database per service” pattern, and what are the trade-offs?
+How do you handle data consistency across distributed microservices?
+What is eventual consistency, and how do you implement it?
+How do you avoid data coupling between microservices with separate databases?
+How do you manage schema versioning and evolution in microservices databases?
+
+
+
+
+8. Microservices Queries and API Composition
+How do you query across microservices that own separate databases?
+How does the CQRS (Command Query Responsibility Segregation) pattern work?
+What is API composition, and how does it aggregate data across microservices?
+
+
+
+
+9. Microservices Distributed Transactions
+What are distributed transactions, and why are they challenging in microservices?
+How does the Saga pattern help manage distributed transactions?
+What is the difference between the choreography and orchestration approaches in the Saga pattern?
+How do you handle compensating transactions in case of failures?
+
+
+
+
+10. Event-Driven Microservices Architecture
+What is event-driven architecture, and how is it implemented in microservices?
+How does event sourcing differ from traditional data storage approaches?
+How do you ensure idempotency in event-driven microservices?
+What are the challenges of ensuring eventual consistency in event-driven systems?
+What are the pros and cons of event sourcing in microservices?
+
+
+
+
+11. Microservices Resilience and Fault Tolerance
+How do you design microservices to be fault-tolerant?
+How does circuit breaking work in microservices?
+What is a fallback mechanism, and how does it enhance resilience?
+How do you implement retry policies in microservices?
+
+
+
+
+12. Microservices Scaling and Deployment
+How do you scale individual microservices?
+How do you deploy microservices in a containerized environment using Docker?
+What is orchestration, and how does Kubernetes help in managing microservices?
+How do you manage rolling updates and zero-downtime deployments?
+Difference between blue-green deployment and A/B testing?
+What is sharding, and how does it scale microservices?
+
+
+
+
+13. Monitoring and Logging in Microservices
+How do you monitor microservices in a distributed environment?
+What are best practices for logging in microservices?
+How do you trace requests across multiple services (distributed tracing)?
+Can you explain how tools like Prometheus, Grafana, or Jaeger are used for monitoring?
+
+
+
+
+14. Security
+How do you secure communication between microservices?
+How do you handle secrets and sensitive data in microservices?
+What is OAuth 2.0, and how can it be used for authentication and authorization?
+How do you manage security in an API Gateway?
+
+
+
+
+15. Testing
+What are the different levels of testing in microservices (unit, integration, contract, end-to-end)?
+What is contract testing, and why is it important for microservices?
+How do you mock external services when testing microservices?
+What are consumer-driven contracts, and why are they important?
+
+
+
+
+16. Service Mesh
+What is a service mesh, and how does it help manage microservices communication?
+What problems do service mesh tools like Istio and Linkerd solve?
+
+
+
+
+
+17. Versioning and Backward Compatibility
+How do you version your microservices APIs?
+How do you maintain backward compatibility in microservices?
+How do you handle breaking changes in microservices?
+
+
+
+
+18. DevOps and CI/CD
+What role does CI/CD play in microservices?
+How do you manage continuous deployment of microservices in a distributed environment?
+How do you handle blue-green and canary deployments in microservices?
+
+
+
+
+19. Handling Legacy Systems
+How do you integrate microservices with existing legacy systems?
+What strategies can you use to break down a monolithic legacy application into microservices?
+
+
+
+20. Data Replication, Sharding, and Distributed Caching
+How do you handle data replication and partitioning in microservices?
+How do you implement distributed caching in a microservices environment (e.g., Redis)?
+What are the differences between local caching and distributed caching?
+
+
+
+21. Shadow Testing
+What is shadow testing in the context of microservices, and how does it help in safe deployments?
+How do you route real traffic to shadow services in production?
+
+
+
+
+22. Challenges and Anti-Patterns in Microservices
+What are the common challenges in building and managing microservices?
+What are some microservices anti-patterns (e.g., Distributed Monolith)?
+How do you avoid tight coupling between microservices?

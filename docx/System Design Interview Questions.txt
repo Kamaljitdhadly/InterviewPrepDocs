@@ -1,0 +1,93 @@
+System Design Basics
+What is scalability, and why is it important?
+Explain horizontal scaling vs. vertical scaling.
+How would you design a system to handle increasing amounts of data or traffic?
+What is a load balancer, and how does it work?
+Describe different load balancing algorithms?
+What is consistent hashing?
+How would you implement load balancing for a web application?
+What is caching, and why is it used?
+Explain different caching strategies (write-through, write-around, write-back).
+How do you decide what data to cache?
+What are the differences between SQL and NoSQL databases?
+How would you design a schema for a relational database?
+Explain database normalization and denormalization.
+What is data partitioning, and why is it used?
+How does sharding work, and when would you use it?
+What are the challenges associated with data sharding?
+What is high availability, and how can it be achieved?
+How would you design a fault-tolerant system?
+Describe common techniques for ensuring fault tolerance.
+
+
+
+
+
+System Design Microservices And API
+What are microservices, and what are their benefits?
+How would you handle communication between microservices?
+Describe the challenges of managing microservices.
+What are RESTful APIs, and how do they differ from SOAP APIs?
+How would you design a scalable API?
+What are some best practices for API versioning?
+Message Queues and Event-Driven Systems
+What are message queues, and why are they used?
+Explain the roles of producer, consumer, and broker in a messaging system.
+How would you handle message reliability and ordering?
+
+
+
+
+System Design Security and Monitoring and Logging
+What are common security concerns in system design?
+How would you design a system for authentication and authorization?
+What methods can you use to secure data in transit and at rest?
+Why is monitoring important in system design?
+How would you implement logging and monitoring for a distributed system?
+What are some common tools for system monitoring?
+
+
+
+
+System Design Design Patterns
+What are some common design patterns used in system design (e.g., Singleton, Factory, Observer)?
+How would you apply these patterns to solve real-world problems?
+How would you apply the CQRS (Command Query Responsibility Segregation) pattern in system design?
+What is the Event Sourcing pattern, and how can it be used?
+How does the Circuit Breaker pattern improve system resilience?
+
+
+
+
+System Design Concurrency and Parallelism
+What is the difference between concurrency and parallelism?
+How would you handle concurrency in a distributed system?
+What are some common issues related to concurrency?
+
+
+
+
+
+System Design Latency and Throughput
+What is latency, and how can it be reduced?
+What is throughput, and how is it measured?
+How do latency and throughput affect system design?
+
+
+
+
+
+
+Designing Scalable Web Application
+How would you design a scalable web application that handles millions of users?
+What architecture would you choose for a high-traffic e-commerce site, and why?
+How would you handle user authentication and authorization in a scalable web application?
+
+
+
+
+Designing Social Media Platform
+How would you design a social media platform that supports features like user profiles, posts, comments, and likes?
+What database schema would you use to store user-generated content efficiently?
+How would you ensure that content is delivered quickly to users across the globe?
+

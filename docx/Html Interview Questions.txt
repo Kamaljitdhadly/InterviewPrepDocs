@@ -1,0 +1,9 @@
+HTML Basics & Document Structure
+1.	What is DOM? What is the difference between HTML and DOM?
+2.	What is the role of DOCTYPE in HTML?
+3.	What if you remove <!DOCTYPE html> from your HTML?
+4.	What are meta tags? What are the 5 types of meta tags?
+5.	What is the difference between window and document in the DOM?
+6.	How do you handle browser compatibility issues in JavaScript?
+7.	What do you mean by BOM?
+

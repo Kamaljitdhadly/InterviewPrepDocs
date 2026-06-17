@@ -1,0 +1,201 @@
+Angular Basics
+What is Angular, and how does it differ from AngularJS?
+What are Angular modules?
+Explain the role of @NgModule and how it helps in structuring an application.
+What are components in Angular?
+How do components interact with each other?
+What are Angular lifecycle hooks, and why are they important?
+Can you name the most commonly used lifecycle hooks?
+What is the difference between constructor and ngOnInit in Angular?
+Explain the concept of data binding in Angular.
+What are the types of data binding?
+What are directives in Angular, and how are they categorized?
+How does ngFor directive work?
+Explain the ngIf directive.
+How do you create a custom directive in Angular?
+What are template reference variables in Angular?
+What is content projection, and how does ng-content work?
+What is the difference between ViewChild and ContentChild and ViewChildren?
+What is the purpose of the angular.json file in Angular projects?
+How do you dynamically load components in Angular?
+Explain ComponentFactoryResolver and ViewContainerRef.
+What are ViewEncapsulation options in Angular, and how do they affect styling?
+
+
+
+
+Routing
+What is Angular routing, and how is it implemented?
+How can you define child routes?
+Explain the difference between forRoot vs forChild.
+Explain the difference between providedIn: 'root' vs providedIn: any.
+What are route guards, and how do you use them?
+What is lazy loading, and how do you implement it in Angular?
+
+
+
+Forms & Pipes
+What are the two types of forms in Angular? Explain Reactive Forms and Template-driven Forms.
+How do you validate forms in Angular?
+Explain how you can handle form submission and error handling in Angular.
+What are pipes in Angular, and what are they used for?
+How do you create a custom pipe?
+Explain the difference between a pure and impure pipe.
+How does the async pipe work in Angular?
+
+
+
+
+HTTP and Services
+What are Angular services, and how do you share data between components using services?
+What is dependency injection in Angular, and how does it work?
+How do you make HTTP requests in Angular?
+Explain how you handle HTTP errors in Angular.
+What is HttpInterceptor, and how is it used?
+
+
+
+
+Change Detection and Performance Optimization
+What is change detection in Angular, and how does it work?
+What is the difference between default and OnPush change detection strategy?
+How can you manually trigger change detection in Angular?
+How do you improve the performance of an Angular application?
+What are some best practices for performance optimization?
+What is Ahead-of-Time (AOT) compilation, and how does it differ from Just-in-Time (JIT) compilation?
+How does Angular handle lazy loading of modules?
+
+
+
+Advanced Topics
+What is Angular Universal, and how does it help with server-side rendering?
+Explain the purpose of Angular CLI and the common commands used.
+How do you set up internationalization (i18n) in Angular?
+What is Webpack, and how does Angular use it?
+What is Ivy in Angular, and what are its benefits?
+
+
+
+
+Animations and Error Handling and Security
+How do you implement animations in Angular?
+Explain the difference between @trigger, @state, and @transition in Angular animations.
+How do you handle errors globally in an Angular application?
+What are some security concerns when developing an Angular application?
+Explain Cross-Site Scripting (XSS) and how Angular helps prevent it.
+How do you protect against Cross-Site Request Forgery (CSRF) in Angular?
+
+
+
+RxJS Basics
+What is RxJS, and why is it used?
+Explain the difference between Observables and Promises.
+What are operators in RxJS, and why are they important?
+What is an Observer in RxJS?
+What is an Observable, and how do you create one in RxJS?
+What are cold and hot Observables?
+Explain how error handling works in RxJS.
+What is the difference between subscribe() and forEach() methods in RxJS?
+
+
+
+RxJS Operators
+What are the different types of RxJS operators?
+Explain the difference between pipeable and creation operators.
+What does the map() operator do in RxJS?
+Explain the difference between mergeMap(), switchMap(), concatMap(), and exhaustMap().
+What is the purpose of the filter() operator?
+What does the catchError() operator do?
+Explain the difference between combineLatest() and forkJoin().
+How do you debounce user input in RxJS?
+What is the difference between merge() and concat() operators?
+Explain the take() and takeUntil() operators.
+
+
+
+RxJS Subjects and Multicasting
+What is a Subject in RxJS, and how is it different from an Observable?
+Explain different types of Subjects: BehaviorSubject, ReplaySubject, and AsyncSubject.
+What is multicasting in RxJS?
+What is the shareReplay() operator used for?
+
+
+
+RxJS Throttling and Debouncing
+What is the difference between throttleTime and debounceTime in RxJS?
+When would you use throttleTime vs debounceTime?
+
+
+
+RxJS Advanced Concepts
+What is a Higher-Order Observable?
+How does flatMap() (or mergeMap()) handle multiple inner Observables?
+Explain backpressure in RxJS.
+What is the role of Scheduler in RxJS?
+How do you cancel an Observable subscription?
+Explain the concept of "hot" and "cold" Observables and their usage.
+
+
+
+RxJS Error Handling and Performance and Optimization
+How do you handle errors in RxJS using catchError() and retry() operators?
+Explain how to recover from an error in RxJS.
+How do you optimize RxJS performance in an Angular application?
+What strategies can you use to avoid memory leaks when working with RxJS?
+
+
+
+
+
+NgRx Basics
+What is NgRx, and why is it used in Angular applications?
+Explain the core principles of NgRx.
+What are the main building blocks of NgRx?
+What is the role of the Store in NgRx?
+How does NgRx handle state management in Angular?
+What are actions in NgRx?
+What is a reducer, and how does it work in NgRx?
+What is the @ngrx/store package?
+How do you dispatch an action in NgRx?
+Explain the flow of data in an NgRx application.
+
+
+
+NgRx Selectors and State
+What are selectors in NgRx, and how do they work?
+What is the createSelector() function used for?
+How do you structure the state in an NgRx application?
+What is a feature state, and how do you create one in NgRx?
+How does Store.select() work, and why is it used?
+How do you combine multiple selectors?
+
+
+
+NgRx Effects
+What are Effects in NgRx, and why are they important?
+How does the @ngrx/effects package work?
+What is the purpose of the Actions observable in NgRx Effects?
+How do you handle side effects in NgRx?
+What is the difference between Actions and Effects in NgRx?
+How do you handle asynchronous operations in NgRx using Effects?
+Explain how you can cancel or debounce actions in Effects.
+
+
+
+NgRx Advanced Concepts
+What is Entity State in NgRx, and how is it managed?
+What are NgRx Schematics, and how can they help in building applications?
+How do you use @ngrx/entity to manage collections in the state?
+What is the role of the combineReducers() function in NgRx?
+How do you handle error states in NgRx?
+
+
+
+NgRx Performance and Best Practices
+How do you optimize NgRx for performance in large applications?
+What are some best practices for structuring NgRx applications?
+How do you manage complex side effects in large NgRx applications?
+
+
+
+

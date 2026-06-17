@@ -1,0 +1,111 @@
+1️⃣ React Fundamentals
+
+1. What is React and why was it created?
+2. What are the core principles of React?
+3. What is the Virtual DOM and how does it work?
+4. What is reconciliation in React and why is it needed?
+5. How does React’s diffing algorithm work?
+6. What are components in React?
+7. What is the difference between functional and class components?
+8. What is JSX and why is it used?
+9. How does React render elements to the DOM?
+10. What is the purpose of key in lists?
+
+2️⃣ Props, Components & Data Flow
+
+11. What are props in React?
+12. Are props mutable or immutable?
+13. What is prop drilling and why is it a problem?
+14. How do you pass data from child to parent components?
+15. What is defaultProps and when would you use it?
+16. What are higher-order components (HOCs)?
+17. What are controlled vs uncontrolled components?
+
+3️⃣ State & Lifecycle
+
+18. What is state in React?
+19. What is the difference between state and props?
+20. How does setState work internally?
+21. Are state updates synchronous or asynchronous?
+22. What are lifecycle methods in class components?
+23. What replaces lifecycle methods in functional components?
+24. What happens in a component when state changes?
+25. What is batching in React state updates?
+
+4️⃣ React Hooks
+
+26. What are Hooks and why were they introduced?
+27. What is useState and how does it work?
+28. What is useEffect and when is it used?
+29. How does the dependency array in useEffect work?
+30. What is the cleanup function in useEffect and when is it called?
+31. What is useRef and what are typical use cases?
+32. What is the difference between useRef and useState?
+33. What is useMemo and when would you use it?
+34. What is useCallback and when would you use it?
+35. What is the difference between useMemo and useCallback?
+36. What is useContext and how does it relate to Context API?
+37. What are custom hooks and why might you create them?
+38. What are the Rules of Hooks?
+39. How does useEffect execution order relate to re-render cycles?
+
+5️⃣ Performance Optimization
+
+40. What causes re-renders in React?
+41. How do you prevent unnecessary re-renders?
+42. What is React.memo and when should you use it?
+43. What is memoization in React and where is it applied?
+44. What is lazy loading in React?
+45. What is code splitting and why is it useful?
+46. What is Suspense in React?
+47. How do key values affect list rendering performance?
+48. What is React Fiber in simple terms?
+
+6️⃣ Forms & Events
+
+49. How does event handling work in React?
+50. What is a Synthetic Event in React?
+51. How do you handle forms in React?
+52. What are controlled components in the context of forms?
+53. How do you validate forms in React?
+54. How do you handle multiple input fields in a form?
+
+7️⃣ Routing
+
+55. What is React Router and why is it used?
+56. What is the difference between BrowserRouter and HashRouter?
+57. What is dynamic routing in React applications?
+58. How do you pass parameters in routes?
+59. What are protected routes and how do you implement them?
+
+8️⃣ State Management (Beyond Local State)
+
+60. What is the Context API and when should you use it?
+61. When would you choose Context instead of prop drilling?
+62. What are the limitations of the Context API?
+63. What is Redux and when would you use it?
+64. What are the core principles of Redux?
+65. What is middleware in Redux?
+66. What is Redux Thunk and why is it used?
+67. What is Redux Toolkit and how does it simplify Redux?
+68. What is the difference between Redux and the Context API?
+
+9️⃣ Advanced React Concepts (5+ Years Experience)
+
+69. What is Server-Side Rendering (SSR) in React?
+70. What is hydration and how does it work with SSR?
+71. What is Concurrent Rendering in React?
+72. What are Portals and when would you use them?
+73. What are Fragments and why are they useful?
+74. What is an Error Boundary and what problems does it solve?
+75. What is StrictMode and what does it do in development?
+76. What are render props and how do they compare to HOCs?
+77. What is forwardRef and when would you use it?
+
+🔟 Testing React Applications
+
+78. How do you approach testing React applications?
+79. What is Jest and how is it used with React?
+80. What is React Testing Library and what are its core ideas?
+81. What is the difference between unit testing and integration testing?
+82. How do you mock API calls when testing React components?

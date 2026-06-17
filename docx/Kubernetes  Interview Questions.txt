@@ -1,0 +1,107 @@
+1. Kubernetes Basics
+What is Kubernetes?
+How does Kubernetes handle container orchestration?
+What are the main components of the Kubernetes architecture?
+What is the role of the Kubernetes Master Node?
+How does Kubernetes differ from Docker Swarm?
+What is the Kubernetes API, and how does it work?
+How can you interact with the Kubernetes API using kubectl and client libraries?
+What is the role of API groups in Kubernetes?
+What is the difference between the Kubernetes API and CRDs?
+what is namespace in kubernetes?
+
+
+
+3. Kubernetes Objects and Configurations
+What are Deployments in Kubernetes?
+What is a ReplicaSet in Kubernetes?
+What is a DaemonSet?
+What is a StatefulSet?
+What is a Job in Kubernetes?
+What are ConfigMaps and Secrets in Kubernetes?
+What is a PersistentVolume (PV) and PersistentVolumeClaim (PVC)?
+How do you pass environment variables to a Pod in Kubernetes?
+
+
+
+
+
+5. Kubernetes Networking and Storage
+What is the Kubernetes networking model?
+What are Services in Kubernetes, and what are the different types?
+What is a ClusterIP service?
+What is a NodePort service?
+What is a LoadBalancer service in Kubernetes?
+What is an Ingress in Kubernetes?
+How does service discovery work in Kubernetes?
+How does Kubernetes handle IP address management?
+What are the different types of volumes in Kubernetes?
+Explain how Persistent Volumes and Persistent Volume Claims work.
+
+
+
+
+9. Kubernetes Scaling and High Availability
+How does scaling work in Kubernetes?
+What is Horizontal Pod Autoscaling (HPA)?
+What is Vertical Pod Autoscaling?
+How does Kubernetes achieve high availability?
+
+
+
+
+10. Kubernetes Controllers and Security
+What is a Kubernetes controller?
+Explain the role of the ReplicaSet controller in maintaining the desired state.
+How do controllers interact with the Kubernetes API?
+How do you secure a Kubernetes cluster?
+What is RBAC (Role-Based Access Control) in Kubernetes?
+What are Network Policies in Kubernetes?
+How does Kubernetes manage Secrets?
+What is the purpose of ServiceAccounts in Kubernetes?
+
+
+
+
+13. Kubernetes etcd and Operators
+What is etcd, and what role does it play in Kubernetes?
+How does Kubernetes ensure consistency with etcd?
+How can you backup and restore the etcd database?
+What are Kubernetes Operators, and why are they important?
+How do Operators differ from controllers?
+How do you create a custom Kubernetes Operator?
+
+
+
+
+15. Kubernetes Deployment Strategies
+What are the different deployment strategies in Kubernetes (e.g., Rolling Update, Blue-Green)?
+What is a Canary Deployment in Kubernetes?
+What is A/B Testing in Kubernetes?
+
+
+
+17. Kubernetes Helm
+What is Helm in Kubernetes?
+What are Helm Charts?
+How do you manage applications using Helm?
+
+
+
+20. Kubernetes and Cloud Providers
+How do cloud providers (e.g., AWS, Azure, GCP) integrate with Kubernetes?
+What is Google Kubernetes Engine (GKE)?
+What is Amazon EKS (Elastic Kubernetes Service)?
+What is Azure Kubernetes Service (AKS)?
+How can you integrate Kubernetes with CI/CD pipelines?
+
+
+
+23. Kubernetes and Service Mesh
+What is a service mesh, and how does it work with Kubernetes?
+What is Istio, and how does it integrate with Kubernetes?
+What are the key advantages of using a service mesh in a Kubernetes cluster?
+
+
+
+

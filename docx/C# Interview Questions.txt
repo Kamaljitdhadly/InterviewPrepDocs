@@ -1,0 +1,206 @@
+C# Basics
+1.	What is the default access modifier class?
+2.	What is the default access modifier interface?
+3.	What is Property?
+	What are nullable types in C#?
+4.	What is Boxing and Unboxing? Where to use them in real applications?
+5.	What is the difference between “String” and “StringBuilder”
+6.	What is String Interpolation in C#
+7.	What is the difference between Finally and Finalize?
+8.	What is the difference between “throw ex” and “throw”?
+9.	What are the types of constructor?
+10.	What is Static constructor? What is the use in real applications?
+11.	What is Private constructor? What is the use?
+12.	What is Constructor overloading?
+13.	What is Destructor?
+14.	If base & child both class have constructors, which will be called first?
+15.	What is “this” keyword in C#? When to use it in real application?
+16.	What is the purpose of “using” keyword in C#?
+17.	What is the difference between “is” and “as” operators?
+18.	What is the difference between “Readonly” and “Constant” variables?
+19.	What is “Static” class? When to use it?
+20.	What is the difference between “var” and “dynamic” in C#?
+21.	What is the use of Yield keyword in C#?
+22.	Common Use Cases for Enums
+
+
+
+C# 8.0 and Later Features
+a.	What are nullable reference types?
+b.	Describe pattern matching enhancements in recent C# versions.
+c.	What are asynchronous streams (IAsyncEnumerable)?
+d.	What is the record type in C#?
+e.	Explain default interface methods.
+
+
+
+C# OOPS
+1.	What is OOPS? What are the main concepts of OOPS?
+2.	What is Polymorphism and what are its types? When to use polymorphism?
+3.	What is the difference between Method Overriding and Method Hiding?
+
+
+
+C# Extension Methods
+1.	What are extension Methods? When to use them?
+
+
+
+C# Generics & Collections
+2.	Explain Generics in C#? When and why to use them?
+3.	What are Collections in C# and what are their types?
+
+
+
+C# Memory Management:
+1.	What is the difference between the Stack and Heap in memory management?
+2.	Explain value types vs. reference types in the context of memory allocation.
+3.	What are the best practices to avoid memory leaks in C#?
+
+
+
+C# Method Parameters
+a.	Explain the difference between value types and reference types in C#.
+2.	Difference between Pass by Value and Pass by Reference Parameters?
+3.	How to return more than one value from a method in C#?
+4.	What is “params” keyword? When to use params keyword in real applications?
+5.	What are optional parameters in a method?
+6.	What are named parameters in a method?
+
+
+
+C# Abstract & Interface
+1.	What are abstract classes and interfaces
+2.	Do abstract class have Constructors in C# 
+3.	Can Abstract class be Sealed or Static in C#
+4.	Can you declare abstract methods as private in C#?
+5.	What is the difference between abstraction and abstract class
+
+
+
+C# Reflections
+1.	What is GAC?
+2.	What is Reflection?
+3.	What is meant by Globalization and Localization?
+
+
+
+C# Delegates & Events
+1.	What are Delegates in C#? When to use delegates in real applications?
+2.	What are Events in C#? When to use events in real applications?
+
+
+
+C# Multithreading
+a.	What is multithreading in C#?
+2.	What is the difference between Process and Thread?
+a.	Explain the difference between Thread, ThreadPool, and Task in C#.
+b.	What are locks in C#?
+c.	Explain the concept of deadlock in multithreading.
+d.	What is a race condition in C# and how do you prevent it?
+
+
+C# Garbage Collector
+1.	What is Garbage Collection(GC)?
+2.	What is the difference between “Dispose” and “Finalize”?
+3.	Can we force Garbage Collector to run?
+a.	What are weak references in C#?
+
+
+
+C# Linq 
+1.	What is the difference between LINQ to SQL and Entity Framework?
+2.	What is the difference between First and FirstOrDefault methods in LINQ?
+3.  Differences Between IEnumerable and IQueryable in C#?
+
+
+
+C# ADO.NET and Entity Framework
+1.	What are the main concepts of ADO.NET?
+2.	What are the examples of ADO.NET?
+3.	What are the different Execute Methods of ADO.NET?
+4.	What are the Authentication techniques used to connect to SQL Server?
+5.	What is ORM? What are the different types of ORM?
+a.	How do you perform eager loading and lazy loading in Entity Framework?
+b.	Describe both loading strategies and their use cases.
+
+
+
+WebAPI Basics
+1.	What is the difference Rest API and Web API?
+2.	What are REST guidelines? What is the difference between Rest and Restful?
+3.	What is Content Negotiation in Web API?
+4.	What is MediaTypeFormatter class in Web API?
+5.	What are Response Codes in Web API?
+
+
+
+.NET Core
+1.	What is .NET Core
+2.	What is .NET Standard?
+a.	Explain the MVC architecture in ASP.NET Core.
+3.	What is the role of Program.cs file in ASP.NET Core?
+4.	What is the role of ConfigureServices and Configure  method
+5.	What are the types of Service Lifetimes of an object/ instance in ASP.NET
+6.	What is Request Delegate?
+7.	What is Run(), Use() and Map() method?
+8.	What are the types of Hosting in ASP.NET Core? What is In process and Out
+9.	What is Routing? Explain attribute routing in ASP.NET Core?
+10.	What are the techniques to save configuration settings in .NET Core
+11.	What is CORS? Why CORS restriction is required? Hot to fix CORS error?
+12.	What is In-Memory caching & Distributed Caching? When to use what?
+a.	Explain Model Binding in ASP.NET Core.
+b.	What are Tag Helpers in ASP.NET Core?
+
+
+
+C# Performance Tuning
+a.	What are some best practices for optimizing the performance of a C# application?
+b.	How would you improve the performance of an ASP.NET Core application?
+
+
+
+C# Popular Libraries
+a.	What are some commonly used C# libraries for logging, testing, and dependency injection?
+b.	Have you used AutoMapper in C#? How does it help in mapping objects?
+
+
+
+C# SOLID Principles
+a.	What are SOLID Principles? How they different from Design Patterns?
+b.	How SOLID Principles different from Design Patterns?
+c.	What is KISS (Keep It Simple, Stupid) principle?
+d.	What is DRY(Don't Repeat Yourself) principle?
+e.	What is YAGNI (You Aren’t Gonna Need It) principle?
+f.	What is Separation of Concerns (SoC) principle?
+
+
+C# Design Pattern
+a.	What are Design Pattern and what problem they solve?
+b.	What are the types of Design Patterns?
+c.	What are Creational Design Patterns?
+d.	What are Structural Design Patterns?
+e.	What are Behavioral Design Patterns?
+
+
+
+
+C# Coding Problems
+1.	Write a program in C# Sharp to reverse a string? 
+2.	Write a program in C# Sharp to reverse the order of the given words?
+3.	Write a program in C# Sharp to find if a given string is palindrome or not?
+4.	Write a C# program to find the substring from a given string
+5.	Write a C# program to find if a positive integer is prime or not?
+a.	Find the largest and smallest numbers in an array.
+b.	Implement a binary search algorithm.
+c.	Check if a given string is a palindrome.
+d.	Find the factorial of a number using recursion.
+e.	Implement a linked list.
+f.	Detect a cycle in a linked list.
+g.	Sort an array using QuickSort or MergeSort.
+h.	Find the nth Fibonacci number.
+i.	Remove duplicates from a list.
+
+
+
+Enumrable vs Iquable

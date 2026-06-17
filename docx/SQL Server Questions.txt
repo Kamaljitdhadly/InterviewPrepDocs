@@ -1,0 +1,163 @@
+SQL Server Architecture and Internals
+What is the SQL Server database engine?
+Explain the SQL Server architecture, including the role of the storage engine and query processor.
+What are data pages, extents, and allocation units in SQL Server?
+What is the purpose of the tempdb database? How is it used internally?
+How does SQL Server handle I/O operations for read and write?
+
+
+
+SQL Basics
+What is Collation? What are the different types of Collation Sensitivity?
+What are the different types of data types in SQL Server?
+What are the differences between DATETIME, SMALLDATETIME, and DATE data types?
+What are user-defined data types?
+What is the difference between CHAR and VARCHAR?
+What is Normalization and Denormalization?
+What are the different types of joins in SQL Server?
+What is CROSS APPLY And OUTER APPLY?
+What types of SQL relationships do you know?
+Explain the difference between WHERE and HAVING clauses.
+What are constraints in SQL? Name the different types.
+How do you enforce unique data in a SQL Server table?
+Explain cascading actions (ON DELETE, ON UPDATE) for foreign keys.
+What is a primary key, and can a table have more than one primary key?
+How do you use the EXISTS clause in SQL?
+How would you use the GROUP BY clause?
+Explain UNION vs. UNION ALL.
+What is difference between union, intersect and except
+What are cursors
+What is the purpose of a temporary table, and how do you create one?
+How do you use table variables vs. temporary tables?
+What is a Common Table Expression (CTE)? Provide an example.
+Explain what a view is and its use cases.
+What are indexed(a materialized view) views, and how do they differ from regular views?
+Can views be updated in SQL Server? If so, how?
+What are stored procedures? How do they differ from functions?
+What is a trigger? Can you give an example of when to use it?
+what are magic tables
+How do you handle exceptions in SQL Server stored procedures?
+What is the difference between RAISEERROR and THROW?
+What is the purpose of a FILESTREAM in SQL Server?
+What is table partitioning, and how does it improve performance?
+How do you create and manage partitioned tables in SQL Server?
+What is the SQL Server error log, and how do you access it?
+
+
+Window Function
+What is scalar and aggregate function?
+What is IIF function
+Explain the use of the ISNULL and NULLIF functions.
+Explain the purpose of COALESCE in SQL.
+How do you use the CAST and CONVERT functions in SQL Server?
+What is GUID 
+What is pivot 
+What is Quotename function 
+What is Rollup 
+What is Cube 
+What is Grouping set 
+What is Grouping function 
+Explain window functions in SQL Server.
+What are the differences between RANK(), ROW_NUMBER(), and DENSE_RANK()?
+What is NTile function 
+What is Difference between rows and range
+What is Lead and lag function 
+
+
+
+
+Transactions and Locking
+What is a transaction in SQL Server, and how do you implement one?
+Explain different types of lock?
+what is no-lock in sql server?
+Explain isolation levels in SQL Server?
+What is Phantom Read?
+Non-repeatable read ?
+What is Snapshot Isolation Level?
+What is a deadlock, and how do you prevent it?
+How can you detect and resolve blocking issues in SQL Server?
+
+
+
+
+
+Query Optimization Techniques
+What are indexes, and how do they improve query performance?
+Explain the difference between table scans, index scans, and index seeks.
+What are filtered indexes, and when would you use them?
+How can you determine if an index is being used or not?
+What is full-text indexing, and how do you implement it?
+Explain the concept of columnstore indexes and how they work.
+How do you force a query to use a specific index?
+Explain index fragmentation and how to resolve it.
+What is an execution plan, and how do you read it?
+what is statistics in SQL Server and execution plan?
+What is parameter sniffing, and how do you handle it?
+What are query hints, and when should you use them?
+How do you resolve performance bottlenecks in a SQL Server query?
+
+
+
+
+SQL Server Database Mirroring and AlwaysOn Availability Groups
+Differnce between High Availability (HA) and Disaster Recovery (DR)
+What is database mirroring in SQL Server? Explain its modes.
+How do you set up SQL Server database mirroring?
+What is SQL Server replication, and what are the types of replication (Snapshot, Transactional, Merge)?
+What is SQL Server log shipping?
+What is the difference between replication and log shipping?
+What is SQL Server AlwaysOn Availability Groups?
+How do you set up and configure AlwaysOn in SQL Server?
+What is the difference between AlwaysOn Failover Cluster Instances (FCI) and AlwaysOn Availability Groups?
+
+
+
+Backup and Restore
+Explain File and Filegroup?
+Explain the different types of backups in SQL Server.
+What are SQL Server Recovery Models
+What is NoRecovery and Recovery Option?
+How would you restore a database from a backup?
+How do you perform a database restore using different recovery models (Full, Bulk-Logged, Simple)?
+How do you set up automated backups in SQL Server?
+Example for backup and recovery model?
+
+
+
+
+SQL Server Analysis and Reporting
+What is SQL Server Integration Services (SSIS)?
+What is SQL Server Analysis Services (SSAS)(Data Warehouse database)?
+What is SQL Server Reporting Services (SSRS) and how do you create a report?
+How do you design and build a data warehouse using SQL Server?
+
+
+
+
+
+Security and User Management
+What are the different types of authentication modes in SQL Server?
+How do you manage database roles and permissions?
+How do you secure data using encryption in SQL Server?
+What are SQL Server security best practices?
+How do you configure SQL Server for secure remote access?
+What is SQL Server Audit and how do you use it for security monitoring?
+
+
+
+
+
+
+SQL Server Agent and Jobs
+What is SQL Server Agent, and how do you use it to schedule jobs?
+How do you monitor SQL Server jobs and handle job failures?
+How would you configure alerts and notifications for job monitoring?
+
+
+
+
+
+
+Advanced SQL Queries
+How would you write a query to find the second-highest salary in a table?
+How do you optimize a slow-running query in SQL Server?
