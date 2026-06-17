@@ -3,6 +3,7 @@ import path from 'node:path';
 import { formatFile as formatCSharpClean } from './format-csharp-clean.mjs';
 import { formatFile as formatAngularClean } from './format-angular-clean.mjs';
 import { formatFile as formatJavascriptClean } from './format-javascript-clean.mjs';
+import { formatFile as formatReactClean } from './format-react-clean.mjs';
 import { formatFile as formatSqlServerClean } from './format-sqlserver-clean.mjs';
 import { formatFile as formatMicroservicesClean } from './format-microservices-clean.mjs';
 import { formatFile as formatSystemDesignClean } from './format-systemdesign-clean.mjs';
@@ -26,6 +27,8 @@ const CODE_LANG = topicLower.includes('c#') || topicLower === 'csharp'
   ? 'csharp'
   : topicLower.includes('javascript') || topicLower === 'js'
     ? 'javascript'
+    : topicLower.includes('react')
+      ? 'javascript'
     : topicLower.includes('sql')
       ? 'sql'
       : topicLower.includes('microservices')
@@ -400,6 +403,7 @@ for (const f of files) {
   else if (topicLower.includes('data structures')) cleaned = formatDsaClean(cleaned, baseName);
   else if (CODE_LANG === 'csharp') cleaned = formatCSharpClean(cleaned);
   else if (topicLower === 'angular') cleaned = formatAngularClean(cleaned, baseName);
+  else if (topicLower.includes('react')) cleaned = formatReactClean(cleaned, baseName);
   else if (topicLower.includes('javascript')) cleaned = formatJavascriptClean(cleaned, baseName);
   else if (topicLower.includes('sql')) cleaned = formatSqlServerClean(cleaned, baseName);
   else if (topicLower.includes('microservices')) cleaned = formatMicroservicesClean(cleaned, baseName);
