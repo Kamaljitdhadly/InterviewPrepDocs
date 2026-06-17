@@ -50,7 +50,7 @@ function promoteQuestionHeadings(text) {
     const h3 = line.match(/^###\s+(\d+)\.\s+(.*)$/);
     if (h3) {
       const idx = parseInt(h3[1], 10) - 1;
-      if (questions[idx]) {
+      if (questions[idx] && matchesQuestion(h3[2], questions[idx])) {
         out.push(`## ${questions[idx]}`);
         continue;
       }
@@ -63,7 +63,7 @@ function promoteQuestionHeadings(text) {
     const boldM = bold.match(/^\*\*(\d+)\.\s+([^*]+)\*\*$/);
     if (boldM) {
       const idx = parseInt(boldM[1], 10) - 1;
-      if (questions[idx]) {
+      if (questions[idx] && matchesQuestion(boldM[2], questions[idx])) {
         out.push(`## ${questions[idx]}`);
         continue;
       }

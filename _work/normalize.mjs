@@ -7,6 +7,7 @@ import { formatFile as formatSqlServerClean } from './format-sqlserver-clean.mjs
 import { formatFile as formatMicroservicesClean } from './format-microservices-clean.mjs';
 import { formatFile as formatSystemDesignClean } from './format-systemdesign-clean.mjs';
 import { formatFile as formatDockerClean } from './format-docker-clean.mjs';
+import { formatFile as formatKubernetesClean } from './format-kubernetes-clean.mjs';
 
 const args = process.argv.slice(2);
 const topicIdx = args.indexOf('--topic');
@@ -28,7 +29,9 @@ const CODE_LANG = topicLower.includes('c#') || topicLower === 'csharp'
           ? 'json'
           : topicLower.includes('docker')
             ? 'bash'
-            : 'typescript';
+            : topicLower.includes('kubernetes')
+              ? 'yaml'
+              : 'typescript';
 
 fs.mkdirSync(OUT, { recursive: true });
 
@@ -110,6 +113,16 @@ const CODE_STRONG_DOCKER = [
   /^\s*-\s*["']?[\w./-]+:/, /host\.docker\.internal/i,
   /^\s*version:\s*["']?3/i, /^\s*services:/i,
 ];
+const CODE_STRONG_K8S = [
+  /\bapiVersion:/i, /\bkind:\s/i, /\bmetadata:/i, /\bspec:/i, /\bstatus:/i,
+  /\bkubectl\s+(apply|get|describe|create|delete|edit|patch|scale|rollout|logs|exec|port-forward|config|cluster-info|auth|label|annotate|run|expose)\b/i,
+  /\bhelm\s+(install|upgrade|uninstall|list|repo|search|template|rollback|status)\b/i,
+  /\bnamespace:\s/i, /\bcontainers:/i, /\bselector:/i, /\breplicas:/i,
+  /\bPersistentVolume/i, /\bStorageClass/i, /\bIngressClass/i,
+  /^\s*-\s+name:/i, /^\s*---\s*$/, /\bport:\s*\d+/i, /\bimage:\s/i,
+  /\benv:/i, /\bvolumeMounts:/i, /\bvolumes:/i, /\bnodeSelector:/i,
+  /\btolerations:/i, /\baffinity:/i, /\blivenessProbe:/i, /\breadinessProbe:/i,
+];
 const CODE_STRONG = [
   ...CODE_STRONG_COMMON,
   ...(CODE_LANG === 'csharp' ? CODE_STRONG_CS
@@ -117,7 +130,8 @@ const CODE_STRONG = [
       : CODE_LANG === 'sql' ? CODE_STRONG_SQL
         : CODE_LANG === 'bash' ? CODE_STRONG_DOCKER
           : CODE_LANG === 'json' ? CODE_STRONG_MS
-            : CODE_STRONG_TS),
+            : CODE_LANG === 'yaml' ? CODE_STRONG_K8S
+              : CODE_STRONG_TS),
 ];
 
 const CODE_WEAK = [
@@ -281,6 +295,12 @@ function normalize(raw, fileBaseName) {
     }
 
     const single = p.split('\n').length === 1;
+    if (single && /^<img\s/i.test(p.trim())) {
+      out.push(unescapeCommon(p));
+      out.push('');
+      j++;
+      continue;
+    }
     if (single && looksStrongCode(p) && !looksProse(p)) {
       const codeLines = [unescapeCommon(p)];
       j++;
@@ -330,6 +350,7 @@ for (const f of files) {
   else if (topicLower.includes('microservices')) cleaned = formatMicroservicesClean(cleaned, baseName);
   else if (topicLower.includes('system design')) cleaned = formatSystemDesignClean(cleaned, baseName);
   else if (topicLower.includes('docker')) cleaned = formatDockerClean(cleaned, baseName);
+  else if (topicLower.includes('kubernetes')) cleaned = formatKubernetesClean(cleaned, baseName);
   fs.writeFileSync(path.join(OUT, f), cleaned, 'utf8');
   console.log(`cleaned: ${f} (${raw.length} -> ${cleaned.length})`);
 }
