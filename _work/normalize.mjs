@@ -4,7 +4,7 @@ import { formatFile as formatCSharpClean } from './format-csharp-clean.mjs';
 import { formatFile as formatAngularClean } from './format-angular-clean.mjs';
 import { formatFile as formatJavascriptClean } from './format-javascript-clean.mjs';
 import { formatFile as formatReactClean } from './format-react-clean.mjs';
-import { formatFile as formatSecurityClean } from './format-security-clean.mjs';
+import { formatFile as formatMongodbClean } from './format-mongodb-clean.mjs';
 import { formatFile as formatSqlServerClean } from './format-sqlserver-clean.mjs';
 import { formatFile as formatMicroservicesClean } from './format-microservices-clean.mjs';
 import { formatFile as formatSystemDesignClean } from './format-systemdesign-clean.mjs';
@@ -406,6 +406,7 @@ for (const f of files) {
   else if (topicLower.includes('data structures')) cleaned = formatDsaClean(cleaned, baseName);
   else if (CODE_LANG === 'csharp') cleaned = formatCSharpClean(cleaned);
   else if (topicLower === 'angular') cleaned = formatAngularClean(cleaned, baseName);
+  else if (topicLower.includes('mongodb') || topicLower.includes('mongo db')) cleaned = formatMongodbClean(cleaned, baseName);
   else if (topicLower.includes('security')) cleaned = formatSecurityClean(cleaned, baseName);
   else if (topicLower.includes('typescript')) cleaned = formatTypescriptClean(cleaned, baseName);
   else if (topicLower.includes('react')) cleaned = formatReactClean(cleaned, baseName);

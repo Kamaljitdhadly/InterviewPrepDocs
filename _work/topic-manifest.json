@@ -8,6 +8,7 @@
       "order": [
         { "topic": "C#", "files": ["C# Basics.md", "C# OOPS.md", "C# SOLID Principles.md", "C# Generics & Collections.md", "C# LINQ.md", ".NET Core Basics.md", "WebApi Basics.md", ".NET Core JSON Web Token.md", "C# ADO.NET and Entity Framework.md"] },
         { "topic": "Sql Server", "files": ["SQL Server Basics.md", "SQL Server Queries.md", "SQL Server Query Optimization Techniques.md", "SQL Server Transactions and Locking.md"] },
+        { "topic": "MongoDB", "files": ["MongoDB Basics.md", "MongoDB CRUD Operations.md", "MongoDB Querying and Indexing.md", "MongoDB Schema Design.md", "MongoDB with Node.js and .NET.md"] },
         { "topic": "TypeScript", "files": ["TypeScript Basics.md", "TypeScript Types and Interfaces.md"] },
         { "topic": "Angular", "files": ["Angular Basics.md", "Angular Modern Features.md", "Angular Routing.md", "Angular Forms & Pipes.md", "Angular HTTP and Services.md", "RxJS Basics.md", "NgRx Basics.md"] },
         { "topic": "Azure Cloud", "files": ["Azure Basics.md", "Azure Active Directory.md", "Azure Compute.md"] },
@@ -44,6 +45,13 @@
       ]
     },
     {
+      "id": "mongodb",
+      "title": "MongoDB / NoSQL",
+      "order": [
+        { "topic": "MongoDB", "files": ["MongoDB Basics.md", "MongoDB CRUD Operations.md", "MongoDB Querying and Indexing.md", "MongoDB Aggregation.md", "MongoDB Schema Design.md", "MongoDB Replication.md", "MongoDB Sharding.md", "MongoDB with Node.js and .NET.md"] }
+      ]
+    },
+    {
       "id": "security",
       "title": "Application & Cloud Security",
       "order": [
@@ -64,7 +72,8 @@
     "React": { "requires": ["JavaScript", "TypeScript"], "next": ["Redux Toolkit Basics", "Next.js"], "pairs": ["Angular"] },
     "Javascript": { "next": ["TypeScript", "React"], "pairs": ["C#"] },
     "TypeScript": { "requires": ["Javascript"], "usedBy": ["Angular", "React"] },
-    "Sql Server": { "pairs": ["C#"], "next": ["SQL Server Query Optimization Techniques"] },
+    "Sql Server": { "pairs": ["C#", "MongoDB"], "next": ["SQL Server Query Optimization Techniques"] },
+    "MongoDB": { "requires": ["Javascript"], "pairs": ["Sql Server", "C#"], "next": ["MongoDB Schema Design", "MongoDB Replication"] },
     "Docker": { "next": ["Kubernetes"], "pairs": ["Azure DevOps"] },
     "Kubernetes": { "requires": ["Docker"], "pairs": ["Microservices"] },
     "Microservices": { "requires": ["Docker", "System Design"], "pairs": ["Kubernetes", "Security"] },
@@ -102,6 +111,12 @@
     "Security/Authentication and Identity.md": ["Security/Authorization and Access Control.md", "C#/.NET Core JSON Web Token.md", "C#/.NET Core OAuth 2.0.md"],
     "Security/Web Application Security.md": ["Security/API Security.md", "React/React Error Handling and Security.md"],
     "Security/Cryptography and TLS.md": ["Certificates/Certificates.md", "Security/Cloud and Infrastructure Security.md"],
-    "Security/Application Security by Stack.md": ["Security/Secure Development Lifecycle.md", "Microservices/Microservices Security.md"]
+    "Security/Application Security by Stack.md": ["Security/Secure Development Lifecycle.md", "Microservices/Microservices Security.md"],
+    "MongoDB/MongoDB Basics.md": ["MongoDB/MongoDB CRUD Operations.md", "Sql Server/SQL Server Basics.md", "Important Concepts/Interview Comparisons.md"],
+    "MongoDB/MongoDB CRUD Operations.md": ["MongoDB/MongoDB Querying and Indexing.md"],
+    "MongoDB/MongoDB Querying and Indexing.md": ["MongoDB/MongoDB Aggregation.md", "MongoDB/MongoDB Performance and Optimization.md"],
+    "MongoDB/MongoDB Schema Design.md": ["MongoDB/MongoDB Replication.md", "Microservices/Microservices Data Management.md"],
+    "MongoDB/MongoDB Replication.md": ["MongoDB/MongoDB Sharding.md"],
+    "MongoDB/MongoDB with Node.js and .NET.md": ["C#/C# ADO.NET and Entity Framework.md", "React/React HTTP and Data Fetching.md"]
   }
 }

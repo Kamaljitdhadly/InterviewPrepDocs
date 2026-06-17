@@ -2,7 +2,7 @@
 
 > **Start here.** All study notes live under `_work/tight/`. Clean (full) versions: `_work/clean/`.
 
-**Library stats:** 19 topics · 194 files · ~1076 questions
+**Library stats:** 20 topics · 204 files · ~1161 questions
 
 ---
 
@@ -24,10 +24,11 @@
 |------|-------|----------------|
 | 1 | **C#** | C# Basics, C# OOPS, C# SOLID Principles, C# Generics & Collections, C# LINQ, .NET Core Basics, WebApi Basics, .NET Core JSON Web Token, C# ADO.NET and Entity Framework |
 | 2 | **Sql Server** | SQL Server Basics, SQL Server Queries, SQL Server Query Optimization Techniques, SQL Server Transactions and Locking |
-| 3 | **TypeScript** | TypeScript Basics, TypeScript Types and Interfaces |
-| 4 | **Angular** | Angular Basics, Angular Modern Features, Angular Routing, Angular Forms & Pipes, Angular HTTP and Services, RxJS Basics, NgRx Basics |
-| 5 | **Azure Cloud** | Azure Basics, Azure Active Directory, Azure Compute |
-| 6 | **Azure DevOps** | Azure Devops Example |
+| 3 | **MongoDB** | MongoDB Basics, MongoDB CRUD Operations, MongoDB Querying and Indexing, MongoDB Schema Design, MongoDB with Node.js and .NET |
+| 4 | **TypeScript** | TypeScript Basics, TypeScript Types and Interfaces |
+| 5 | **Angular** | Angular Basics, Angular Modern Features, Angular Routing, Angular Forms & Pipes, Angular HTTP and Services, RxJS Basics, NgRx Basics |
+| 6 | **Azure Cloud** | Azure Basics, Azure Active Directory, Azure Compute |
+| 7 | **Azure DevOps** | Azure Devops Example |
 
 ### React / Frontend Developer
 
@@ -54,6 +55,12 @@
 | 1 | **Microservices** | Microservices Basics, Microservices Communication, Microservices Service Discovery, Microservices Distributed Transactions |
 | 2 | **System Design** | System Design Basics, System Design CAP Theorem, System Design Design Patterns |
 | 3 | **Important Concepts** | OWASP, Important keywords |
+
+### MongoDB / NoSQL
+
+| Step | Topic | Files to study |
+|------|-------|----------------|
+| 1 | **MongoDB** | MongoDB Basics, MongoDB CRUD Operations, MongoDB Querying and Indexing, MongoDB Aggregation, MongoDB Schema Design, MongoDB Replication, MongoDB Sharding, MongoDB with Node.js and .NET |
 
 ### Application & Cloud Security
 
@@ -86,6 +93,7 @@
 | Javascript | 12 | `_work/tight/Javascript/` |
 | Kubernetes | 12 | `_work/tight/Kubernetes/` |
 | Microservices | 22 | `_work/tight/Microservices/` |
+| MongoDB | 10 | `_work/tight/MongoDB/` |
 | React | 16 | `_work/tight/React/` |
 | Security | 10 | `_work/tight/Security/` |
 | Sql Server | 11 | `_work/tight/Sql Server/` |
@@ -124,7 +132,7 @@
 
 **Cloud:** `Azure Cloud` · `Azure DevOps`
 
-**Other:** `Bash` · `Certificates` · `Git` · `Security` · `Testing`
+**Other:** `Bash` · `Certificates` · `Git` · `MongoDB` · `Security` · `Testing`
 
 **Backend & .NET:** `C#` · `Sql Server`
 

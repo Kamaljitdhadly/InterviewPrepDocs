@@ -26,6 +26,7 @@ Reads `_work/md/{Topic}/`, writes `_work/clean/{Topic}/`. Pick formatter by topi
 | Docker / Kubernetes | respective `format-*-clean.mjs` |
 | Azure Cloud / DevOps | `format-azurecloud-clean.mjs` / `format-azuredevops-clean.mjs` |
 | DSA | `format-dsa-clean.mjs` |
+| MongoDB | `format-mongodb-clean.mjs` |
 | Git, Bash, Certificates, Testing, Security | `format-generic-clean.mjs` / `format-security-clean.mjs` |
 
 ## Other scripts
