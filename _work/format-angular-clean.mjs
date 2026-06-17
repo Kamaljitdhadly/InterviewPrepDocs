@@ -208,8 +208,43 @@ function addQuestionHeadings(text) {
 
   const out = [];
   let i = 0;
+  let inTocSection = false;
   while (i < lines.length) {
     const line = lines[i];
+    if (line.trim() === '## Questions Covered') {
+      inTocSection = true;
+      out.push(line);
+      out.push('');
+      i++;
+      continue;
+    }
+    if (inTocSection) {
+      const t = line.trim();
+      if (/^\d+\.\s+\*\*/.test(t)) {
+        inTocSection = false;
+      } else if (/^\d+\.\s+/.test(t)) {
+        out.push(line);
+        i++;
+        continue;
+      } else if (t === '') {
+        out.push(line);
+        i++;
+        continue;
+      } else {
+        inTocSection = false;
+      }
+    }
+    const numM = line.match(/^\d+\.\s+(.*)$/);
+    if (numM) {
+      const q = stripBold(numM[1].trim());
+      const key = normKey(q);
+      if (qKeys.has(key) && !existing.has(key)) {
+        out.push(`## ${q}`);
+        existing.add(key);
+        i++;
+        continue;
+      }
+    }
     const plain = stripBold(line.trim());
     const key = normKey(plain);
     if (qKeys.has(key) && !existing.has(key) && !line.startsWith('#') && plain.length > 5) {
@@ -247,6 +282,7 @@ function collapseBlank(text) {
 export function formatFile(raw, fileBaseName = '') {
   let t = raw;
   if (fileBaseName) t = fixH1Title(t, fileBaseName);
+  t = t.replace(/<!--\s*-->\s*\n/g, '');
   t = mergeSplitCodeFences(t);
   t = cleanInsideCodeFences(t);
   t = formatIndentation(t);
@@ -258,7 +294,7 @@ export function formatFile(raw, fileBaseName = '') {
 // ---- CLI: node format-angular-clean.mjs ------------------------------------
 
 const DIR = path.resolve('_work/clean/Angular');
-if (import.meta.url.includes('format-angular-clean')) {
+if (import.meta.url.includes('format-angular-clean') && process.argv[1]?.includes('format-angular-clean')) {
   const files = fs.readdirSync(DIR).filter((f) => f.endsWith('.md'));
   for (const f of files) {
     const p = path.join(DIR, f);

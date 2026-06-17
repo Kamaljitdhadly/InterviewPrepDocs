@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { formatFile as formatCSharpClean } from './format-csharp-clean.mjs';
 import { formatFile as formatAngularClean } from './format-angular-clean.mjs';
+import { formatFile as formatJavascriptClean } from './format-javascript-clean.mjs';
 
 const args = process.argv.slice(2);
 const topicIdx = args.indexOf('--topic');
@@ -10,7 +11,12 @@ const only = args.find((a) => !a.startsWith('--') && a !== topic) ?? '';
 
 const SRC = path.resolve('_work/md', topic);
 const OUT = path.resolve('_work/clean', topic);
-const CODE_LANG = topic.toLowerCase().includes('c#') || topic.toLowerCase() === 'csharp' ? 'csharp' : 'typescript';
+const topicLower = topic.toLowerCase();
+const CODE_LANG = topicLower.includes('c#') || topicLower === 'csharp'
+  ? 'csharp'
+  : topicLower.includes('javascript') || topicLower === 'js'
+    ? 'javascript'
+    : 'typescript';
 
 fs.mkdirSync(OUT, { recursive: true });
 
@@ -53,9 +59,17 @@ const CODE_STRONG_CS = [
   /\bConsole\.Write/, /\bIEnumerable</, /\bList</, /\bTask</, /\bdelegate\s+/,
   /\bevent\s+/, /\b#pragma\s+/, /\b#region\b/, /\b#endregion\b/,
 ];
+const CODE_STRONG_JS = [
+  /\bimport\s+/, /\bexport\s+/, /\brequire\s*\(/, /\bmodule\.exports/,
+  /\bconst\s+\w+\s*=/, /\blet\s+\w+\s*=/, /\bvar\s+\w+\s*=/,
+  /\bfunction\s*\(/, /\basync\s+function/, /\bawait\s+/,
+  /\bconsole\.(log|error|warn|info)/, /\bdocument\./, /\bwindow\./, /\baddEventListener/,
+  /\.then\s*\(/, /\.catch\s*\(/, /\.map\s*\(/, /\.filter\s*\(/, /\bPromise\./,
+  /\blocalStorage/, /\bsessionStorage/, /\bfetch\s*\(/, /\bJSON\./,
+];
 const CODE_STRONG = [
   ...CODE_STRONG_COMMON,
-  ...(CODE_LANG === 'csharp' ? CODE_STRONG_CS : CODE_STRONG_TS),
+  ...(CODE_LANG === 'csharp' ? CODE_STRONG_CS : CODE_LANG === 'javascript' ? CODE_STRONG_JS : CODE_STRONG_TS),
 ];
 
 const CODE_WEAK = [
@@ -225,7 +239,8 @@ for (const f of files) {
   const baseName = f.replace(/\.md$/i, '');
   let cleaned = normalize(raw, baseName);
   if (CODE_LANG === 'csharp') cleaned = formatCSharpClean(cleaned);
-  else if (topic.toLowerCase() === 'angular') cleaned = formatAngularClean(cleaned, baseName);
+  else if (topicLower === 'angular') cleaned = formatAngularClean(cleaned, baseName);
+  else if (topicLower.includes('javascript')) cleaned = formatJavascriptClean(cleaned, baseName);
   fs.writeFileSync(path.join(OUT, f), cleaned, 'utf8');
   console.log(`cleaned: ${f} (${raw.length} -> ${cleaned.length})`);
 }

@@ -223,8 +223,7 @@ export { formatFile };
 
 // ---- run (when executed directly) ------------------------------------------
 
-const isMain = process.argv[1] && import.meta.url.endsWith(process.argv[1].replace(/\\/g, '/'));
-if (isMain || process.argv[1]?.includes('format-csharp-clean')) {
+if (process.argv[1]?.includes('format-csharp-clean')) {
 const files = fs.readdirSync(DIR).filter((f) => f.endsWith('.md'));
 for (const f of files) {
   const p = path.join(DIR, f);
