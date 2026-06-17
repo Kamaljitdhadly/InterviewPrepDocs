@@ -6,6 +6,7 @@ import { formatFile as formatJavascriptClean } from './format-javascript-clean.m
 import { formatFile as formatSqlServerClean } from './format-sqlserver-clean.mjs';
 import { formatFile as formatMicroservicesClean } from './format-microservices-clean.mjs';
 import { formatFile as formatSystemDesignClean } from './format-systemdesign-clean.mjs';
+import { formatFile as formatDockerClean } from './format-docker-clean.mjs';
 
 const args = process.argv.slice(2);
 const topicIdx = args.indexOf('--topic');
@@ -25,7 +26,9 @@ const CODE_LANG = topicLower.includes('c#') || topicLower === 'csharp'
         ? 'json'
         : topicLower.includes('system design')
           ? 'json'
-          : 'typescript';
+          : topicLower.includes('docker')
+            ? 'bash'
+            : 'typescript';
 
 fs.mkdirSync(OUT, { recursive: true });
 
@@ -99,13 +102,22 @@ const CODE_STRONG_MS = [
   /\b"[^"]+"\s*:/, /^\s*\{/, /^\s*\[/, /^\s*-\s+\w+:/,
   /\bcurl\s+-/i, /\bnpm\s+/i, /\bdotnet\s+/i,
 ];
+const CODE_STRONG_DOCKER = [
+  /\bdocker\s+(run|build|pull|push|exec|ps|images|rmi|stop|start|rm|network|volume|compose|login|tag)\b/i,
+  /\bdocker-compose\b/i, /^FROM\s+/i, /^RUN\s+/i, /^CMD\s+/i, /^ENTRYPOINT\s+/i,
+  /^COPY\s+/i, /^WORKDIR\s+/i, /^EXPOSE\s+/i, /^ENV\s+/i, /^ARG\s+/i,
+  /^ADD\s+/i, /^LABEL\s+/i, /^VOLUME\s+/i, /^USER\s+/i, /^HEALTHCHECK\s+/i,
+  /^\s*-\s*["']?[\w./-]+:/, /host\.docker\.internal/i,
+  /^\s*version:\s*["']?3/i, /^\s*services:/i,
+];
 const CODE_STRONG = [
   ...CODE_STRONG_COMMON,
   ...(CODE_LANG === 'csharp' ? CODE_STRONG_CS
     : CODE_LANG === 'javascript' ? CODE_STRONG_JS
       : CODE_LANG === 'sql' ? CODE_STRONG_SQL
-        : CODE_LANG === 'json' ? CODE_STRONG_MS
-          : CODE_STRONG_TS),
+        : CODE_LANG === 'bash' ? CODE_STRONG_DOCKER
+          : CODE_LANG === 'json' ? CODE_STRONG_MS
+            : CODE_STRONG_TS),
 ];
 
 const CODE_WEAK = [
@@ -317,6 +329,7 @@ for (const f of files) {
   else if (topicLower.includes('sql')) cleaned = formatSqlServerClean(cleaned, baseName);
   else if (topicLower.includes('microservices')) cleaned = formatMicroservicesClean(cleaned, baseName);
   else if (topicLower.includes('system design')) cleaned = formatSystemDesignClean(cleaned, baseName);
+  else if (topicLower.includes('docker')) cleaned = formatDockerClean(cleaned, baseName);
   fs.writeFileSync(path.join(OUT, f), cleaned, 'utf8');
   console.log(`cleaned: ${f} (${raw.length} -> ${cleaned.length})`);
 }
