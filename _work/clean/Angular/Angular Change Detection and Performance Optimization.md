@@ -38,7 +38,7 @@ By default, Angular uses **dirty checking**, where it checks every component for
 
 ```typescript
 @Component({
-selector: 'app-default',
+  selector: 'app-default',
 ```
 
 changeDetection: ChangeDetectionStrategy.Default, // Default strategy
@@ -47,7 +47,7 @@ changeDetection: ChangeDetectionStrategy.Default, // Default strategy
 template: `<div>{{ data }}</div>`
 })
 export class DefaultComponent {
-data = 'Default strategy';
+  data = 'Default strategy';
 }
 ```
 
@@ -59,7 +59,7 @@ The **OnPush** strategy optimizes change detection by checking only when the com
 
 ```typescript
 @Component({
-selector: 'app-on-push',
+  selector: 'app-on-push',
 ```
 
 changeDetection: ChangeDetectionStrategy.OnPush, // OnPush strategy
@@ -68,7 +68,7 @@ changeDetection: ChangeDetectionStrategy.OnPush, // OnPush strategy
 template: `<div>{{ data }}</div>`
 })
 export class OnPushComponent {
-@Input() data: string;
+  @Input() data: string;
 }
 ```
 
@@ -113,11 +113,11 @@ You can trigger change detection manually using the ChangeDetectorRef class.
 ```typescript
 import { ChangeDetectorRef } from '@angular/core';
 export class MyComponent {
-constructor(private cd: ChangeDetectorRef) {}
-someMethod() {
-// Manually trigger change detection
-this.cd.detectChanges();
-}
+  constructor(private cd: ChangeDetectorRef) {}
+  someMethod() {
+    // Manually trigger change detection
+    this.cd.detectChanges();
+  }
 }
 ```
 
@@ -128,16 +128,16 @@ You can detach change detection from a component to stop Angular from checking i
 ```typescript
 import { ChangeDetectorRef } from '@angular/core';
 export class MyComponent {
-constructor(private cd: ChangeDetectorRef) {}
-ngOnInit() {
-// Detach change detection
-this.cd.detach();
-}
-reattachChangeDetection() {
-// Reattach change detection when needed
-this.cd.reattach();
-this.cd.detectChanges(); // Trigger change detection manually
-}
+  constructor(private cd: ChangeDetectorRef) {}
+  ngOnInit() {
+    // Detach change detection
+    this.cd.detach();
+  }
+  reattachChangeDetection() {
+    // Reattach change detection when needed
+    this.cd.reattach();
+    this.cd.detectChanges(); // Trigger change detection manually
+  }
 }
 ```
 
@@ -156,7 +156,7 @@ Here are a few techniques to optimize change detection in Angular:
 ```typescript
 <div *ngFor="let item of items; trackBy: trackByFn">{{ item.name }}</div>
 trackByFn(index: number, item: any) {
-return item.id; // Use item ID to track DOM elements
+  return item.id; // Use item ID to track DOM elements
 }
 ```
 
@@ -198,7 +198,7 @@ The **difference between the default and OnPush change detection strategies** in
 
 ```typescript
 @Component({
-selector: 'app-default',
+  selector: 'app-default',
 ```
 
 changeDetection: ChangeDetectionStrategy.Default, // This is the default
@@ -207,7 +207,7 @@ changeDetection: ChangeDetectionStrategy.Default, // This is the default
 template: `<div>{{ data }}</div>`
 })
 export class DefaultComponent {
-data = 'Default Change Detection';
+  data = 'Default Change Detection';
 }
 ```
 
@@ -239,7 +239,7 @@ data = 'Default Change Detection';
 
 ```typescript
 @Component({
-selector: 'app-on-push',
+  selector: 'app-on-push',
 ```
 
 changeDetection: ChangeDetectionStrategy.OnPush, // Using OnPush
@@ -248,7 +248,7 @@ changeDetection: ChangeDetectionStrategy.OnPush, // Using OnPush
 template: `<div>{{ data }}</div>`
 })
 export class OnPushComponent {
-@Input() data: string; // Change detection only occurs when this input changes
+  @Input() data: string; // Change detection only occurs when this input changes
 }
 ```
 
@@ -296,17 +296,17 @@ The detectChanges() method tells Angular to check the component and its children
 ```typescript
 import { Component, ChangeDetectorRef } from '@angular/core';
 @Component({
-selector: 'app-manual-detect',
-template: `<div>{{ data }}</div>`
+  selector: 'app-manual-detect',
+  template: `<div>{{ data }}</div>`
 })
 export class ManualDetectComponent {
-data = 'Initial value';
-constructor(private cd: ChangeDetectorRef) {}
-someMethod() {
-this.data = 'Updated value';
-// Manually trigger change detection
-this.cd.detectChanges();
-}
+  data = 'Initial value';
+  constructor(private cd: ChangeDetectorRef) {}
+  someMethod() {
+    this.data = 'Updated value';
+    // Manually trigger change detection
+    this.cd.detectChanges();
+  }
 }
 ```
 
@@ -321,18 +321,18 @@ The markForCheck() method marks the component and its ancestors to be checked du
 ```typescript
 import { Component, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 @Component({
-selector: 'app-mark-for-check',
-changeDetection: ChangeDetectionStrategy.OnPush,
-template: `<div>{{ data }}</div>`
+  selector: 'app-mark-for-check',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: `<div>{{ data }}</div>`
 })
 export class MarkForCheckComponent {
-data = 'Initial value';
-constructor(private cd: ChangeDetectorRef) {}
-updateData() {
-this.data = 'Updated value';
-// Marks the component for check in the next change detection cycle
-this.cd.markForCheck();
-}
+  data = 'Initial value';
+  constructor(private cd: ChangeDetectorRef) {}
+  updateData() {
+    this.data = 'Updated value';
+    // Marks the component for check in the next change detection cycle
+    this.cd.markForCheck();
+  }
 }
 ```
 
@@ -347,17 +347,17 @@ The ApplicationRef.tick() method triggers a full change detection cycle, checkin
 ```typescript
 import { Component, ApplicationRef } from '@angular/core';
 @Component({
-selector: 'app-tick-example',
-template: `<div>{{ data }}</div>`
+  selector: 'app-tick-example',
+  template: `<div>{{ data }}</div>`
 })
 export class TickExampleComponent {
-data = 'Initial value';
-constructor(private appRef: ApplicationRef) {}
-updateAndTick() {
-this.data = 'Updated value';
-// Trigger a full change detection cycle
-this.appRef.tick();
-}
+  data = 'Initial value';
+  constructor(private appRef: ApplicationRef) {}
+  updateAndTick() {
+    this.data = 'Updated value';
+    // Trigger a full change detection cycle
+    this.appRef.tick();
+  }
 }
 ```
 
@@ -372,23 +372,23 @@ Angular's NgZone allows you to run code inside or outside Angular's change detec
 ```typescript
 import { Component, NgZone } from '@angular/core';
 @Component({
-selector: 'app-ng-zone',
-template: `<div>{{ data }}</div>`
+  selector: 'app-ng-zone',
+  template: `<div>{{ data }}</div>`
 })
 export class NgZoneComponent {
-data = 'Initial value';
-constructor(private ngZone: NgZone) {}
-runOutsideAngular() {
-this.ngZone.runOutsideAngular(() => {
-setTimeout(() => {
-this.data = 'Updated value';
-// Manually trigger change detection
-this.ngZone.run(() => {
-console.log('Change detection triggered');
-});
-}, 2000);
-});
-}
+  data = 'Initial value';
+  constructor(private ngZone: NgZone) {}
+  runOutsideAngular() {
+    this.ngZone.runOutsideAngular(() => {
+      setTimeout(() => {
+        this.data = 'Updated value';
+        // Manually trigger change detection
+        this.ngZone.run(() => {
+          console.log('Change detection triggered');
+        });
+      }, 2000);
+    });
+  }
 }
 ```
 
@@ -423,8 +423,8 @@ detectChanges() triggers **immediate change detection** on the component and all
 
 ```typescript
 @Component({
-selector: 'app-child',
-template: `<div>{{data}}</div>`,
+  selector: 'app-child',
+  template: `<div>{{data}}</div>`,
 ```
 
 changeDetection: ChangeDetectionStrategy.OnPush
@@ -432,14 +432,14 @@ changeDetection: ChangeDetectionStrategy.OnPush
 ```typescript
 })
 export class ChildComponent implements OnInit {
-@Input() data: string;
-constructor(private cd: ChangeDetectorRef) {}
-ngOnInit() {
-setTimeout(() => {
-this.data = 'New Data';
-this.cd.detectChanges(); // triggers immediate change detection
-}, 2000);
-}
+  @Input() data: string;
+  constructor(private cd: ChangeDetectorRef) {}
+  ngOnInit() {
+    setTimeout(() => {
+      this.data = 'New Data';
+      this.cd.detectChanges(); // triggers immediate change detection
+    }, 2000);
+  }
 }
 ```
 
@@ -465,8 +465,8 @@ markForCheck() does **not trigger change detection immediately**, but rather it 
 
 ```typescript
 @Component({
-selector: 'app-child',
-template: `<div>{{data}}</div>`,
+  selector: 'app-child',
+  template: `<div>{{data}}</div>`,
 ```
 
 changeDetection: ChangeDetectionStrategy.OnPush
@@ -474,12 +474,12 @@ changeDetection: ChangeDetectionStrategy.OnPush
 ```typescript
 })
 export class ChildComponent {
-@Input() data: string;
-constructor(private cd: ChangeDetectorRef) {}
-someMethod() {
-this.data = 'New Data';
-this.cd.markForCheck(); // marks this component for checking in the next cycle
-}
+  @Input() data: string;
+  constructor(private cd: ChangeDetectorRef) {}
+  someMethod() {
+    this.data = 'New Data';
+    this.cd.markForCheck(); // marks this component for checking in the next cycle
+  }
 }
 ```
 
@@ -503,12 +503,12 @@ By default, Angular checks for changes in every component after every event (cli
 
 ```typescript
 @Component({
-selector: 'app-on-push',
-changeDetection: ChangeDetectionStrategy.OnPush,
-template: `<div>{{ data }}</div>`
+  selector: 'app-on-push',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: `<div>{{ data }}</div>`
 })
 export class OnPushComponent {
-@Input() data: string;
+  @Input() data: string;
 }
 ```
 
@@ -541,7 +541,7 @@ In angular.json, make sure AOT is enabled:
 
 ```typescript
 "build": {
-"options": {
+  "options": {
 ```
 
 "aot": true
@@ -578,7 +578,7 @@ When looping over arrays in Angular templates using `*ngFor`, Angular recreates 
 ```typescript
 <div *ngFor="let item of items; trackBy: trackById">{{ item.name }}</div>
 trackById(index: number, item: any): number {
-return item.id; // Unique identifier
+  return item.id; // Unique identifier
 }
 ```
 
@@ -593,9 +593,9 @@ Pure pipes are only recalculated when the input data changes, as opposed to impu
 ```typescript
 @Pipe({ name: 'purePipe', pure: true })
 export class PurePipe implements PipeTransform {
-transform(value: any): any {
-// Transformation logic here
-}
+  transform(value: any): any {
+    // Transformation logic here
+  }
 }
 ```
 
@@ -611,10 +611,10 @@ constructor(private cd: ChangeDetectorRef) {}
 
 ```typescript
 ngOnInit() {
-this.cd.detach(); // Detach change detection
+  this.cd.detach(); // Detach change detection
 }
 update() {
-this.cd.detectChanges(); // Manually trigger change detection
+  this.cd.detectChanges(); // Manually trigger change detection
 }
 ```
 
@@ -634,8 +634,8 @@ For dynamic imports:
 
 ```typescript
 import('./lazy-loaded-lib').then(module => {
-const lib = module.default;
-// Use the library here
+  const lib = module.default;
+  // Use the library here
 });
 ```
 
@@ -668,12 +668,12 @@ Memory leaks can slow down an Angular app over time, especially when dealing wit
 ```typescript
 private subscription: Subscription;
 ngOnInit() {
-this.subscription = this.myObservable.subscribe(data => {
-// Handle data
-});
+  this.subscription = this.myObservable.subscribe(data => {
+    // Handle data
+  });
 }
 ngOnDestroy() {
-this.subscription.unsubscribe(); // Prevent memory leaks
+  this.subscription.unsubscribe(); // Prevent memory leaks
 }
 ```
 
@@ -689,7 +689,7 @@ For routes that may be used after the initial load, **preloading** can help impr
 
 ```typescript
 @NgModule({
-imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],
+  imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],
 })
 export class AppModule {}
 ```
@@ -714,11 +714,11 @@ Web workers allow you to run computationally expensive tasks in a separate threa
 
 ```typescript
 if (typeof Worker !== 'undefined') {
-const worker = new Worker('./app.worker', { type: 'module' });
-worker.onmessage = ({ data }) => {
-console.log(`Data from worker: ${data}`);
-};
-worker.postMessage('Hello from Angular');
+  const worker = new Worker('./app.worker', { type: 'module' });
+  worker.onmessage = ({ data }) => {
+    console.log(`Data from worker: ${data}`);
+  };
+  worker.postMessage('Hello from Angular');
 }
 ```
 
@@ -1123,8 +1123,8 @@ const routes: Routes = [
 
 ```typescript
 @NgModule({
-imports: [RouterModule.forChild(routes)],
-exports: [RouterModule]
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
 })
 export class FeatureRoutingModule { }
 ```
@@ -1140,8 +1140,8 @@ const routes: Routes = [
 // Other root routes
 ];
 @NgModule({
-imports: [RouterModule.forRoot(routes)],
-exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
 })
 export class AppRoutingModule { }
 ```
@@ -1152,9 +1152,9 @@ Ensure the FeatureModule is correctly defined and imports the FeatureRoutingModu
 
 ```typescript
 @NgModule({
-declarations: [FeatureComponent],
-imports: [
-CommonModule,
+  declarations: [FeatureComponent],
+  imports: [
+  CommonModule,
 ```
 
 FeatureRoutingModule
@@ -1201,10 +1201,10 @@ const routes: Routes = [
 // Other routes
 ];
 @NgModule({
-imports: [
-RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
-],
-exports: [RouterModule]
+  imports: [
+  RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+  ],
+  exports: [RouterModule]
 })
 export class AppRoutingModule { }
 ```

@@ -246,6 +246,8 @@ Buffering operators collect a group of emitted values and emit them together as 
 
 - **bufferTime**: Buffers values emitted by the source Observable within a specific time period.
 
+Explanation: This example buffers values for 1 second and emits them as an array every 1 second.
+
 ```typescript
 import { interval } from 'rxjs';
 import { bufferTime } from 'rxjs/operators';
@@ -254,7 +256,6 @@ const source$ = interval(100); // Emits a value every 100ms
 source$.pipe(
 bufferTime(1000)
 ).subscribe(buffer => console.log(buffer));
-**Explanation**: This example buffers values for 1 second and emits them as an array every 1 second.
 ```
 
 #### 2. **Windowing**
@@ -262,6 +263,8 @@ bufferTime(1000)
 Windowing is similar to buffering, but instead of emitting the buffered values as an array, it emits the buffered values as a new Observable.
 
 - **windowTime**: Splits the source Observable into "windows" over a specific time period, emitting Observables that contain the values emitted within that period.
+
+Explanation: This example opens a new "window" every 1 second and emits values within that window as separate Observables.
 
 ```typescript
 import { interval } from 'rxjs';
@@ -272,7 +275,6 @@ source$.pipe(
 windowTime(1000),
 mergeAll() // Flatten the windowed Observables back into a single stream
 ).subscribe(value => console.log(value));
-**Explanation**: This example opens a new "window" every 1 second and emits values within that window as separate Observables.
 ```
 
 #### 3. **Throttling**
@@ -280,6 +282,8 @@ mergeAll() // Flatten the windowed Observables back into a single stream
 Throttling controls the emission rate by only emitting a value periodically while ignoring other values in between.
 
 - **throttleTime**: Ignores values emitted during a specified time period, ensuring only one emission within that period.
+
+Explanation: This example allows only one value to pass every 500ms, ignoring any values emitted during the throttling period.
 
 ```typescript
 import { interval } from 'rxjs';
@@ -289,7 +293,6 @@ const source$ = interval(100); // Emits a value every 100ms
 source$.pipe(
 throttleTime(500)
 ).subscribe(value => console.log(value));
-**Explanation**: This example allows only one value to pass every 500ms, ignoring any values emitted during the throttling period.
 ```
 
 #### 4. **Debouncing**
@@ -297,6 +300,8 @@ throttleTime(500)
 Debouncing delays the emission of values until a period of inactivity. It helps handle rapid streams of events by only processing the final event after the stream "settles."
 
 - **debounceTime**: Waits until a specified period of inactivity has passed before emitting the last value.
+
+Explanation: This example waits for 500ms of inactivity before emitting the user's input, preventing backpressure from rapid input events.
 
 ```typescript
 import { fromEvent } from 'rxjs';
@@ -306,7 +311,6 @@ const input = document.querySelector('input');
 fromEvent(input, 'input').pipe(
 debounceTime(500)
 ).subscribe(event => console.log((event.target as HTMLInputElement).value));
-**Explanation**: This example waits for 500ms of inactivity before emitting the user's input, preventing backpressure from rapid input events.
 ```
 
 #### 5. **Sampling**
@@ -314,6 +318,8 @@ debounceTime(500)
 Sampling takes periodic snapshots of the source Observable, emitting the most recent value at regular intervals.
 
 - **sampleTime**: Emits the most recent value from the source Observable at regular time intervals.
+
+Explanation: This example emits the most recent value every 1 second, effectively reducing the frequency of emissions.
 
 ```typescript
 import { interval } from 'rxjs';
@@ -323,7 +329,6 @@ const source$ = interval(100); // Emits a value every 100ms
 source$.pipe(
 sampleTime(1000)
 ).subscribe(value => console.log(value));
-**Explanation**: This example emits the most recent value every 1 second, effectively reducing the frequency of emissions.
 ```
 
 ### Summary of Backpressure Handling Strategies
@@ -374,6 +379,8 @@ RxJS provides several built-in Schedulers, each with a specific purpose:
 
     - Runs the task in the next JavaScript event loop or at a later time.
 
+In this example, the values 1, 2, and 3 will be emitted asynchronously in the next event loop.
+
 ```typescript
 Example:
 import { asyncScheduler, of } from 'rxjs';
@@ -381,7 +388,6 @@ import { observeOn } from 'rxjs/operators';
 of(1, 2, 3).pipe(
 observeOn(asyncScheduler)
 ).subscribe(value => console.log(value));
-In this example, the values 1, 2, and 3 will be emitted asynchronously in the next event loop.
 ```
 
 2.  **queueScheduler**:
@@ -390,6 +396,8 @@ In this example, the values 1, 2, and 3 will be emitted asynchronously in the ne
 
     - Prevents infinite recursion by handling queued tasks in a controlled manner.
 
+The values will be processed in a synchronous manner, using the FIFO order, but ensuring no recursive call issues.
+
 ```typescript
 Example:
 import { of, queueScheduler } from 'rxjs';
@@ -397,7 +405,6 @@ import { observeOn } from 'rxjs/operators';
 of(1, 2, 3).pipe(
 observeOn(queueScheduler)
 ).subscribe(value => console.log(value));
-The values will be processed in a synchronous manner, using the FIFO order, but ensuring no recursive call issues.
 ```
 
 3.  **asapScheduler**:
@@ -422,13 +429,14 @@ The values are executed after the current synchronous code but before the next a
 
     - Useful for animations or tasks that should be synchronized with the browser’s rendering cycles.
 
+In this example, the emission of values is synchronized with the browser’s animation frame.
+
 ```typescript
 Example:
 import { interval, animationFrameScheduler } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 const animation$ = interval(0, animationFrameScheduler);
 animation$.subscribe(frame => console.log(`Frame: ${frame}`));
-In this example, the emission of values is synchronized with the browser’s animation frame.
 ```
 
 ### How Schedulers Are Used
@@ -437,6 +445,8 @@ Schedulers can be used with many RxJS operators to control how and when the Obse
 
 1.  **observeOn**: This operator lets you specify a Scheduler on which the notifications (i.e., next, error, complete) will be emitted.
 
+Here, the emission of values is deferred and handled asynchronously.
+
 ```typescript
 Example:
 import { of, asyncScheduler } from 'rxjs';
@@ -444,10 +454,11 @@ import { observeOn } from 'rxjs/operators';
 of(1, 2, 3).pipe(
 observeOn(asyncScheduler)
 ).subscribe(value => console.log(value));
-Here, the emission of values is deferred and handled asynchronously.
 ```
 
 2.  **subscribeOn**: This operator allows you to specify a Scheduler on which the subscription logic itself (i.e., the work to generate values) is executed.
+
+This defers the subscription to the Observable, causing it to start emitting values asynchronously.
 
 ```typescript
 Example:
@@ -456,7 +467,6 @@ import { subscribeOn } from 'rxjs/operators';
 of(1, 2, 3).pipe(
 subscribeOn(asyncScheduler)
 ).subscribe(value => console.log(value));
-This defers the subscription to the Observable, causing it to start emitting values asynchronously.
 ```
 
 ### Why Schedulers are Important
@@ -492,14 +502,15 @@ const subscription = observable$.subscribe(value => console.log(value));
 
 2.  **Unsubscribe from the Observable**: To cancel the subscription, call the unsubscribe() method on the subscription object.
 
+Explanation: After 5 seconds, the subscription will be canceled, and the Observable will stop emitting values.
+
 ```typescript
 typescript
 Copy code
 setTimeout(() => {
-subscription.unsubscribe();
-console.log('Unsubscribed');
+  subscription.unsubscribe();
+  console.log('Unsubscribed');
 }, 5000); // Unsubscribes after 5 seconds
-**Explanation**: After 5 seconds, the subscription will be canceled, and the Observable will stop emitting values.
 ```
 
 ### Why Canceling Subscriptions is Important
@@ -518,8 +529,8 @@ const clicks$ = fromEvent(document, 'click');
 const subscription = clicks$.subscribe(event => console.log(event));
 // Unsubscribe after 10 seconds
 setTimeout(() => {
-subscription.unsubscribe();
-console.log('Unsubscribed from click events');
+  subscription.unsubscribe();
+  console.log('Unsubscribed from click events');
 }, 10000);
 ```
 
@@ -530,13 +541,8 @@ You can also cancel multiple subscriptions using the **Subscription.add()** meth
 ```typescript
 const sub1 = observable1$.subscribe();
 const sub2 = observable2$.subscribe();
-```
-
 sub1.add(sub2); // sub2 will also be unsubscribed when sub1 is unsubscribed
-
 // Unsubscribe both
-
-```typescript
 sub1.unsubscribe();
 ```
 
@@ -580,9 +586,9 @@ In RxJS, Observables are categorized into two types based on how they emit value
 import { Observable } from 'rxjs';
 // This cold Observable starts emitting only when subscribed
 const cold$ = new Observable(observer => {
-console.log('Observable started');
-observer.next(Math.random()); // Emits a random value
-observer.complete();
+  console.log('Observable started');
+  observer.next(Math.random()); // Emits a random value
+  observer.complete();
 });
 // Subscription 1
 cold$.subscribe(value => console.log(`Subscriber 1: ${value}`));
@@ -618,10 +624,10 @@ import { share } from 'rxjs/operators';
 // This interval Observable is inherently hot, but we can make it truly shared with multiple subscribers using `share()`
 const hot$ = interval(1000).pipe(share());
 setTimeout(() => {
-hot$.subscribe(value => console.log(`Subscriber 1: ${value}`));
+  hot$.subscribe(value => console.log(`Subscriber 1: ${value}`));
 }, 1000);
 setTimeout(() => {
-hot$.subscribe(value => console.log(`Subscriber 2: ${value}`));
+  hot$.subscribe(value => console.log(`Subscriber 2: ${value}`));
 }, 3000);
 ```
 
@@ -664,11 +670,12 @@ hot$.subscribe(value => console.log(`Subscriber 2: ${value}`));
 
 You can make a cold Observable "hot" by using operators like **share()** or **publish()**, which ensure that all subscribers share the same execution and the same stream of values.
 
+By doing this, multiple subscribers to cold$ will now receive the same values at the same time.
+
 ```typescript
 import { interval } from 'rxjs';
 import { share } from 'rxjs/operators';
 const cold$ = interval(1000).pipe(share()); // This makes the cold Observable hot
-By doing this, multiple subscribers to cold$ will now receive the same values at the same time.
 ```
 
 ### Conclusion

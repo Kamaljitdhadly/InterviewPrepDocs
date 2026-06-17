@@ -69,8 +69,8 @@ NgRx uses a single store to hold the entire application’s state. This global s
 
 ```typescript
 interface AppState {
-user: UserState;
-products: ProductsState;
+  user: UserState;
+  products: ProductsState;
 }
 ```
 
@@ -149,17 +149,17 @@ In NgRx, side effects such as HTTP requests or other asynchronous operations are
 ```typescript
 @Injectable()
 export class ProductEffects {
-loadProducts$ = createEffect(() =>
-this.actions$.pipe(
-ofType(loadProducts),
-mergeMap(() => this.productService.getAll()
-.pipe(
-map(products => loadProductsSuccess({ products })),
-catchError(error => of(loadProductsFailure({ error })))
-)
-)
-)
-);
+  loadProducts$ = createEffect(() =>
+  this.actions$.pipe(
+  ofType(loadProducts),
+  mergeMap(() => this.productService.getAll()
+  .pipe(
+  map(products => loadProductsSuccess({ products })),
+  catchError(error => of(loadProductsFailure({ error })))
+  )
+  )
+  )
+  );
 }
 ```
 
@@ -236,8 +236,8 @@ The **store** is the centralized state container that holds the application’s 
 
 ```typescript
 interface AppState {
-user: UserState;
-products: ProductState;
+  user: UserState;
+  products: ProductState;
 }
 ```
 
@@ -304,17 +304,17 @@ export const selectUser = (state: AppState) => state.auth.user;
 ```typescript
 @Injectable()
 export class ProductEffects {
-loadProducts$ = createEffect(() =>
-this.actions$.pipe(
-ofType(loadProducts),
-mergeMap(() => this.productService.getAll()
-.pipe(
-map(products => loadProductsSuccess({ products })),
-catchError(error => of(loadProductsFailure({ error })))
-)
-)
-)
-);
+  loadProducts$ = createEffect(() =>
+  this.actions$.pipe(
+  ofType(loadProducts),
+  mergeMap(() => this.productService.getAll()
+  .pipe(
+  map(products => loadProductsSuccess({ products })),
+  catchError(error => of(loadProductsFailure({ error })))
+  )
+  )
+  )
+  );
 }
 ```
 
@@ -328,7 +328,7 @@ catchError(error => of(loadProductsFailure({ error })))
 
 ```typescript
 export interface ProductState extends EntityState<Product> {
-selectedProductId: string | null;
+  selectedProductId: string | null;
 }
 ```
 
@@ -445,9 +445,9 @@ this.store.dispatch(login({ username: 'user', password: 'pass' }));
 const authReducer = createReducer(
 initialState,
 on(loginSuccess, (state, { user }) => ({
-...state,
-user: user,
-isLoggedIn: true
+  ...state,
+  user: user,
+  isLoggedIn: true
 }))
 );
 ```
@@ -459,17 +459,17 @@ isLoggedIn: true
 ```typescript
 @Injectable()
 export class AuthEffects {
-login$ = createEffect(() =>
-this.actions$.pipe(
-ofType(login),
-mergeMap(action => this.authService.login(action.username, action.password)
-.pipe(
-map(user => loginSuccess({ user })),
-catchError(() => of(loginFailure()))
-)
-)
-)
-);
+  login$ = createEffect(() =>
+  this.actions$.pipe(
+  ofType(login),
+  mergeMap(action => this.authService.login(action.username, action.password)
+  .pipe(
+  map(user => loginSuccess({ user })),
+  catchError(() => of(loginFailure()))
+  )
+  )
+  )
+  );
 }
 ```
 
@@ -535,12 +535,12 @@ A reducer function typically has the following signature:
 
 ```typescript
 export interface AuthState {
-user: User | null;
-isLoggedIn: boolean;
+  user: User | null;
+  isLoggedIn: boolean;
 }
 const initialAuthState: AuthState = {
-user: null,
-isLoggedIn: false
+  user: null,
+  isLoggedIn: false
 };
 ```
 
@@ -554,18 +554,18 @@ import { login, loginSuccess, logout } from './auth.actions';
 const authReducer = createReducer(
 initialAuthState,
 on(login, state => ({
-...state,
-isLoggedIn: false
+  ...state,
+  isLoggedIn: false
 })),
 on(loginSuccess, (state, { user }) => ({
-...state,
-user: user,
-isLoggedIn: true
+  ...state,
+  user: user,
+  isLoggedIn: true
 })),
 on(logout, state => ({
-...state,
-user: null,
-isLoggedIn: false
+  ...state,
+  user: null,
+  isLoggedIn: false
 }))
 );
 ```
@@ -593,12 +593,12 @@ import { ActionReducerMap } from '@ngrx/store';
 import { AuthState, authReducer } from './auth.reducer';
 import { ProductState, productReducer } from './product.reducer';
 export interface AppState {
-auth: AuthState;
-products: ProductState;
+  auth: AuthState;
+  products: ProductState;
 }
 export const reducers: ActionReducerMap<AppState> = {
-auth: authReducer,
-products: productReducer
+  auth: authReducer,
+  products: productReducer
 };
 ```
 
@@ -664,7 +664,7 @@ import { AppState } from './app.state';
 import { loadProducts } from './product.actions';
 constructor(private store: Store<AppState>) {}
 loadProducts() {
-this.store.dispatch(loadProducts());
+  this.store.dispatch(loadProducts());
 }
 ```
 
@@ -689,17 +689,17 @@ props<{ products: Product[] }>()
 import { createReducer, on } from '@ngrx/store';
 import { loadProductsSuccess } from './product.actions';
 export const initialState: ProductState = {
-products: [],
+  products: [],
 };
 const _productReducer = createReducer(
 initialState,
 on(loadProductsSuccess, (state, { products }) => ({
-...state,
-products
+  ...state,
+  products
 }))
 );
 export function productReducer(state, action) {
-return _productReducer(state, action);
+  return _productReducer(state, action);
 }
 ```
 
@@ -728,20 +728,20 @@ import { loadProducts, loadProductsSuccess } from './product.actions';
 import { mergeMap, map } from 'rxjs/operators';
 @Injectable()
 export class ProductEffects {
-loadProducts$ = createEffect(() =>
-this.actions$.pipe(
-ofType(loadProducts),
-mergeMap(() => this.productService.getProducts()
-.pipe(
-map(products => loadProductsSuccess({ products }))
-)
-)
-)
-);
-constructor(
-private actions$: Actions,
-private productService: ProductService
-) {}
+  loadProducts$ = createEffect(() =>
+  this.actions$.pipe(
+  ofType(loadProducts),
+  mergeMap(() => this.productService.getProducts()
+  .pipe(
+  map(products => loadProductsSuccess({ products }))
+  )
+  )
+  )
+  );
+  constructor(
+  private actions$: Actions,
+  private productService: ProductService
+  ) {}
 }
 ```
 
@@ -766,11 +766,11 @@ import { EffectsModule } from '@ngrx/effects';
 import { productReducer } from './product.reducer';
 import { ProductEffects } from './product.effects';
 @NgModule({
-imports: [
-StoreModule.forRoot({ products: productReducer }),
-EffectsModule.forRoot([ProductEffects])
-],
-...
+  imports: [
+  StoreModule.forRoot({ products: productReducer }),
+  EffectsModule.forRoot([ProductEffects])
+  ],
+  ...
 })
 export class AppModule { }
 ```
@@ -785,15 +785,15 @@ import { Store } from '@ngrx/store';
 import { selectAllProducts } from './product.selectors';
 import { loadProducts } from './product.actions';
 @Component({
-selector: 'app-product-list',
-templateUrl: './product-list.component.html',
+  selector: 'app-product-list',
+  templateUrl: './product-list.component.html',
 })
 export class ProductListComponent implements OnInit {
-products$ = this.store.select(selectAllProducts);
-constructor(private store: Store) {}
-ngOnInit() {
-this.store.dispatch(loadProducts());
-}
+  products$ = this.store.select(selectAllProducts);
+  constructor(private store: Store) {}
+  ngOnInit() {
+    this.store.dispatch(loadProducts());
+  }
 }
 ```
 

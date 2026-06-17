@@ -41,8 +41,8 @@ const routes: Routes = [
 { path: '**', redirectTo: '/home' } // wildcard route for invalid paths
 ];
 @NgModule({
-imports: [RouterModule.forRoot(routes)],
-exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
 })
 export class AppRoutingModule { }
 ```
@@ -65,9 +65,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 @NgModule({
-declarations: [AppComponent],
-imports: [BrowserModule, AppRoutingModule],
-bootstrap: [AppComponent]
+  declarations: [AppComponent],
+  imports: [BrowserModule, AppRoutingModule],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
 ```
@@ -78,7 +78,7 @@ export class AppModule { }
 import { Router } from '@angular/router';
 constructor(private router: Router) { }
 goToHome() {
-this.router.navigate(['/home']);
+  this.router.navigate(['/home']);
 }
 ```
 
@@ -113,12 +113,12 @@ import { ProfileComponent } from './profile/profile.component';
 import { SettingsComponent } from './settings/settings.component';
 const routes: Routes = [
 {
-path: 'dashboard', // Parent route
-component: DashboardComponent,
-children: [
-{ path: 'profile', component: ProfileComponent }, // Child route
-{ path: 'settings', component: SettingsComponent }, // Child route
-]
+  path: 'dashboard', // Parent route
+  component: DashboardComponent,
+  children: [
+  { path: 'profile', component: ProfileComponent }, // Child route
+  { path: 'settings', component: SettingsComponent }, // Child route
+  ]
 },
 { path: '', redirectTo: '/dashboard', pathMatch: 'full' }
 ];
@@ -149,7 +149,7 @@ children: [
 import { Router } from '@angular/router';
 constructor(private router: Router) { }
 navigateToProfile() {
-this.router.navigate(['profile'], { relativeTo: this.route });
+  this.router.navigate(['profile'], { relativeTo: this.route });
 }
 ```
 
@@ -191,8 +191,8 @@ const routes: Routes = [
 { path: 'home', component: HomeComponent }
 ];
 @NgModule({
-imports: [RouterModule.forRoot(routes)], // Used in the root module
-exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes)], // Used in the root module
+  exports: [RouterModule]
 })
 export class AppRoutingModule { }
 ```
@@ -215,8 +215,8 @@ const routes: Routes = [
 { path: 'feature', component: FeatureComponent }
 ];
 @NgModule({
-imports: [RouterModule.forChild(routes)], // Used in a feature module
-exports: [RouterModule]
+  imports: [RouterModule.forChild(routes)], // Used in a feature module
+  exports: [RouterModule]
 })
 export class FeatureRoutingModule { }
 ```
@@ -251,14 +251,15 @@ In Angular, the providedIn metadata in the @Injectable() decorator is used to sp
 
 - **Example**:
 
+In this case, AuthService will be created once and reused everywhere in the application.
+
 ```typescript
 @Injectable({
-providedIn: 'root',
+  providedIn: 'root',
 })
 export class AuthService {
-// Auth service logic
+  // Auth service logic
 }
-In this case, AuthService will be created once and reused everywhere in the application.
 ```
 
 - **Key Characteristics**:
@@ -281,14 +282,15 @@ In this case, AuthService will be created once and reused everywhere in the appl
 
 - **Example**:
 
+In this case, FeatureService could have multiple instances if injected in lazy-loaded modules, with each module getting its own instance of the service.
+
 ```typescript
 @Injectable({
-providedIn: 'any',
+  providedIn: 'any',
 })
 export class FeatureService {
-// Feature-specific service logic
+  // Feature-specific service logic
 }
-In this case, FeatureService could have multiple instances if injected in lazy-loaded modules, with each module getting its own instance of the service.
 ```
 
 - **Key Characteristics**:
@@ -339,26 +341,28 @@ Angular provides different types of route guards, each designed to control navig
 
     - Example Use Case: Protect routes that should only be accessible to logged-in users (like an admin panel).
 
+Implementation
+
+Adding the Guard to Routes
+
 ```typescript
-**Implementation**:
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import { AuthService } from './auth.service';
 @Injectable({
-providedIn: 'root',
+  providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
-constructor(private authService: AuthService, private router: Router) {}
-canActivate(): boolean {
-if (this.authService.isLoggedIn()) {
-return true;
-} else {
-this.router.navigate(['/login']);
-return false;
+  constructor(private authService: AuthService, private router: Router) {}
+  canActivate(): boolean {
+    if (this.authService.isLoggedIn()) {
+      return true;
+    } else {
+      this.router.navigate(['/login']);
+      return false;
+    }
+  }
 }
-}
-}
-**Adding the Guard to Routes**:
 const routes: Routes = [
 { path: 'admin', component: AdminComponent, canActivate: [AuthGuard] },
 ];
@@ -368,23 +372,25 @@ const routes: Routes = [
 
     - Purpose: Prevent navigation **away** from a route. Useful when you need to confirm if users want to leave a page (e.g., unsaved form changes).
 
+Implementation
+
+Adding to Routes
+
 ```typescript
-**Implementation**:
 import { Injectable } from '@angular/core';
 import { CanDeactivate } from '@angular/router';
 import { Observable } from 'rxjs';
 export interface CanComponentDeactivate {
-canDeactivate: () => boolean | Observable<boolean>;
+  canDeactivate: () => boolean | Observable<boolean>;
 }
 @Injectable({
-providedIn: 'root',
+  providedIn: 'root',
 })
 export class CanDeactivateGuard implements CanDeactivate<CanComponentDeactivate> {
-canDeactivate(component: CanComponentDeactivate): boolean | Observable<boolean> {
-return component.canDeactivate ? component.canDeactivate() : true;
+  canDeactivate(component: CanComponentDeactivate): boolean | Observable<boolean> {
+    return component.canDeactivate ? component.canDeactivate() : true;
+  }
 }
-}
-**Adding to Routes**:
 const routes: Routes = [
 { path: 'edit', component: EditComponent, canDeactivate: [CanDeactivateGuard] },
 ];
@@ -392,9 +398,9 @@ In the EditComponent, implement the CanComponentDeactivate interface:
 typescript
 Copy code
 export class EditComponent implements CanComponentDeactivate {
-canDeactivate(): boolean {
-return confirm('Do you want to discard changes?');
-}
+  canDeactivate(): boolean {
+    return confirm('Do you want to discard changes?');
+  }
 }
 ```
 
@@ -402,17 +408,18 @@ return confirm('Do you want to discard changes?');
 
     - Purpose: Protect child routes with logic similar to CanActivate.
 
+**Example:**
+
 ```typescript
-**Example**:
 const routes: Routes = [
 {
-path: 'dashboard',
-component: DashboardComponent,
-canActivateChild: [AuthGuard],
-children: [
-{ path: 'profile', component: ProfileComponent },
-{ path: 'settings', component: SettingsComponent },
-],
+  path: 'dashboard',
+  component: DashboardComponent,
+  canActivateChild: [AuthGuard],
+  children: [
+  { path: 'profile', component: ProfileComponent },
+  { path: 'settings', component: SettingsComponent },
+  ],
 },
 ];
 ```
@@ -421,18 +428,19 @@ children: [
 
     - Purpose: Prevent a lazy-loaded module from being loaded if a condition isn’t met (like user authentication).
 
+Implementation
+
 ```typescript
-**Implementation**:
 const routes: Routes = [
 {
-path: 'admin',
-loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),
-canLoad: [AuthGuard],
+  path: 'admin',
+  loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule),
+  canLoad: [AuthGuard],
 },
 ];
 In the AuthGuard:
 canLoad(): boolean {
-return this.authService.isLoggedIn();
+  return this.authService.isLoggedIn();
 }
 ```
 
@@ -440,22 +448,24 @@ return this.authService.isLoggedIn();
 
     - Purpose: Pre-fetch data before a route is activated, ensuring that the data is available when the route is displayed.
 
+Implementation
+
+Adding to Routes
+
 ```typescript
-**Implementation**:
 import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
 import { DataService } from './data.service';
 @Injectable({
-providedIn: 'root',
+  providedIn: 'root',
 })
 export class DataResolver implements Resolve<any> {
-constructor(private dataService: DataService) {}
-resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> {
-return this.dataService.getData();
+  constructor(private dataService: DataService) {}
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> {
+    return this.dataService.getData();
+  }
 }
-}
-**Adding to Routes**:
 const routes: Routes = [
 { path: 'data', component: DataComponent, resolve: { data: DataResolver } },
 ];
@@ -528,19 +538,20 @@ This command automatically:
 
 2.  **Update Routing Configuration**: To lazy load a module, you define the module in the loadChildren property of the route configuration. This tells Angular to load the module when that route is visited.
 
+**Example - app-routing.module.ts**
+
 ```typescript
-**Example - app-routing.module.ts**:
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
 {
-path: 'feature',
-loadChildren: () => import('./feature/feature.module').then(m => m.FeatureModule)
+  path: 'feature',
+  loadChildren: () => import('./feature/feature.module').then(m => m.FeatureModule)
 }
 ];
 @NgModule({
-imports: [RouterModule.forRoot(routes)],
-exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
 })
 export class AppRoutingModule {}
 In this example:
@@ -552,8 +563,9 @@ In this example:
 
 3.  **Configure Child Routes in the Feature Module**: Once you've set up lazy loading in the main routing module, configure the routes for the FeatureModule itself.
 
+**Example - feature-routing.module.ts**
+
 ```typescript
-**Example - feature-routing.module.ts**:
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FeatureComponent } from './feature.component';
@@ -561,8 +573,8 @@ const routes: Routes = [
 { path: '', component: FeatureComponent } // default route for the feature module
 ];
 @NgModule({
-imports: [RouterModule.forChild(routes)],
-exports: [RouterModule]
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
 })
 export class FeatureRoutingModule {}
 ```
@@ -577,8 +589,8 @@ For example, enabling preloading for lazy-loaded modules:
 
 ```typescript
 @NgModule({
-imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],
-exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })],
+  exports: [RouterModule]
 })
 export class AppRoutingModule {}
 ```

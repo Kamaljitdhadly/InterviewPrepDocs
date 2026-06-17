@@ -69,9 +69,9 @@ In RxJS, a Subject is a special type of Observable that allows values to be mult
 import { Observable } from 'rxjs';
 // Create a simple Observable that emits values
 const observable$ = new Observable<number>(subscriber => {
-subscriber.next(1);
-subscriber.next(2);
-subscriber.complete();
+  subscriber.next(1);
+  subscriber.next(2);
+  subscriber.complete();
 });
 // Subscribe to the Observable
 observable$.subscribe(value => console.log('Observable value:', value));
@@ -269,10 +269,10 @@ import { Observable } from 'rxjs';
 import { share, tap } from 'rxjs/operators';
 // Create an Observable that performs an HTTP request or heavy computation
 const source$ = new Observable<number>(observer => {
-console.log('Observable created');
-observer.next(1);
-observer.next(2);
-observer.complete();
+  console.log('Observable created');
+  observer.next(1);
+  observer.next(2);
+  observer.complete();
 }).pipe(
 tap(value => console.log('Value emitted:', value)), // Optional: logging emission
 share() // Convert to a multicasted Observable

@@ -27,15 +27,15 @@ import { catchError } from 'rxjs/operators';
 const source$ = throwError('An error occurred!');
 const handled$ = source$.pipe(
 catchError(err => {
-console.error('Caught error:', err);
-// Return a fallback observable
-return of('Fallback value');
+  console.error('Caught error:', err);
+  // Return a fallback observable
+  return of('Fallback value');
 })
 );
 handled$.subscribe({
-next: value => console.log(value),
-error: err => console.log('Error:', err),
-complete: () => console.log('Completed')
+  next: value => console.log(value),
+  error: err => console.log('Error:', err),
+  complete: () => console.log('Completed')
 });
 ```
 
@@ -62,21 +62,21 @@ import { of, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 let attempt = 1;
 const source$ = throwError(() => {
-console.log(`Attempt ${attempt}`);
-attempt++;
-return 'Error after retry!';
+  console.log(`Attempt ${attempt}`);
+  attempt++;
+  return 'Error after retry!';
 });
 const handled$ = source$.pipe(
 retry(3), // Retry up to 3 times
 catchError(err => {
-console.error('Caught error after retries:', err);
-return of('Recovered after retry');
+  console.error('Caught error after retries:', err);
+  return of('Recovered after retry');
 })
 );
 handled$.subscribe({
-next: value => console.log(value),
-error: err => console.log('Error:', err),
-complete: () => console.log('Completed')
+  next: value => console.log(value),
+  error: err => console.log('Error:', err),
+  complete: () => console.log('Completed')
 });
 ```
 
@@ -100,8 +100,8 @@ You can combine retry() and catchError() to retry a stream on failure and then h
 source$.pipe(
 retry(3),
 catchError(err => {
-console.error('Final error after retries:', err);
-return of('Handled error after retries');
+  console.error('Final error after retries:', err);
+  return of('Handled error after retries');
 })
 );
 ```
@@ -126,15 +126,15 @@ import { catchError } from 'rxjs/operators';
 const source$ = throwError('An error occurred!');
 const recovered$ = source$.pipe(
 catchError(err => {
-console.error('Error caught:', err);
-// Recover by returning a fallback observable
-return of('Fallback value');
+  console.error('Error caught:', err);
+  // Recover by returning a fallback observable
+  return of('Fallback value');
 })
 );
 recovered$.subscribe({
-next: value => console.log(value),
-error: err => console.log('Error:', err),
-complete: () => console.log('Stream completed')
+  next: value => console.log(value),
+  error: err => console.log('Error:', err),
+  complete: () => console.log('Stream completed')
 });
 ```
 
@@ -159,22 +159,22 @@ import { throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 let attempt = 1;
 const source$ = throwError(() => {
-console.log(`Attempt ${attempt}`);
-attempt++;
-return 'Error occurred!';
+  console.log(`Attempt ${attempt}`);
+  attempt++;
+  return 'Error occurred!';
 });
 const recovered$ = source$.pipe(
 retry(2), // Retry up to 2 times
 catchError(err => {
-console.error('Error after retries:', err);
-// Recover with fallback value
-return of('Recovered after retries');
+  console.error('Error after retries:', err);
+  // Recover with fallback value
+  return of('Recovered after retries');
 })
 );
 recovered$.subscribe({
-next: value => console.log(value),
-error: err => console.log('Error:', err),
-complete: () => console.log('Stream completed')
+  next: value => console.log(value),
+  error: err => console.log('Error:', err),
+  complete: () => console.log('Stream completed')
 });
 ```
 
@@ -202,9 +202,9 @@ import { throwError, timer } from 'rxjs';
 import { retryWhen, catchError, delayWhen } from 'rxjs/operators';
 let attempt = 1;
 const source$ = throwError(() => {
-console.log(`Attempt ${attempt}`);
-attempt++;
-return 'Error occurred!';
+  console.log(`Attempt ${attempt}`);
+  attempt++;
+  return 'Error occurred!';
 });
 const recovered$ = source$.pipe(
 retryWhen(errors => errors.pipe(
@@ -212,14 +212,14 @@ delayWhen(() => timer(2000)), // Retry after a 2-second delay
 catchError(() => of('Failed after retries')) // Catch if retries also fail
 )),
 catchError(err => {
-console.error('Final error:', err);
-return of('Recovered after retries');
+  console.error('Final error:', err);
+  return of('Recovered after retries');
 })
 );
 recovered$.subscribe({
-next: value => console.log(value),
-error: err => console.log('Error:', err),
-complete: () => console.log('Stream completed')
+  next: value => console.log(value),
+  error: err => console.log('Error:', err),
+  complete: () => console.log('Stream completed')
 });
 ```
 
@@ -248,14 +248,14 @@ import { catchError } from 'rxjs/operators';
 const source$ = throwError('Critical error!');
 const recovered$ = source$.pipe(
 catchError(err => {
-console.log('Recovering with a new stream after error:', err);
-return of('Recovered and continuing...');
+  console.log('Recovering with a new stream after error:', err);
+  return of('Recovered and continuing...');
 })
 );
 recovered$.subscribe({
-next: value => console.log(value),
-error: err => console.log('Error:', err),
-complete: () => console.log('Stream completed')
+  next: value => console.log(value),
+  error: err => console.log('Error:', err),
+  complete: () => console.log('Stream completed')
 });
 ```
 
@@ -263,8 +263,9 @@ complete: () => console.log('Stream completed')
 
 - **Output**:
 
-```typescript
 Recovering with a new stream after error: Critical error!
+
+```typescript
 Recovered and continuing...
 Stream completed
 ```
@@ -312,16 +313,16 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 @Component({...})
 export class MyComponent implements OnDestroy {
-private destroy$ = new Subject<void>();
-ngOnInit() {
-this.myObservable$.pipe(
-takeUntil(this.destroy$)
-).subscribe(...);
-}
-ngOnDestroy() {
-this.destroy$.next();
-this.destroy$.complete();
-}
+  private destroy$ = new Subject<void>();
+  ngOnInit() {
+    this.myObservable$.pipe(
+    takeUntil(this.destroy$)
+    ).subscribe(...);
+  }
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 }
 ```
 
@@ -338,7 +339,7 @@ this.searchInput$.pipe(
 debounceTime(300), // Wait 300ms after user stops typing
 distinctUntilChanged() // Only emit when the value has changed
 ).subscribe(searchTerm => {
-this.search(searchTerm);
+  this.search(searchTerm);
 });
 ```
 
@@ -354,7 +355,7 @@ If the stream emits the same value multiple times, use distinctUntilChanged() to
 this.myObservable$.pipe(
 distinctUntilChanged() // Only emit when the value changes
 ).subscribe(value => {
-// Handle value
+  // Handle value
 });
 ```
 
@@ -371,7 +372,7 @@ this.searchInput$.pipe(
 debounceTime(300),
 switchMap(searchTerm => this.http.get(`searchUrl?query=${searchTerm}`))
 ).subscribe(result => {
-this.searchResults = result;
+  this.searchResults = result;
 });
 ```
 
@@ -409,7 +410,7 @@ For events that occur rapidly, such as scrolling or mouse movement, use **rate-l
 fromEvent(window, 'scroll').pipe(
 throttleTime(100)
 ).subscribe(event => {
-// Handle scroll event
+  // Handle scroll event
 });
 ```
 
@@ -441,7 +442,7 @@ To reduce the number of operations on a stream, you can use **batching operators
 fromEvent(window, 'click').pipe(
 bufferTime(1000) // Collect clicks for 1 second
 ).subscribe(clickEvents => {
-console.log(`${clickEvents.length} clicks received`);
+  console.log(`${clickEvents.length} clicks received`);
 });
 ```
 
@@ -506,18 +507,18 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 @Component({...})
 export class MyComponent implements OnDestroy {
-private destroy$ = new Subject<void>();
-ngOnInit() {
-this.myObservable$.pipe(
-takeUntil(this.destroy$)
-).subscribe(data => {
-// handle data
-});
-}
-ngOnDestroy() {
-this.destroy$.next();
-this.destroy$.complete(); // Ensures observable cleanup
-}
+  private destroy$ = new Subject<void>();
+  ngOnInit() {
+    this.myObservable$.pipe(
+    takeUntil(this.destroy$)
+    ).subscribe(data => {
+      // handle data
+    });
+  }
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete(); // Ensures observable cleanup
+  }
 }
 ```
 
@@ -546,15 +547,15 @@ If you need more fine-grained control, you can unsubscribe manually from an obse
 ```typescript
 @Component({...})
 export class MyComponent implements OnDestroy {
-private subscription: Subscription;
-ngOnInit() {
-this.subscription = this.myObservable$.subscribe(data => {
-// handle data
-});
-}
-ngOnDestroy() {
-this.subscription.unsubscribe(); // Manually unsubscribe
-}
+  private subscription: Subscription;
+  ngOnInit() {
+    this.subscription = this.myObservable$.subscribe(data => {
+      // handle data
+    });
+  }
+  ngOnDestroy() {
+    this.subscription.unsubscribe(); // Manually unsubscribe
+  }
 }
 ```
 
@@ -570,7 +571,7 @@ If you only need a single value from an observable and don’t need to keep the 
 this.myObservable$.pipe(
 take(1)
 ).subscribe(data => {
-// handle data only once
+  // handle data only once
 });
 ```
 
@@ -587,7 +588,7 @@ let isAlive = true;
 this.myObservable$.pipe(
 takeWhile(() => isAlive)
 ).subscribe(data => {
-// handle data while isAlive is true
+  // handle data while isAlive is true
 });
 // Later in the lifecycle
 ```
@@ -607,10 +608,10 @@ const sharedObservable$ = this.myService.getData().pipe(
 shareReplay(1) // Cache the last emitted value
 );
 sharedObservable$.subscribe(data => {
-// First subscriber
+  // First subscriber
 });
 sharedObservable$.subscribe(data => {
-// Second subscriber
+  // Second subscriber
 });
 ```
 
@@ -626,7 +627,7 @@ When working with streams that depend on previous emissions, switchMap() is an e
 this.searchInput$.pipe(
 switchMap(searchTerm => this.http.get(`search?query=${searchTerm}`))
 ).subscribe(result => {
-// handle search result
+  // handle search result
 });
 ```
 
@@ -641,11 +642,11 @@ The finalize() operator allows you to perform any necessary cleanup when an obse
 ```typescript
 this.myObservable$.pipe(
 finalize(() => {
-// Perform cleanup actions
-console.log('Observable completed or unsubscribed');
+  // Perform cleanup actions
+  console.log('Observable completed or unsubscribed');
 })
 ).subscribe(data => {
-// handle data
+  // handle data
 });
 ```
 
@@ -660,14 +661,14 @@ When dealing with multiple subscriptions, you can group them together using the 
 ```typescript
 @Component({...})
 export class MyComponent implements OnDestroy {
-private subscriptions = new Subscription();
-ngOnInit() {
-this.subscriptions.add(this.observableOne$.subscribe());
-this.subscriptions.add(this.observableTwo$.subscribe());
-}
-ngOnDestroy() {
-this.subscriptions.unsubscribe(); // Unsubscribe from all grouped subscriptions
-}
+  private subscriptions = new Subscription();
+  ngOnInit() {
+    this.subscriptions.add(this.observableOne$.subscribe());
+    this.subscriptions.add(this.observableTwo$.subscribe());
+  }
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe(); // Unsubscribe from all grouped subscriptions
+  }
 }
 ```
 
@@ -682,18 +683,18 @@ Be cautious when subscribing to observables inside services. Since services are 
 ```typescript
 @Injectable({ providedIn: 'root' })
 export class MyService {
-private destroy$ = new Subject<void>();
-fetchData() {
-this.http.get('url').pipe(
-takeUntil(this.destroy$) // Automatically unsubscribe when service is destroyed
-).subscribe(data => {
-// handle data
-});
-}
-ngOnDestroy() {
-this.destroy$.next();
-this.destroy$.complete();
-}
+  private destroy$ = new Subject<void>();
+  fetchData() {
+    this.http.get('url').pipe(
+    takeUntil(this.destroy$) // Automatically unsubscribe when service is destroyed
+    ).subscribe(data => {
+      // handle data
+    });
+  }
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 }
 ```
 

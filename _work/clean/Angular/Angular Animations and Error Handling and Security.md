@@ -32,9 +32,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; // Import Angular animations module
 import { AppComponent } from './app.component';
 @NgModule({
-declarations: [AppComponent],
-imports: [
-BrowserModule,
+  declarations: [AppComponent],
+  imports: [
+  BrowserModule,
 ```
 
 BrowserAnimationsModule // Add it to imports
@@ -62,9 +62,9 @@ Animations are defined using the @angular/animations module. You typically defin
 import { Component } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 @Component({
-selector: 'app-root',
-templateUrl: './app.component.html',
-styleUrls: ['./app.component.css'],
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
 ```
 
 animations: [
@@ -106,7 +106,7 @@ animate('300ms ease-in-out', style({ transform: 'translateX(100%)' }))
 ```typescript
 })
 export class AppComponent {
-isVisible = true;
+  isVisible = true;
 }
 ```
 
@@ -290,9 +290,9 @@ Here's a complete example combining @trigger, @state, and @transition:
 import { Component } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 @Component({
-selector: 'app-root',
-templateUrl: './app.component.html',
-styleUrls: ['./app.component.css'],
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
 ```
 
 animations: [
@@ -328,7 +328,7 @@ animate('300ms')
 ```typescript
 })
 export class AppComponent {
-isVisible = true;
+  isVisible = true;
 }
 ```
 
@@ -359,41 +359,45 @@ Angular provides the ErrorHandler class for custom error handling. You can creat
 
 1.  **Create a Custom Error Handler**
 
-```typescript
 Define a class that implements the ErrorHandler interface. In this class, you can handle the error as needed, such as logging it to an external service or displaying a user-friendly message.
-**app-error-handler.ts**:
+
+app-error-handler.ts
+
+```typescript
 import { ErrorHandler } from '@angular/core';
 import { Injectable, Injector } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 @Injectable()
 export class AppErrorHandler implements ErrorHandler {
-constructor(private http: HttpClient) {}
-handleError(error: any): void {
-// Log the error to an external server
-console.error('An error occurred:', error);
-this.http.post('/api/error-log', { error: error.message }).subscribe();
-// Handle the error as needed (e.g., show a user-friendly message)
-}
+  constructor(private http: HttpClient) {}
+  handleError(error: any): void {
+    // Log the error to an external server
+    console.error('An error occurred:', error);
+    this.http.post('/api/error-log', { error: error.message }).subscribe();
+    // Handle the error as needed (e.g., show a user-friendly message)
+  }
 }
 ```
 
 2.  **Provide the Custom Error Handler in Your Module**
 
-```typescript
 Register the custom error handler in the providers array of your application module.
-**app.module.ts**:
+
+app.module.ts
+
+```typescript
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { AppErrorHandler } from './app-error-handler';
 @NgModule({
-declarations: [AppComponent],
-imports: [BrowserModule, HttpClientModule],
-providers: [
-{ provide: ErrorHandler, useClass: AppErrorHandler }
-],
-bootstrap: [AppComponent]
+  declarations: [AppComponent],
+  imports: [BrowserModule, HttpClientModule],
+  providers: [
+  { provide: ErrorHandler, useClass: AppErrorHandler }
+  ],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
 ```
@@ -406,45 +410,49 @@ For handling HTTP errors globally, you can use Angular’s HttpInterceptor to ca
 
 1.  **Create an HTTP Interceptor**
 
-```typescript
 Implement an HTTP interceptor to handle responses and errors from HTTP requests.
-**http-error.interceptor.ts**:
+
+http-error.interceptor.ts
+
+```typescript
 import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpErrorResponse, HttpEvent } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 @Injectable()
 export class HttpErrorInterceptor implements HttpInterceptor {
-intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-return next.handle(req).pipe(
-catchError((error: HttpErrorResponse) => {
-// Handle HTTP errors
-console.error('HTTP error occurred:', error);
-// Optionally, show an alert or user-friendly message
-return throwError(error);
-})
-);
-}
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    return next.handle(req).pipe(
+    catchError((error: HttpErrorResponse) => {
+      // Handle HTTP errors
+      console.error('HTTP error occurred:', error);
+      // Optionally, show an alert or user-friendly message
+      return throwError(error);
+    })
+    );
+  }
 }
 ```
 
 2.  **Register the HTTP Interceptor**
 
-```typescript
 Add the HTTP interceptor to the providers array in your module.
-**app.module.ts**:
+
+app.module.ts
+
+```typescript
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { HttpErrorInterceptor } from './http-error.interceptor';
 @NgModule({
-declarations: [AppComponent],
-imports: [BrowserModule, HttpClientModule],
-providers: [
-{ provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true }
-],
-bootstrap: [AppComponent]
+  declarations: [AppComponent],
+  imports: [BrowserModule, HttpClientModule],
+  providers: [
+  { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true }
+  ],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
 ```
@@ -457,39 +465,42 @@ You can also use Angular services to centralize error handling and provide metho
 
 1.  **Create an Error Handling Service**
 
+error.service.ts
+
 ```typescript
 Define a service to manage error handling and logging.
-**error.service.ts**:
 import { Injectable } from '@angular/core';
 @Injectable({
-providedIn: 'root'
+  providedIn: 'root'
 })
 export class ErrorService {
-logError(error: any): void {
-// Implement logging to external service
-console.error('Logging error:', error);
-}
-showError(message: string): void {
-// Implement user notification logic
-alert(`Error: ${message}`);
-}
+  logError(error: any): void {
+    // Implement logging to external service
+    console.error('Logging error:', error);
+  }
+  showError(message: string): void {
+    // Implement user notification logic
+    alert(`Error: ${message}`);
+  }
 }
 ```
 
 2.  **Inject the Error Service**
 
-```typescript
 Use the service in your custom error handler or HTTP interceptor to manage errors.
-**app-error-handler.ts**:
+
+app-error-handler.ts
+
+```typescript
 import { ErrorHandler } from '@angular/core';
 import { ErrorService } from './error.service';
 @Injectable()
 export class AppErrorHandler implements ErrorHandler {
-constructor(private errorService: ErrorService) {}
-handleError(error: any): void {
-this.errorService.logError(error);
-this.errorService.showError('An unexpected error occurred.');
-}
+  constructor(private errorService: ErrorService) {}
+  handleError(error: any): void {
+    this.errorService.logError(error);
+    this.errorService.showError('An unexpected error occurred.');
+  }
 }
 ```
 
@@ -522,14 +533,14 @@ When developing an Angular application, addressing security concerns is crucial 
 ```typescript
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 @Component({
-selector: 'app-root',
-template: `<div [innerHtml]="safeHtmlContent"></div>`
+  selector: 'app-root',
+  template: `<div [innerHtml]="safeHtmlContent"></div>`
 })
 export class AppComponent {
-safeHtmlContent: SafeHtml;
-constructor(private sanitizer: DomSanitizer) {
-this.safeHtmlContent = this.sanitizer.bypassSecurityTrustHtml('<p>Safe HTML content</p>');
-}
+  safeHtmlContent: SafeHtml;
+  constructor(private sanitizer: DomSanitizer) {
+    this.safeHtmlContent = this.sanitizer.bypassSecurityTrustHtml('<p>Safe HTML content</p>');
+  }
 }
 ```
 
@@ -549,8 +560,8 @@ this.safeHtmlContent = this.sanitizer.bypassSecurityTrustHtml('<p>Safe HTML cont
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 constructor(private http: HttpClient) {}
 postData() {
-const headers = new HttpHeaders({ 'X-CSRF-Token': 'your-csrf-token' });
-this.http.post('/api/endpoint', { data: 'your data' }, { headers }).subscribe();
+  const headers = new HttpHeaders({ 'X-CSRF-Token': 'your-csrf-token' });
+  this.http.post('/api/endpoint', { data: 'your data' }, { headers }).subscribe();
 }
 ```
 
@@ -579,28 +590,24 @@ this.http.post('/api/endpoint', { data: 'your data' }, { headers }).subscribe();
 ```typescript
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 @Injectable({
-```
-
-providedIn: 'root'
-
-```typescript
+  providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-constructor(private authService: AuthService, private router: Router) {}
-canActivate(
-route: ActivatedRouteSnapshot,
+  constructor(private authService: AuthService, private router: Router) {}
+  canActivate(
+  route: ActivatedRouteSnapshot,
 ```
 
 state: RouterStateSnapshot
 
 ```typescript
 ): boolean {
-if (this.authService.isAuthenticated()) {
-return true;
-} else {
-this.router.navigate(['/login']);
-return false;
-}
+  if (this.authService.isAuthenticated()) {
+    return true;
+  } else {
+    this.router.navigate(['/login']);
+    return false;
+  }
 }
 }
 ```
@@ -707,15 +714,15 @@ Angular provides the DomSanitizer service to handle cases where you need to expl
 import { Component } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 @Component({
-selector: 'app-root',
-template: `<div [innerHtml]="safeHtmlContent"></div>`
+  selector: 'app-root',
+  template: `<div [innerHtml]="safeHtmlContent"></div>`
 })
 export class AppComponent {
-safeHtmlContent: SafeHtml;
-constructor(private sanitizer: DomSanitizer) {
-// Trust specific HTML content
-this.safeHtmlContent = this.sanitizer.bypassSecurityTrustHtml('<p>Safe HTML content</p>');
-}
+  safeHtmlContent: SafeHtml;
+  constructor(private sanitizer: DomSanitizer) {
+    // Trust specific HTML content
+    this.safeHtmlContent = this.sanitizer.bypassSecurityTrustHtml('<p>Safe HTML content</p>');
+  }
 }
 ```
 
@@ -785,8 +792,10 @@ CSRF protection generally involves including a token with requests to verify tha
 
 1.  **Server-Side Setup**
 
-```typescript
 Ensure that your server generates a CSRF token and includes it in the responses. The token should be unique for each user session.
+
+```typescript
+
 ```
 
 - **Set Up CSRF Token Generation**: Configure your server to generate and manage CSRF tokens. For example, in Express.js, you can use the csurf middleware.
@@ -796,7 +805,7 @@ const csrf = require('csurf');
 const csrfProtection = csrf({ cookie: true });
 app.use(csrfProtection);
 app.get('/api/get-token', (req, res) => {
-res.json({ csrfToken: req.csrfToken() });
+  res.json({ csrfToken: req.csrfToken() });
 });
 ```
 
@@ -812,21 +821,21 @@ Use Angular’s HttpClient to send the CSRF token with every request that modifi
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 @Injectable({
-providedIn: 'root'
+  providedIn: 'root'
 })
 export class CsrfService {
-private csrfToken: string;
-constructor(private http: HttpClient) {
-this.fetchCsrfToken();
-}
-private fetchCsrfToken(): void {
-this.http.get<{ csrfToken: string }>('/api/get-token').subscribe(response => {
-this.csrfToken = response.csrfToken;
-});
-}
-getCsrfToken(): string {
-return this.csrfToken;
-}
+  private csrfToken: string;
+  constructor(private http: HttpClient) {
+    this.fetchCsrfToken();
+  }
+  private fetchCsrfToken(): void {
+    this.http.get<{ csrfToken: string }>('/api/get-token').subscribe(response => {
+      this.csrfToken = response.csrfToken;
+    });
+  }
+  getCsrfToken(): string {
+    return this.csrfToken;
+  }
 }
 ```
 
@@ -839,16 +848,16 @@ import { CsrfService } from './csrf.service';
 import { Observable } from 'rxjs';
 @Injectable()
 export class CsrfInterceptor implements HttpInterceptor {
-constructor(private csrfService: CsrfService) {}
-intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-const csrfToken = this.csrfService.getCsrfToken();
-const clonedReq = req.clone({
-setHeaders: {
-'X-CSRF-Token': csrfToken
-}
-});
-return next.handle(clonedReq);
-}
+  constructor(private csrfService: CsrfService) {}
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    const csrfToken = this.csrfService.getCsrfToken();
+    const clonedReq = req.clone({
+      setHeaders: {
+        'X-CSRF-Token': csrfToken
+      }
+    });
+    return next.handle(clonedReq);
+  }
 }
 ```
 
@@ -861,12 +870,12 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { CsrfInterceptor } from './csrf.interceptor';
 @NgModule({
-declarations: [AppComponent],
-imports: [BrowserModule, HttpClientModule],
-providers: [
-{ provide: HTTP_INTERCEPTORS, useClass: CsrfInterceptor, multi: true }
-],
-bootstrap: [AppComponent]
+  declarations: [AppComponent],
+  imports: [BrowserModule, HttpClientModule],
+  providers: [
+  { provide: HTTP_INTERCEPTORS, useClass: CsrfInterceptor, multi: true }
+  ],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
 ```

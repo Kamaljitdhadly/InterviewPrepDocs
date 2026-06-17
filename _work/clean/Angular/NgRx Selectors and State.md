@@ -67,17 +67,17 @@ import { Observable } from 'rxjs';
 import { selectAvailableProducts } from './product.selectors';
 import { AppState } from './app.state';
 @Component({
-selector: 'app-product-list',
-templateUrl: './product-list.component.html'
+  selector: 'app-product-list',
+  templateUrl: './product-list.component.html'
 })
 export class ProductListComponent implements OnInit {
-availableProducts$: Observable<Product[]>;
-constructor(private store: Store<AppState>) {
-this.availableProducts$ = this.store.select(selectAvailableProducts);
-}
-ngOnInit(): void {
-// Optionally, you can dispatch actions here if needed
-}
+  availableProducts$: Observable<Product[]>;
+  constructor(private store: Store<AppState>) {
+    this.availableProducts$ = this.store.select(selectAvailableProducts);
+  }
+  ngOnInit(): void {
+    // Optionally, you can dispatch actions here if needed
+  }
 }
 ```
 
@@ -226,9 +226,9 @@ Structuring state in an NgRx application is crucial for maintaining clarity, sca
 import { ProductState } from './product/product.state';
 import { UserState } from './user/user.state';
 export interface AppState {
-products: ProductState;
-user: UserState;
-// Add other feature states here
+  products: ProductState;
+  user: UserState;
+  // Add other feature states here
 }
 ```
 
@@ -240,16 +240,16 @@ user: UserState;
 
 ```typescript
 export interface ProductState {
-products: Product[];
-selectedProduct: Product | null;
-loading: boolean;
-error: string | null;
+  products: Product[];
+  selectedProduct: Product | null;
+  loading: boolean;
+  error: string | null;
 }
 // user.state.ts
 export interface UserState {
-user: User | null;
-loggedIn: boolean;
-error: string | null;
+  user: User | null;
+  loggedIn: boolean;
+  error: string | null;
 }
 ```
 
@@ -261,9 +261,9 @@ error: string | null;
 
 ```typescript
 export const initialProductState: ProductState = {
-products: [],
-selectedProduct: null,
-loading: false,
+  products: [],
+  selectedProduct: null,
+  loading: false,
 ```
 
 error: null
@@ -272,8 +272,8 @@ error: null
 };
 // user.state.ts
 export const initialUserState: UserState = {
-user: null,
-loggedIn: false,
+  user: null,
+  loggedIn: false,
 ```
 
 error: null
@@ -295,8 +295,8 @@ import { loadProductsSuccess, loadProductsFailure } from './product.actions';
 const _productReducer = createReducer(
 initialProductState,
 on(loadProductsSuccess, (state, { products }) => ({
-...state,
-products,
+  ...state,
+  products,
 ```
 
 loading: false
@@ -304,8 +304,8 @@ loading: false
 ```typescript
 })),
 on(loadProductsFailure, (state, { error }) => ({
-...state,
-loading: false,
+  ...state,
+  loading: false,
 ```
 
 error
@@ -314,7 +314,7 @@ error
 }))
 );
 export function productReducer(state: ProductState, action: Action) {
-return _productReducer(state, action);
+  return _productReducer(state, action);
 }
 ```
 
@@ -331,11 +331,11 @@ import { UserState } from './user/user.state';
 import { productReducer } from './product/product.reducer';
 import { userReducer } from './user/user.reducer';
 export interface AppState {
-products: ProductState;
-user: UserState;
+  products: ProductState;
+  user: UserState;
 }
 export const appReducer: ActionReducerMap<AppState> = {
-products: productReducer,
+  products: productReducer,
 ```
 
 user: userReducer
@@ -357,11 +357,11 @@ import { EffectsModule } from '@ngrx/effects';
 import { productReducer } from './product.reducer';
 import { ProductEffects } from './product.effects';
 @NgModule({
-imports: [
-StoreModule.forFeature('products', productReducer),
-EffectsModule.forFeature([ProductEffects])
-],
-providers: [ProductService]
+  imports: [
+  StoreModule.forFeature('products', productReducer),
+  EffectsModule.forFeature([ProductEffects])
+  ],
+  providers: [ProductService]
 })
 export class ProductModule {}
 ```
@@ -421,34 +421,37 @@ A **feature state** in NgRx refers to a specific slice or subset of the overall 
 
 1.  **Define the Feature State Interface**
 
-```typescript
 Create an interface to define the shape of the feature state. This interface specifies the properties that the state will hold.
+
+```typescript
 // product.state.ts
 export interface ProductState {
-products: Product[];
-selectedProduct: Product | null;
-loading: boolean;
-error: string | null;
+  products: Product[];
+  selectedProduct: Product | null;
+  loading: boolean;
+  error: string | null;
 }
 ```
 
 2.  **Create Initial State**
 
-```typescript
 Define the initial state for the feature. This provides default values for the state when the application starts.
+
+```typescript
 // product.state.ts
 export const initialProductState: ProductState = {
-products: [],
-selectedProduct: null,
-loading: false,
-error: null
+  products: [],
+  selectedProduct: null,
+  loading: false,
+  error: null
 };
 ```
 
 3.  **Implement Reducers**
 
-```typescript
 Create a reducer function to handle actions and update the feature state. Reducers are pure functions that take the current state and an action as arguments and return a new state.
+
+```typescript
 // product.reducer.ts
 import { createReducer, on } from '@ngrx/store';
 import { ProductState, initialProductState } from './product.state';
@@ -456,29 +459,30 @@ import { loadProductsSuccess, loadProductsFailure, selectProduct } from './produ
 const _productReducer = createReducer(
 initialProductState,
 on(loadProductsSuccess, (state, { products }) => ({
-...state,
-products,
-loading: false
+  ...state,
+  products,
+  loading: false
 })),
 on(loadProductsFailure, (state, { error }) => ({
-...state,
-loading: false,
-error
+  ...state,
+  loading: false,
+  error
 })),
 on(selectProduct, (state, { product }) => ({
-...state,
-selectedProduct: product
+  ...state,
+  selectedProduct: product
 }))
 );
 export function productReducer(state: ProductState | undefined, action: Action) {
-return _productReducer(state, action);
+  return _productReducer(state, action);
 }
 ```
 
 4.  **Create Actions**
 
-```typescript
 Define actions related to the feature state. Actions describe changes or events that should trigger updates to the state.
+
+```typescript
 // product.actions.ts
 import { createAction, props } from '@ngrx/store';
 import { Product } from './product.model';
@@ -499,8 +503,9 @@ props<{ product: Product }>()
 
 5.  **Create Selectors**
 
-```typescript
 Define selectors to query and derive pieces of the feature state. Selectors help components access the state efficiently.
+
+```typescript
 // product.selectors.ts
 import { createSelector } from '@ngrx/store';
 import { AppState } from '../app.state';
@@ -528,13 +533,13 @@ import { EffectsModule } from '@ngrx/effects';
 import { productReducer } from './product.reducer';
 import { ProductEffects } from './product.effects';
 @NgModule({
-imports: [
-CommonModule,
-StoreModule.forFeature('products', productReducer),
-EffectsModule.forFeature([ProductEffects])
-],
-declarations: [ProductListComponent, ProductDetailComponent],
-providers: [ProductService]
+  imports: [
+  CommonModule,
+  StoreModule.forFeature('products', productReducer),
+  EffectsModule.forFeature([ProductEffects])
+  ],
+  declarations: [ProductListComponent, ProductDetailComponent],
+  providers: [ProductService]
 })
 export class ProductModule {}
 ```
@@ -604,18 +609,18 @@ import { selectAllProducts } from './product.selectors';
 import { AppState } from '../app.state';
 import { Product } from './product.model';
 @Component({
-selector: 'app-product-list',
-templateUrl: './product-list.component.html'
+  selector: 'app-product-list',
+  templateUrl: './product-list.component.html'
 })
 export class ProductListComponent implements OnInit {
-products$: Observable<Product[]>;
-constructor(private store: Store<AppState>) {
-// Use Store.select() with a selector function to get the products
-this.products$ = this.store.select(selectAllProducts);
-}
-ngOnInit(): void {
-// Products will be updated automatically as state changes
-}
+  products$: Observable<Product[]>;
+  constructor(private store: Store<AppState>) {
+    // Use Store.select() with a selector function to get the products
+    this.products$ = this.store.select(selectAllProducts);
+  }
+  ngOnInit(): void {
+    // Products will be updated automatically as state changes
+  }
 }
 ```
 
@@ -673,8 +678,9 @@ Combining multiple selectors in NgRx allows you to create more complex selectors
 
 1.  **Define Individual Selectors**
 
-```typescript
 First, create simple selectors to access different parts of the state. These selectors will be used as input selectors when combining them.
+
+```typescript
 // product.selectors.ts
 import { createSelector } from '@ngrx/store';
 import { AppState } from '../app.state';
@@ -714,15 +720,16 @@ export const selectSelectedProduct = createSelector(
 selectAllProducts,
 selectSelectedProductId,
 (products: Product[], selectedProductId: number) => {
-return products.find(product => product.id === selectedProductId) || null;
+  return products.find(product => product.id === selectedProductId) || null;
 }
 );
 ```
 
 3.  **Using the Combined Selector in a Component**
 
-```typescript
 In your component, you can use the combined selector to get the derived state.
+
+```typescript
 // product-list.component.ts
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
@@ -731,18 +738,18 @@ import { selectSelectedProduct } from './product.selectors';
 import { AppState } from '../app.state';
 import { Product } from './product.model';
 @Component({
-selector: 'app-product-list',
-templateUrl: './product-list.component.html'
+  selector: 'app-product-list',
+  templateUrl: './product-list.component.html'
 })
 export class ProductListComponent implements OnInit {
-selectedProduct$: Observable<Product | null>;
-constructor(private store: Store<AppState>) {
-// Use combined selector to get the selected product
-this.selectedProduct$ = this.store.select(selectSelectedProduct);
-}
-ngOnInit(): void {
-// The component will automatically react to changes in the selected product
-}
+  selectedProduct$: Observable<Product | null>;
+  constructor(private store: Store<AppState>) {
+    // Use combined selector to get the selected product
+    this.selectedProduct$ = this.store.select(selectSelectedProduct);
+  }
+  ngOnInit(): void {
+    // The component will automatically react to changes in the selected product
+  }
 }
 ```
 

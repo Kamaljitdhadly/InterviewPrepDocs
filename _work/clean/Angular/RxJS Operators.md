@@ -332,8 +332,8 @@ map(value => value * 2)
 );
 // Subscribe to the new Observable to see the results
 doubled$.subscribe({
-next: value => console.log('Emitted value:', value),
-complete: () => console.log('Completed')
+  next: value => console.log('Emitted value:', value),
+  complete: () => console.log('Completed')
 });
 ```
 
@@ -604,8 +604,8 @@ const source$ = throwError('An error occurred!');
 // Apply the catchError operator to handle the error and provide a fallback Observable
 const result$ = source$.pipe(
 catchError(error => {
-console.error('Caught error:', error);
-return of('Fallback value'); // Provide a fallback Observable
+  console.error('Caught error:', error);
+  return of('Fallback value'); // Provide a fallback Observable
 })
 );
 // Subscribe to the new Observable to see the results
@@ -668,7 +668,7 @@ const observable2$ = of(1, 2, 3);
 // Combine the latest values from both Observables
 const combined$ = combineLatest([observable1$, observable2$]);
 combined$.subscribe(([val1, val2]) => {
-console.log(`Latest values: ${val1}, ${val2}`);
+  console.log(`Latest values: ${val1}, ${val2}`);
 });
 ```
 
@@ -702,7 +702,7 @@ const observable2$ = of(1, 2, 3);
 // Combine the final values from both Observables
 const combined$ = forkJoin([observable1$, observable2$]);
 combined$.subscribe(([val1, val2]) => {
-console.log(`Final values: ${val1}, ${val2}`);
+  console.log(`Final values: ${val1}, ${val2}`);
 });
 ```
 
@@ -770,8 +770,8 @@ debounceTime(300) // Wait for 300ms after the last input
 );
 // Subscribe to the debounced Observable
 input$.subscribe(value => {
-console.log('Debounced value:', value);
-// Perform search or other actions here
+  console.log('Debounced value:', value);
+  // Perform search or other actions here
 });
 ```
 

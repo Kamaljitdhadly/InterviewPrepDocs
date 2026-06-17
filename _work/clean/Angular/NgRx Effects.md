@@ -73,19 +73,19 @@ import { ProductService } from './product.service';
 import { loadProducts, loadProductsSuccess, loadProductsFailure } from './product.actions';
 @Injectable()
 export class ProductEffects {
-loadProducts$ = createEffect(() => this.actions$.pipe(
-ofType(loadProducts),
-mergeMap(() => this.productService.getAll()
-.pipe(
-map(products => loadProductsSuccess({ products })),
-catchError(error => of(loadProductsFailure({ error: error.message })))
-)
-)
-));
-constructor(
-private actions$: Actions,
-private productService: ProductService
-) {}
+  loadProducts$ = createEffect(() => this.actions$.pipe(
+  ofType(loadProducts),
+  mergeMap(() => this.productService.getAll()
+  .pipe(
+  map(products => loadProductsSuccess({ products })),
+  catchError(error => of(loadProductsFailure({ error: error.message })))
+  )
+  )
+  ));
+  constructor(
+  private actions$: Actions,
+  private productService: ProductService
+  ) {}
 }
 ```
 
@@ -99,11 +99,11 @@ import { EffectsModule } from '@ngrx/effects';
 import { productReducer } from './product.reducer';
 import { ProductEffects } from './product.effects';
 @NgModule({
-imports: [
-StoreModule.forFeature('products', productReducer),
-EffectsModule.forFeature([ProductEffects])
-],
-providers: [ProductService]
+  imports: [
+  StoreModule.forFeature('products', productReducer),
+  EffectsModule.forFeature([ProductEffects])
+  ],
+  providers: [ProductService]
 })
 export class ProductModule {}
 ```
@@ -143,26 +143,27 @@ import { ProductService } from './product.service';
 import { loadProducts, loadProductsSuccess, loadProductsFailure } from './product.actions';
 @Injectable()
 export class ProductEffects {
-loadProducts$ = createEffect(() => this.actions$.pipe(
-ofType(loadProducts),
-mergeMap(() => this.productService.getAll()
-.pipe(
-map(products => loadProductsSuccess({ products })),
-catchError(error => of(loadProductsFailure({ error: error.message })))
-)
-)
-));
-constructor(
-private actions$: Actions,
-private productService: ProductService
-) {}
+  loadProducts$ = createEffect(() => this.actions$.pipe(
+  ofType(loadProducts),
+  mergeMap(() => this.productService.getAll()
+  .pipe(
+  map(products => loadProductsSuccess({ products })),
+  catchError(error => of(loadProductsFailure({ error: error.message })))
+  )
+  )
+  ));
+  constructor(
+  private actions$: Actions,
+  private productService: ProductService
+  ) {}
 }
 ```
 
 2.  **Actions**
 
-```typescript
 Effects respond to actions dispatched to the store. Actions represent events or requests that can trigger side effects. For instance, an action might request to load data from an API.
+
+```typescript
 // product.actions.ts
 import { createAction, props } from '@ngrx/store';
 import { Product } from './product.model';
@@ -204,8 +205,9 @@ import { mergeMap, map, catchError } from 'rxjs/operators';
 
 5.  **Error Handling**
 
-```typescript
 Effects can handle errors that occur during side effects. Typically, this involves catching errors and dispatching failure actions with the error details.
+
+```typescript
 catchError(error => of(loadProductsFailure({ error: error.message })))
 ```
 
@@ -216,9 +218,9 @@ Effects must be registered in the Angular module using the EffectsModule.forFeat
 import { EffectsModule } from '@ngrx/effects';
 import { ProductEffects } from './product.effects';
 @NgModule({
-imports: [
-EffectsModule.forFeature([ProductEffects])
-]
+  imports: [
+  EffectsModule.forFeature([ProductEffects])
+  ]
 })
 export class ProductModule {}
 ```
@@ -261,12 +263,13 @@ In NgRx Effects, the Actions observable plays a crucial role in handling side ef
 
 1.  **Listening for Actions**
 
-```typescript
 The Actions observable provides a stream of all actions dispatched to the NgRx store. Effects use this observable to listen for specific actions that they are interested in. By subscribing to the Actions observable, effects can react to those actions and perform associated side effects.
+
+```typescript
 import { Actions } from '@ngrx/effects';
 @Injectable()
 export class ProductEffects {
-constructor(private actions$: Actions) {}
+  constructor(private actions$: Actions) {}
 }
 ```
 
@@ -281,26 +284,27 @@ import { ProductService } from './product.service';
 import { loadProducts, loadProductsSuccess, loadProductsFailure } from './product.actions';
 @Injectable()
 export class ProductEffects {
-loadProducts$ = createEffect(() => this.actions$.pipe(
-ofType(loadProducts),
-mergeMap(() => this.productService.getAll()
-.pipe(
-map(products => loadProductsSuccess({ products })),
-catchError(error => of(loadProductsFailure({ error: error.message })))
-)
-)
-));
-constructor(
-private actions$: Actions,
-private productService: ProductService
-) {}
+  loadProducts$ = createEffect(() => this.actions$.pipe(
+  ofType(loadProducts),
+  mergeMap(() => this.productService.getAll()
+  .pipe(
+  map(products => loadProductsSuccess({ products })),
+  catchError(error => of(loadProductsFailure({ error: error.message })))
+  )
+  )
+  ));
+  constructor(
+  private actions$: Actions,
+  private productService: ProductService
+  ) {}
 }
 ```
 
 3.  **Dispatching New Actions**
 
-```typescript
 After performing the side effect, effects can dispatch new actions to update the store with the results. For example, after successfully fetching data from an API, an effect might dispatch a success action with the retrieved data.
+
+```typescript
 import { map } from 'rxjs/operators';
 import { loadProductsSuccess } from './product.actions';
 this.actions$.pipe(
@@ -315,8 +319,9 @@ map(products => loadProductsSuccess({ products }))
 
 4.  **Error Handling**
 
-```typescript
 The Actions observable also supports handling errors. Effects can use RxJS operators to catch errors from asynchronous operations and dispatch failure actions with error details.
+
+```typescript
 import { catchError } from 'rxjs/operators';
 import { loadProductsFailure } from './product.actions';
 this.actions$.pipe(
@@ -401,24 +406,19 @@ import { ProductService } from './product.service';
 import { loadProducts, loadProductsSuccess, loadProductsFailure } from './product.actions';
 @Injectable()
 export class ProductEffects {
-loadProducts$ = createEffect(() => this.actions$.pipe(
-ofType(loadProducts),
-mergeMap(() => this.productService.getAll()
-.pipe(
-map(products => loadProductsSuccess({ products })),
-catchError(error => of(loadProductsFailure({ error: error.message })))
-)
-)
-));
-constructor(
-private actions$: Actions,
-```
-
-private productService: ProductService
-
-) {}
-
-```typescript
+  loadProducts$ = createEffect(() => this.actions$.pipe(
+  ofType(loadProducts),
+  mergeMap(() => this.productService.getAll()
+  .pipe(
+  map(products => loadProductsSuccess({ products })),
+  catchError(error => of(loadProductsFailure({ error: error.message })))
+  )
+  )
+  ));
+  constructor(
+  private actions$: Actions,
+  private productService: ProductService
+  ) {}
 }
 ```
 
@@ -435,11 +435,11 @@ import { EffectsModule } from '@ngrx/effects';
 import { productReducer } from './product.reducer';
 import { ProductEffects } from './product.effects';
 @NgModule({
-imports: [
-StoreModule.forFeature('products', productReducer),
-EffectsModule.forFeature([ProductEffects])
-],
-providers: [ProductService]
+  imports: [
+  StoreModule.forFeature('products', productReducer),
+  EffectsModule.forFeature([ProductEffects])
+  ],
+  providers: [ProductService]
 })
 export class ProductModule {}
 ```
@@ -496,14 +496,17 @@ In NgRx, **Actions** and **Effects** serve different but complementary roles in 
 
 1.  **Purpose**
 
-```typescript
 Actions are payloads of information that send data from your application to the NgRx store. They represent events or requests and are used to trigger changes in the state or perform operations.
+
+```typescript
+
 ```
 
 2.  **Definition**
 
-```typescript
 Actions are typically defined using createAction in NgRx and include a type and optional payload.
+
+```typescript
 import { createAction, props } from '@ngrx/store';
 import { Product } from './product.model';
 export const loadProducts = createAction('[Product] Load Products');
@@ -529,8 +532,10 @@ this.store.dispatch(loadProducts());
 
 4.  **Focus**
 
-```typescript
 Actions are focused on defining what has happened or what needs to happen. They are a way to communicate events and data between different parts of the application.
+
+```typescript
+
 ```
 
 ### Effects
@@ -553,19 +558,19 @@ import { ProductService } from './product.service';
 import { loadProducts, loadProductsSuccess, loadProductsFailure } from './product.actions';
 @Injectable()
 export class ProductEffects {
-loadProducts$ = createEffect(() => this.actions$.pipe(
-ofType(loadProducts),
-mergeMap(() => this.productService.getAll()
-.pipe(
-map(products => loadProductsSuccess({ products })),
-catchError(error => of(loadProductsFailure({ error: error.message })))
-)
-)
-));
-constructor(
-private actions$: Actions,
-private productService: ProductService
-) {}
+  loadProducts$ = createEffect(() => this.actions$.pipe(
+  ofType(loadProducts),
+  mergeMap(() => this.productService.getAll()
+  .pipe(
+  map(products => loadProductsSuccess({ products })),
+  catchError(error => of(loadProductsFailure({ error: error.message })))
+  )
+  )
+  ));
+  constructor(
+  private actions$: Actions,
+  private productService: ProductService
+  ) {}
 }
 ```
 
@@ -579,8 +584,10 @@ private productService: ProductService
 
 4.  **Focus**
 
-```typescript
 Effects are focused on handling side effects and managing complex asynchronous operations. They provide a way to separate side effects from components and reducers, maintaining a clean and modular architecture.
+
+```typescript
+
 ```
 
 ### Summary
@@ -646,24 +653,19 @@ import { ProductService } from './product.service';
 import { loadProducts, loadProductsSuccess, loadProductsFailure } from './product.actions';
 @Injectable()
 export class ProductEffects {
-loadProducts$ = createEffect(() => this.actions$.pipe(
-ofType(loadProducts),
-mergeMap(() => this.productService.getAll()
-.pipe(
-map(products => loadProductsSuccess({ products })),
-catchError(error => of(loadProductsFailure({ error: error.message })))
-)
-)
-));
-constructor(
-private actions$: Actions,
-```
-
-private productService: ProductService
-
-) {}
-
-```typescript
+  loadProducts$ = createEffect(() => this.actions$.pipe(
+  ofType(loadProducts),
+  mergeMap(() => this.productService.getAll()
+  .pipe(
+  map(products => loadProductsSuccess({ products })),
+  catchError(error => of(loadProductsFailure({ error: error.message })))
+  )
+  )
+  ));
+  constructor(
+  private actions$: Actions,
+  private productService: ProductService
+  ) {}
 }
 ```
 
@@ -691,11 +693,11 @@ import { productReducer } from './product.reducer';
 import { ProductEffects } from './product.effects';
 import { ProductService } from './product.service';
 @NgModule({
-imports: [
-StoreModule.forFeature('products', productReducer),
-EffectsModule.forFeature([ProductEffects])
-],
-providers: [ProductService]
+  imports: [
+  StoreModule.forFeature('products', productReducer),
+  EffectsModule.forFeature([ProductEffects])
+  ],
+  providers: [ProductService]
 })
 export class ProductModule {}
 ```
@@ -755,24 +757,19 @@ import { SearchService } from './search.service';
 import { search, searchSuccess, searchFailure } from './search.actions';
 @Injectable()
 export class SearchEffects {
-search$ = createEffect(() => this.actions$.pipe(
-ofType(search),
-switchMap(action => this.searchService.search(action.query)
-.pipe(
-map(results => searchSuccess({ results })),
-catchError(error => of(searchFailure({ error: error.message })))
-)
-)
-));
-constructor(
-private actions$: Actions,
-```
-
-private searchService: SearchService
-
-) {}
-
-```typescript
+  search$ = createEffect(() => this.actions$.pipe(
+  ofType(search),
+  switchMap(action => this.searchService.search(action.query)
+  .pipe(
+  map(results => searchSuccess({ results })),
+  catchError(error => of(searchFailure({ error: error.message })))
+  )
+  )
+  ));
+  constructor(
+  private actions$: Actions,
+  private searchService: SearchService
+  ) {}
 }
 ```
 
@@ -803,25 +800,20 @@ import { SearchService } from './search.service';
 import { search, searchSuccess, searchFailure } from './search.actions';
 @Injectable()
 export class SearchEffects {
-search$ = createEffect(() => this.actions$.pipe(
-ofType(search),
-debounceTime(300), // Wait for 300ms pause in events
-switchMap(action => this.searchService.search(action.query)
-.pipe(
-map(results => searchSuccess({ results })),
-catchError(error => of(searchFailure({ error: error.message })))
-)
-)
-));
-constructor(
-private actions$: Actions,
-```
-
-private searchService: SearchService
-
-) {}
-
-```typescript
+  search$ = createEffect(() => this.actions$.pipe(
+  ofType(search),
+  debounceTime(300), // Wait for 300ms pause in events
+  switchMap(action => this.searchService.search(action.query)
+  .pipe(
+  map(results => searchSuccess({ results })),
+  catchError(error => of(searchFailure({ error: error.message })))
+  )
+  )
+  ));
+  constructor(
+  private actions$: Actions,
+  private searchService: SearchService
+  ) {}
 }
 ```
 

@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { formatFile as formatCSharpClean } from './format-csharp-clean.mjs';
+import { formatFile as formatAngularClean } from './format-angular-clean.mjs';
 
 const args = process.argv.slice(2);
 const topicIdx = args.indexOf('--topic');
@@ -224,6 +225,7 @@ for (const f of files) {
   const baseName = f.replace(/\.md$/i, '');
   let cleaned = normalize(raw, baseName);
   if (CODE_LANG === 'csharp') cleaned = formatCSharpClean(cleaned);
+  else if (topic.toLowerCase() === 'angular') cleaned = formatAngularClean(cleaned, baseName);
   fs.writeFileSync(path.join(OUT, f), cleaned, 'utf8');
   console.log(`cleaned: ${f} (${raw.length} -> ${cleaned.length})`);
 }

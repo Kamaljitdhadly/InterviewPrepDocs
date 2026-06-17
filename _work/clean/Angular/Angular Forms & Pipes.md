@@ -55,10 +55,10 @@ In this example:
 
 ```typescript
 export class AppComponent {
-user = { name: '' };
-onSubmit(form: any): void {
-console.log('Form Submitted!', form.value);
-}
+  user = { name: '' };
+  onSubmit(form: any): void {
+    console.log('Form Submitted!', form.value);
+  }
 }
 ```
 
@@ -103,14 +103,14 @@ In this example:
 ```typescript
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 export class AppComponent {
-userForm = new FormGroup({
-name: new FormControl('', [Validators.required, Validators.minLength(3)])
-});
-onSubmit(): void {
-if (this.userForm.valid) {
-console.log('Form Submitted!', this.userForm.value);
-}
-}
+  userForm = new FormGroup({
+    name: new FormControl('', [Validators.required, Validators.minLength(3)])
+  });
+  onSubmit(): void {
+    if (this.userForm.valid) {
+      console.log('Form Submitted!', this.userForm.value);
+    }
+  }
 }
 ```
 
@@ -167,22 +167,14 @@ Template-driven forms rely on Angular's built-in directives for validation. Most
 
 ```typescript
 <form #userForm="ngForm" (ngSubmit)="onSubmit(userForm)">
-```
-
 <!-- Name Field -->
-
-```typescript
 <label for="name">Name:</label>
 <input type="text" id="name" name="name" [(ngModel)]="user.name" required minlength="3">
 <div *ngIf="userForm.controls.name?.invalid && userForm.controls.name?.touched">
 <small *ngIf="userForm.controls.name?.errors?.required">Name is required.</small>
 <small *ngIf="userForm.controls.name?.errors?.minlength">Name must be at least 3 characters long.</small>
 </div>
-```
-
 <!-- Email Field -->
-
-```typescript
 <label for="email">Email:</label>
 <input type="email" id="email" name="email" [(ngModel)]="user.email" required email>
 <div *ngIf="userForm.controls.email?.invalid && userForm.controls.email?.touched">
@@ -223,22 +215,22 @@ Reactive form validation gives you more control and flexibility over your form l
 import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 @Component({
-selector: 'app-reactive-form',
-templateUrl: './reactive-form.component.html'
+  selector: 'app-reactive-form',
+  templateUrl: './reactive-form.component.html'
 })
 export class ReactiveFormComponent {
-userForm: FormGroup;
-constructor() {
-this.userForm = new FormGroup({
-name: new FormControl('', [Validators.required, Validators.minLength(3)]),
-email: new FormControl('', [Validators.required, Validators.email])
-});
-}
-onSubmit() {
-if (this.userForm.valid) {
-console.log('Form submitted:', this.userForm.value);
-}
-}
+  userForm: FormGroup;
+  constructor() {
+    this.userForm = new FormGroup({
+      name: new FormControl('', [Validators.required, Validators.minLength(3)]),
+      email: new FormControl('', [Validators.required, Validators.email])
+    });
+  }
+  onSubmit() {
+    if (this.userForm.valid) {
+      console.log('Form submitted:', this.userForm.value);
+    }
+  }
 }
 ```
 
@@ -246,22 +238,14 @@ console.log('Form submitted:', this.userForm.value);
 
 ```typescript
 <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
-```
-
 <!-- Name Field -->
-
-```typescript
 <label for="name">Name:</label>
 <input id="name" type="text" formControlName="name">
 <div *ngIf="userForm.controls.name.invalid && userForm.controls.name.touched">
 <small *ngIf="userForm.controls.name.errors?.required">Name is required.</small>
 <small *ngIf="userForm.controls.name.errors?.minlength">Name must be at least 3 characters long.</small>
 </div>
-```
-
 <!-- Email Field -->
-
-```typescript
 <label for="email">Email:</label>
 <input id="email" type="email" formControlName="email">
 <div *ngIf="userForm.controls.email.invalid && userForm.controls.email.touched">
@@ -291,10 +275,10 @@ Here’s a custom validator that checks whether the input contains the word "Ang
 ```typescript
 import { AbstractControl, ValidatorFn } from '@angular/forms';
 export function forbiddenNameValidator(nameRe: RegExp): ValidatorFn {
-return (control: AbstractControl): { [key: string]: any } | null => {
-const forbidden = nameRe.test(control.value);
-return forbidden ? { forbiddenName: { value: control.value } } : null;
-};
+  return (control: AbstractControl): { [key: string]: any } | null => {
+    const forbidden = nameRe.test(control.value);
+    return forbidden ? { forbiddenName: { value: control.value } } : null;
+  };
 }
 ```
 
@@ -302,7 +286,7 @@ return forbidden ? { forbiddenName: { value: control.value } } : null;
 
 ```typescript
 this.userForm = new FormGroup({
-name: new FormControl('', [Validators.required, forbiddenNameValidator(/angular/i)]),
+  name: new FormControl('', [Validators.required, forbiddenNameValidator(/angular/i)]),
 });
 ```
 
@@ -348,8 +332,10 @@ Handling form submission and error handling in Angular involves several steps. H
 
 1.  **Reactive Forms**: Use Angular’s Reactive Forms module to manage form submissions in a structured way. Reactive forms provide more control and scalability compared to Template-driven forms.
 
+Steps
+
 ```typescript
-**Steps:**
+
 ```
 
 - Import ReactiveFormsModule in your Angular module.
@@ -360,33 +346,35 @@ Handling form submission and error handling in Angular involves several steps. H
 
 - Handle form submission by calling a method on form submit.
 
-```typescript
 **Example:**
+
+Template
+
+```typescript
 // Import necessary modules
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
-selector: 'app-my-form',
-templateUrl: './my-form.component.html'
+  selector: 'app-my-form',
+  templateUrl: './my-form.component.html'
 })
 export class MyFormComponent {
-myForm: FormGroup;
-constructor(private fb: FormBuilder) {
-this.myForm = this.fb.group({
-name: ['', Validators.required],
-email: ['', [Validators.required, Validators.email]]
-});
+  myForm: FormGroup;
+  constructor(private fb: FormBuilder) {
+    this.myForm = this.fb.group({
+      name: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]]
+    });
+  }
+  onSubmit(): void {
+    if (this.myForm.valid) {
+      console.log(this.myForm.value);
+      // Handle form submission (e.g., send data to a server)
+    } else {
+      console.log('Form is invalid');
+    }
+  }
 }
-onSubmit(): void {
-if (this.myForm.valid) {
-console.log(this.myForm.value);
-// Handle form submission (e.g., send data to a server)
-} else {
-console.log('Form is invalid');
-}
-}
-}
-**Template:**
 <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
 <label for="name">Name:</label>
 <input id="name" formControlName="name">
@@ -398,8 +386,10 @@ console.log('Form is invalid');
 
 2.  **Template-Driven Forms**: Use Template-driven forms for simpler scenarios. They rely on Angular’s forms API to bind the form controls and handle validation.
 
+Steps
+
 ```typescript
-**Steps:**
+
 ```
 
 - Import FormsModule in your Angular module.
@@ -408,25 +398,27 @@ console.log('Form is invalid');
 
 - Handle form submission in the component.
 
-```typescript
 **Example:**
+
+Template
+
+```typescript
 // Import necessary modules
 import { Component } from '@angular/core';
 @Component({
-selector: 'app-my-form',
-templateUrl: './my-form.component.html'
+  selector: 'app-my-form',
+  templateUrl: './my-form.component.html'
 })
 export class MyFormComponent {
-onSubmit(form: any): void {
-if (form.valid) {
-console.log(form.value);
-// Handle form submission
-} else {
-console.log('Form is invalid');
+  onSubmit(form: any): void {
+    if (form.valid) {
+      console.log(form.value);
+      // Handle form submission
+    } else {
+      console.log('Form is invalid');
+    }
+  }
 }
-}
-}
-**Template:**
 <form #form="ngForm" (ngSubmit)="onSubmit(form)">
 <label for="name">Name:</label>
 <input id="name" name="name" ngModel required>
@@ -440,8 +432,11 @@ console.log('Form is invalid');
 
 1.  **Validation Error Handling**: You can handle validation errors by using Angular’s built-in validators and displaying error messages conditionally.
 
+Reactive Forms Example
+
+Template-Driven Forms Example
+
 ```typescript
-**Reactive Forms Example:**
 <form [formGroup]="myForm" (ngSubmit)="onSubmit()">
 <label for="name">Name:</label>
 <input id="name" formControlName="name">
@@ -456,7 +451,6 @@ console.log('Form is invalid');
 </div>
 <button type="submit">Submit</button>
 </form>
-**Template-Driven Forms Example:**
 <form #form="ngForm" (ngSubmit)="onSubmit(form)">
 <label for="name">Name:</label>
 <input id="name" name="name" ngModel required #name="ngModel">
@@ -475,44 +469,46 @@ console.log('Form is invalid');
 
 2.  **Server-Side Error Handling**: Handle errors returned from a server (e.g., validation errors or server-side issues) by subscribing to HTTP responses in your service.
 
+Service Example
+
+Component Example
+
 ```typescript
-**Service Example:**
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 @Injectable({
-providedIn: 'root'
+  providedIn: 'root'
 })
 export class MyService {
-constructor(private http: HttpClient) {}
-submitForm(data: any) {
-return this.http.post('/api/submit', data)
-.pipe(
-catchError(error => {
-console.error('Error occurred:', error);
-return throwError(() => new Error('Server error'));
-})
-);
+  constructor(private http: HttpClient) {}
+  submitForm(data: any) {
+    return this.http.post('/api/submit', data)
+    .pipe(
+    catchError(error => {
+      console.error('Error occurred:', error);
+      return throwError(() => new Error('Server error'));
+    })
+    );
+  }
 }
-}
-**Component Example:**
 import { Component } from '@angular/core';
 import { MyService } from './my-service.service';
 @Component({
-selector: 'app-my-form',
-templateUrl: './my-form.component.html'
+  selector: 'app-my-form',
+  templateUrl: './my-form.component.html'
 })
 export class MyFormComponent {
-constructor(private myService: MyService) {}
-onSubmit(form: any): void {
-if (form.valid) {
-this.myService.submitForm(form.value).subscribe({
-next: (response) => console.log('Success:', response),
-error: (error) => console.error('Error:', error)
-});
-}
-}
+  constructor(private myService: MyService) {}
+  onSubmit(form: any): void {
+    if (form.valid) {
+      this.myService.submitForm(form.value).subscribe({
+        next: (response) => console.log('Success:', response),
+        error: (error) => console.error('Error:', error)
+      });
+    }
+  }
 }
 ```
 
@@ -528,10 +524,12 @@ In Angular, pipes are a powerful feature used to transform data in your template
 
 2.  **Declarative Syntax**: Pipes are used in Angular templates with a simple and intuitive syntax. They are applied using the pipe operator (|).
 
-```typescript
 **Example:**
-{{ today | date:'shortDate' }}
+
 In this example, the date pipe is used to format the today variable to a short date format.
+
+```typescript
+{{ today | date:'shortDate' }}
 ```
 
 3.  **Built-in Pipes**: Angular provides several built-in pipes for common transformations:
@@ -568,8 +566,10 @@ In this example, the date pipe is used to format the today variable to a short d
 
 4.  **Custom Pipes**: You can create your own pipes to handle specific data transformations that are not covered by built-in pipes.
 
+Creating a Custom Pipe
+
 ```typescript
-**Creating a Custom Pipe:**
+
 ```
 
 1.  **Generate the Pipe**: Use Angular CLI to generate a new pipe.
@@ -583,13 +583,13 @@ ng generate pipe my-custom
 ```typescript
 import { Pipe, PipeTransform } from '@angular/core';
 @Pipe({
-name: 'myCustom'
+  name: 'myCustom'
 })
 export class MyCustomPipe implements PipeTransform {
-transform(value: string, ...args: any[]): string {
-// Custom transformation logic
-return value.toUpperCase(); // Example: Converts text to uppercase
-}
+  transform(value: string, ...args: any[]): string {
+    // Custom transformation logic
+    return value.toUpperCase(); // Example: Converts text to uppercase
+  }
 }
 ```
 
@@ -607,8 +607,8 @@ return value.toUpperCase(); // Example: Converts text to uppercase
 
 ```typescript
 @Pipe({
-name: 'myCustom',
-pure: false
+  name: 'myCustom',
+  pure: false
 })
 ```
 
@@ -654,10 +654,10 @@ name: 'myCustom'
 ```typescript
 })
 export class MyCustomPipe implements PipeTransform {
-transform(value: string, ...args: any[]): string {
-// Custom transformation logic
-return value.toUpperCase(); // Example: Converts text to uppercase
-}
+  transform(value: string, ...args: any[]): string {
+    // Custom transformation logic
+    return value.toUpperCase(); // Example: Converts text to uppercase
+  }
 }
 ```
 
@@ -671,8 +671,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { MyCustomPipe } from './my-custom.pipe'; // Import the pipe
 @NgModule({
-declarations: [
-AppComponent,
+  declarations: [
+  AppComponent,
 ```
 
 MyCustomPipe // Declare the pipe
@@ -708,11 +708,12 @@ In this example, the myCustom pipe will transform 'hello world' to uppercase.
 
 1.  **Arguments**: Pipes can accept additional arguments. You can access these in the transform method via the args parameter.
 
+**Usage:**
+
 ```typescript
 transform(value: string, uppercase: boolean): string {
-return uppercase ? value.toUpperCase() : value.toLowerCase();
+  return uppercase ? value.toUpperCase() : value.toLowerCase();
 }
-**Usage:**
 <p>{{ 'hello world' | myCustom:true }}</p>
 ```
 
@@ -724,8 +725,8 @@ return uppercase ? value.toUpperCase() : value.toLowerCase();
 
 ```typescript
 @Pipe({
-name: 'myCustom',
-pure: false
+  name: 'myCustom',
+  pure: false
 })
 ```
 
@@ -747,12 +748,12 @@ In Angular, pipes are used to transform data in templates. Understanding the dif
 
 ```typescript
 @Pipe({
-name: 'purePipe'
+  name: 'purePipe'
 })
 export class PurePipe implements PipeTransform {
-transform(value: string): string {
-return value.toUpperCase(); // Example transformation
-}
+  transform(value: string): string {
+    return value.toUpperCase(); // Example transformation
+  }
 }
 ```
 
@@ -770,14 +771,14 @@ return value.toUpperCase(); // Example transformation
 
 ```typescript
 @Pipe({
-name: 'impurePipe',
-pure: false // Mark the pipe as impure
+  name: 'impurePipe',
+  pure: false // Mark the pipe as impure
 })
 export class ImpurePipe implements PipeTransform {
-transform(value: string): string {
-// Example transformation that might depend on external state
-return value.toUpperCase(); // Example transformation
-}
+  transform(value: string): string {
+    // Example transformation that might depend on external state
+    return value.toUpperCase(); // Example transformation
+  }
 }
 ```
 
@@ -819,48 +820,54 @@ The async pipe in Angular is a powerful tool for handling asynchronous data stre
 
 1.  **With Observables**:
 
+Component
+
+Template
+
+In this example, the data$ observable is subscribed to by the async pipe, and the emitted value is displayed in the template. The value is updated when the observable emits a new value.
+
 ```typescript
-**Component:**
 import { Component, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
 @Component({
-selector: 'app-async-example',
-templateUrl: './async-example.component.html'
+  selector: 'app-async-example',
+  templateUrl: './async-example.component.html'
 })
 export class AsyncExampleComponent implements OnInit {
-data$: Observable<string>;
-ngOnInit(): void {
-this.data$ = of('Hello, world!').pipe(
-delay(2000) // Simulate delay
-);
+  data$: Observable<string>;
+  ngOnInit(): void {
+    this.data$ = of('Hello, world!').pipe(
+    delay(2000) // Simulate delay
+    );
+  }
 }
-}
-**Template:**
 <p>{{ data$ | async }}</p>
-In this example, the data$ observable is subscribed to by the async pipe, and the emitted value is displayed in the template. The value is updated when the observable emits a new value.
 ```
 
 2.  **With Promises**:
 
+Component
+
+Template
+
+In this example, the promise is handled by the async pipe, and the resolved value is displayed in the template once the promise is fulfilled.
+
 ```typescript
-**Component:**
 import { Component, OnInit } from '@angular/core';
 @Component({
-selector: 'app-async-example',
-templateUrl: './async-example.component.html'
+  selector: 'app-async-example',
+  templateUrl: './async-example.component.html'
 })
 export class AsyncExampleComponent implements OnInit {
-promise: Promise<string>;
-ngOnInit(): void {
-this.promise = new Promise((resolve) => {
-setTimeout(() => resolve('Hello, world!'), 2000);
-});
+  promise: Promise<string>;
+  ngOnInit(): void {
+    this.promise = new Promise((resolve) => {
+      setTimeout(() => resolve('Hello, world!'), 2000);
+    });
+  }
 }
-}
-**Template:**
 <p>{{ promise | async }}</p>
-In this example, the promise is handled by the async pipe, and the resolved value is displayed in the template once the promise is fulfilled.
 ```
 
 ### Key Features

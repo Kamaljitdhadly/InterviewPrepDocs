@@ -48,13 +48,13 @@
 ```typescript
 import { Observable } from 'rxjs';
 const observable = new Observable(observer => {
-observer.next('Hello');
-observer.next('World');
-observer.complete();
+  observer.next('Hello');
+  observer.next('World');
+  observer.complete();
 });
 observable.subscribe({
-next: value => console.log(value),
-complete: () => console.log('Completed')
+  next: value => console.log(value),
+  complete: () => console.log('Completed')
 });
 ```
 
@@ -104,7 +104,7 @@ In this example:
 
 ```typescript
 const promise = new Promise((resolve, reject) => {
-setTimeout(() => resolve('Value'), 1000);
+  setTimeout(() => resolve('Value'), 1000);
 });
 promise.then(value => console.log(value)); // Logs: 'Value'
 ```
@@ -114,13 +114,13 @@ promise.then(value => console.log(value)); // Logs: 'Value'
 ```typescript
 import { Observable } from 'rxjs';
 const observable = new Observable(subscriber => {
-subscriber.next('Value 1');
-subscriber.next('Value 2');
-subscriber.complete();
+  subscriber.next('Value 1');
+  subscriber.next('Value 2');
+  subscriber.complete();
 });
 observable.subscribe({
-next: value => console.log(value),
-complete: () => console.log('Complete')
+  next: value => console.log(value),
+  complete: () => console.log('Complete')
 });
 ```
 
@@ -130,10 +130,10 @@ complete: () => console.log('Complete')
 
 ```typescript
 const fetchData = () => {
-return new Promise((resolve, reject) => {
-// Simulating async operation
-setTimeout(() => resolve('Data fetched'), 2000);
-});
+  return new Promise((resolve, reject) => {
+    // Simulating async operation
+    setTimeout(() => resolve('Data fetched'), 2000);
+  });
 };
 fetchData().then(data => console.log(data)); // Logs: 'Data fetched'
 ```
@@ -365,16 +365,16 @@ Here’s a basic example of how you might define and use an Observer in RxJS:
 import { Observable } from 'rxjs';
 // Create an Observable
 const observable = new Observable<number>(subscriber => {
-subscriber.next(1);
-subscriber.next(2);
-subscriber.next(3);
-subscriber.complete(); // Complete the Observable
+  subscriber.next(1);
+  subscriber.next(2);
+  subscriber.next(3);
+  subscriber.complete(); // Complete the Observable
 });
 // Define an Observer
 const observer = {
-next: (value: number) => console.log(`Next: ${value}`),
-error: (err: any) => console.log(`Error: ${err}`),
-complete: () => console.log('Complete')
+  next: (value: number) => console.log(`Next: ${value}`),
+  error: (err: any) => console.log(`Error: ${err}`),
+  complete: () => console.log('Complete')
 };
 // Subscribe the Observer to the Observable
 observable.subscribe(observer);
@@ -394,9 +394,9 @@ When subscribing to an Observable, you can provide an Observer object directly o
 
 ```typescript
 observable.subscribe({
-next: (value) => console.log(value),
-error: (err) => console.error(err),
-complete: () => console.log('Done')
+  next: (value) => console.log(value),
+  error: (err) => console.error(err),
+  complete: () => console.log('Done')
 });
 ```
 
@@ -441,18 +441,18 @@ You can create an Observable by instantiating the Observable class and defining 
 ```typescript
 import { Observable } from 'rxjs';
 const observable = new Observable(subscriber => {
-// Emit values
-subscriber.next('Hello');
-subscriber.next('World');
-// Complete the Observable
-subscriber.complete();
-// Optionally, handle errors
-// subscriber.error('An error occurred');
+  // Emit values
+  subscriber.next('Hello');
+  subscriber.next('World');
+  // Complete the Observable
+  subscriber.complete();
+  // Optionally, handle errors
+  // subscriber.error('An error occurred');
 });
 // Subscribe to the Observable
 observable.subscribe({
-next: value => console.log(value),
-complete: () => console.log('Complete')
+  next: value => console.log(value),
+  complete: () => console.log('Complete')
 });
 ```
 
@@ -505,19 +505,19 @@ Here’s an example of creating a custom Observable that emits a sequence of num
 ```typescript
 import { Observable } from 'rxjs';
 const numberObservable = new Observable<number>(subscriber => {
-let count = 1;
-const intervalId = setInterval(() => {
-if (count > 5) {
-subscriber.complete();
-clearInterval(intervalId);
-} else {
-subscriber.next(count++);
-}
-}, 1000);
+  let count = 1;
+  const intervalId = setInterval(() => {
+    if (count > 5) {
+      subscriber.complete();
+      clearInterval(intervalId);
+    } else {
+      subscriber.next(count++);
+    }
+  }, 1000);
 });
 numberObservable.subscribe({
-next: value => console.log(value), // Logs: 1, 2, 3, 4, 5
-complete: () => console.log('Completed')
+  next: value => console.log(value), // Logs: 1, 2, 3, 4, 5
+  complete: () => console.log('Completed')
 });
 ```
 
@@ -552,10 +552,10 @@ In RxJS, **cold** and **hot** Observables refer to different behaviors in how Ob
 ```typescript
 import { Observable } from 'rxjs';
 const coldObservable = new Observable(subscriber => {
-console.log('Observable starts');
-subscriber.next('Hello');
-subscriber.next('World');
-subscriber.complete();
+  console.log('Observable starts');
+  subscriber.next('Hello');
+  subscriber.next('World');
+  subscriber.complete();
 });
 coldObservable.subscribe(value => console.log('Subscriber 1:', value));
 // Output:
@@ -623,18 +623,14 @@ An Observable can emit errors using the error method on the Subscriber object. W
 ```typescript
 import { Observable } from 'rxjs';
 const observable = new Observable(subscriber => {
-subscriber.next('Value 1');
-subscriber.error('An error occurred');
-```
-
-subscriber.next('Value 2'); // This will not be emitted
-
-```typescript
+  subscriber.next('Value 1');
+  subscriber.error('An error occurred');
+  subscriber.next('Value 2'); // This will not be emitted
 });
 observable.subscribe({
-next: value => console.log('Next:', value),
-error: err => console.error('Error:', err),
-complete: () => console.log('Complete')
+  next: value => console.log('Next:', value),
+  error: err => console.error('Error:', err),
+  complete: () => console.log('Complete')
 });
 ```
 
@@ -655,13 +651,13 @@ import { of, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 const observable = throwError('An error occurred').pipe(
 catchError(err => {
-console.error('Caught error:', err);
-return of('Default Value'); // Return a fallback Observable
+  console.error('Caught error:', err);
+  return of('Default Value'); // Return a fallback Observable
 })
 );
 observable.subscribe({
-next: value => console.log('Next:', value),
-complete: () => console.log('Complete')
+  next: value => console.log('Next:', value),
+  complete: () => console.log('Complete')
 });
 In this example:
 ```
@@ -681,9 +677,9 @@ const observable = throwError('An error occurred').pipe(
 retry(3) // Retry up to 3 times
 );
 observable.subscribe({
-next: value => console.log('Next:', value),
-error: err => console.error('Error:', err),
-complete: () => console.log('Complete')
+  next: value => console.log('Next:', value),
+  error: err => console.error('Error:', err),
+  complete: () => console.log('Complete')
 });
 In this example:
 ```
@@ -703,9 +699,9 @@ mergeMap((error, index) => index < 3 ? timer(1000) : throwError(error))
 ))
 );
 observable.subscribe({
-next: value => console.log('Next:', value),
-error: err => console.error('Error:', err),
-complete: () => console.log('Complete')
+  next: value => console.log('Next:', value),
+  error: err => console.error('Error:', err),
+  complete: () => console.log('Complete')
 });
 In this example:
 ```
@@ -722,13 +718,13 @@ import { mergeMap, catchError } from 'rxjs/operators';
 const observable = of('Start').pipe(
 mergeMap(() => throwError('An error occurred')),
 catchError(err => {
-console.error('Caught error in mergeMap:', err);
-return of('Fallback Value');
+  console.error('Caught error in mergeMap:', err);
+  return of('Fallback Value');
 })
 );
 observable.subscribe({
-next: value => console.log('Next:', value),
-complete: () => console.log('Complete')
+  next: value => console.log('Next:', value),
+  complete: () => console.log('Complete')
 });
 ```
 
@@ -772,13 +768,13 @@ In RxJS, both subscribe() and forEach() are methods used to handle the values em
 import { interval } from 'rxjs';
 const observable = interval(1000); // Emits a value every second
 const subscription = observable.subscribe({
-next: value => console.log('Value:', value),
-error: err => console.error('Error:', err),
-complete: () => console.log('Completed')
+  next: value => console.log('Value:', value),
+  error: err => console.error('Error:', err),
+  complete: () => console.log('Completed')
 });
 // To stop receiving values after 5 seconds
 setTimeout(() => {
-subscription.unsubscribe();
+  subscription.unsubscribe();
 }, 5000);
 ```
 
@@ -808,11 +804,11 @@ In this example:
 import { of } from 'rxjs';
 const observable = of(1, 2, 3, 4, 5); // Emits values 1 to 5
 observable.forEach(value => {
-console.log('Value:', value);
+  console.log('Value:', value);
 }).then(() => {
-console.log('Completed');
+  console.log('Completed');
 }).catch(err => {
-console.error('Error:', err);
+  console.error('Error:', err);
 });
 ```
 

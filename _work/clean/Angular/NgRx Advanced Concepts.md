@@ -41,8 +41,8 @@ import { Product } from './product.model';
 import { addProduct, loadProductsSuccess } from './product.actions';
 // Define the state interface extending EntityState
 export interface ProductState extends EntityState<Product> {
-// Additional state properties
-loading: boolean;
+  // Additional state properties
+  loading: boolean;
 }
 // Create an entity adapter
 export const productAdapter: EntityAdapter<Product> = createEntityAdapter<Product>();
@@ -189,26 +189,34 @@ ng generate @ngrx/schematics:action [name] --creators
 
 2.  **Consistent Code Structure**
 
-```typescript
 Using schematics ensures that your code follows a consistent structure and naming conventions, making it easier to maintain and understand. This consistency is especially valuable in large projects or teams.
+
+```typescript
+
 ```
 
 3.  **Reduce Manual Configuration**
 
-```typescript
 NgRx Schematics help automate the setup of NgRx-related configurations, such as adding NgRx dependencies to your package.json and configuring AppModule with StoreModule and EffectsModule. This reduces the risk of configuration errors and speeds up the setup process.
+
+```typescript
+
 ```
 
 4.  **Simplify State Management Setup**
 
-```typescript
 Schematics can quickly scaffold a complete state management setup for a feature module, including actions, reducers, effects, and selectors, which saves time and effort in setting up NgRx for new features.
+
+```typescript
+
 ```
 
 5.  **Improve Development Efficiency**
 
-```typescript
 By automating repetitive tasks, NgRx Schematics improve development efficiency and allow developers to focus more on implementing application logic rather than setting up boilerplate code.
+
+```typescript
+
 ```
 
 ### Common NgRx Schematics Commands
@@ -217,37 +225,42 @@ Here are some commonly used NgRx Schematics commands:
 
 - **Generate Actions**
 
+This command generates an action file with action creators for dispatching actions.
+
 ```typescript
 ng generate @ngrx/schematics:action [name] --creators
-This command generates an action file with action creators for dispatching actions.
 ```
 
 - **Generate Reducer**
 
+This command creates a reducer file with a basic reducer setup and initial state.
+
 ```typescript
 ng generate @ngrx/schematics:reducer [name]
-This command creates a reducer file with a basic reducer setup and initial state.
 ```
 
 - **Generate Effects**
 
+This command creates an effects file with a basic setup for handling side effects.
+
 ```typescript
 ng generate @ngrx/schematics:effect [name]
-This command creates an effects file with a basic setup for handling side effects.
 ```
 
 - **Generate Selector**
 
+This command generates a selector file for querying state.
+
 ```typescript
 ng generate @ngrx/schematics:selector [name]
-This command generates a selector file for querying state.
 ```
 
 - **Generate Feature State**
 
+This command sets up a feature module with NgRx state management, including actions, reducers, and effects.
+
 ```typescript
 ng generate @ngrx/schematics:feature [name] --module [module]
-This command sets up a feature module with NgRx state management, including actions, reducers, and effects.
 ```
 
 ### Example Usage
@@ -296,13 +309,13 @@ First, define the state interface and use the EntityAdapter to manage the entity
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 // Define the entity interface
 export interface Product {
-id: number;
-name: string;
-price: number;
+  id: number;
+  name: string;
+  price: number;
 }
 // Extend EntityState with your entity type
 export interface ProductState extends EntityState<Product> {
-loading: boolean;
+  loading: boolean;
 }
 // Create an entity adapter for your entity type
 export const productAdapter: EntityAdapter<Product> = createEntityAdapter<Product>();
@@ -415,24 +428,19 @@ import { ProductService } from './product.service';
 import { loadProducts, loadProductsSuccess, loadProductsFailure } from './product.actions';
 @Injectable()
 export class ProductEffects {
-loadProducts$ = createEffect(() => this.actions$.pipe(
-ofType(loadProducts),
-mergeMap(() => this.productService.getAll()
-.pipe(
-map(products => loadProductsSuccess({ products })),
-catchError(error => of(loadProductsFailure({ error: error.message })))
-)
-)
-));
-constructor(
-private actions$: Actions,
-```
-
-private productService: ProductService
-
-) {}
-
-```typescript
+  loadProducts$ = createEffect(() => this.actions$.pipe(
+  ofType(loadProducts),
+  mergeMap(() => this.productService.getAll()
+  .pipe(
+  map(products => loadProductsSuccess({ products })),
+  catchError(error => of(loadProductsFailure({ error: error.message })))
+  )
+  )
+  ));
+  constructor(
+  private actions$: Actions,
+  private productService: ProductService
+  ) {}
 }
 ```
 
@@ -464,8 +472,10 @@ The combineReducers() function allows you to combine multiple reducers into one.
 
 2.  **Organizes State Management**
 
-```typescript
 It helps organize and modularize your state management. Instead of having a single large reducer function managing the entire state, you can split your state into smaller, more manageable slices and handle each slice with a separate reducer. This leads to cleaner and more maintainable code.
+
+```typescript
+
 ```
 
 3.  **Creates a Root Reducer**
@@ -514,12 +524,12 @@ import { productReducer } from './products.reducer';
 import { userReducer } from './user.reducer';
 // Define the shape of the app state
 export interface AppState {
-products: ProductState;
-user: UserState;
+  products: ProductState;
+  user: UserState;
 }
 // Combine reducers
 export const reducers: ActionReducerMap<AppState> = {
-products: productReducer,
+  products: productReducer,
 ```
 
 user: userReducer
@@ -537,10 +547,10 @@ import { NgModule } from '@angular/core';
 import { StoreModule } from '@ngrx/store';
 import { reducers } from './app.state';
 @NgModule({
-imports: [
-StoreModule.forRoot(reducers)
-],
-// other configurations
+  imports: [
+  StoreModule.forRoot(reducers)
+  ],
+  // other configurations
 })
 export class AppModule { }
 ```
@@ -583,17 +593,13 @@ Include an error state in your state interface and handle error actions in your 
 import { EntityState } from '@ngrx/entity';
 import { Item } from './item.model';
 export interface ItemState extends EntityState<Item> {
-loading: boolean;
-```
-
-error: string | null; // Add an error property to store error messages
-
-```typescript
+  loading: boolean;
+  error: string | null; // Add an error property to store error messages
 }
 export const initialItemState: ItemState = {
-ids: [],
-entities: {},
-loading: false,
+  ids: [],
+  entities: {},
+  loading: false,
 ```
 
 error: null
@@ -613,17 +619,17 @@ import { ItemState, initialItemState } from './item.model';
 export const itemReducer = createReducer(
 initialItemState,
 on(loadItemsSuccess, (state, { items }) => ({
-...state,
-loading: false,
-error: null,
-entities: items.reduce((entities, item) => {
-entities[item.id] = item;
-return entities;
-}, {})
+  ...state,
+  loading: false,
+  error: null,
+  entities: items.reduce((entities, item) => {
+    entities[item.id] = item;
+    return entities;
+  }, {})
 })),
 on(loadItemsFailure, (state, { error }) => ({
-...state,
-loading: false,
+  ...state,
+  loading: false,
 ```
 
 error: error // Store the error message in the state
@@ -646,24 +652,19 @@ import { ItemService } from './item.service';
 import { loadItems, loadItemsFailure, loadItemsSuccess } from './item.actions';
 @Injectable()
 export class ItemEffects {
-loadItems$ = createEffect(() => this.actions$.pipe(
-ofType(loadItems),
-mergeMap(() => this.itemService.getAll()
-.pipe(
-map(items => loadItemsSuccess({ items })),
-catchError(error => of(loadItemsFailure({ error: error.message }))) // Dispatch failure action with error message
-)
-)
-));
-constructor(
-private actions$: Actions,
-```
-
-private itemService: ItemService
-
-) {}
-
-```typescript
+  loadItems$ = createEffect(() => this.actions$.pipe(
+  ofType(loadItems),
+  mergeMap(() => this.itemService.getAll()
+  .pipe(
+  map(items => loadItemsSuccess({ items })),
+  catchError(error => of(loadItemsFailure({ error: error.message }))) // Dispatch failure action with error message
+  )
+  )
+  ));
+  constructor(
+  private actions$: Actions,
+  private itemService: ItemService
+  ) {}
 }
 ```
 
@@ -689,15 +690,15 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { selectError } from './item.selectors';
 @Component({
-selector: 'app-item-list',
-templateUrl: './item-list.component.html'
+  selector: 'app-item-list',
+  templateUrl: './item-list.component.html'
 })
 export class ItemListComponent implements OnInit {
-error$ = this.store.select(selectError);
-constructor(private store: Store) {}
-ngOnInit() {
-// Load items or perform other actions
-}
+  error$ = this.store.select(selectError);
+  constructor(private store: Store) {}
+  ngOnInit() {
+    // Load items or perform other actions
+  }
 }
 In your template:
 <div *ngIf="error$ | async as error">

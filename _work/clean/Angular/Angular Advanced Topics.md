@@ -104,10 +104,10 @@ const PORT = process.env.PORT || 4000;
 const DIST_FOLDER = join(process.cwd(), 'dist/browser');
 const { AppServerModuleNgFactory, LAZY_MODULE_MAP } = require('./dist/server/main');
 app.engine('html', ngExpressEngine({
-bootstrap: AppServerModule,
-providers: [
-provideModuleMap(LAZY_MODULE_MAP),
-],
+  bootstrap: AppServerModule,
+  providers: [
+  provideModuleMap(LAZY_MODULE_MAP),
+  ],
 }));
 app.set('view engine', 'html');
 app.set('views', DIST_FOLDER);
@@ -119,10 +119,10 @@ maxAge: '1y'
 ```typescript
 }));
 app.get('*', (req, res) => {
-res.render('index', { req });
+  res.render('index', { req });
 });
 app.listen(PORT, () => {
-console.log(`Node server listening on http://localhost:${PORT}`);
+  console.log(`Node server listening on http://localhost:${PORT}`);
 });
 ```
 
@@ -380,15 +380,15 @@ Update angular.json to include the translation files:
 
 ```typescript
 "projects": {
-"my-angular-app": {
+  "my-angular-app": {
 ```
 
 ...
 
 ```typescript
 "i18n": {
-"locales": {
-"fr": "src/locale/messages.fr.xlf",
+  "locales": {
+    "fr": "src/locale/messages.fr.xlf",
 ```
 
 "de": "src/locale/messages.de.xlf"
@@ -421,12 +421,12 @@ import localeDe from '@angular/common/locales/de';
 registerLocaleData(localeFr, 'fr');
 registerLocaleData(localeDe, 'de');
 @NgModule({
-declarations: [AppComponent],
-imports: [CommonModule],
-providers: [
-{ provide: LOCALE_ID, useValue: 'fr' } // Change 'fr' to 'de' or other locales as needed
-],
-bootstrap: [AppComponent]
+  declarations: [AppComponent],
+  imports: [CommonModule],
+  providers: [
+  { provide: LOCALE_ID, useValue: 'fr' } // Change 'fr' to 'de' or other locales as needed
+  ],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
 ```
@@ -523,11 +523,11 @@ Update angular.json to use the custom builder:
 
 ```typescript
 {
-"architect": {
-"build": {
-"builder": "@angular-builders/custom-webpack:browser",
-"options": {
-"customWebpackConfig": {
+  "architect": {
+    "build": {
+      "builder": "@angular-builders/custom-webpack:browser",
+      "options": {
+        "customWebpackConfig": {
 ```
 
 "path": "./extra-webpack.config.js"
@@ -545,11 +545,11 @@ Create a extra-webpack.config.js file with your custom Webpack configuration:
 ```typescript
 const path = require('path');
 module.exports = {
-resolve: {
-alias: {
-'my-alias': path.resolve(__dirname, 'src/my-custom-path')
-}
-}
+  resolve: {
+    alias: {
+      'my-alias': path.resolve(__dirname, 'src/my-custom-path')
+    }
+  }
 };
 ```
 
@@ -565,8 +565,10 @@ Angular CLI uses builders to configure various build processes. You can customiz
 
 - **@angular-devkit/build-angular**
 
-```typescript
 : For building Angular Universal server-side applications.
+
+```typescript
+
 ```
 
 ### Summary

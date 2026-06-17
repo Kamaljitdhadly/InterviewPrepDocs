@@ -98,10 +98,10 @@ In Angular, **modules** are a way to organize and group related parts of an appl
 
 ```typescript
 @NgModule({
-declarations: [ /* Components, Directives, Pipes */ ],
-imports: [ /* Other Modules */ ],
-providers: [ /* Services */ ],
-bootstrap: [ /* Root Component (for root module) */ ]
+  declarations: [ /* Components, Directives, Pipes */ ],
+  imports: [ /* Other Modules */ ],
+  providers: [ /* Services */ ],
+  bootstrap: [ /* Root Component (for root module) */ ]
 })
 export class AppModule { }
 ```
@@ -120,9 +120,9 @@ export class AppModule { }
 
 ```typescript
 @NgModule({
-declarations: [AppComponent],
-imports: [BrowserModule],
-bootstrap: [AppComponent]
+  declarations: [AppComponent],
+  imports: [BrowserModule],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}
 ```
@@ -131,8 +131,8 @@ export class AppModule {}
 
 ```typescript
 @NgModule({
-declarations: [UserComponent],
-imports: [CommonModule],
+  declarations: [UserComponent],
+  imports: [CommonModule],
 })
 export class UserModule {}
 ```
@@ -141,8 +141,8 @@ export class UserModule {}
 
 ```typescript
 @NgModule({
-declarations: [SharedComponent],
-exports: [SharedComponent]
+  declarations: [SharedComponent],
+  exports: [SharedComponent]
 })
 export class SharedModule {}
 ```
@@ -159,9 +159,9 @@ export class SharedModule {}
 
 ```typescript
 @NgModule({
-declarations: [SomeComponent],
-imports: [CommonModule],
-exports: [SomeComponent]
+  declarations: [SomeComponent],
+  imports: [CommonModule],
+  exports: [SomeComponent]
 })
 export class SomeModule {}
 ```
@@ -173,9 +173,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UserComponent } from './user.component';
 @NgModule({
-declarations: [UserComponent], // Declare components, directives, and pipes
-imports: [CommonModule], // Import other Angular or custom modules
-exports: [UserComponent], // Export components so other modules can use them
+  declarations: [UserComponent], // Declare components, directives, and pipes
+  imports: [CommonModule], // Import other Angular or custom modules
+  exports: [UserComponent], // Export components so other modules can use them
 })
 export class UserModule {}
 ```
@@ -210,7 +210,7 @@ The @NgModule decorator is a key feature in Angular that defines an **Angular mo
 
 ```typescript
 @NgModule({
-declarations: [AppComponent, HeaderComponent, FooterComponent]
+  declarations: [AppComponent, HeaderComponent, FooterComponent]
 })
 export class AppModule {}
 ```
@@ -225,7 +225,7 @@ export class AppModule {}
 
 ```typescript
 @NgModule({
-imports: [BrowserModule, FormsModule, SharedModule]
+  imports: [BrowserModule, FormsModule, SharedModule]
 })
 export class AppModule {}
 ```
@@ -240,8 +240,8 @@ export class AppModule {}
 
 ```typescript
 @NgModule({
-declarations: [SharedComponent],
-exports: [SharedComponent] // Makes SharedComponent available to other modules
+  declarations: [SharedComponent],
+  exports: [SharedComponent] // Makes SharedComponent available to other modules
 })
 export class SharedModule {}
 ```
@@ -256,7 +256,7 @@ export class SharedModule {}
 
 ```typescript
 @NgModule({
-providers: [AuthService]
+  providers: [AuthService]
 })
 export class AuthModule {}
 ```
@@ -271,9 +271,9 @@ export class AuthModule {}
 
 ```typescript
 @NgModule({
-declarations: [AppComponent],
-imports: [BrowserModule],
-bootstrap: [AppComponent]
+  declarations: [AppComponent],
+  imports: [BrowserModule],
+  bootstrap: [AppComponent]
 })
 export class AppModule {}
 ```
@@ -334,9 +334,9 @@ import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { SharedModule } from './shared/shared.module';
 @NgModule({
-declarations: [AppComponent],
-imports: [BrowserModule, UserModule, AuthModule, SharedModule], // Feature and shared modules
-bootstrap: [AppComponent]
+  declarations: [AppComponent],
+  imports: [BrowserModule, UserModule, AuthModule, SharedModule], // Feature and shared modules
+  bootstrap: [AppComponent]
 })
 export class AppModule {}
 ```
@@ -381,15 +381,15 @@ Example:
 Example:
 import { Component } from '@angular/core';
 @Component({
-selector: 'app-example',
-templateUrl: './example.component.html',
-styleUrls: ['./example.component.css']
+  selector: 'app-example',
+  templateUrl: './example.component.html',
+  styleUrls: ['./example.component.css']
 })
 export class ExampleComponent {
-title = 'Hello, Angular!';
-handleClick() {
-alert('Button Clicked!');
-}
+  title = 'Hello, Angular!';
+  handleClick() {
+    alert('Button Clicked!');
+  }
 }
 ```
 
@@ -402,7 +402,7 @@ alert('Button Clicked!');
 ```typescript
 Example:
 h1 {
-color: blue;
+  color: blue;
 }
 ```
 
@@ -413,9 +413,9 @@ color: blue;
 ```typescript
 Example:
 @Component({
-selector: 'app-example', // Defines how to use the component in HTML
-templateUrl: './example.component.html', // HTML for the component
-styleUrls: ['./example.component.css'] // CSS for the component
+  selector: 'app-example', // Defines how to use the component in HTML
+  templateUrl: './example.component.html', // HTML for the component
+  styleUrls: ['./example.component.css'] // CSS for the component
 })
 ```
 
@@ -431,7 +431,7 @@ An Angular component is made up of the following parts:
 
 ```typescript
 @Component({
-selector: 'app-example', // This is how the component is referenced
+  selector: 'app-example', // This is how the component is referenced
 })
 ```
 
@@ -456,21 +456,17 @@ selector: 'app-example', // This is how the component is referenced
 ```typescript
 import { Component } from '@angular/core';
 @Component({
-selector: 'app-example', // The component's HTML tag
-templateUrl: './example.component.html', // External HTML file for the template
-styleUrls: ['./example.component.css'] // External CSS file for styles
+  selector: 'app-example', // The component's HTML tag
+  templateUrl: './example.component.html', // External HTML file for the template
+  styleUrls: ['./example.component.css'] // External CSS file for styles
 })
 export class ExampleComponent {
-title = 'Hello, Angular!';
-handleClick() {
-console.log('Button clicked!');
+  title = 'Hello, Angular!';
+  handleClick() {
+    console.log('Button clicked!');
+  }
 }
-}
-```
-
 <!-- example.component.html -->
-
-```typescript
 <h1>{{ title }}</h1>
 <button (click)="handleClick()">Click Me</button>
 ```
@@ -479,7 +475,7 @@ console.log('Button clicked!');
 
 ```typescript
 h1 {
-color: green;
+  color: green;
 }
 ```
 
@@ -493,8 +489,10 @@ color: green;
 
     - ngOnChanges(): Called when data-bound properties change.
 
-```typescript
 These hooks allow developers to run custom logic at different stages of the component's lifecycle.
+
+```typescript
+
 ```
 
 2.  **Data Binding**: Angular provides different forms of **data binding** in components:
@@ -516,14 +514,14 @@ These hooks allow developers to run custom logic at different stages of the comp
 ```typescript
 Example:
 @Component({
-selector: 'app-child',
-template: '<button (click)="notifyParent()">Click Me</button>',
+  selector: 'app-child',
+  template: '<button (click)="notifyParent()">Click Me</button>',
 })
 export class ChildComponent {
-@Output() notify = new EventEmitter<string>();
-notifyParent() {
-this.notify.emit('Child button clicked!');
-}
+  @Output() notify = new EventEmitter<string>();
+  notifyParent() {
+    this.notify.emit('Child button clicked!');
+  }
 }
 ```
 
@@ -578,11 +576,11 @@ A parent component can pass data to a child component using **@Input()** propert
 ```typescript
 import { Component, Input } from '@angular/core';
 @Component({
-selector: 'app-child',
-template: `<p>Message from parent: {{ message }}</p>`
+  selector: 'app-child',
+  template: `<p>Message from parent: {{ message }}</p>`
 })
 export class ChildComponent {
-@Input() message: string = ''; // Receives data from parent
+  @Input() message: string = ''; // Receives data from parent
 }
 ```
 
@@ -591,17 +589,13 @@ export class ChildComponent {
 ```typescript
 import { Component } from '@angular/core';
 @Component({
-selector: 'app-parent',
-template: `
-<app-child [message]="parentMessage"></app-child> <!-- Passes value to child -->
-```
-
-`
-
-```typescript
+  selector: 'app-parent',
+  template: `
+  <app-child [message]="parentMessage"></app-child> <!-- Passes value to child -->
+  `
 })
 export class ParentComponent {
-parentMessage: string = 'Hello from the parent!';
+  parentMessage: string = 'Hello from the parent!';
 }
 ```
 
@@ -624,14 +618,14 @@ A child component can send data or events to its parent using **@Output()** and 
 ```typescript
 import { Component, Output, EventEmitter } from '@angular/core';
 @Component({
-selector: 'app-child',
-template: `<button (click)="sendMessage()">Click Me</button>`
+  selector: 'app-child',
+  template: `<button (click)="sendMessage()">Click Me</button>`
 })
 export class ChildComponent {
-@Output() messageEvent = new EventEmitter<string>();
-sendMessage() {
-this.messageEvent.emit('Hello from the child!'); // Emit an event with data
-}
+  @Output() messageEvent = new EventEmitter<string>();
+  sendMessage() {
+    this.messageEvent.emit('Hello from the child!'); // Emit an event with data
+  }
 }
 ```
 
@@ -640,21 +634,17 @@ this.messageEvent.emit('Hello from the child!'); // Emit an event with data
 ```typescript
 import { Component } from '@angular/core';
 @Component({
-selector: 'app-parent',
-template: `
-<app-child (messageEvent)="receiveMessage($event)"></app-child> <!-- Listens for event -->
-<p>{{ receivedMessage }}</p>
-```
-
-`
-
-```typescript
+  selector: 'app-parent',
+  template: `
+  <app-child (messageEvent)="receiveMessage($event)"></app-child> <!-- Listens for event -->
+  <p>{{ receivedMessage }}</p>
+  `
 })
 export class ParentComponent {
-receivedMessage: string = '';
-receiveMessage(message: string) {
-this.receivedMessage = message; // Handle event from child
-}
+  receivedMessage: string = '';
+  receiveMessage(message: string) {
+    this.receivedMessage = message; // Handle event from child
+  }
 }
 ```
 
@@ -678,18 +668,14 @@ When components need to communicate without a direct parent-child relationship, 
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 @Injectable({
-```
-
-providedIn: 'root'
-
-```typescript
+  providedIn: 'root'
 })
 export class SharedService {
-private messageSource = new BehaviorSubject<string>('Initial Message');
-currentMessage = this.messageSource.asObservable();
-changeMessage(message: string) {
-this.messageSource.next(message); // Update the message
-}
+  private messageSource = new BehaviorSubject<string>('Initial Message');
+  currentMessage = this.messageSource.asObservable();
+  changeMessage(message: string) {
+    this.messageSource.next(message); // Update the message
+  }
 }
 ```
 
@@ -699,14 +685,14 @@ this.messageSource.next(message); // Update the message
 import { Component } from '@angular/core';
 import { SharedService } from './shared.service';
 @Component({
-selector: 'app-component-a',
-template: `<button (click)="newMessage()">Send Message</button>`
+  selector: 'app-component-a',
+  template: `<button (click)="newMessage()">Send Message</button>`
 })
 export class ComponentA {
-constructor(private sharedService: SharedService) {}
-newMessage() {
-this.sharedService.changeMessage('Message from Component A'); // Update message in service
-}
+  constructor(private sharedService: SharedService) {}
+  newMessage() {
+    this.sharedService.changeMessage('Message from Component A'); // Update message in service
+  }
 }
 ```
 
@@ -716,15 +702,15 @@ this.sharedService.changeMessage('Message from Component A'); // Update message 
 import { Component, OnInit } from '@angular/core';
 import { SharedService } from './shared.service';
 @Component({
-selector: 'app-component-b',
-template: `<p>{{ message }}</p>`
+  selector: 'app-component-b',
+  template: `<p>{{ message }}</p>`
 })
 export class ComponentB implements OnInit {
-message: string = '';
-constructor(private sharedService: SharedService) {}
-ngOnInit() {
-this.sharedService.currentMessage.subscribe(message => this.message = message); // Subscribe to message updates
-}
+  message: string = '';
+  constructor(private sharedService: SharedService) {}
+  ngOnInit() {
+    this.sharedService.currentMessage.subscribe(message => this.message = message); // Subscribe to message updates
+  }
 }
 ```
 
@@ -745,13 +731,13 @@ Another way for a parent to interact directly with a child component is by using
 ```typescript
 import { Component } from '@angular/core';
 @Component({
-selector: 'app-child',
-template: `<p>Child Component</p>`
+  selector: 'app-child',
+  template: `<p>Child Component</p>`
 })
 export class ChildComponent {
-childMethod() {
-console.log('Child method called!');
-}
+  childMethod() {
+    console.log('Child method called!');
+  }
 }
 ```
 
@@ -761,24 +747,20 @@ console.log('Child method called!');
 import { Component, ViewChild, AfterViewInit } from '@angular/core';
 import { ChildComponent } from './child.component';
 @Component({
-selector: 'app-parent',
-template: `
-<app-child></app-child>
-<button (click)="callChildMethod()">Call Child Method</button>
-```
-
-`
-
-```typescript
+  selector: 'app-parent',
+  template: `
+  <app-child></app-child>
+  <button (click)="callChildMethod()">Call Child Method</button>
+  `
 })
 export class ParentComponent implements AfterViewInit {
-@ViewChild(ChildComponent) childComponent!: ChildComponent;
-ngAfterViewInit() {
-// Access child's method or properties after the view has been initialized
-}
-callChildMethod() {
-this.childComponent.childMethod(); // Calling child method from parent
-}
+  @ViewChild(ChildComponent) childComponent!: ChildComponent;
+  ngAfterViewInit() {
+    // Access child's method or properties after the view has been initialized
+  }
+  callChildMethod() {
+    this.childComponent.childMethod(); // Calling child method from parent
+  }
 }
 ```
 
@@ -800,8 +782,8 @@ Sometimes a parent component may need to pass content (HTML) to a child componen
 
 ```typescript
 @Component({
-selector: 'app-child',
-template: `<p>Child Component:</p><ng-content></ng-content>`
+  selector: 'app-child',
+  template: `<p>Child Component:</p><ng-content></ng-content>`
 })
 export class ChildComponent {}
 ```
@@ -810,16 +792,12 @@ export class ChildComponent {}
 
 ```typescript
 @Component({
-selector: 'app-parent',
-template: `
-<app-child>
-<p>This is projected content from the parent.</p>
-</app-child>
-```
-
-`
-
-```typescript
+  selector: 'app-parent',
+  template: `
+  <app-child>
+  <p>This is projected content from the parent.</p>
+  </app-child>
+  `
 })
 export class ParentComponent {}
 ```
@@ -860,7 +838,7 @@ Lifecycle hooks enhance control over a component’s behavior and are crucial fo
 
 ```typescript
 ngOnChanges(changes: SimpleChanges) {
-console.log('Input property changed:', changes);
+  console.log('Input property changed:', changes);
 }
 ```
 
@@ -874,7 +852,7 @@ console.log('Input property changed:', changes);
 
 ```typescript
 ngOnInit() {
-console.log('Component initialized');
+  console.log('Component initialized');
 }
 ```
 
@@ -888,7 +866,7 @@ console.log('Component initialized');
 
 ```typescript
 ngDoCheck() {
-console.log('Change detection run');
+  console.log('Change detection run');
 }
 ```
 
@@ -902,7 +880,7 @@ console.log('Change detection run');
 
 ```typescript
 ngAfterContentInit() {
-console.log('Projected content initialized');
+  console.log('Projected content initialized');
 }
 ```
 
@@ -916,7 +894,7 @@ console.log('Projected content initialized');
 
 ```typescript
 ngAfterContentChecked() {
-console.log('Projected content checked');
+  console.log('Projected content checked');
 }
 ```
 
@@ -930,7 +908,7 @@ console.log('Projected content checked');
 
 ```typescript
 ngAfterViewInit() {
-console.log('View initialized');
+  console.log('View initialized');
 }
 ```
 
@@ -944,7 +922,7 @@ console.log('View initialized');
 
 ```typescript
 ngAfterViewChecked() {
-console.log('View checked');
+  console.log('View checked');
 }
 ```
 
@@ -958,7 +936,7 @@ console.log('View checked');
 
 ```typescript
 ngOnDestroy() {
-console.log('Component destroyed');
+  console.log('Component destroyed');
 }
 ```
 
@@ -999,23 +977,23 @@ The typical flow of the lifecycle hooks is as follows:
 ```typescript
 import { Component, Input, OnInit, OnChanges, OnDestroy } from '@angular/core';
 @Component({
-selector: 'app-lifecycle-demo',
-template: `<p>{{ message }}</p>`
+  selector: 'app-lifecycle-demo',
+  template: `<p>{{ message }}</p>`
 })
 export class LifecycleDemoComponent implements OnInit, OnChanges, OnDestroy {
-@Input() message: string = '';
-constructor() {
-console.log('Constructor: Component instantiated');
-}
-ngOnChanges(changes: SimpleChanges) {
-console.log('ngOnChanges: Input changed', changes);
-}
-ngOnInit() {
-console.log('ngOnInit: Component initialized');
-}
-ngOnDestroy() {
-console.log('ngOnDestroy: Component is about to be destroyed');
-}
+  @Input() message: string = '';
+  constructor() {
+    console.log('Constructor: Component instantiated');
+  }
+  ngOnChanges(changes: SimpleChanges) {
+    console.log('ngOnChanges: Input changed', changes);
+  }
+  ngOnInit() {
+    console.log('ngOnInit: Component initialized');
+  }
+  ngOnDestroy() {
+    console.log('ngOnDestroy: Component is about to be destroyed');
+  }
 }
 ```
 
@@ -1077,18 +1055,18 @@ In Angular, both the **constructor** and **ngOnInit()** methods are used during 
 import { Component, OnInit } from '@angular/core';
 import { MyService } from './my.service';
 @Component({
-selector: 'app-example',
-templateUrl: './example.component.html'
+  selector: 'app-example',
+  templateUrl: './example.component.html'
 })
 export class ExampleComponent implements OnInit {
-constructor(private myService: MyService) {
-// Dependency injection happens here
-console.log('Constructor called');
-}
-ngOnInit() {
-// Initialization logic
-console.log('ngOnInit called');
-}
+  constructor(private myService: MyService) {
+    // Dependency injection happens here
+    console.log('Constructor called');
+  }
+  ngOnInit() {
+    // Initialization logic
+    console.log('ngOnInit called');
+  }
 }
 ```
 
@@ -1112,18 +1090,18 @@ console.log('ngOnInit called');
 import { Component, OnInit } from '@angular/core';
 import { MyService } from './my.service';
 @Component({
-selector: 'app-example',
-templateUrl: './example.component.html'
+  selector: 'app-example',
+  templateUrl: './example.component.html'
 })
 export class ExampleComponent implements OnInit {
-constructor(private myService: MyService) {}
-ngOnInit() {
-// Perform initialization logic here, e.g., data fetching
-console.log('ngOnInit called');
-this.myService.getData().subscribe(data => {
-console.log('Data fetched:', data);
-});
-}
+  constructor(private myService: MyService) {}
+  ngOnInit() {
+    // Perform initialization logic here, e.g., data fetching
+    console.log('ngOnInit called');
+    this.myService.getData().subscribe(data => {
+      console.log('Data fetched:', data);
+    });
+  }
 }
 ```
 
@@ -1137,8 +1115,10 @@ Data binding in Angular is a fundamental concept that allows synchronization bet
 
 1.  **Interpolation (One-Way Binding)**
 
-```typescript
 Interpolation is used to bind data from the component class to the view. It allows you to display component data within the HTML template.
+
+```typescript
+
 ```
 
 - **Syntax**: {{ expression }}
@@ -1148,11 +1128,11 @@ Interpolation is used to bind data from the component class to the view. It allo
 ```typescript
 <p>{{ message }}</p>
 @Component({
-selector: 'app-example',
-templateUrl: './example.component.html'
+  selector: 'app-example',
+  templateUrl: './example.component.html'
 })
 export class ExampleComponent {
-message: string = 'Hello, Angular!';
+  message: string = 'Hello, Angular!';
 }
 ```
 
@@ -1170,12 +1150,12 @@ Property binding allows you to bind data from the component to an HTML element p
 <img [src]="imageUrl" alt="Angular Logo">
 <input [value]="inputValue">
 @Component({
-selector: 'app-example',
-templateUrl: './example.component.html'
+  selector: 'app-example',
+  templateUrl: './example.component.html'
 })
 export class ExampleComponent {
-imageUrl: string = 'https://angular.io/assets/images/logos/angular/angular.png';
-inputValue: string = 'Initial Value';
+  imageUrl: string = 'https://angular.io/assets/images/logos/angular/angular.png';
+  inputValue: string = 'Initial Value';
 }
 ```
 
@@ -1192,20 +1172,22 @@ Event binding allows you to listen to events (e.g., click events) from the view 
 ```typescript
 <button (click)="handleClick()">Click Me</button>
 @Component({
-selector: 'app-example',
-templateUrl: './example.component.html'
+  selector: 'app-example',
+  templateUrl: './example.component.html'
 })
 export class ExampleComponent {
-handleClick() {
-console.log('Button clicked!');
-}
+  handleClick() {
+    console.log('Button clicked!');
+  }
 }
 ```
 
 4.  **Two-Way Data Binding**
 
-```typescript
 Two-way data binding allows for the synchronization of data between the component and the view. Changes in the view update the component data, and changes in the component data update the view. This is commonly used with form controls.
+
+```typescript
+
 ```
 
 - **Syntax**: [(ngModel)]="property"
@@ -1216,11 +1198,11 @@ Two-way data binding allows for the synchronization of data between the componen
 <input [(ngModel)]="name">
 <p>Hello, {{ name }}!</p>
 @Component({
-selector: 'app-example',
-templateUrl: './example.component.html'
+  selector: 'app-example',
+  templateUrl: './example.component.html'
 })
 export class ExampleComponent {
-name: string = 'Angular';
+  name: string = 'Angular';
 }
 ```
 
@@ -1228,8 +1210,10 @@ name: string = 'Angular';
 
 5.  **Attribute Binding (One-Way Binding)**
 
-```typescript
 Attribute binding allows you to bind data to the attributes of HTML elements that are not standard properties.
+
+```typescript
+
 ```
 
 - **Syntax**: [attr.attributeName]="expression"
@@ -1239,18 +1223,20 @@ Attribute binding allows you to bind data to the attributes of HTML elements tha
 ```typescript
 <div [attr.aria-label]="label">Content</div>
 @Component({
-selector: 'app-example',
-templateUrl: './example.component.html'
+  selector: 'app-example',
+  templateUrl: './example.component.html'
 })
 export class ExampleComponent {
-label: string = 'Accessible label';
+  label: string = 'Accessible label';
 }
 ```
 
 6.  **Class Binding (One-Way Binding)**
 
-```typescript
 Class binding allows you to dynamically add or remove CSS classes on an element based on component data.
+
+```typescript
+
 ```
 
 - **Syntax**: [class.className]="expression"
@@ -1260,18 +1246,20 @@ Class binding allows you to dynamically add or remove CSS classes on an element 
 ```typescript
 <div [class.active]="isActive">Content</div>
 @Component({
-selector: 'app-example',
-templateUrl: './example.component.html'
+  selector: 'app-example',
+  templateUrl: './example.component.html'
 })
 export class ExampleComponent {
-isActive: boolean = true;
+  isActive: boolean = true;
 }
 ```
 
 7.  **Style Binding (One-Way Binding)**
 
-```typescript
 Style binding allows you to dynamically set CSS styles on an element based on component data.
+
+```typescript
+
 ```
 
 - **Syntax**: [style.styleName]="expression"
@@ -1281,11 +1269,11 @@ Style binding allows you to dynamically set CSS styles on an element based on co
 ```typescript
 <div [style.color]="color">Styled Text</div>
 @Component({
-selector: 'app-example',
-templateUrl: './example.component.html'
+  selector: 'app-example',
+  templateUrl: './example.component.html'
 })
 export class ExampleComponent {
-color: string = 'blue';
+  color: string = 'blue';
 }
 ```
 
@@ -1323,9 +1311,9 @@ Directives in Angular are categorized into three main types:
 
 ```typescript
 @Component({
-selector: 'app-my-component',
-template: `<p>Hello, World!</p>`,
-styles: [`p { color: blue; }`]
+  selector: 'app-my-component',
+  template: `<p>Hello, World!</p>`,
+  styles: [`p { color: blue; }`]
 })
 export class MyComponent { }
 ```
@@ -1382,12 +1370,12 @@ export class MyComponent { }
 
 ```typescript
 @Directive({
-selector: '[appHighlight]'
+  selector: '[appHighlight]'
 })
 export class HighlightDirective {
-constructor(private el: ElementRef) {
-el.nativeElement.style.backgroundColor = 'yellow';
-}
+  constructor(private el: ElementRef) {
+    el.nativeElement.style.backgroundColor = 'yellow';
+  }
 }
 <p appHighlight>This text has a yellow background.</p>
 ```
@@ -1444,18 +1432,20 @@ The `*ngFor` directive in Angular is a structural directive used to iterate over
 
 3.  **Example**:
 
+Component Class
+
+Template
+
 ```typescript
 Suppose you have a list of names that you want to display in an unordered list. Here’s how you could use *ngFor to achieve this:
-**Component Class**:
 import { Component } from '@angular/core';
 @Component({
-selector: 'app-name-list',
-templateUrl: './name-list.component.html'
+  selector: 'app-name-list',
+  templateUrl: './name-list.component.html'
 })
 export class NameListComponent {
-names: string[] = ['Alice', 'Bob', 'Charlie', 'Diana'];
+  names: string[] = ['Alice', 'Bob', 'Charlie', 'Diana'];
 }
-**Template**:
 <ul>
 <li *ngFor="let name of names">{{ name }}</li>
 </ul>
@@ -1484,8 +1474,9 @@ In this example, *ngFor iterates over the names array and creates an <li> elemen
 
     - odd: true if the item’s index is odd.
 
+**Example:**
+
 ```typescript
-**Example**:
 <ul>
 <li *ngFor="let name of names; let i = index; let isFirst = first; let isLast = last">
 <span *ngIf="isFirst">First Item: </span>
@@ -1497,24 +1488,26 @@ In this example, *ngFor iterates over the names array and creates an <li> elemen
 
 3.  **Track By**: To improve performance, especially with large lists or when the list data changes frequently, you can use the trackBy function. This function helps Angular track which items have changed, added, or removed.
 
+**Usage:**
+
+Component Class
+
 ```typescript
-**Usage**:
 <ul>
 <li *ngFor="let name of names; trackBy: trackByFn">
 {{ name }}
 </li>
 </ul>
-**Component Class**:
 import { Component } from '@angular/core';
 @Component({
-selector: 'app-name-list',
-templateUrl: './name-list.component.html'
+  selector: 'app-name-list',
+  templateUrl: './name-list.component.html'
 })
 export class NameListComponent {
-names: string[] = ['Alice', 'Bob', 'Charlie', 'Diana'];
-trackByFn(index: number, item: string): number {
-return index; // or use a unique identifier if the items are objects
-}
+  names: string[] = ['Alice', 'Bob', 'Charlie', 'Diana'];
+  trackByFn(index: number, item: string): number {
+    return index; // or use a unique identifier if the items are objects
+  }
 }
 ```
 
@@ -1548,18 +1541,20 @@ The `*ngIf` directive in Angular is a structural directive that conditionally in
 
 2.  **Usage Example**:
 
+Component Class
+
+Template
+
 ```typescript
 Suppose you want to display a message only if a certain condition is met. Here’s how you can use *ngIf:
-**Component Class**:
 import { Component } from '@angular/core';
 @Component({
-selector: 'app-conditional-message',
-templateUrl: './conditional-message.component.html'
+  selector: 'app-conditional-message',
+  templateUrl: './conditional-message.component.html'
 })
 export class ConditionalMessageComponent {
-isVisible: boolean = true; // This could be dynamically changed
+  isVisible: boolean = true; // This could be dynamically changed
 }
-**Template**:
 <p *ngIf="isVisible">This message is visible.</p>
 In this example, the <p> element will only be rendered if isVisible is true. If isVisible is false, the element will not be included in the DOM.
 ```
@@ -1650,27 +1645,29 @@ This command creates two files:
 
 2.  **Define the Directive**
 
-```typescript
 Open the generated highlight.directive.ts file and define the directive. You need to import the necessary Angular core classes and use the @Directive decorator to define your custom directive.
-**Example**: Creating a directive that highlights an element by changing its background color.
+
+Example: Creating a directive that highlights an element by changing its background color.
+
+```typescript
 import { Directive, ElementRef, Renderer2, HostListener, Input } from '@angular/core';
 @Directive({
-selector: '[appHighlight]' // This is the selector you use in HTML to apply the directive
+  selector: '[appHighlight]' // This is the selector you use in HTML to apply the directive
 })
 export class HighlightDirective {
-@Input('appHighlight') highlightColor: string = 'yellow'; // Input property to set the highlight color
-constructor(private el: ElementRef, private renderer: Renderer2) {
-// Optionally, initialize directive logic here
-}
-@HostListener('mouseenter') onMouseEnter() {
-this.highlight(this.highlightColor);
-}
-@HostListener('mouseleave') onMouseLeave() {
-this.highlight(null);
-}
-private highlight(color: string | null) {
-this.renderer.setStyle(this.el.nativeElement, 'backgroundColor', color);
-}
+  @Input('appHighlight') highlightColor: string = 'yellow'; // Input property to set the highlight color
+  constructor(private el: ElementRef, private renderer: Renderer2) {
+    // Optionally, initialize directive logic here
+  }
+  @HostListener('mouseenter') onMouseEnter() {
+    this.highlight(this.highlightColor);
+  }
+  @HostListener('mouseleave') onMouseLeave() {
+    this.highlight(null);
+  }
+  private highlight(color: string | null) {
+    this.renderer.setStyle(this.el.nativeElement, 'backgroundColor', color);
+  }
 }
 ```
 
@@ -1684,33 +1681,38 @@ this.renderer.setStyle(this.el.nativeElement, 'backgroundColor', color);
 
 3.  **Use the Directive in Templates**
 
-```typescript
 Once the directive is defined, you can use it in your Angular templates. Make sure the directive is declared in an Angular module.
-**Example**: Applying the appHighlight directive to an element.
-**Component Template**:
+
+Example: Applying the appHighlight directive to an element.
+
+Component Template
+
+```typescript
 <p [appHighlight]="'lightblue'">Hover over me to see the highlight effect!</p>
 In this example, the appHighlight directive changes the background color of the <p> element when the mouse enters or leaves.
 ```
 
 4.  **Declare the Directive in a Module**
 
-```typescript
 Make sure the directive is declared in an Angular module so that Angular can recognize and use it.
-**Module Declaration**:
+
+Module Declaration
+
+```typescript
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { HighlightDirective } from './highlight.directive'; // Import the custom directive
 @NgModule({
-declarations: [
-AppComponent,
-HighlightDirective // Declare the custom directive here
-],
-imports: [
-BrowserModule
-],
-providers: [],
-bootstrap: [AppComponent]
+  declarations: [
+  AppComponent,
+  HighlightDirective // Declare the custom directive here
+  ],
+  imports: [
+  BrowserModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
 ```
@@ -1725,8 +1727,9 @@ Template reference variables in Angular are a way to reference elements or direc
 
 1.  **Definition**: Template reference variables are defined in the template using the # symbol followed by a variable name. These variables can be used to access the corresponding DOM element or component instance within the template.
 
+Syntax
+
 ```typescript
-**Syntax**:
 <element #variableName></element>
 ```
 
@@ -1734,8 +1737,9 @@ Template reference variables in Angular are a way to reference elements or direc
 
 2.  **Accessing Elements**: You can use the template reference variable to access and manipulate the corresponding DOM element or component instance.
 
+**Example:**
+
 ```typescript
-**Example**:
 <input #myInput type="text">
 <button (click)="logValue(myInput.value)">Log Value</button>
 In this example, #myInput is a reference to the <input> element. The logValue method is called when the button is clicked, and it logs the current value of the input element.
@@ -1743,17 +1747,20 @@ In this example, #myInput is a reference to the <input> element. The logValue me
 
 3.  **Accessing Component Instances**: Template reference variables can also be used to access component instances. This allows you to call methods or access properties of the component.
 
+**Example:**
+
+Here, #myComponent is a reference to the app-my-component instance. The doSomething method of MyComponent will be called when the button is clicked.
+
 ```typescript
-**Example**:
 <app-my-component #myComponent></app-my-component>
 <button (click)="myComponent.doSomething()">Call Component Method</button>
-Here, #myComponent is a reference to the app-my-component instance. The doSomething method of MyComponent will be called when the button is clicked.
 ```
 
 4.  **Accessing Directives**: You can use template reference variables to access directives applied to elements.
 
+**Example:**
+
 ```typescript
-**Example**:
 <div *ngIf="isVisible" #myDiv="ngIf"></div>
 <button (click)="logNgIfStatus(myDiv)">Log ngIf Status</button>
 In this example, #myDiv="ngIf" allows you to access the ngIf directive instance and its properties.
@@ -1761,8 +1768,9 @@ In this example, #myDiv="ngIf" allows you to access the ngIf directive instance 
 
 5.  **Form Control Access**: Template reference variables are commonly used with Angular forms to access form controls and their properties.
 
+**Example:**
+
 ```typescript
-**Example**:
 <form #myForm="ngForm">
 <input name="name" ngModel>
 <button (click)="logForm(myForm)">Log Form</button>
@@ -1802,13 +1810,16 @@ Template reference variables are a powerful feature in Angular that enable you t
 
     - Content provided by the parent component is projected into the ng-content placeholder.
 
+**Example:**
+
+Child Component Template (child.component.html)
+
+Parent Component Template (parent.component.html)
+
 ```typescript
-**Example**:
-**Child Component Template (child.component.html)**:
 <div class="content">
 <ng-content></ng-content>
 </div>
-**Parent Component Template (parent.component.html)**:
 <app-child>
 <p>This content is projected into the child component.</p>
 </app-child>
@@ -1817,37 +1828,45 @@ In this example, the <p> element from the parent component is inserted into the 
 
 2.  **Named Content Projection**: You can use multiple ng-content elements with selectors to project different content into specific areas of the child component's template.
 
+**Example:**
+
+Child Component Template (child.component.html)
+
+Parent Component Template (parent.component.html)
+
+In this example, the header and body attributes are used to target different sections of the child component’s template.
+
 ```typescript
-**Example**:
-**Child Component Template (child.component.html)**:
 <div class="header">
 <ng-content select="[header]"></ng-content>
 </div>
 <div class="body">
 <ng-content select="[body]"></ng-content>
 </div>
-**Parent Component Template (parent.component.html)**:
 <app-child>
 <h1 header>Header Content</h1>
 <p body>Body Content</p>
 </app-child>
-In this example, the header and body attributes are used to target different sections of the child component’s template.
 ```
 
 3.  **Fallback Content**: You can provide fallback content in case no content is projected into the ng-content placeholder.
 
+**Example:**
+
+Child Component Template (child.component.html)
+
+Parent Component Template (parent.component.html)
+
+In this case, "No content provided." will be displayed if no other content is projected into the child component.
+
 ```typescript
-**Example**:
-**Child Component Template (child.component.html)**:
 <div class="content">
 <ng-content></ng-content>
 <ng-template #fallback>
 <p>No content provided.</p>
 </ng-template>
 </div>
-**Parent Component Template (parent.component.html)**:
 <app-child></app-child>
-In this case, "No content provided." will be displayed if no other content is projected into the child component.
 ```
 
 ### How to Use ng-content
@@ -1885,14 +1904,14 @@ In Angular, **ViewChild**, **ContentChild**, and **ViewChildren** are decorators
 ```typescript
 import { Component, ViewChild, ElementRef } from '@angular/core';
 @Component({
-selector: 'app-example',
-template: `<input #myInput>`
+  selector: 'app-example',
+  template: `<input #myInput>`
 })
 export class ExampleComponent {
-@ViewChild('myInput') inputElement: ElementRef;
-ngAfterViewInit() {
-this.inputElement.nativeElement.focus();
-}
+  @ViewChild('myInput') inputElement: ElementRef;
+  ngAfterViewInit() {
+    this.inputElement.nativeElement.focus();
+  }
 }
 In this example, #myInput is a template reference variable, and @ViewChild('myInput') allows you to access the DOM element directly.
 ```
@@ -1903,14 +1922,14 @@ In this example, #myInput is a template reference variable, and @ViewChild('myIn
 import { Component, ViewChild } from '@angular/core';
 import { ChildComponent } from './child.component';
 @Component({
-selector: 'app-parent',
-template: `<app-child></app-child>`
+  selector: 'app-parent',
+  template: `<app-child></app-child>`
 })
 export class ParentComponent {
-@ViewChild(ChildComponent) child: ChildComponent;
-ngAfterViewInit() {
-this.child.someMethod();
-}
+  @ViewChild(ChildComponent) child: ChildComponent;
+  ngAfterViewInit() {
+    this.child.someMethod();
+  }
 }
 Here, @ViewChild(ChildComponent) provides access to the ChildComponent instance within the parent component's view.
 ```
@@ -1923,19 +1942,20 @@ Here, @ViewChild(ChildComponent) provides access to the ChildComponent instance 
 
 1.  **Accessing Projected Content**:
 
+Parent Component Template
+
 ```typescript
 import { Component, ContentChild, ElementRef } from '@angular/core';
 @Component({
-selector: 'app-parent',
-template: `<ng-content></ng-content>`
+  selector: 'app-parent',
+  template: `<ng-content></ng-content>`
 })
 export class ParentComponent {
-@ContentChild('projectedContent') content: ElementRef;
-ngAfterContentInit() {
-console.log(this.content.nativeElement.textContent);
+  @ContentChild('projectedContent') content: ElementRef;
+  ngAfterContentInit() {
+    console.log(this.content.nativeElement.textContent);
+  }
 }
-}
-**Parent Component Template**:
 <app-parent>
 <p #projectedContent>Content to project</p>
 </app-parent>
@@ -1950,22 +1970,23 @@ In this example, #projectedContent is a reference variable used in the projected
 
 1.  **Accessing Multiple Elements**:
 
+In this example, @ViewChildren is used to get a QueryList of all inputs with the reference variables input1 and input2.
+
 ```typescript
 import { Component, ViewChildren, QueryList, AfterViewInit, ElementRef } from '@angular/core';
 @Component({
-selector: 'app-example',
-template: `
-<input #input1>
-<input #input2>
-`
+  selector: 'app-example',
+  template: `
+  <input #input1>
+  <input #input2>
+  `
 })
 export class ExampleComponent implements AfterViewInit {
-@ViewChildren('input1, input2') inputs: QueryList<ElementRef>;
-ngAfterViewInit() {
-this.inputs.forEach(input => console.log(input.nativeElement.value));
+  @ViewChildren('input1, input2') inputs: QueryList<ElementRef>;
+  ngAfterViewInit() {
+    this.inputs.forEach(input => console.log(input.nativeElement.value));
+  }
 }
-}
-In this example, @ViewChildren is used to get a QueryList of all inputs with the reference variables input1 and input2.
 ```
 
 2.  **Accessing Multiple Components**:
@@ -1974,14 +1995,14 @@ In this example, @ViewChildren is used to get a QueryList of all inputs with the
 import { Component, ViewChildren, QueryList, AfterViewInit } from '@angular/core';
 import { ChildComponent } from './child.component';
 @Component({
-selector: 'app-parent',
-template: `<app-child *ngFor="let item of items"></app-child>`
+  selector: 'app-parent',
+  template: `<app-child *ngFor="let item of items"></app-child>`
 })
 export class ParentComponent implements AfterViewInit {
-@ViewChildren(ChildComponent) children: QueryList<ChildComponent>;
-ngAfterViewInit() {
-this.children.forEach(child => child.someMethod());
-}
+  @ViewChildren(ChildComponent) children: QueryList<ChildComponent>;
+  ngAfterViewInit() {
+    this.children.forEach(child => child.someMethod());
+  }
 }
 In this case, @ViewChildren(ChildComponent) provides access to all instances of ChildComponent within the parent component's view.
 ```
@@ -2038,14 +2059,14 @@ Here's an overview of the main sections and their purposes:
 
 ```typescript
 "projects": {
-"my-app": {
-"projectType": "application",
-...
-},
-"my-lib": {
-"projectType": "library",
-...
-}
+  "my-app": {
+    "projectType": "application",
+    ...
+  },
+  "my-lib": {
+    "projectType": "library",
+    ...
+  }
 }
 ```
 
@@ -2057,22 +2078,22 @@ Here's an overview of the main sections and their purposes:
 
 ```typescript
 "architect": {
-"build": {
-"builder": "@angular-devkit/build-angular:browser",
-"options": {
-"outputPath": "dist/my-app",
-"index": "src/index.html",
-"main": "src/main.ts",
-"polyfills": "src/polyfills.ts",
-...
-}
-},
-"serve": {
-"builder": "@angular-devkit/build-angular:dev-server",
-"options": {
-"browserTarget": "my-app:build"
-}
-}
+  "build": {
+    "builder": "@angular-devkit/build-angular:browser",
+    "options": {
+      "outputPath": "dist/my-app",
+      "index": "src/index.html",
+      "main": "src/main.ts",
+      "polyfills": "src/polyfills.ts",
+      ...
+    }
+  },
+  "serve": {
+    "builder": "@angular-devkit/build-angular:dev-server",
+    "options": {
+      "browserTarget": "my-app:build"
+    }
+  }
 }
 ```
 
@@ -2084,21 +2105,21 @@ Here's an overview of the main sections and their purposes:
 
 ```typescript
 "build": {
-"options": {
-"outputPath": "dist/my-app",
-"index": "src/index.html",
-"main": "src/main.ts",
-"polyfills": "src/polyfills.ts",
-"tsConfig": "src/tsconfig.app.json",
-"assets": [
-"src/favicon.ico",
-"src/assets"
-],
-"styles": [
-"src/styles.css"
-],
-"scripts": []
-}
+  "options": {
+    "outputPath": "dist/my-app",
+    "index": "src/index.html",
+    "main": "src/main.ts",
+    "polyfills": "src/polyfills.ts",
+    "tsConfig": "src/tsconfig.app.json",
+    "assets": [
+    "src/favicon.ico",
+    "src/assets"
+    ],
+    "styles": [
+    "src/styles.css"
+    ],
+    "scripts": []
+  }
 }
 ```
 
@@ -2110,11 +2131,11 @@ Here's an overview of the main sections and their purposes:
 
 ```typescript
 "serve": {
-"options": {
-"port": 4200,
-"open": true,
-"proxyConfig": "src/proxy.conf.json"
-}
+  "options": {
+    "port": 4200,
+    "open": true,
+    "proxyConfig": "src/proxy.conf.json"
+  }
 }
 ```
 
@@ -2126,11 +2147,11 @@ Here's an overview of the main sections and their purposes:
 
 ```typescript
 "test": {
-"options": {
-"main": "src/test.ts",
-"tsConfig": "src/tsconfig.spec.json",
-"karmaConfig": "src/karma.conf.js"
-}
+  "options": {
+    "main": "src/test.ts",
+    "tsConfig": "src/tsconfig.spec.json",
+    "karmaConfig": "src/karma.conf.js"
+  }
 }
 ```
 
@@ -2142,15 +2163,15 @@ Here's an overview of the main sections and their purposes:
 
 ```typescript
 "lint": {
-"options": {
-"tsConfig": [
-"src/tsconfig.app.json",
-"src/tsconfig.spec.json"
-],
-"exclude": [
-"**/node_modules/**"
-]
-}
+  "options": {
+    "tsConfig": [
+    "src/tsconfig.app.json",
+    "src/tsconfig.spec.json"
+    ],
+    "exclude": [
+    "**/node_modules/**"
+    ]
+  }
 }
 ```
 
@@ -2186,14 +2207,15 @@ The ComponentFactoryResolver service provides a way to create and inject compone
 
 1.  **Create a Directive to Mark the Insertion Point**: Define a directive that acts as a placeholder for the dynamically loaded component.
 
+Directive (dynamic-host.directive.ts)
+
 ```typescript
-**Directive (dynamic-host.directive.ts)**:
 import { Directive, ViewContainerRef } from '@angular/core';
 @Directive({
-selector: '[appDynamicHost]'
+  selector: '[appDynamicHost]'
 })
 export class DynamicHostDirective {
-constructor(public viewContainerRef: ViewContainerRef) { }
+  constructor(public viewContainerRef: ViewContainerRef) { }
 }
 ```
 
@@ -2201,40 +2223,42 @@ constructor(public viewContainerRef: ViewContainerRef) { }
 
 2.  **Create a Component to Load Dynamically**: Define the component that you want to load dynamically.
 
+Dynamic Component (dynamic.component.ts)
+
 ```typescript
-**Dynamic Component (dynamic.component.ts)**:
 import { Component } from '@angular/core';
 @Component({
-selector: 'app-dynamic',
-template: `<p>Dynamic Component Loaded!</p>`
+  selector: 'app-dynamic',
+  template: `<p>Dynamic Component Loaded!</p>`
 })
 export class DynamicComponent { }
 ```
 
 3.  **Inject the Component Dynamically**: Use ComponentFactoryResolver to create and insert the component into the view.
 
+Host Component (host.component.ts)
+
 ```typescript
-**Host Component (host.component.ts)**:
 import { Component, OnInit, ComponentFactoryResolver, ViewChild } from '@angular/core';
 import { DynamicHostDirective } from './dynamic-host.directive';
 import { DynamicComponent } from './dynamic.component';
 @Component({
-selector: 'app-host',
-template: `
-<ng-template appDynamicHost></ng-template>
-<button (click)="loadComponent()">Load Component</button>
-`
+  selector: 'app-host',
+  template: `
+  <ng-template appDynamicHost></ng-template>
+  <button (click)="loadComponent()">Load Component</button>
+  `
 })
 export class HostComponent implements OnInit {
-@ViewChild(DynamicHostDirective, { static: true }) dynamicHost: DynamicHostDirective;
-constructor(private componentFactoryResolver: ComponentFactoryResolver) { }
-ngOnInit() { }
-loadComponent() {
-const componentFactory = this.componentFactoryResolver.resolveComponentFactory(DynamicComponent);
-const viewContainerRef = this.dynamicHost.viewContainerRef;
-viewContainerRef.clear(); // Clear any existing components
-viewContainerRef.createComponent(componentFactory);
-}
+  @ViewChild(DynamicHostDirective, { static: true }) dynamicHost: DynamicHostDirective;
+  constructor(private componentFactoryResolver: ComponentFactoryResolver) { }
+  ngOnInit() { }
+  loadComponent() {
+    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(DynamicComponent);
+    const viewContainerRef = this.dynamicHost.viewContainerRef;
+    viewContainerRef.clear(); // Clear any existing components
+    viewContainerRef.createComponent(componentFactory);
+  }
 }
 ```
 
@@ -2250,45 +2274,47 @@ Angular Elements allow you to create Angular components as custom elements (web 
 
 1.  **Create an Angular Element**: Convert an Angular component into a custom element.
 
+Angular Element Component (angular-element.component.ts)
+
 ```typescript
-**Angular Element Component (angular-element.component.ts)**:
 import { Component, Input, Inject } from '@angular/core';
 @Component({
-selector: 'app-angular-element',
-template: `<p>{{ message }}</p>`
+  selector: 'app-angular-element',
+  template: `<p>{{ message }}</p>`
 })
 export class AngularElementComponent {
-@Input() message: string;
+  @Input() message: string;
 }
 ```
 
 2.  **Register the Component as a Custom Element**: Register the component with the Angular Elements API.
 
+Module (app.module.ts)
+
 ```typescript
-**Module (app.module.ts)**:
 import { NgModule, Injector } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { AngularElementComponent } from './angular-element.component';
 import { createCustomElement } from '@angular/elements';
 @NgModule({
-declarations: [
-AppComponent,
-AngularElementComponent
-],
-imports: [
-BrowserModule
-],
-entryComponents: [AngularElementComponent],
-providers: [],
-bootstrap: [AppComponent]
+  declarations: [
+  AppComponent,
+  AngularElementComponent
+  ],
+  imports: [
+  BrowserModule
+  ],
+  entryComponents: [AngularElementComponent],
+  providers: [],
+  bootstrap: [AppComponent]
 })
 export class AppModule {
-constructor(private injector: Injector) {
-const angularElement = createCustomElement(AngularElementComponent, { injector });
-customElements.define('app-angular-element', angularElement);
-}
-ngDoBootstrap() {}
+  constructor(private injector: Injector) {
+    const angularElement = createCustomElement(AngularElementComponent, { injector });
+    customElements.define('app-angular-element', angularElement);
+  }
+  ngDoBootstrap() {}
 }
 ```
 
@@ -2298,8 +2324,9 @@ ngDoBootstrap() {}
 
 3.  **Use the Custom Element**: Use the custom element in any HTML file or other frameworks.
 
+HTML Usage
+
 ```typescript
-**HTML Usage**:
 <app-angular-element message="Hello from Angular Element!"></app-angular-element>
 ```
 
@@ -2336,8 +2363,8 @@ Both methods allow for flexible and dynamic component loading, enhancing the cap
 ```typescript
 import { Component } from '@angular/core';
 @Component({
-selector: 'app-dynamic',
-template: `<p>Dynamic Component Loaded!</p>`
+  selector: 'app-dynamic',
+  template: `<p>Dynamic Component Loaded!</p>`
 })
 export class DynamicComponent { }
 ```
@@ -2349,25 +2376,21 @@ import { Component, ComponentFactoryResolver, ViewChild } from '@angular/core';
 import { DynamicHostDirective } from './dynamic-host.directive';
 import { DynamicComponent } from './dynamic.component';
 @Component({
-selector: 'app-host',
-template: `
-<ng-template appDynamicHost></ng-template>
-<button (click)="loadComponent()">Load Component</button>
-```
-
-`
-
-```typescript
+  selector: 'app-host',
+  template: `
+  <ng-template appDynamicHost></ng-template>
+  <button (click)="loadComponent()">Load Component</button>
+  `
 })
 export class HostComponent {
-@ViewChild(DynamicHostDirective, { static: true }) dynamicHost: DynamicHostDirective;
-constructor(private componentFactoryResolver: ComponentFactoryResolver) { }
-loadComponent() {
-const componentFactory = this.componentFactoryResolver.resolveComponentFactory(DynamicComponent);
-const viewContainerRef = this.dynamicHost.viewContainerRef;
-viewContainerRef.clear(); // Clear any existing components
-viewContainerRef.createComponent(componentFactory);
-}
+  @ViewChild(DynamicHostDirective, { static: true }) dynamicHost: DynamicHostDirective;
+  constructor(private componentFactoryResolver: ComponentFactoryResolver) { }
+  loadComponent() {
+    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(DynamicComponent);
+    const viewContainerRef = this.dynamicHost.viewContainerRef;
+    viewContainerRef.clear(); // Clear any existing components
+    viewContainerRef.createComponent(componentFactory);
+  }
 }
 ```
 
@@ -2402,10 +2425,10 @@ In this example:
 ```typescript
 import { Directive, ViewContainerRef } from '@angular/core';
 @Directive({
-selector: '[appDynamicHost]'
+  selector: '[appDynamicHost]'
 })
 export class DynamicHostDirective {
-constructor(public viewContainerRef: ViewContainerRef) { }
+  constructor(public viewContainerRef: ViewContainerRef) { }
 }
 ```
 
@@ -2420,24 +2443,20 @@ import { Component, ViewChild } from '@angular/core';
 import { DynamicHostDirective } from './dynamic-host.directive';
 import { DynamicComponent } from './dynamic.component';
 @Component({
-selector: 'app-host',
-template: `
-<ng-template appDynamicHost></ng-template>
-<button (click)="loadComponent()">Load Component</button>
-```
-
-`
-
-```typescript
+  selector: 'app-host',
+  template: `
+  <ng-template appDynamicHost></ng-template>
+  <button (click)="loadComponent()">Load Component</button>
+  `
 })
 export class HostComponent {
-@ViewChild(DynamicHostDirective, { static: true }) dynamicHost: DynamicHostDirective;
-loadComponent() {
-const viewContainerRef = this.dynamicHost.viewContainerRef;
-viewContainerRef.clear(); // Clear any existing components
-const componentFactory = this.componentFactoryResolver.resolveComponentFactory(DynamicComponent);
-viewContainerRef.createComponent(componentFactory);
-}
+  @ViewChild(DynamicHostDirective, { static: true }) dynamicHost: DynamicHostDirective;
+  loadComponent() {
+    const viewContainerRef = this.dynamicHost.viewContainerRef;
+    viewContainerRef.clear(); // Clear any existing components
+    const componentFactory = this.componentFactoryResolver.resolveComponentFactory(DynamicComponent);
+    viewContainerRef.createComponent(componentFactory);
+  }
 }
 ```
 
@@ -2485,8 +2504,8 @@ Angular provides four options for **ViewEncapsulation**:
 
 ```typescript
 :host {
-display: block;
-background-color: lightblue;
+  display: block;
+  background-color: lightblue;
 }
 ```
 
@@ -2495,9 +2514,9 @@ background-color: lightblue;
 ```typescript
 import { Component, ViewEncapsulation } from '@angular/core';
 @Component({
-selector: 'app-example',
-template: `<p>Emulated View Encapsulation Example</p>`,
-styleUrls: ['./component.css'],
+  selector: 'app-example',
+  template: `<p>Emulated View Encapsulation Example</p>`,
+  styleUrls: ['./component.css'],
 ```
 
 encapsulation: ViewEncapsulation.Emulated
@@ -2528,9 +2547,9 @@ In this mode, Angular's style encapsulation ensures that styles defined in compo
 ```typescript
 import { Component, ViewEncapsulation } from '@angular/core';
 @Component({
-selector: 'app-example',
-template: `<p>Shadow DOM View Encapsulation Example</p>`,
-styleUrls: ['./component.css'],
+  selector: 'app-example',
+  template: `<p>Shadow DOM View Encapsulation Example</p>`,
+  styleUrls: ['./component.css'],
 ```
 
 encapsulation: ViewEncapsulation.ShadowDom
@@ -2544,7 +2563,7 @@ export class ExampleComponent { }
 
 ```typescript
 p {
-color: green;
+  color: green;
 }
 ```
 
@@ -2567,9 +2586,9 @@ In this mode, component.css styles are scoped to the shadow root, and styles def
 ```typescript
 import { Component, ViewEncapsulation } from '@angular/core';
 @Component({
-selector: 'app-example',
-template: `<p>None View Encapsulation Example</p>`,
-styleUrls: ['./component.css'],
+  selector: 'app-example',
+  template: `<p>None View Encapsulation Example</p>`,
+  styleUrls: ['./component.css'],
 ```
 
 encapsulation: ViewEncapsulation.None
@@ -2583,7 +2602,7 @@ export class ExampleComponent { }
 
 ```typescript
 p {
-color: red;
+  color: red;
 }
 ```
 
@@ -2603,7 +2622,7 @@ While not an encapsulation mode per se, **::ng-deep** (deprecated and to be avoi
 
 ```typescript
 ::ng-deep .child-class {
-color: blue;
+  color: blue;
 }
 ```
 
@@ -2611,7 +2630,7 @@ color: blue;
 
 ```typescript
 .child-class {
-color: red;
+  color: red;
 }
 ```
 

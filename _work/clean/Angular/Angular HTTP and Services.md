@@ -1,4 +1,4 @@
-# Angular Basics
+# Angular HTTP and Services
 
 ## Questions Covered
 
@@ -37,20 +37,21 @@ ng generate service myService
 
 - Implement the service logic.
 
+**Example Service**
+
 ```typescript
-**Example Service:**
 import { Injectable } from '@angular/core';
 @Injectable({
-providedIn: 'root' // Makes the service available application-wide
+  providedIn: 'root' // Makes the service available application-wide
 })
 export class MyService {
-private data: string = 'Initial data';
-getData(): string {
-return this.data;
-}
-setData(newData: string): void {
-this.data = newData;
-}
+  private data: string = 'Initial data';
+  getData(): string {
+    return this.data;
+  }
+  setData(newData: string): void {
+    this.data = newData;
+  }
 }
 ```
 
@@ -60,56 +61,61 @@ To share data between components, you can use Angular services to hold and manag
 
 1.  **Create a Service**: Define a service that holds the data and provides methods to access or modify it.
 
+**Example Service**
+
+In this example, BehaviorSubject from RxJS is used to create an observable stream of data. This allows components to subscribe to changes in the data.
+
 ```typescript
-**Example Service:**
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 @Injectable({
-providedIn: 'root'
+  providedIn: 'root'
 })
 export class DataService {
-private dataSubject = new BehaviorSubject<string>('Initial data');
-data$ = this.dataSubject.asObservable();
-setData(newData: string): void {
-this.dataSubject.next(newData);
+  private dataSubject = new BehaviorSubject<string>('Initial data');
+  data$ = this.dataSubject.asObservable();
+  setData(newData: string): void {
+    this.dataSubject.next(newData);
+  }
 }
-}
-In this example, BehaviorSubject from RxJS is used to create an observable stream of data. This allows components to subscribe to changes in the data.
 ```
 
 2.  **Inject the Service into Components**: Inject the service into any component that needs access to the shared data.
 
+Component A (Sender)
+
+Component B (Receiver)
+
+Template for Component B
+
 ```typescript
-**Component A (Sender):**
 import { Component } from '@angular/core';
 import { DataService } from './data.service';
 @Component({
-selector: 'app-component-a',
-templateUrl: './component-a.component.html'
+  selector: 'app-component-a',
+  templateUrl: './component-a.component.html'
 })
 export class ComponentA {
-constructor(private dataService: DataService) {}
-updateData(): void {
-this.dataService.setData('Updated data from Component A');
+  constructor(private dataService: DataService) {}
+  updateData(): void {
+    this.dataService.setData('Updated data from Component A');
+  }
 }
-}
-**Component B (Receiver):**
 import { Component, OnInit } from '@angular/core';
 import { DataService } from './data.service';
 @Component({
-selector: 'app-component-b',
-templateUrl: './component-b.component.html'
+  selector: 'app-component-b',
+  templateUrl: './component-b.component.html'
 })
 export class ComponentB implements OnInit {
-data: string;
-constructor(private dataService: DataService) {}
-ngOnInit(): void {
-this.dataService.data$.subscribe(data => {
-this.data = data;
-});
+  data: string;
+  constructor(private dataService: DataService) {}
+  ngOnInit(): void {
+    this.dataService.data$.subscribe(data => {
+      this.data = data;
+    });
+  }
 }
-}
-**Template for Component B:**
 <p>{{ data }}</p>
 In this example:
 ```
@@ -136,66 +142,71 @@ Dependency Injection (DI) in Angular is a design pattern and a core feature that
 
 2.  **Providers**: Providers are used to configure how dependencies are created and injected. They are defined in the providers array of an Angular module or component.
 
+**Example Provider Definition**
+
 ```typescript
-**Example Provider Definition:**
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { MyService } from './my-service.service';
 @NgModule({
-declarations: [
-AppComponent
-],
-imports: [
-BrowserModule
-],
-providers: [MyService], // Provider configuration
-bootstrap: [AppComponent]
+  declarations: [
+  AppComponent
+  ],
+  imports: [
+  BrowserModule
+  ],
+  providers: [MyService], // Provider configuration
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
 ```
 
 3.  **Injectable Services**: Services that are to be injected need to be decorated with the @Injectable decorator. This decorator allows Angular to create and inject instances of the service.
 
+**Example Service**
+
 ```typescript
-**Example Service:**
 import { Injectable } from '@angular/core';
 @Injectable({
-providedIn: 'root' // This makes the service available application-wide
+  providedIn: 'root' // This makes the service available application-wide
 })
 export class MyService {
-getData(): string {
-return 'Hello from MyService!';
-}
+  getData(): string {
+    return 'Hello from MyService!';
+  }
 }
 ```
 
 4.  **Injection Tokens**: For more complex scenarios, you can use injection tokens to provide and inject dependencies. This is useful when dealing with values, configurations, or multiple implementations of the same interface.
 
+**Example Injection Token**
+
+Providing the Token
+
+Injecting the Token
+
 ```typescript
-**Example Injection Token:**
 import { InjectionToken } from '@angular/core';
 export const API_URL = new InjectionToken<string>('apiUrl');
-**Providing the Token:**
 typescript
 Copy code
 @NgModule({
-providers: [
-{ provide: API_URL, useValue: 'https://api.example.com' }
-]
+  providers: [
+  { provide: API_URL, useValue: 'https://api.example.com' }
+  ]
 })
 export class AppModule { }
-**Injecting the Token:**
 import { Inject, Component } from '@angular/core';
 import { API_URL } from './api-url.token';
 @Component({
-selector: 'app-root',
-templateUrl: './app.component.html'
+  selector: 'app-root',
+  templateUrl: './app.component.html'
 })
 export class AppComponent {
-constructor(@Inject(API_URL) private apiUrl: string) {
-console.log('API URL:', apiUrl);
-}
+  constructor(@Inject(API_URL) private apiUrl: string) {
+    console.log('API URL:', apiUrl);
+  }
 }
 ```
 
@@ -203,18 +214,19 @@ console.log('API URL:', apiUrl);
 
 1.  **Constructor Injection**: Dependencies are typically injected into the constructor of a class. Angular’s DI system resolves and provides the necessary instances when the class is instantiated.
 
+**Example Component with DI**
+
 ```typescript
-**Example Component with DI:**
 import { Component } from '@angular/core';
 import { MyService } from './my-service.service';
 @Component({
-selector: 'app-root',
-templateUrl: './app.component.html'
+  selector: 'app-root',
+  templateUrl: './app.component.html'
 })
 export class AppComponent {
-constructor(private myService: MyService) {
-console.log(this.myService.getData());
-}
+  constructor(private myService: MyService) {
+    console.log(this.myService.getData());
+  }
 }
 ```
 
@@ -255,7 +267,7 @@ import { HttpClientModule } from '@angular/common/http'; // Import HttpClientMod
 import { AppComponent } from './app.component';
 import { MyService } from './my-service.service'; // Import your service
 @NgModule({
-declarations: [
+  declarations: [
 ```
 
 AppComponent
@@ -290,37 +302,27 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 @Injectable({
-```
-
-providedIn: 'root'
-
-```typescript
+  providedIn: 'root'
 })
 export class MyService {
-```
-
-private apiUrl = 'https://api.example.com/data'; // Replace with your API endpoint
-
-constructor(private http: HttpClient) { }
-
-// Method to make a GET request
-
-```typescript
-getData(): Observable<any> {
-return this.http.get<any>(this.apiUrl);
-}
-// Method to make a POST request
-postData(data: any): Observable<any> {
-return this.http.post<any>(this.apiUrl, data);
-}
-// Method to make a PUT request
-updateData(id: number, data: any): Observable<any> {
-return this.http.put<any>(`${this.apiUrl}/${id}`, data);
-}
-// Method to make a DELETE request
-deleteData(id: number): Observable<any> {
-return this.http.delete<any>(`${this.apiUrl}/${id}`);
-}
+  private apiUrl = 'https://api.example.com/data'; // Replace with your API endpoint
+  constructor(private http: HttpClient) { }
+  // Method to make a GET request
+  getData(): Observable<any> {
+    return this.http.get<any>(this.apiUrl);
+  }
+  // Method to make a POST request
+  postData(data: any): Observable<any> {
+    return this.http.post<any>(this.apiUrl, data);
+  }
+  // Method to make a PUT request
+  updateData(id: number, data: any): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}/${id}`, data);
+  }
+  // Method to make a DELETE request
+  deleteData(id: number): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}/${id}`);
+  }
 }
 ```
 
@@ -334,38 +336,38 @@ Inject the service into your component and use its methods to perform HTTP reque
 import { Component, OnInit } from '@angular/core';
 import { MyService } from './my-service.service';
 @Component({
-selector: 'app-root',
-templateUrl: './app.component.html'
+  selector: 'app-root',
+  templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit {
-data: any;
-constructor(private myService: MyService) { }
-ngOnInit(): void {
-this.getData();
-}
-getData(): void {
-this.myService.getData().subscribe(
-response => {
-this.data = response;
-console.log(this.data);
-},
-error => {
-console.error('Error fetching data', error);
-}
-);
-}
-// Example method to post data
-postData(): void {
-const newData = { name: 'New Item' };
-this.myService.postData(newData).subscribe(
-response => {
-console.log('Data posted successfully', response);
-},
-error => {
-console.error('Error posting data', error);
-}
-);
-}
+  data: any;
+  constructor(private myService: MyService) { }
+  ngOnInit(): void {
+    this.getData();
+  }
+  getData(): void {
+    this.myService.getData().subscribe(
+    response => {
+      this.data = response;
+      console.log(this.data);
+    },
+    error => {
+      console.error('Error fetching data', error);
+    }
+    );
+  }
+  // Example method to post data
+  postData(): void {
+    const newData = { name: 'New Item' };
+    this.myService.postData(newData).subscribe(
+    response => {
+      console.log('Data posted successfully', response);
+    },
+    error => {
+      console.error('Error posting data', error);
+    }
+    );
+  }
 }
 ```
 
@@ -399,32 +401,28 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { throwError, Observable } from 'rxjs';
 @Injectable({
-```
-
-providedIn: 'root'
-
-```typescript
+  providedIn: 'root'
 })
 export class ApiService {
-private apiUrl = 'https://api.example.com/data';
-constructor(private http: HttpClient) { }
-getData(): Observable<any> {
-return this.http.get(this.apiUrl).pipe(
-catchError(this.handleError) // Catch and handle errors
-);
-}
-private handleError(error: HttpErrorResponse) {
-let errorMessage = '';
-if (error.error instanceof ErrorEvent) {
-// Client-side or network error
-errorMessage = `Client-side error: ${error.error.message}`;
-} else {
-// Server-side error
-errorMessage = `Server-side error: ${error.status} - ${error.message}`;
-}
-console.error(errorMessage);
-return throwError(() => new Error(errorMessage)); // Return an observable with a user-facing error message
-}
+  private apiUrl = 'https://api.example.com/data';
+  constructor(private http: HttpClient) { }
+  getData(): Observable<any> {
+    return this.http.get(this.apiUrl).pipe(
+    catchError(this.handleError) // Catch and handle errors
+    );
+  }
+  private handleError(error: HttpErrorResponse) {
+    let errorMessage = '';
+    if (error.error instanceof ErrorEvent) {
+      // Client-side or network error
+      errorMessage = `Client-side error: ${error.error.message}`;
+    } else {
+      // Server-side error
+      errorMessage = `Server-side error: ${error.status} - ${error.message}`;
+    }
+    console.error(errorMessage);
+    return throwError(() => new Error(errorMessage)); // Return an observable with a user-facing error message
+  }
 }
 ```
 
@@ -444,26 +442,22 @@ You can also display user-friendly error messages in your UI by returning an app
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from './api.service';
 @Component({
-selector: 'app-data',
-template: `
-<div *ngIf="errorMessage">{{ errorMessage }}</div>
-<div *ngIf="data">{{ data | json }}</div>
-```
-
-`
-
-```typescript
+  selector: 'app-data',
+  template: `
+  <div *ngIf="errorMessage">{{ errorMessage }}</div>
+  <div *ngIf="data">{{ data | json }}</div>
+  `
 })
 export class DataComponent implements OnInit {
-data: any;
-errorMessage: string = '';
-constructor(private apiService: ApiService) { }
-ngOnInit(): void {
-this.apiService.getData().subscribe({
-next: (response) => this.data = response,
-error: (error) => this.errorMessage = error.message
-});
-}
+  data: any;
+  errorMessage: string = '';
+  constructor(private apiService: ApiService) { }
+  ngOnInit(): void {
+    this.apiService.getData().subscribe({
+      next: (response) => this.data = response,
+      error: (error) => this.errorMessage = error.message
+    });
+  }
 }
 ```
 
@@ -480,19 +474,19 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
-intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-return next.handle(req).pipe(
-catchError((error: HttpErrorResponse) => {
-let errorMessage = '';
-if (error.error instanceof ErrorEvent) {
-errorMessage = `Client-side error: ${error.error.message}`;
-} else {
-errorMessage = `Server-side error: ${error.status} - ${error.message}`;
-}
-return throwError(() => new Error(errorMessage));
-})
-);
-}
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    return next.handle(req).pipe(
+    catchError((error: HttpErrorResponse) => {
+      let errorMessage = '';
+      if (error.error instanceof ErrorEvent) {
+        errorMessage = `Client-side error: ${error.error.message}`;
+      } else {
+        errorMessage = `Server-side error: ${error.status} - ${error.message}`;
+      }
+      return throwError(() => new Error(errorMessage));
+    })
+    );
+  }
 }
 ```
 
@@ -543,10 +537,10 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-// Clone the request to add the Authorization header
-const authReq = req.clone({
-setHeaders: {
+  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+    // Clone the request to add the Authorization header
+    const authReq = req.clone({
+      setHeaders: {
 ```
 
 Authorization: `Bearer my-token` // Add your token here
@@ -558,16 +552,16 @@ Authorization: `Bearer my-token` // Add your token here
 return next.handle(authReq).pipe(
 // Handle errors globally
 catchError((error: HttpErrorResponse) => {
-let errorMsg = '';
-if (error.error instanceof ErrorEvent) {
-// Client-side error
-errorMsg = `Client-side error: ${error.error.message}`;
-} else {
-// Server-side error
-errorMsg = `Server-side error: ${error.status} - ${error.message}`;
-}
-console.error(errorMsg);
-return throwError(() => new Error(errorMsg));
+  let errorMsg = '';
+  if (error.error instanceof ErrorEvent) {
+    // Client-side error
+    errorMsg = `Client-side error: ${error.error.message}`;
+  } else {
+    // Server-side error
+    errorMsg = `Server-side error: ${error.status} - ${error.message}`;
+  }
+  console.error(errorMsg);
+  return throwError(() => new Error(errorMsg));
 })
 );
 }
@@ -583,12 +577,12 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { AuthInterceptor } from './auth.interceptor';
 @NgModule({
-declarations: [AppComponent],
-imports: [BrowserModule, HttpClientModule],
-providers: [
-{
-provide: HTTP_INTERCEPTORS,
-useClass: AuthInterceptor,
+  declarations: [AppComponent],
+  imports: [BrowserModule, HttpClientModule],
+  providers: [
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
 ```
 
 multi: true // Ensures multiple interceptors can be added
@@ -623,9 +617,9 @@ It returns an Observable<HttpEvent<any>>, which means you can modify or handle t
 
 ```typescript
 const authReq = req.clone({
-setHeaders: {
-Authorization: `Bearer ${authToken}` // Adding a token to the request header
-}
+  setHeaders: {
+    Authorization: `Bearer ${authToken}` // Adding a token to the request header
+  }
 });
 ```
 
@@ -638,8 +632,9 @@ return next.handle(req); // Proceed with the request
 
 3.  **Retrying a Failed Request:**
 
-```typescript
 You can retry the request a certain number of times in case of failure.
+
+```typescript
 import { retry } from 'rxjs/operators';
 return next.handle(req).pipe(
 retry(2), // Retry the request up to 2 times

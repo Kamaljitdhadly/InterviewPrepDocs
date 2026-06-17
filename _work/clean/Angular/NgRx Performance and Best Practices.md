@@ -19,8 +19,8 @@ In Angular, change detection can be optimized by using the OnPush change detecti
 ```typescript
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 @Component({
-selector: 'app-my-component',
-templateUrl: './my-component.component.html',
+  selector: 'app-my-component',
+  templateUrl: './my-component.component.html',
 ```
 
 changeDetection: ChangeDetectionStrategy.OnPush
@@ -28,7 +28,7 @@ changeDetection: ChangeDetectionStrategy.OnPush
 ```typescript
 })
 export class MyComponent {
-// Component logic
+  // Component logic
 }
 ```
 
@@ -59,12 +59,12 @@ The @ngrx/entity library helps manage collections of entities efficiently. It pr
 ```typescript
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 export interface Product {
-id: number;
-name: string;
-price: number;
+  id: number;
+  name: string;
+  price: number;
 }
 export interface ProductState extends EntityState<Product> {
-loading: boolean;
+  loading: boolean;
 }
 export const productAdapter: EntityAdapter<Product> = createEntityAdapter<Product>();
 export const initialProductState: ProductState = productAdapter.getInitialState({
@@ -95,24 +95,19 @@ import { MyService } from './my.service';
 import { loadItems, loadItemsSuccess, loadItemsFailure } from './my.actions';
 @Injectable()
 export class MyEffects {
-loadItems$ = createEffect(() => this.actions$.pipe(
-ofType(loadItems),
-mergeMap(() => this.myService.getItems()
-.pipe(
-map(items => loadItemsSuccess({ items })),
-catchError(error => of(loadItemsFailure({ error })))
-)
-)
-));
-constructor(
-private actions$: Actions,
-```
-
-private myService: MyService
-
-) {}
-
-```typescript
+  loadItems$ = createEffect(() => this.actions$.pipe(
+  ofType(loadItems),
+  mergeMap(() => this.myService.getItems()
+  .pipe(
+  map(items => loadItemsSuccess({ items })),
+  catchError(error => of(loadItemsFailure({ error })))
+  )
+  )
+  ));
+  constructor(
+  private actions$: Actions,
+  private myService: MyService
+  ) {}
 }
 ```
 
@@ -126,8 +121,8 @@ const routes: Routes = [
 
 ```typescript
 {
-path: 'feature',
-loadChildren: () => import('./feature/feature.module').then(m => m.FeatureModule)
+  path: 'feature',
+  loadChildren: () => import('./feature/feature.module').then(m => m.FeatureModule)
 }
 ];
 ```
@@ -144,9 +139,9 @@ import { addProduct, updateProduct, deleteProduct } from './product.actions';
 export const productReducer = createReducer(
 initialProductState,
 on(addProduct, (state, { product }) => ({
-...state,
-entities: {
-...state.entities,
+  ...state,
+  entities: {
+    ...state.entities,
 ```
 
 [product.id]: product
@@ -155,9 +150,9 @@ entities: {
 }
 })),
 on(updateProduct, (state, { product }) => ({
-...state,
-entities: {
-...state.entities,
+  ...state,
+  entities: {
+    ...state.entities,
 ```
 
 [product.id]: product
@@ -166,9 +161,9 @@ entities: {
 }
 })),
 on(deleteProduct, (state, { id }) => {
-const { [id]: removed, ...entities } = state.entities;
-return {
-...state,
+  const { [id]: removed, ...entities } = state.entities;
+  return {
+    ...state,
 ```
 
 entities
@@ -188,8 +183,8 @@ While @ngrx/store-devtools is useful for debugging, it can impact performance in
 ```typescript
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 @NgModule({
-imports: [
-StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
+  imports: [
+  StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
 ```
 
 ]
@@ -371,24 +366,19 @@ import { ProductService } from './product.service';
 import { loadProducts, loadProductsSuccess, loadProductsFailure } from './product.actions';
 @Injectable()
 export class ProductEffects {
-loadProducts$ = createEffect(() => this.actions$.pipe(
-ofType(loadProducts),
-mergeMap(() => this.productService.getAll()
-.pipe(
-map(products => loadProductsSuccess({ products })),
-catchError(error => of(loadProductsFailure({ error: error.message })))
-)
-)
-));
-constructor(
-private actions$: Actions,
-```
-
-private productService: ProductService
-
-) {}
-
-```typescript
+  loadProducts$ = createEffect(() => this.actions$.pipe(
+  ofType(loadProducts),
+  mergeMap(() => this.productService.getAll()
+  .pipe(
+  map(products => loadProductsSuccess({ products })),
+  catchError(error => of(loadProductsFailure({ error: error.message })))
+  )
+  )
+  ));
+  constructor(
+  private actions$: Actions,
+  private productService: ProductService
+  ) {}
 }
 ```
 
@@ -401,12 +391,12 @@ For managing collections of entities, use @ngrx/entity to simplify state managem
 ```typescript
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 export interface Product {
-id: number;
-name: string;
-price: number;
+  id: number;
+  name: string;
+  price: number;
 }
 export interface ProductState extends EntityState<Product> {
-loading: boolean;
+  loading: boolean;
 }
 export const productAdapter: EntityAdapter<Product> = createEntityAdapter<Product>();
 export const initialProductState: ProductState = productAdapter.getInitialState({
@@ -431,9 +421,9 @@ import { productReducer } from './store/reducers/product.reducer';
 import { ProductEffects } from './store/effects/product.effects';
 import { EffectsModule } from '@ngrx/effects';
 @NgModule({
-imports: [
-StoreModule.forFeature('products', productReducer),
-EffectsModule.forFeature([ProductEffects])
+  imports: [
+  StoreModule.forFeature('products', productReducer),
+  EffectsModule.forFeature([ProductEffects])
 ```
 
 ]
@@ -487,8 +477,8 @@ const routes: Routes = [
 
 ```typescript
 {
-path: 'products',
-loadChildren: () => import('./products/products.module').then(m => m.ProductsModule)
+  path: 'products',
+  loadChildren: () => import('./products/products.module').then(m => m.ProductsModule)
 }
 ];
 ```
@@ -590,24 +580,19 @@ import { UserService } from './user.service';
 import { loadUsers, loadUsersSuccess, loadUsersFailure } from './user.actions';
 @Injectable()
 export class UserEffects {
-loadUsers$ = createEffect(() => this.actions$.pipe(
-ofType(loadUsers),
-mergeMap(() => this.userService.getAllUsers()
-.pipe(
-map(users => loadUsersSuccess({ users })),
-catchError(error => of(loadUsersFailure({ error: error.message })))
-)
-)
-));
-constructor(
-private actions$: Actions,
-```
-
-private userService: UserService
-
-) {}
-
-```typescript
+  loadUsers$ = createEffect(() => this.actions$.pipe(
+  ofType(loadUsers),
+  mergeMap(() => this.userService.getAllUsers()
+  .pipe(
+  map(users => loadUsersSuccess({ users })),
+  catchError(error => of(loadUsersFailure({ error: error.message })))
+  )
+  )
+  ));
+  constructor(
+  private actions$: Actions,
+  private userService: UserService
+  ) {}
 }
 ```
 
@@ -687,10 +672,10 @@ The Actions observable in NgRx can be used to react to multiple types of actions
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 @Injectable()
 export class MyEffects {
-myEffect$ = createEffect(() => this.actions$.pipe(
-ofType(action1, action2),
-// handle actions
-));
+  myEffect$ = createEffect(() => this.actions$.pipe(
+  ofType(action1, action2),
+  // handle actions
+  ));
 }
 ```
 
@@ -732,16 +717,16 @@ import { UserEffects } from './user.effects';
 import { UserService } from './user.service';
 import { loadUsers, loadUsersSuccess, loadUsersFailure } from './user.actions';
 describe('UserEffects', () => {
-let effects: UserEffects;
-let actions$: Observable<Action>;
-let userService: jasmine.SpyObj<UserService>;
-beforeEach(() => {
-const spy = jasmine.createSpyObj('UserService', ['getAllUsers']);
-TestBed.configureTestingModule({
-providers: [
-UserEffects,
-provideMockActions(() => actions$),
-{ provide: UserService, useValue: spy }
+  let effects: UserEffects;
+  let actions$: Observable<Action>;
+  let userService: jasmine.SpyObj<UserService>;
+  beforeEach(() => {
+    const spy = jasmine.createSpyObj('UserService', ['getAllUsers']);
+    TestBed.configureTestingModule({
+      providers: [
+      UserEffects,
+      provideMockActions(() => actions$),
+      { provide: UserService, useValue: spy }
 ```
 
 ]
@@ -752,14 +737,14 @@ effects = TestBed.inject(UserEffects);
 userService = TestBed.inject(UserService) as jasmine.SpyObj<UserService>;
 });
 it('should return a loadUsersSuccess action, with users, on success', () => {
-const users = [{ id: 1, name: 'User1' }];
-const action = loadUsers();
-const outcome = loadUsersSuccess({ users });
-actions$ = hot('-a-', { a: action });
-const response = cold('-b|', { b: users });
-userService.getAllUsers.and.returnValue(response);
-const expected = cold('--c', { c: outcome });
-expect(effects.loadUsers$).toBeObservable(expected);
+  const users = [{ id: 1, name: 'User1' }];
+  const action = loadUsers();
+  const outcome = loadUsersSuccess({ users });
+  actions$ = hot('-a-', { a: action });
+  const response = cold('-b|', { b: users });
+  userService.getAllUsers.and.returnValue(response);
+  const expected = cold('--c', { c: outcome });
+  expect(effects.loadUsers$).toBeObservable(expected);
 });
 });
 ```
