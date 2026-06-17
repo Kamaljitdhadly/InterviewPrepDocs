@@ -1,0 +1,35 @@
+---
+description: Authoring conventions for the Interview Prep Knowledge Base (C#, .NET, JS, SQL Server, Angular)
+globs: docs/**/*.md
+alwaysApply: false
+---
+
+# Interview Prep Knowledge Base — Authoring Rules
+
+Build a Markdown-only interview prep knowledge base covering 5 tracks:
+`csharp`, `dotnet`, `javascript`, `sql-server`, `angular`. No build tooling — files must render on GitHub.
+
+## Structure
+
+- One Markdown file per major topic, numbered for reading order: `01-topic-name.md`.
+- Each track folder has a `README.md` index linking its topic files in study order.
+- Root `README.md` links all 5 tracks + a suggested study plan.
+
+## Every topic file MUST contain these sections (in order)
+
+1. **Concept Explanation** — precise, clear, not a textbook dump.
+2. **Code Example(s)** — runnable, idiomatic, well-commented, language-tagged.
+3. **Interview Q&A** — model answers phrased as spoken aloud. Tag each question difficulty: 🟢 Junior / 🟡 Mid / 🔴 Senior.
+4. **⚠️ Tricky / Gotchas** — misconceptions, "what's the output?" puzzles, subtle distinctions; explain *why* the confusion happens.
+5. **📌 Quick Recap** — bullet cheat sheet for last-minute revision.
+
+## Quality bar
+
+- Cover all levels (include 🟢/🟡/🔴 tagged questions per topic).
+- Every code block syntactically correct and language-tagged.
+- Use Markdown tables for comparisons; Mermaid blocks for diagrams (pipelines, event loop, etc.).
+- Scannable: headings, tables, bullets. Cross-link related topics via relative links.
+
+## Build order
+
+C# → .NET → JavaScript → SQL Server → Angular. Finish all of a track's topics before moving on; summarize after each track.
