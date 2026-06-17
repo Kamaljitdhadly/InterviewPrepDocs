@@ -8,6 +8,7 @@ import { formatFile as formatMicroservicesClean } from './format-microservices-c
 import { formatFile as formatSystemDesignClean } from './format-systemdesign-clean.mjs';
 import { formatFile as formatDockerClean } from './format-docker-clean.mjs';
 import { formatFile as formatKubernetesClean } from './format-kubernetes-clean.mjs';
+import { formatFile as formatImportantConceptsClean } from './format-importantconcepts-clean.mjs';
 
 const args = process.argv.slice(2);
 const topicIdx = args.indexOf('--topic');
@@ -31,7 +32,9 @@ const CODE_LANG = topicLower.includes('c#') || topicLower === 'csharp'
             ? 'bash'
             : topicLower.includes('kubernetes')
               ? 'yaml'
-              : 'typescript';
+              : topicLower.includes('important concepts')
+                ? 'text'
+                : 'typescript';
 
 fs.mkdirSync(OUT, { recursive: true });
 
@@ -123,6 +126,15 @@ const CODE_STRONG_K8S = [
   /\benv:/i, /\bvolumeMounts:/i, /\bvolumes:/i, /\bnodeSelector:/i,
   /\btolerations:/i, /\baffinity:/i, /\blivenessProbe:/i, /\breadinessProbe:/i,
 ];
+const CODE_STRONG_TEXT = [
+  /\bIN\s+(A|AAAA|MX|TXT|NS|PTR|SRV|CNAME)\b/i,
+  /\.in-addr\.arpa/i,
+  /\bSELECT\b/i, /\bINSERT\b/i, /\bUPDATE\b/i, /\bDELETE\b/i,
+  /<script/i, /document\.(write|getElementById)/i,
+  /encodeURIComponent/i, /\.textContent\s*=/i,
+  /^Copy code$/i,
+  /^html$/i, /^javascript$/i, /^sql$/i, /^csharp$/i,
+];
 const CODE_STRONG = [
   ...CODE_STRONG_COMMON,
   ...(CODE_LANG === 'csharp' ? CODE_STRONG_CS
@@ -131,7 +143,8 @@ const CODE_STRONG = [
         : CODE_LANG === 'bash' ? CODE_STRONG_DOCKER
           : CODE_LANG === 'json' ? CODE_STRONG_MS
             : CODE_LANG === 'yaml' ? CODE_STRONG_K8S
-              : CODE_STRONG_TS),
+              : CODE_LANG === 'text' ? CODE_STRONG_TEXT
+                : CODE_STRONG_TS),
 ];
 
 const CODE_WEAK = [
@@ -202,11 +215,17 @@ function normalize(raw, fileBaseName) {
   const boldText = (p) => p.trim().replace(/^\*\*/, '').replace(/\*\*$/, '').trim();
 
   let i = 0;
-  // Title: bold first line, or derive from filename
+  // Title: bold first line, or derive from filename (skip numbered section labels)
   if (paras.length && isBoldOnly(paras[0])) {
-    out.push(`# ${unescapeCommon(boldText(paras[0]))}`);
-    out.push('');
-    i = 1;
+    const firstBold = boldText(paras[0]);
+    if (/^\d+\.\s+/.test(firstBold) && fileBaseName) {
+      out.push(`# ${fileBaseName}`);
+      out.push('');
+    } else {
+      out.push(`# ${unescapeCommon(firstBold)}`);
+      out.push('');
+      i = 1;
+    }
   } else if (fileBaseName) {
     out.push(`# ${fileBaseName}`);
     out.push('');
@@ -351,6 +370,7 @@ for (const f of files) {
   else if (topicLower.includes('system design')) cleaned = formatSystemDesignClean(cleaned, baseName);
   else if (topicLower.includes('docker')) cleaned = formatDockerClean(cleaned, baseName);
   else if (topicLower.includes('kubernetes')) cleaned = formatKubernetesClean(cleaned, baseName);
+  else if (topicLower.includes('important concepts')) cleaned = formatImportantConceptsClean(cleaned, baseName);
   fs.writeFileSync(path.join(OUT, f), cleaned, 'utf8');
   console.log(`cleaned: ${f} (${raw.length} -> ${cleaned.length})`);
 }
