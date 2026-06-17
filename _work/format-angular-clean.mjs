@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-const FENCE_LANGS = ['typescript', 'html', 'javascript', 'json', 'bash', 'css', 'scss', 'sql'];
+const FENCE_LANGS = ['typescript', 'html', 'javascript', 'json', 'bash', 'css', 'scss', 'sql', 'yaml', 'yml', 'dockerfile'];
 const INDENT_LANGS = ['typescript', 'javascript', 'csharp'];
 
 // ---- helpers ---------------------------------------------------------------

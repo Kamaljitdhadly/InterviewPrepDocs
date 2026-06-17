@@ -4,6 +4,7 @@ import { formatFile as formatCSharpClean } from './format-csharp-clean.mjs';
 import { formatFile as formatAngularClean } from './format-angular-clean.mjs';
 import { formatFile as formatJavascriptClean } from './format-javascript-clean.mjs';
 import { formatFile as formatSqlServerClean } from './format-sqlserver-clean.mjs';
+import { formatFile as formatMicroservicesClean } from './format-microservices-clean.mjs';
 
 const args = process.argv.slice(2);
 const topicIdx = args.indexOf('--topic');
@@ -19,7 +20,9 @@ const CODE_LANG = topicLower.includes('c#') || topicLower === 'csharp'
     ? 'javascript'
     : topicLower.includes('sql')
       ? 'sql'
-      : 'typescript';
+      : topicLower.includes('microservices')
+        ? 'json'
+        : 'typescript';
 
 fs.mkdirSync(OUT, { recursive: true });
 
@@ -86,12 +89,20 @@ const CODE_STRONG_SQL = [
   /^\s*--/, /\bTRY\b/i, /\bCATCH\b/i, /\bTRAN(SACTION)?\b/i, /\bCOMMIT\b/i, /\bROLLBACK\b/i,
   /\bPARTITION\b/i, /\bFILESTREAM\b/i, /\bMERGE\b/i, /\bOUTPUT\b/i,
 ];
+const CODE_STRONG_MS = [
+  /\bapiVersion:/i, /\bkind:\s/i, /\bmetadata:/i, /\bspec:/i,
+  /\bdocker\s+/i, /\bkubectl\s+/i, /\bhelm\s+/i,
+  /\bgrpc/i, /\bprotobuf/i, /\bkafka/i, /\brabbitmq/i,
+  /\b"[^"]+"\s*:/, /^\s*\{/, /^\s*\[/, /^\s*-\s+\w+:/,
+  /\bcurl\s+-/i, /\bnpm\s+/i, /\bdotnet\s+/i,
+];
 const CODE_STRONG = [
   ...CODE_STRONG_COMMON,
   ...(CODE_LANG === 'csharp' ? CODE_STRONG_CS
     : CODE_LANG === 'javascript' ? CODE_STRONG_JS
       : CODE_LANG === 'sql' ? CODE_STRONG_SQL
-        : CODE_STRONG_TS),
+        : CODE_LANG === 'json' ? CODE_STRONG_MS
+          : CODE_STRONG_TS),
 ];
 
 const CODE_WEAK = [
@@ -187,6 +198,7 @@ function normalize(raw, fileBaseName) {
       const q = stripBold(unescapeCommon(m[1].replace(/\s+/g, ' ').trim()));
       toc.push(q);
       questionKeys.add(normKey(q));
+      questionKeys.add(normKey(q.replace(/^\d+\.\s*/, '')));
       i++;
     } else break;
   }
@@ -203,11 +215,12 @@ function normalize(raw, fileBaseName) {
     const p = rest[j];
 
     if (isBoldOnly(p)) {
-      const t = unescapeCommon(boldText(p)).replace(/:+$/, '');
-      if (questionKeys.has(normKey(boldText(p))) || /\?$/.test(t)) {
+      const raw = unescapeCommon(boldText(p)).replace(/:+$/, '');
+      const t = raw.replace(/^\d+\.\s*/, '');
+      if (questionKeys.has(normKey(t)) || questionKeys.has(normKey(raw)) || /\?$/.test(t)) {
         out.push(`## ${t}`);
       } else {
-        out.push(`### ${t}`);
+        out.push(`### ${raw}`);
       }
       out.push('');
       j++;
@@ -299,6 +312,7 @@ for (const f of files) {
   else if (topicLower === 'angular') cleaned = formatAngularClean(cleaned, baseName);
   else if (topicLower.includes('javascript')) cleaned = formatJavascriptClean(cleaned, baseName);
   else if (topicLower.includes('sql')) cleaned = formatSqlServerClean(cleaned, baseName);
+  else if (topicLower.includes('microservices')) cleaned = formatMicroservicesClean(cleaned, baseName);
   fs.writeFileSync(path.join(OUT, f), cleaned, 'utf8');
   console.log(`cleaned: ${f} (${raw.length} -> ${cleaned.length})`);
 }
