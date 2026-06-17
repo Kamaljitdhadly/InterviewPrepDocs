@@ -2,7 +2,7 @@
 
 > **Start here.** All study notes live under `_work/tight/`. Clean (full) versions: `_work/clean/`.
 
-**Library stats:** 18 topics · 184 files · ~987 questions
+**Library stats:** 19 topics · 194 files · ~1076 questions
 
 ---
 
@@ -55,6 +55,12 @@
 | 2 | **System Design** | System Design Basics, System Design CAP Theorem, System Design Design Patterns |
 | 3 | **Important Concepts** | OWASP, Important keywords |
 
+### Application & Cloud Security
+
+| Step | Topic | Files to study |
+|------|-------|----------------|
+| 1 | **Security** | Security Basics, OWASP Top 10, Authentication and Identity, Authorization and Access Control, Web Application Security, API Security, Cryptography and TLS, Cloud and Infrastructure Security, Secure Development Lifecycle, Application Security by Stack |
+
 ### Data Structures & Algorithms
 
 | Step | Topic | Files to study |
@@ -81,6 +87,7 @@
 | Kubernetes | 12 | `_work/tight/Kubernetes/` |
 | Microservices | 22 | `_work/tight/Microservices/` |
 | React | 16 | `_work/tight/React/` |
+| Security | 10 | `_work/tight/Security/` |
 | Sql Server | 11 | `_work/tight/Sql Server/` |
 | System Design | 8 | `_work/tight/System Design/` |
 | Testing | 1 | `_work/tight/Testing/` |
@@ -117,7 +124,7 @@
 
 **Cloud:** `Azure Cloud` · `Azure DevOps`
 
-**Other:** `Bash` · `Certificates` · `Git` · `Testing`
+**Other:** `Bash` · `Certificates` · `Git` · `Security` · `Testing`
 
 **Backend & .NET:** `C#` · `Sql Server`
 

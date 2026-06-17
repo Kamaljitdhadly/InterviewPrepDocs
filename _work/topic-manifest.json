@@ -44,6 +44,13 @@
       ]
     },
     {
+      "id": "security",
+      "title": "Application & Cloud Security",
+      "order": [
+        { "topic": "Security", "files": ["Security Basics.md", "OWASP Top 10.md", "Authentication and Identity.md", "Authorization and Access Control.md", "Web Application Security.md", "API Security.md", "Cryptography and TLS.md", "Cloud and Infrastructure Security.md", "Secure Development Lifecycle.md", "Application Security by Stack.md"] }
+      ]
+    },
+    {
       "id": "algorithms",
       "title": "Data Structures & Algorithms",
       "order": [
@@ -60,7 +67,8 @@
     "Sql Server": { "pairs": ["C#"], "next": ["SQL Server Query Optimization Techniques"] },
     "Docker": { "next": ["Kubernetes"], "pairs": ["Azure DevOps"] },
     "Kubernetes": { "requires": ["Docker"], "pairs": ["Microservices"] },
-    "Microservices": { "requires": ["Docker", "System Design"], "pairs": ["Kubernetes"] },
+    "Microservices": { "requires": ["Docker", "System Design"], "pairs": ["Kubernetes", "Security"] },
+    "Security": { "requires": ["C#", "Javascript"], "pairs": ["Important Concepts", "Certificates"], "next": ["OWASP Top 10", "Authentication and Identity"] },
     "RxJS": { "requires": ["Angular"], "next": ["NgRx"] },
     "NgRx": { "requires": ["RxJS", "Angular"] }
   },
@@ -88,6 +96,12 @@
     "React/Redux Toolkit Basics.md": ["Angular/NgRx Basics.md", "Important Concepts/Interview Comparisons.md"],
     "Angular/NgRx Basics.md": ["React/Redux Toolkit Basics.md", "Important Concepts/Interview Comparisons.md"],
     "System Design/System Design Basics.md": ["Microservices/Microservices Basics.md", "Important Concepts/Interview Comparisons.md"],
-    "Kubernetes/Kubernetes Basics.md": ["Docker/Docker Basics.md", "Important Concepts/Interview Comparisons.md"]
+    "Kubernetes/Kubernetes Basics.md": ["Docker/Docker Basics.md", "Important Concepts/Interview Comparisons.md"],
+    "Security/Security Basics.md": ["Security/OWASP Top 10.md", "Security/Authentication and Identity.md", "Important Concepts/OWASP.md"],
+    "Security/OWASP Top 10.md": ["Security/Web Application Security.md", "Security/API Security.md"],
+    "Security/Authentication and Identity.md": ["Security/Authorization and Access Control.md", "C#/.NET Core JSON Web Token.md", "C#/.NET Core OAuth 2.0.md"],
+    "Security/Web Application Security.md": ["Security/API Security.md", "React/React Error Handling and Security.md"],
+    "Security/Cryptography and TLS.md": ["Certificates/Certificates.md", "Security/Cloud and Infrastructure Security.md"],
+    "Security/Application Security by Stack.md": ["Security/Secure Development Lifecycle.md", "Microservices/Microservices Security.md"]
   }
 }

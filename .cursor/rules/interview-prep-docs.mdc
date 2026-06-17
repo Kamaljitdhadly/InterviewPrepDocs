@@ -59,7 +59,7 @@ Answer with tables, bullets, and fenced code (`csharp`, `typescript`, `jsx`, `ja
 
 ## Topics (18 folders, ~184 files)
 
-`C#`, `Sql Server`, `Javascript`, `TypeScript`, `Angular`, `React`, `Docker`, `Kubernetes`, `Azure Cloud`, `Azure DevOps`, `Microservices`, `System Design`, `Data Structures and Algorithms`, `Important Concepts`, `Certificates`, `Git`, `Bash`, `Testing`
+`C#`, `Sql Server`, `Javascript`, `TypeScript`, `Angular`, `React`, `Security`, `Docker`, `Kubernetes`, `Azure Cloud`, `Azure DevOps`, `Microservices`, `System Design`, `Data Structures and Algorithms`, `Important Concepts`, `Certificates`, `Git`, `Bash`, `Testing`
 
 React and TypeScript were authored in-repo (no docx). Angular includes **Angular Modern Features** (signals, standalone). **Interview Comparisons** lives under Important Concepts.
 
