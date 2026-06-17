@@ -420,3 +420,10 @@ const bears = useBearStore((s) => s.bears); // re-renders only when bears change
 ```
 
 **Summary:** measure → narrow subscriptions → memoized selectors → then `React.memo`.
+
+---
+
+## Related Topics
+
+- **Redux Toolkit Basics** (`React/`)
+- **Zustand and Alternative State** (`React/`)

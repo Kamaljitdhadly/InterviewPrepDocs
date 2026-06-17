@@ -627,3 +627,10 @@ class Dog extends Animal {
 let myDog = new Dog();
 myDog.speak(); // Animal speaks
 ES6 `class` syntax is syntactic sugar over this prototype mechanism — inheritance still works through the chain.
+
+---
+
+## Related Topics
+
+- **JavaScript ES6 Features and Syntax** (`Javascript/`)
+- **TypeScript Basics** (`TypeScript/`)

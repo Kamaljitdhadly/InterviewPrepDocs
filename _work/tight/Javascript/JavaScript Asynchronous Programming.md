@@ -820,3 +820,10 @@ fetchData()
   console.log('Additional processing');
 });
 ```
+
+---
+
+## Related Topics
+
+- **React HTTP and Data Fetching** (`React/`)
+- **RxJS Basics** (`Angular/`)

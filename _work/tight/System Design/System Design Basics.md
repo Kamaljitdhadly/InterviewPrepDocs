@@ -374,3 +374,10 @@ A **fault-tolerant system** continues operating (fully or partially) despite com
 | Distributed systems | Spread workload; isolate blast radius |
 
 Together these techniques ensure systems survive hardware faults, network issues, and software errors with minimal user impact.
+
+---
+
+## Related Topics
+
+- **Microservices Basics** (`Microservices/`)
+- **Interview Comparisons** (`Important Concepts/`)

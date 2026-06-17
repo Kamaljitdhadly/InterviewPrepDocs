@@ -758,3 +758,10 @@ function useAuth() {
 ```
 
 Custom hooks compose with each other and replace most HOC/render-prop sharing patterns.
+
+---
+
+## Related Topics
+
+- **React Performance and Optimization** (`React/`)
+- **React Advanced Topics** (`React/`)

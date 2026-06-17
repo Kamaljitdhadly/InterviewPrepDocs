@@ -1554,3 +1554,10 @@ SQL Server rotates logs automatically (default: 6 retained). Configure retention
 ```sql
 EXEC sp_readerrorlog 0, 1, 'startup';
 ```
+
+---
+
+## Related Topics
+
+- **SQL Server Queries** (`Sql Server/`)
+- **C# ADO.NET and Entity Framework** (`C#/`)

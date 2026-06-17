@@ -430,3 +430,10 @@ Goal: trick victims into believing they interact with a legitimate entity (bank,
 ### Real-World Example
 
 **Gmail (2016)** — phishing emails from trusted contacts with fake Google Docs link → convincing fake login page harvested credentials. Google disabled malicious accounts and added security measures.
+
+---
+
+## Related Topics
+
+- **Interview Comparisons** (`Important Concepts/`)
+- **React Error Handling and Security** (`React/`)

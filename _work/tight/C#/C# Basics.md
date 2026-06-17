@@ -1303,3 +1303,10 @@ FileAccess access = FileAccess.Read | FileAccess.Write;
 ```
 
 3. **Switch statements** — structured handling of enum values.
+
+---
+
+## Related Topics
+
+- **C# OOPS** (`C#/`)
+- **C# SOLID Principles** (`C#/`)

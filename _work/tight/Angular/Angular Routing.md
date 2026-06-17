@@ -420,3 +420,9 @@ export class AppRoutingModule {}
 ```
 
 In short, lazy loading via `loadChildren` keeps the initial bundle small and is especially valuable for large apps with many feature modules.
+
+---
+
+## Related Topics
+
+- **Angular HTTP and Services** (`Angular/`)

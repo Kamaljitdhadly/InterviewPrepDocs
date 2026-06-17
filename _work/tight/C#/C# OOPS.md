@@ -393,3 +393,10 @@ class Program
     }
 }
 ```
+
+---
+
+## Related Topics
+
+- **C# Abstract & Interface** (`C#/`)
+- **C# Design Pattern** (`C#/`)

@@ -493,3 +493,10 @@ observable.forEach(value => {
 ```
 
 In short: use `subscribe()` for ongoing streams and full lifecycle/error control; use `forEach()` for simple, Promise-based one-time value handling without active subscription management.
+
+---
+
+## Related Topics
+
+- **RxJS Operators** (`Angular/`)
+- **NgRx Basics** (`Angular/`)

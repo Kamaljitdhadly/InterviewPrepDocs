@@ -461,3 +461,10 @@ kubectl config set-context --current --namespace=dev
 **Use cases:** multi-team clusters, dev/staging/prod separation, resource quota enforcement.
 
 **Limitations:** namespaces are single-cluster only; some resources (Nodes, StorageClass, PV) are cluster-scoped, not namespaced.
+
+---
+
+## Related Topics
+
+- **Docker Basics** (`Docker/`)
+- **Interview Comparisons** (`Important Concepts/`)

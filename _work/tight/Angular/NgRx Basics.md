@@ -484,3 +484,10 @@ export class ProductListComponent implements OnInit {
 ```
 
 In short, `@ngrx/store` provides a centralized store, actions, reducers, and selectors (with effects from `@ngrx/effects`) for a clear, structured approach to managing complex state.
+
+---
+
+## Related Topics
+
+- **Redux Toolkit Basics** (`React/`)
+- **Interview Comparisons** (`Important Concepts/`)

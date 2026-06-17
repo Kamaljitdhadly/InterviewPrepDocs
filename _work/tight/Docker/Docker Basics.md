@@ -670,3 +670,10 @@ node_modules
 Effective caching and Dockerfile ordering dramatically reduce build times.
 
 **Rule of thumb:** Static dependencies (OS packages, `npm install` from lockfile) before dynamic source (`COPY . .`). This maximizes cache hits on the most expensive layers.
+
+---
+
+## Related Topics
+
+- **Docker Compose** (`Docker/`)
+- **Kubernetes Basics** (`Kubernetes/`)

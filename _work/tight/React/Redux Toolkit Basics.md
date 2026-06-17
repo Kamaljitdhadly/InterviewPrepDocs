@@ -313,3 +313,10 @@ export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
 // features/todos/todosSelectors.ts — selectTodos, selectTodoById
 // services/api.ts — RTK Query endpoints shared across features
 ```
+
+---
+
+## Related Topics
+
+- **NgRx Basics** (`Angular/`)
+- **Interview Comparisons** (`Important Concepts/`)

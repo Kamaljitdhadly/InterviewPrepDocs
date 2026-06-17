@@ -1097,3 +1097,11 @@ export class ExampleComponent {}
 ```
 
 **Summary:** `Emulated` (default) scopes styles via generated attributes; `ShadowDom` provides native, true isolation; and `None` makes styles global. Choose based on how much style isolation a component needs.
+
+---
+
+## Related Topics
+
+- **Angular Modern Features** (`Angular/`)
+- **Angular Routing** (`Angular/`)
+- **TypeScript Basics** (`TypeScript/`)

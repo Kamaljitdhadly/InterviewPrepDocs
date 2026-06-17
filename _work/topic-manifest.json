@@ -1,0 +1,93 @@
+{
+  "version": 1,
+  "studyRoot": "_work/tight",
+  "paths": [
+    {
+      "id": "fullstack-dotnet",
+      "title": "Full-Stack .NET Developer",
+      "order": [
+        { "topic": "C#", "files": ["C# Basics.md", "C# OOPS.md", "C# SOLID Principles.md", "C# Generics & Collections.md", "C# LINQ.md", ".NET Core Basics.md", "WebApi Basics.md", ".NET Core JSON Web Token.md", "C# ADO.NET and Entity Framework.md"] },
+        { "topic": "Sql Server", "files": ["SQL Server Basics.md", "SQL Server Queries.md", "SQL Server Query Optimization Techniques.md", "SQL Server Transactions and Locking.md"] },
+        { "topic": "TypeScript", "files": ["TypeScript Basics.md", "TypeScript Types and Interfaces.md"] },
+        { "topic": "Angular", "files": ["Angular Basics.md", "Angular Modern Features.md", "Angular Routing.md", "Angular Forms & Pipes.md", "Angular HTTP and Services.md", "RxJS Basics.md", "NgRx Basics.md"] },
+        { "topic": "Azure Cloud", "files": ["Azure Basics.md", "Azure Active Directory.md", "Azure Compute.md"] },
+        { "topic": "Azure DevOps", "files": ["Azure Devops Example.md"] }
+      ]
+    },
+    {
+      "id": "react-developer",
+      "title": "React / Frontend Developer",
+      "order": [
+        { "topic": "Javascript", "files": ["JavaScript Basics.md", "JavaScript ES6 Features and Syntax.md", "JavaScript Asynchronous Programming.md", "JavaScript Functions & Scoping.md"] },
+        { "topic": "TypeScript", "files": ["TypeScript Basics.md", "TypeScript Types and Interfaces.md", "TypeScript Generics.md"] },
+        { "topic": "React", "files": ["React Basics.md", "React Hooks.md", "React Routing.md", "React Forms.md", "React HTTP and Data Fetching.md", "React State Management.md", "Redux Toolkit Basics.md", "Next.js.md"] }
+      ]
+    },
+    {
+      "id": "devops-cloud",
+      "title": "DevOps & Cloud",
+      "order": [
+        { "topic": "Docker", "files": ["Docker Basics.md", "Docker Compose.md", "Docker Networking.md", "Docker Build and CICD Integration.md"] },
+        { "topic": "Kubernetes", "files": ["Kubernetes Basics.md", "Kubernetes Objects and Configurations.md", "Kubernetes Networking and Storage.md", "Kubernetes Deployment Strategies.md"] },
+        { "topic": "Azure Cloud", "files": ["Azure Basics.md", "Azure Networking.md", "Azure Messaging.md"] },
+        { "topic": "Git", "files": ["Git Commands.md"] },
+        { "topic": "Bash", "files": ["bash Commands.md"] }
+      ]
+    },
+    {
+      "id": "microservices-architect",
+      "title": "Microservices & System Design",
+      "order": [
+        { "topic": "Microservices", "files": ["Microservices Basics.md", "Microservices Communication.md", "Microservices Service Discovery.md", "Microservices Distributed Transactions.md"] },
+        { "topic": "System Design", "files": ["System Design Basics.md", "System Design CAP Theorem.md", "System Design Design Patterns.md"] },
+        { "topic": "Important Concepts", "files": ["OWASP.md", "Important keywords.md"] }
+      ]
+    },
+    {
+      "id": "algorithms",
+      "title": "Data Structures & Algorithms",
+      "order": [
+        { "topic": "Data Structures and Algorithms", "files": ["Data Structures and Algorithms Basics.md", "Data Structures and Algorithms Arrays.md", "Data Structures and Algorithms Linked Lists.md", "Data Structures and Algorithms Trees.md", "Data Structures and Algorithms Graphs.md", "Data Structures and Algorithms Algorithms Concepts.md"] }
+      ]
+    }
+  ],
+  "topicGraph": {
+    "C#": { "next": ["Sql Server", "TypeScript", ".NET Core"], "pairs": ["JavaScript"] },
+    "Angular": { "requires": ["TypeScript", "JavaScript"], "next": ["RxJS", "NgRx"], "pairs": ["React"] },
+    "React": { "requires": ["JavaScript", "TypeScript"], "next": ["Redux Toolkit Basics", "Next.js"], "pairs": ["Angular"] },
+    "Javascript": { "next": ["TypeScript", "React"], "pairs": ["C#"] },
+    "TypeScript": { "requires": ["Javascript"], "usedBy": ["Angular", "React"] },
+    "Sql Server": { "pairs": ["C#"], "next": ["SQL Server Query Optimization Techniques"] },
+    "Docker": { "next": ["Kubernetes"], "pairs": ["Azure DevOps"] },
+    "Kubernetes": { "requires": ["Docker"], "pairs": ["Microservices"] },
+    "Microservices": { "requires": ["Docker", "System Design"], "pairs": ["Kubernetes"] },
+    "RxJS": { "requires": ["Angular"], "next": ["NgRx"] },
+    "NgRx": { "requires": ["RxJS", "Angular"] }
+  },
+  "fileRelations": {
+    "Angular/Angular Basics.md": ["Angular/Angular Modern Features.md", "Angular/Angular Routing.md", "TypeScript/TypeScript Basics.md"],
+    "Angular/Angular Modern Features.md": ["Angular/Angular Change Detection and Performance Optimization.md", "Angular/RxJS Basics.md"],
+    "Angular/Angular Routing.md": ["Angular/Angular HTTP and Services.md"],
+    "Angular/RxJS Basics.md": ["Angular/RxJS Operators.md", "Angular/NgRx Basics.md"],
+    "Angular/NgRx Basics.md": ["Angular/NgRx Effects.md", "Angular/NgRx Selectors and State.md"],
+    "React/React Basics.md": ["React/React Hooks.md", "TypeScript/TypeScript Basics.md"],
+    "React/React Hooks.md": ["React/React Performance and Optimization.md", "React/React Advanced Topics.md"],
+    "React/React State Management.md": ["React/Redux Toolkit Basics.md", "React/Zustand and Alternative State.md"],
+    "C#/C# Basics.md": ["C#/C# OOPS.md", "C#/C# SOLID Principles.md"],
+    "C#/C# OOPS.md": ["C#/C# Abstract & Interface.md", "C#/C# Design Pattern.md"],
+    "Javascript/JavaScript Basics.md": ["Javascript/JavaScript ES6 Features and Syntax.md", "TypeScript/TypeScript Basics.md"],
+    "Javascript/JavaScript Asynchronous Programming.md": ["React/React HTTP and Data Fetching.md", "Angular/RxJS Basics.md"],
+    "Sql Server/SQL Server Basics.md": ["Sql Server/SQL Server Queries.md", "C#/C# ADO.NET and Entity Framework.md"],
+    "Docker/Docker Basics.md": ["Docker/Docker Compose.md", "Kubernetes/Kubernetes Basics.md"],
+    "Kubernetes/Kubernetes Basics.md": ["Kubernetes/Kubernetes Objects and Configurations.md"],
+    "Important Concepts/OWASP.md": ["Important Concepts/Interview Comparisons.md", "React/React Error Handling and Security.md"],
+    "Important Concepts/Interview Comparisons.md": ["Important Concepts/OWASP.md", "Microservices/Microservices Basics.md"],
+    "TypeScript/TypeScript Basics.md": ["Javascript/JavaScript Basics.md", "TypeScript/TypeScript Types and Interfaces.md"],
+    "TypeScript/TypeScript Types and Interfaces.md": ["TypeScript/TypeScript Generics.md", "Angular/Angular Basics.md", "React/React Basics.md"],
+    "TypeScript/TypeScript Generics.md": ["TypeScript/TypeScript Advanced.md", "C#/C# Generics & Collections.md"],
+    "React/Redux Toolkit Basics.md": ["Angular/NgRx Basics.md", "Important Concepts/Interview Comparisons.md"],
+    "Angular/NgRx Basics.md": ["React/Redux Toolkit Basics.md", "Important Concepts/Interview Comparisons.md"],
+    "System Design/System Design Basics.md": ["Microservices/Microservices Basics.md", "Important Concepts/Interview Comparisons.md"],
+    "Kubernetes/Kubernetes Basics.md": ["Docker/Docker Basics.md", "Important Concepts/Interview Comparisons.md"]
+  }
+}

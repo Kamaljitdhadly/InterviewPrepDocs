@@ -1087,3 +1087,10 @@ Not a bug — exposes missing cleanup before production leaks.
 Wrap root in dev (Vite default). Remove only for incompatible third-party libs.
 
 Development aid for pure renders, effect cleanup, and modern APIs.
+
+---
+
+## Related Topics
+
+- **React Hooks** (`React/`)
+- **TypeScript Basics** (`TypeScript/`)
