@@ -4,7 +4,7 @@
 
 1. What are extension Methods? When to use them?
 
-What are extension Methods? When to use them?
+## What are extension Methods? When to use them?
 
 **Extension methods** in C# allow you to add new methods to existing types without modifying the original type or using inheritance. They are particularly useful for enhancing functionality of classes, structs, interfaces, or even built-in types that you do not have control over.
 
@@ -21,10 +21,10 @@ What are extension Methods? When to use them?
 ```csharp
 public static class ExtensionClass
 {
-public static ReturnType ExtensionMethod(this Type typeParameter, otherParameters)
-{
-// Method implementation
-}
+  public static ReturnType ExtensionMethod(this Type typeParameter, otherParameters)
+  {
+    // Method implementation
+  }
 }
 ```
 
@@ -40,15 +40,15 @@ Let's say you want to add a method to the string class that counts the number of
 using System;
 public static class StringExtensions
 {
-// Extension method to count words in a string
-public static int WordCount(this string str)
-{
-if (string.IsNullOrWhiteSpace(str))
-{
-return 0;
-}
-return str.Split(new[] { ' ', '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries).Length;
-}
+  // Extension method to count words in a string
+  public static int WordCount(this string str)
+  {
+    if (string.IsNullOrWhiteSpace(str))
+    {
+      return 0;
+    }
+    return str.Split(new[] { ' ', '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries).Length;
+  }
 }
 ```
 
@@ -58,13 +58,13 @@ return str.Split(new[] { ' ', '\r', '\n' }, StringSplitOptions.RemoveEmptyEntrie
 using System;
 class Program
 {
-static void Main(string[] args)
-{
-string sentence = "Hello world! This is an example.";
-// Use the extension method as if it were a member of the string class
-int count = sentence.WordCount();
-Console.WriteLine($"The number of words is: {count}");
-}
+  static void Main(string[] args)
+  {
+    string sentence = "Hello world! This is an example.";
+    // Use the extension method as if it were a member of the string class
+    int count = sentence.WordCount();
+    Console.WriteLine($"The number of words is: {count}");
+  }
 }
 ```
 

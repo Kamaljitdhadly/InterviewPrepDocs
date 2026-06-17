@@ -8,35 +8,35 @@
 4. Write a C# program to find the substring from a given string
 5. Write a C# program to find if a positive integer is prime or not?
 
-Write a program in C# Sharp to reverse a string?
+## Write a program in C# Sharp to reverse a string?
 
 ```csharp
 using System;
 class Program
 {
-static void Main()
-{
-// Input string
-Console.Write("Enter a string: ");
-string originalString = Console.ReadLine();
-// Reverse the string
-string reversedString = ReverseString(originalString);
-// Output the reversed string
-Console.WriteLine("Reversed string: " + reversedString);
-}
-// Method to reverse a string without using built-in methods
-static string ReverseString(string str)
-{
-char[] charArray = new char[str.Length];
-int index = 0;
-// Manually reverse the string
-for (int i = str.Length - 1; i >= 0; i--)
-{
-charArray[index] = str[i];
-index++;
-}
-return new string(charArray);
-}
+  static void Main()
+  {
+    // Input string
+    Console.Write("Enter a string: ");
+    string originalString = Console.ReadLine();
+    // Reverse the string
+    string reversedString = ReverseString(originalString);
+    // Output the reversed string
+    Console.WriteLine("Reversed string: " + reversedString);
+  }
+  // Method to reverse a string without using built-in methods
+  static string ReverseString(string str)
+  {
+    char[] charArray = new char[str.Length];
+    int index = 0;
+    // Manually reverse the string
+    for (int i = str.Length - 1; i >= 0; i--)
+    {
+      charArray[index] = str[i];
+      index++;
+    }
+    return new string(charArray);
+  }
 }
 ```
 
@@ -58,72 +58,68 @@ Reversed string: IAnepO
 
 This version of the program manually iterates through the string and reverses it without relying on any built-in methods.
 
-Write a program in C# Sharp to reverse the order of the given words?
+## Write a program in C# Sharp to reverse the order of the given words?
 
 ```csharp
 using System;
 class Program
 {
-static void Main()
-{
-// Input sentence
-Console.Write("Enter a sentence: ");
-string sentence = Console.ReadLine();
-// Reverse the order of words
-string reversedSentence = ReverseWords(sentence);
-// Output the reversed sentence
-Console.WriteLine("Reversed sentence: " + reversedSentence);
-}
-// Method to reverse the order of words in a sentence
-static string ReverseWords(string sentence)
-{
-string[] words = SplitWords(sentence);
-string reversedSentence = "";
-// Manually reverse the order of words
-for (int i = words.Length - 1; i >= 0; i--)
-{
-reversedSentence += words[i];
-if (i > 0)
-{
-reversedSentence += " ";
-}
-}
-return reversedSentence;
-}
-// Method to split the sentence into words without using built-in methods
-static string[] SplitWords(string sentence)
-{
-int wordCount = 0;
-for (int i = 0; i < sentence.Length; i++)
-{
-if (sentence[i] == ' ')
-{
-wordCount++;
-}
-}
-string[] words = new string[wordCount + 1];
-string word = "";
-int index = 0;
-for (int i = 0; i < sentence.Length; i++)
-{
-if (sentence[i] == ' ')
-{
-words[index] = word;
-word = "";
-index++;
-}
-```
-
-else
-
-```csharp
-{
-word += sentence[i];
-}
-}
-words[index] = word;
-return words;
-}
+  static void Main()
+  {
+    // Input sentence
+    Console.Write("Enter a sentence: ");
+    string sentence = Console.ReadLine();
+    // Reverse the order of words
+    string reversedSentence = ReverseWords(sentence);
+    // Output the reversed sentence
+    Console.WriteLine("Reversed sentence: " + reversedSentence);
+  }
+  // Method to reverse the order of words in a sentence
+  static string ReverseWords(string sentence)
+  {
+    string[] words = SplitWords(sentence);
+    string reversedSentence = "";
+    // Manually reverse the order of words
+    for (int i = words.Length - 1; i >= 0; i--)
+    {
+      reversedSentence += words[i];
+      if (i > 0)
+      {
+        reversedSentence += " ";
+      }
+    }
+    return reversedSentence;
+  }
+  // Method to split the sentence into words without using built-in methods
+  static string[] SplitWords(string sentence)
+  {
+    int wordCount = 0;
+    for (int i = 0; i < sentence.Length; i++)
+    {
+      if (sentence[i] == ' ')
+      {
+        wordCount++;
+      }
+    }
+    string[] words = new string[wordCount + 1];
+    string word = "";
+    int index = 0;
+    for (int i = 0; i < sentence.Length; i++)
+    {
+      if (sentence[i] == ' ')
+      {
+        words[index] = word;
+        word = "";
+        index++;
+      }
+      else
+      {
+        word += sentence[i];
+      }
+    }
+    words[index] = word;
+    return words;
+  }
 }
 ```
 
@@ -155,46 +151,42 @@ Reversed sentence: fun is C#
 
 This program takes a sentence, reverses the order of the words, and outputs the result without using any built-in methods for splitting or reversing.
 
-Write a program in C# Sharp to find if a given string is palindrome or not?
+## Write a program in C# Sharp to find if a given string is palindrome or not?
 
 ```csharp
 using System;
 class Program
 {
-static void Main()
-{
-// Input string
-Console.Write("Enter a string: ");
-string inputString = Console.ReadLine();
-// Check if the string is a palindrome
-bool isPalindrome = IsPalindrome(inputString);
-// Output the result
-if (isPalindrome)
-{
-Console.WriteLine("The string is a palindrome.");
-}
-```
-
-else
-
-```csharp
-{
-Console.WriteLine("The string is not a palindrome.");
-}
-}
-// Method to check if a string is a palindrome without using built-in methods
-static bool IsPalindrome(string str)
-{
-int length = str.Length;
-for (int i = 0; i < length / 2; i++)
-{
-if (str[i] != str[length - i - 1])
-{
-return false;
-}
-}
-return true;
-}
+  static void Main()
+  {
+    // Input string
+    Console.Write("Enter a string: ");
+    string inputString = Console.ReadLine();
+    // Check if the string is a palindrome
+    bool isPalindrome = IsPalindrome(inputString);
+    // Output the result
+    if (isPalindrome)
+    {
+      Console.WriteLine("The string is a palindrome.");
+    }
+    else
+    {
+      Console.WriteLine("The string is not a palindrome.");
+    }
+  }
+  // Method to check if a string is a palindrome without using built-in methods
+  static bool IsPalindrome(string str)
+  {
+    int length = str.Length;
+    for (int i = 0; i < length / 2; i++)
+    {
+      if (str[i] != str[length - i - 1])
+      {
+        return false;
+      }
+    }
+    return true;
+  }
 }
 ```
 
@@ -228,49 +220,49 @@ The string is not a palindrome.
 
 This program checks if the given string is a palindrome by comparing characters from both ends toward the center without using any built-in methods for reversing or comparing the string.
 
-Write a C# program to find the substring from a given string
+## Write a C# program to find the substring from a given string
 
 ```csharp
 using System;
 class Program
 {
-static void Main()
-{
-// Input the main string
-Console.Write("Enter the main string: ");
-string mainString = Console.ReadLine();
-// Input the start index and length of the substring
-Console.Write("Enter the start index of the substring: ");
-int startIndex = int.Parse(Console.ReadLine());
-Console.Write("Enter the length of the substring: ");
-int length = int.Parse(Console.ReadLine());
-// Validate inputs
-if (startIndex < 0 || startIndex >= mainString.Length)
-{
-Console.WriteLine("Invalid start index.");
-return;
-}
-if (length < 0 || startIndex + length > mainString.Length)
-{
-Console.WriteLine("Invalid length.");
-return;
-}
-// Extract and print the substring
-string substring = GetSubstring(mainString, startIndex, length);
-Console.WriteLine("Substring: " + substring);
-}
-// Method to get a substring from a given string
-static string GetSubstring(string str, int startIndex, int length)
-{
-char[] charArray = new char[length];
-int index = 0;
-for (int i = startIndex; i < startIndex + length; i++)
-{
-charArray[index] = str[i];
-index++;
-}
-return new string(charArray);
-}
+  static void Main()
+  {
+    // Input the main string
+    Console.Write("Enter the main string: ");
+    string mainString = Console.ReadLine();
+    // Input the start index and length of the substring
+    Console.Write("Enter the start index of the substring: ");
+    int startIndex = int.Parse(Console.ReadLine());
+    Console.Write("Enter the length of the substring: ");
+    int length = int.Parse(Console.ReadLine());
+    // Validate inputs
+    if (startIndex < 0 || startIndex >= mainString.Length)
+    {
+      Console.WriteLine("Invalid start index.");
+      return;
+    }
+    if (length < 0 || startIndex + length > mainString.Length)
+    {
+      Console.WriteLine("Invalid length.");
+      return;
+    }
+    // Extract and print the substring
+    string substring = GetSubstring(mainString, startIndex, length);
+    Console.WriteLine("Substring: " + substring);
+  }
+  // Method to get a substring from a given string
+  static string GetSubstring(string str, int startIndex, int length)
+  {
+    char[] charArray = new char[length];
+    int index = 0;
+    for (int i = startIndex; i < startIndex + length; i++)
+    {
+      charArray[index] = str[i];
+      index++;
+    }
+    return new string(charArray);
+  }
 }
 ```
 
@@ -312,7 +304,7 @@ Substring: World
 
 This program demonstrates how to extract a substring from a given string by specifying the start index and length without using built-in substring methods.
 
-Write a C# program to find if a positive integer is prime or not?
+## Write a C# program to find if a positive integer is prime or not?
 
 A **prime number** is a natural number greater than 1 that has no positive divisors other than 1 and itself. In other words, a prime number is only divisible by 1 and itself without leaving any remainder.
 
@@ -356,63 +348,55 @@ A **prime number** is a natural number greater than 1 that has no positive divis
 using System;
 class Program
 {
-static void Main()
-{
-// Input positive integer
-Console.Write("Enter a positive integer: ");
-int number;
-if (int.TryParse(Console.ReadLine(), out number) && number > 0)
-{
-// Check if the number is prime
-bool isPrime = IsPrime(number);
-// Output the result
-if (isPrime)
-{
-Console.WriteLine($"{number} is a prime number.");
-}
-```
-
-else
-
-```csharp
-{
-Console.WriteLine($"{number} is not a prime number.");
-}
-}
-```
-
-else
-
-```csharp
-{
-Console.WriteLine("Invalid input. Please enter a positive integer.");
-}
-}
-// Method to check if a number is prime
-static bool IsPrime(int num)
-{
-if (num <= 1)
-{
-return false; // 0 and 1 are not prime numbers
-}
-if (num == 2)
-{
-return true; // 2 is the only even prime number
-}
-if (num % 2 == 0)
-{
-return false; // Other even numbers are not prime
-}
-// Check for factors from 3 to √num
-for (int i = 3; i * i <= num; i += 2)
-{
-if (num % i == 0)
-{
-return false; // Found a factor, not a prime number
-}
-}
-return true; // No factors found, it's a prime number
-}
+  static void Main()
+  {
+    // Input positive integer
+    Console.Write("Enter a positive integer: ");
+    int number;
+    if (int.TryParse(Console.ReadLine(), out number) && number > 0)
+    {
+      // Check if the number is prime
+      bool isPrime = IsPrime(number);
+      // Output the result
+      if (isPrime)
+      {
+        Console.WriteLine($"{number} is a prime number.");
+      }
+      else
+      {
+        Console.WriteLine($"{number} is not a prime number.");
+      }
+    }
+    else
+    {
+      Console.WriteLine("Invalid input. Please enter a positive integer.");
+    }
+  }
+  // Method to check if a number is prime
+  static bool IsPrime(int num)
+  {
+    if (num <= 1)
+    {
+      return false; // 0 and 1 are not prime numbers
+    }
+    if (num == 2)
+    {
+      return true; // 2 is the only even prime number
+    }
+    if (num % 2 == 0)
+    {
+      return false; // Other even numbers are not prime
+    }
+    // Check for factors from 3 to √num
+    for (int i = 3; i * i <= num; i += 2)
+    {
+      if (num % i == 0)
+      {
+        return false; // Found a factor, not a prime number
+      }
+    }
+    return true; // No factors found, it's a prime number
+  }
 }
 ```
 

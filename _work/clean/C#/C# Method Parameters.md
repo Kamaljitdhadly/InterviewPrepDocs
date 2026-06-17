@@ -8,7 +8,7 @@
 4. What are optional parameters in a method?
 5. What are named parameters in a method?
 
-Difference between Pass by Value and Pass by Reference Parameters?
+## Difference between Pass by Value and Pass by Reference Parameters?
 
 In C#, parameter passing can be done either **by value** or **by reference**. Understanding these concepts is crucial for managing data and control flow in your programs.
 
@@ -30,20 +30,16 @@ In C#, parameter passing can be done either **by value** or **by reference**. Un
 using System;
 class Program
 {
-static void Main(string[] args)
-{
-int number = 10;
-ModifyValue(number);
-Console.WriteLine(number); // Output: 10
-}
-static void ModifyValue(int num)
-{
-```
-
-num = 20; // Changes the local copy, not the original variable
-
-```csharp
-}
+  static void Main(string[] args)
+  {
+    int number = 10;
+    ModifyValue(number);
+    Console.WriteLine(number); // Output: 10
+  }
+  static void ModifyValue(int num)
+  {
+    num = 20; // Changes the local copy, not the original variable
+  }
 }
 ```
 
@@ -67,20 +63,16 @@ In this example, the number variable in Main remains unchanged after the ModifyV
 using System;
 class Program
 {
-static void Main(string[] args)
-{
-int number = 10;
-ModifyReference(ref number);
-Console.WriteLine(number); // Output: 20
-}
-static void ModifyReference(ref int num)
-{
-```
-
-num = 20; // Changes the original variable
-
-```csharp
-}
+  static void Main(string[] args)
+  {
+    int number = 10;
+    ModifyReference(ref number);
+    Console.WriteLine(number); // Output: 20
+  }
+  static void ModifyReference(ref int num)
+  {
+    num = 20; // Changes the original variable
+  }
 }
 ```
 
@@ -92,41 +84,43 @@ In C#, the ref and out keywords are used to pass parameters by reference, but th
 
 - **ref**: The parameter must be initialized before it is passed to the method. The method can modify the value of the parameter.
 
+**Example:**
+
 ```csharp
-**Example**:
 using System;
 class Program
 {
-static void Main(string[] args)
-{
-int number = 10;
-ModifyValue(ref number);
-Console.WriteLine(number); // Output: 20
-}
-static void ModifyValue(ref int num)
-{
-num = 20;
-}
+  static void Main(string[] args)
+  {
+    int number = 10;
+    ModifyValue(ref number);
+    Console.WriteLine(number); // Output: 20
+  }
+  static void ModifyValue(ref int num)
+  {
+    num = 20;
+  }
 }
 ```
 
 - **out**: The parameter does not need to be initialized before it is passed to the method. The method must assign a value to the parameter before the method returns.
 
+**Example:**
+
 ```csharp
-**Example**:
 using System;
 class Program
 {
-static void Main(string[] args)
-{
-int number;
-InitializeValue(out number);
-Console.WriteLine(number); // Output: 20
-}
-static void InitializeValue(out int num)
-{
-num = 20; // Must assign a value to 'num'
-}
+  static void Main(string[] args)
+  {
+    int number;
+    InitializeValue(out number);
+    Console.WriteLine(number); // Output: 20
+  }
+  static void InitializeValue(out int num)
+  {
+    num = 20; // Must assign a value to 'num'
+  }
 }
 ```
 
@@ -138,7 +132,7 @@ num = 20; // Must assign a value to 'num'
 
 Understanding these differences helps manage how data is modified and propagated through methods in your C# programs.
 
-How to return more than one value from a method in C#?
+## How to return more than one value from a method in C#?
 
 In C#, you can return more than one value from a method using several approaches:
 
@@ -152,15 +146,15 @@ Tuples provide a simple way to return multiple values from a method. A tuple can
 using System;
 class Program
 {
-static void Main(string[] args)
-{
-var result = GetPersonInfo();
-Console.WriteLine($"Name: {result.Name}, Age: {result.Age}");
-}
-static (string Name, int Age) GetPersonInfo()
-{
-return ("John Doe", 30); // Tuple with two values
-}
+  static void Main(string[] args)
+  {
+    var result = GetPersonInfo();
+    Console.WriteLine($"Name: {result.Name}, Age: {result.Age}");
+  }
+  static (string Name, int Age) GetPersonInfo()
+  {
+    return ("John Doe", 30); // Tuple with two values
+  }
 }
 ```
 
@@ -180,22 +174,18 @@ The out keyword allows you to return multiple values by specifying additional pa
 using System;
 class Program
 {
-static void Main(string[] args)
-{
-string name;
-int age;
-GetPersonInfo(out name, out age);
-Console.WriteLine($"Name: {name}, Age: {age}");
-}
-static void GetPersonInfo(out string name, out int age)
-{
-name = "Jane Doe";
-```
-
-age = 25; // Must assign values to the out parameters
-
-```csharp
-}
+  static void Main(string[] args)
+  {
+    string name;
+    int age;
+    GetPersonInfo(out name, out age);
+    Console.WriteLine($"Name: {name}, Age: {age}");
+  }
+  static void GetPersonInfo(out string name, out int age)
+  {
+    name = "Jane Doe";
+    age = 25; // Must assign values to the out parameters
+  }
 }
 ```
 
@@ -215,20 +205,20 @@ You can create a custom class or struct to encapsulate the values and return an 
 using System;
 class Program
 {
-static void Main(string[] args)
-{
-var personInfo = GetPersonInfo();
-Console.WriteLine($"Name: {personInfo.Name}, Age: {personInfo.Age}");
-}
-static Person GetPersonInfo()
-{
-return new Person { Name = "Alice Smith", Age = 28 };
-}
+  static void Main(string[] args)
+  {
+    var personInfo = GetPersonInfo();
+    Console.WriteLine($"Name: {personInfo.Name}, Age: {personInfo.Age}");
+  }
+  static Person GetPersonInfo()
+  {
+    return new Person { Name = "Alice Smith", Age = 28 };
+  }
 }
 class Person
 {
-public string Name { get; set; }
-public int Age { get; set; }
+  public string Name { get; set; }
+  public int Age { get; set; }
 }
 ```
 
@@ -238,15 +228,15 @@ public int Age { get; set; }
 using System;
 class Program
 {
-static void Main(string[] args)
-{
-Person personInfo = GetPersonInfo();
-Console.WriteLine($"Name: {personInfo.Name}, Age: {personInfo.Age}");
-}
-static Person GetPersonInfo()
-{
-return new Person { Name = "Alice Smith", Age = 28 };
-}
+  static void Main(string[] args)
+  {
+    Person personInfo = GetPersonInfo();
+    Console.WriteLine($"Name: {personInfo.Name}, Age: {personInfo.Age}");
+  }
+  static Person GetPersonInfo()
+  {
+    return new Person { Name = "Alice Smith", Age = 28 };
+  }
 }
 ```
 
@@ -254,8 +244,8 @@ struct Person
 
 ```csharp
 {
-public string Name { get; set; }
-public int Age { get; set; }
+  public string Name { get; set; }
+  public int Age { get; set; }
 }
 ```
 
@@ -276,15 +266,15 @@ using System;
 using System.Linq;
 class Program
 {
-static void Main(string[] args)
-{
-var personInfo = GetPersonInfo();
-Console.WriteLine($"Name: {personInfo.Name}, Age: {personInfo.Age}");
-}
-static dynamic GetPersonInfo()
-{
-return new { Name = "Bob Johnson", Age = 40 };
-}
+  static void Main(string[] args)
+  {
+    var personInfo = GetPersonInfo();
+    Console.WriteLine($"Name: {personInfo.Name}, Age: {personInfo.Age}");
+  }
+  static dynamic GetPersonInfo()
+  {
+    return new { Name = "Bob Johnson", Age = 40 };
+  }
 }
 ```
 
@@ -304,7 +294,7 @@ return new { Name = "Bob Johnson", Age = 40 };
 
 Choose the method that best fits your needs based on the complexity of the data and the requirements of your application.
 
- What is “params” keyword? When to use params keyword in real applications?
+## What is “params” keyword? When to use params keyword in real applications?
 
 The params keyword in C# is used to specify a method parameter that takes a variable number of arguments. It allows you to pass a variable-length list of arguments to a method without having to create an array explicitly. This is useful when you want to provide a flexible number of arguments to a method.
 
@@ -321,7 +311,7 @@ The params keyword in C# is used to specify a method parameter that takes a vari
 ```csharp
 public void MethodName(params Type[] parameters)
 {
-// Method implementation
+  // Method implementation
 }
 ```
 
@@ -333,19 +323,19 @@ Here’s an example of using the params keyword:
 using System;
 class Program
 {
-static void Main(string[] args)
-{
-PrintNumbers(1, 2, 3, 4, 5); // Calling with multiple arguments
-PrintNumbers(10, 20); // Calling with fewer arguments
-PrintNumbers(); // Calling with no arguments
-}
-static void PrintNumbers(params int[] numbers)
-{
-foreach (int number in numbers)
-{
-Console.WriteLine(number);
-}
-}
+  static void Main(string[] args)
+  {
+    PrintNumbers(1, 2, 3, 4, 5); // Calling with multiple arguments
+    PrintNumbers(10, 20); // Calling with fewer arguments
+    PrintNumbers(); // Calling with no arguments
+  }
+  static void PrintNumbers(params int[] numbers)
+  {
+    foreach (int number in numbers)
+    {
+      Console.WriteLine(number);
+    }
+  }
 }
 ```
 
@@ -355,7 +345,7 @@ Console.WriteLine(number);
 
 - You can pass any number of int arguments, including none.
 
-What are optional parameters in a method?
+## What are optional parameters in a method?
 
 **Optional parameters** in C# allow you to specify default values for parameters in a method. When calling the method, you can omit these optional parameters, and the method will use the default values if they are not provided.
 
@@ -374,7 +364,7 @@ To define optional parameters, you assign default values in the method signature
 ```csharp
 public void MethodName(int requiredParam, int optionalParam1 = defaultValue1, string optionalParam2 = defaultValue2)
 {
-// Method implementation
+  // Method implementation
 }
 ```
 
@@ -386,19 +376,19 @@ Here’s an example demonstrating the use of optional parameters:
 using System;
 class Program
 {
-static void Main(string[] args)
-{
-PrintMessage("Hello"); // Only required parameter
-PrintMessage("Hello", "World"); // Both parameters
-PrintMessage("Hello", "World", 5); // All parameters
-}
-static void PrintMessage(string message, string suffix = "!", int repeatCount = 1)
-{
-for (int i = 0; i < repeatCount; i++)
-{
-Console.WriteLine(message + suffix);
-}
-}
+  static void Main(string[] args)
+  {
+    PrintMessage("Hello"); // Only required parameter
+    PrintMessage("Hello", "World"); // Both parameters
+    PrintMessage("Hello", "World", 5); // All parameters
+  }
+  static void PrintMessage(string message, string suffix = "!", int repeatCount = 1)
+  {
+    for (int i = 0; i < repeatCount; i++)
+    {
+      Console.WriteLine(message + suffix);
+    }
+  }
 }
 ```
 
@@ -412,8 +402,9 @@ Console.WriteLine(message + suffix);
 
 1.  **Simplify Method Overloading**: Optional parameters can reduce the need for method overloading by allowing a single method to handle different numbers of parameters.
 
+**Example:**
+
 ```csharp
-**Example**:
 // Without optional parameters
 void LogMessage(string message) { /* implementation */ }
 void LogMessage(string message, int severity) { /* implementation */ }
@@ -423,8 +414,9 @@ void LogMessage(string message, int severity = 0) { /* implementation */ }
 
 2.  **Provide Default Values**: Use optional parameters to provide sensible default values for parameters that are often the same.
 
+**Example:**
+
 ```csharp
-**Example**:
 void SendEmail(string recipient, string subject = "No Subject", string body = "No Content") { /* implementation */ }
 ```
 
@@ -440,7 +432,7 @@ void SendEmail(string recipient, string subject = "No Subject", string body = "N
 
 Optional parameters provide a way to call methods with fewer arguments by specifying default values for some parameters. They can simplify method signatures, reduce the need for overloading, and enhance code readability. Use them when you want to provide default behavior while allowing callers to customize specific aspects.
 
-What are named parameters in a method?
+## What are named parameters in a method?
 
 **Named parameters** in C# allow you to specify which arguments correspond to which parameters by name when calling a method. This enhances code readability and flexibility, especially when dealing with methods with many parameters or optional parameters.
 
@@ -468,18 +460,18 @@ Here’s an example demonstrating the use of named parameters:
 using System;
 class Program
 {
-static void Main(string[] args)
-{
-// Calling method with named parameters
-PrintMessage(message: "Hello", repeatCount: 3, suffix: "!");
-}
-static void PrintMessage(string message, int repeatCount = 1, string suffix = "!")
-{
-for (int i = 0; i < repeatCount; i++)
-{
-Console.WriteLine(message + suffix);
-}
-}
+  static void Main(string[] args)
+  {
+    // Calling method with named parameters
+    PrintMessage(message: "Hello", repeatCount: 3, suffix: "!");
+  }
+  static void PrintMessage(string message, int repeatCount = 1, string suffix = "!")
+  {
+    for (int i = 0; i < repeatCount; i++)
+    {
+      Console.WriteLine(message + suffix);
+    }
+  }
 }
 ```
 
@@ -493,8 +485,9 @@ Console.WriteLine(message + suffix);
 
 1.  **Improve Readability**: When methods have multiple parameters, especially optional ones, using named parameters can make the code more readable and self-documenting.
 
+**Example:**
+
 ```csharp
-**Example**:
 // Without named parameters
 ConfigureSettings("MyApp", true, 10);
 // With named parameters
@@ -503,8 +496,9 @@ ConfigureSettings(applicationName: "MyApp", isDebugMode: true, maxConnections: 1
 
 2.  **Specify Values for Optional Parameters**: If you want to specify values for some parameters while using default values for others, named parameters make it clear which parameters you are setting.
 
+**Example:**
+
 ```csharp
-**Example**:
 // Method call specifying only some parameters
 SendEmail(recipient: "user@example.com", subject: "Hello");
 ```

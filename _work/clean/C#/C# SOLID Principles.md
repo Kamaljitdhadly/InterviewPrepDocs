@@ -36,23 +36,23 @@ Let’s consider a class that handles user information, including user data mana
 ```csharp
 public class User
 {
-public string Name { get; set; }
-public string Email { get; set; }
-public void Save()
-{
-// Code to save user data to a database
-Console.WriteLine("User saved.");
-}
-public void SendEmail(string message)
-{
-// Code to send an email
-Console.WriteLine($"Email sent to {Email}: {message}");
-}
-public void GenerateReport()
-{
-// Code to generate a user report
-Console.WriteLine("User report generated.");
-}
+  public string Name { get; set; }
+  public string Email { get; set; }
+  public void Save()
+  {
+    // Code to save user data to a database
+    Console.WriteLine("User saved.");
+  }
+  public void SendEmail(string message)
+  {
+    // Code to send an email
+    Console.WriteLine($"Email sent to {Email}: {message}");
+  }
+  public void GenerateReport()
+  {
+    // Code to generate a user report
+    Console.WriteLine("User report generated.");
+  }
 }
 ```
 
@@ -68,35 +68,35 @@ To adhere to SRP, we can refactor the code into separate classes, each handling 
 ```csharp
 public class User
 {
-public string Name { get; set; }
-public string Email { get; set; }
+  public string Name { get; set; }
+  public string Email { get; set; }
 }
 // Class for saving user data
 public class UserRepository
 {
-public void Save(User user)
-{
-// Code to save user data to a database
-Console.WriteLine("User saved.");
-}
+  public void Save(User user)
+  {
+    // Code to save user data to a database
+    Console.WriteLine("User saved.");
+  }
 }
 // Class for sending emails
 public class EmailService
 {
-public void SendEmail(User user, string message)
-{
-// Code to send an email
-Console.WriteLine($"Email sent to {user.Email}: {message}");
-}
+  public void SendEmail(User user, string message)
+  {
+    // Code to send an email
+    Console.WriteLine($"Email sent to {user.Email}: {message}");
+  }
 }
 // Class for generating user reports
 public class UserReportGenerator
 {
-public void GenerateReport(User user)
-{
-// Code to generate a user report
-Console.WriteLine("User report generated.");
-}
+  public void GenerateReport(User user)
+  {
+    // Code to generate a user report
+    Console.WriteLine("User report generated.");
+  }
 }
 ```
 
@@ -154,26 +154,18 @@ Let’s say we have a simple application that calculates the area of different s
 // Shape class that calculates area
 public class Shape
 {
-public enum ShapeType { Rectangle, Circle }
-public ShapeType Type { get; set; }
-public double Width { get; set; }
-public double Height { get; set; }
-public double CalculateArea()
-{
-switch (Type)
-{
-```
-
-case ShapeType.Rectangle:
-
-```csharp
-return Width * Height;
-```
-
-case ShapeType.Circle:
-
-```csharp
-return Math.PI * (Width / 2) * (Width / 2); // Assuming Width is the diameter
+  public enum ShapeType { Rectangle, Circle }
+  public ShapeType Type { get; set; }
+  public double Width { get; set; }
+  public double Height { get; set; }
+  public double CalculateArea()
+  {
+    switch (Type)
+    {
+      case ShapeType.Rectangle:
+      return Width * Height;
+      case ShapeType.Circle:
+      return Math.PI * (Width / 2) * (Width / 2); // Assuming Width is the diameter
 ```
 
 default:
@@ -202,36 +194,36 @@ To adhere to OCP, we can use interfaces and polymorphism to allow for new shapes
 ```csharp
 public interface IShape
 {
-double CalculateArea();
+  double CalculateArea();
 }
 // Rectangle class
 public class Rectangle : IShape
 {
-public double Width { get; set; }
-public double Height { get; set; }
-public double CalculateArea()
-{
-return Width * Height;
-}
+  public double Width { get; set; }
+  public double Height { get; set; }
+  public double CalculateArea()
+  {
+    return Width * Height;
+  }
 }
 // Circle class
 public class Circle : IShape
 {
-public double Radius { get; set; }
-public double CalculateArea()
-{
-return Math.PI * Radius * Radius;
-}
+  public double Radius { get; set; }
+  public double CalculateArea()
+  {
+    return Math.PI * Radius * Radius;
+  }
 }
 // Triangle class
 public class Triangle : IShape
 {
-public double Base { get; set; }
-public double Height { get; set; }
-public double CalculateArea()
-{
-return 0.5 * Base * Height;
-}
+  public double Base { get; set; }
+  public double Height { get; set; }
+  public double CalculateArea()
+  {
+    return 0.5 * Base * Height;
+  }
 }
 // Usage
 IShape rectangle = new Rectangle { Width = 5, Height = 10 };
@@ -293,26 +285,26 @@ Consider a scenario with a base class Bird and a subclass Penguin:
 ```csharp
 public class Bird
 {
-public virtual void Fly()
-{
-Console.WriteLine("I can fly!");
-}
+  public virtual void Fly()
+  {
+    Console.WriteLine("I can fly!");
+  }
 }
 // Subclass
 public class Sparrow : Bird
 {
-public override void Fly()
-{
-Console.WriteLine("Sparrow flying!");
-}
+  public override void Fly()
+  {
+    Console.WriteLine("Sparrow flying!");
+  }
 }
 // Another Subclass that cannot fly
 public class Penguin : Bird
 {
-public override void Fly()
-{
-throw new NotImplementedException("Penguins cannot fly!");
-}
+  public override void Fly()
+  {
+    throw new NotImplementedException("Penguins cannot fly!");
+  }
 }
 ```
 
@@ -328,40 +320,40 @@ To follow LSP, we need to ensure that all subclasses can be used interchangeably
 ```csharp
 public class Bird
 {
-public virtual void Eat()
-{
-Console.WriteLine("Eating...");
-}
+  public virtual void Eat()
+  {
+    Console.WriteLine("Eating...");
+  }
 }
 // Flyable Interface
 public interface IFlyable
 {
-void Fly();
+  void Fly();
 }
 // Subclass: Sparrow (can fly)
 public class Sparrow : Bird, IFlyable
 {
-public void Fly()
-{
-Console.WriteLine("Sparrow flying!");
-}
+  public void Fly()
+  {
+    Console.WriteLine("Sparrow flying!");
+  }
 }
 // Subclass: Penguin (cannot fly)
 public class Penguin : Bird
 {
-// No Fly() method
+  // No Fly() method
 }
 // Usage
 public class BirdWatcher
 {
-public void WatchBird(Bird bird)
-{
-bird.Eat();
-if (bird is IFlyable flyableBird)
-{
-flyableBird.Fly(); // Only calls Fly() on birds that can fly
-}
-}
+  public void WatchBird(Bird bird)
+  {
+    bird.Eat();
+    if (bird is IFlyable flyableBird)
+    {
+      flyableBird.Fly(); // Only calls Fly() on birds that can fly
+    }
+  }
 }
 // Usage Example
 var watcher = new BirdWatcher();
@@ -426,41 +418,41 @@ Let's say we have a general interface for various types of machines:
 ```csharp
 public interface IMachine
 {
-void Print();
-void Scan();
-void Fax();
+  void Print();
+  void Scan();
+  void Fax();
 }
 // Class that implements IMachine but doesn't need Fax
 public class MultiFunctionPrinter : IMachine
 {
-public void Print()
-{
-Console.WriteLine("Printing...");
-}
-public void Scan()
-{
-Console.WriteLine("Scanning...");
-}
-public void Fax() // Unused method
-{
-Console.WriteLine("Faxing...");
-}
+  public void Print()
+  {
+    Console.WriteLine("Printing...");
+  }
+  public void Scan()
+  {
+    Console.WriteLine("Scanning...");
+  }
+  public void Fax() // Unused method
+  {
+    Console.WriteLine("Faxing...");
+  }
 }
 // Class that only needs to Print
 public class SimplePrinter : IMachine
 {
-public void Print()
-{
-Console.WriteLine("Printing...");
-}
-public void Scan() // Unused method
-{
-throw new NotImplementedException();
-}
-public void Fax() // Unused method
-{
-throw new NotImplementedException();
-}
+  public void Print()
+  {
+    Console.WriteLine("Printing...");
+  }
+  public void Scan() // Unused method
+  {
+    throw new NotImplementedException();
+  }
+  public void Fax() // Unused method
+  {
+    throw new NotImplementedException();
+  }
 }
 ```
 
@@ -476,39 +468,39 @@ We can create smaller, more focused interfaces for each type of functionality:
 ```csharp
 public interface IPrinter
 {
-void Print();
+  void Print();
 }
 public interface IScanner
 {
-void Scan();
+  void Scan();
 }
 public interface IFax
 {
-void Fax();
+  void Fax();
 }
 // Class implementing Printer and Scanner
 public class MultiFunctionPrinter : IPrinter, IScanner, IFax
 {
-public void Print()
-{
-Console.WriteLine("Printing...");
-}
-public void Scan()
-{
-Console.WriteLine("Scanning...");
-}
-public void Fax()
-{
-Console.WriteLine("Faxing...");
-}
+  public void Print()
+  {
+    Console.WriteLine("Printing...");
+  }
+  public void Scan()
+  {
+    Console.WriteLine("Scanning...");
+  }
+  public void Fax()
+  {
+    Console.WriteLine("Faxing...");
+  }
 }
 // Class implementing only the Printer interface
 public class SimplePrinter : IPrinter
 {
-public void Print()
-{
-Console.WriteLine("Printing...");
-}
+  public void Print()
+  {
+    Console.WriteLine("Printing...");
+  }
 }
 ```
 
@@ -567,23 +559,19 @@ Let’s use an example of a **message sender** system. The high-level module (bu
 ```csharp
 public class SMS
 {
-public void SendMessage(string message)
-{
-Console.WriteLine("Sending SMS: " + message);
-}
+  public void SendMessage(string message)
+  {
+    Console.WriteLine("Sending SMS: " + message);
+  }
 }
 // High-level module: Business logic
 public class Notification
 {
-private SMS _sms = new SMS(); // High-level module depends directly on the low-level module
-public void Send(string message)
-{
-```
-
-_sms.SendMessage(message); // Tightly coupled to SMS
-
-```csharp
-}
+  private SMS _sms = new SMS(); // High-level module depends directly on the low-level module
+  public void Send(string message)
+  {
+    _sms.SendMessage(message); // Tightly coupled to SMS
+  }
 }
 // Usage
 var notification = new Notification();
@@ -602,37 +590,37 @@ We can introduce an **abstraction** in the form of an interface, and both the hi
 ```csharp
 public interface IMessageSender
 {
-void SendMessage(string message);
+  void SendMessage(string message);
 }
 // Low-level module 1: SMS sending logic
 public class SMS : IMessageSender
 {
-public void SendMessage(string message)
-{
-Console.WriteLine("Sending SMS: " + message);
-}
+  public void SendMessage(string message)
+  {
+    Console.WriteLine("Sending SMS: " + message);
+  }
 }
 // Low-level module 2: Email sending logic
 public class Email : IMessageSender
 {
-public void SendMessage(string message)
-{
-Console.WriteLine("Sending Email: " + message);
-}
+  public void SendMessage(string message)
+  {
+    Console.WriteLine("Sending Email: " + message);
+  }
 }
 // High-level module: Notification class
 public class Notification
 {
-private IMessageSender _messageSender;
-// Constructor injection to pass the abstraction (IMessageSender)
-public Notification(IMessageSender messageSender)
-{
-_messageSender = messageSender;
-}
-public void Send(string message)
-{
-_messageSender.SendMessage(message); // Works with any message sender (SMS, Email, etc.)
-}
+  private IMessageSender _messageSender;
+  // Constructor injection to pass the abstraction (IMessageSender)
+  public Notification(IMessageSender messageSender)
+  {
+    _messageSender = messageSender;
+  }
+  public void Send(string message)
+  {
+    _messageSender.SendMessage(message); // Works with any message sender (SMS, Email, etc.)
+  }
 }
 // Usage
 var smsSender = new SMS();
@@ -737,37 +725,33 @@ Let’s consider a scenario where we need to calculate the area of different sha
 ```csharp
 public class ShapeAreaCalculator
 {
-public double CalculateArea(string shapeType, params double[] dimensions)
-{
-double area = 0;
-if (shapeType == "rectangle")
-{
-if (dimensions.Length != 2)
-throw new ArgumentException("Rectangle requires 2 dimensions.");
-area = dimensions[0] * dimensions[1];
-}
-else if (shapeType == "circle")
-{
-if (dimensions.Length != 1)
-throw new ArgumentException("Circle requires 1 dimension.");
-area = Math.PI * Math.Pow(dimensions[0], 2);
-}
-else if (shapeType == "triangle")
-{
-if (dimensions.Length != 2)
-throw new ArgumentException("Triangle requires 2 dimensions.");
-area = 0.5 * dimensions[0] * dimensions[1];
-}
-```
-
-else
-
-```csharp
-{
-throw new NotImplementedException("Shape type not supported.");
-}
-return area;
-}
+  public double CalculateArea(string shapeType, params double[] dimensions)
+  {
+    double area = 0;
+    if (shapeType == "rectangle")
+    {
+      if (dimensions.Length != 2)
+      throw new ArgumentException("Rectangle requires 2 dimensions.");
+      area = dimensions[0] * dimensions[1];
+    }
+    else if (shapeType == "circle")
+    {
+      if (dimensions.Length != 1)
+      throw new ArgumentException("Circle requires 1 dimension.");
+      area = Math.PI * Math.Pow(dimensions[0], 2);
+    }
+    else if (shapeType == "triangle")
+    {
+      if (dimensions.Length != 2)
+      throw new ArgumentException("Triangle requires 2 dimensions.");
+      area = 0.5 * dimensions[0] * dimensions[1];
+    }
+    else
+    {
+      throw new NotImplementedException("Shape type not supported.");
+    }
+    return area;
+  }
 }
 // Usage
 var calculator = new ShapeAreaCalculator();
@@ -794,36 +778,36 @@ To adhere to the KISS Principle, we can refactor the code using a more straightf
 ```csharp
 public interface IShape
 {
-double CalculateArea();
+  double CalculateArea();
 }
 // Rectangle class
 public class Rectangle : IShape
 {
-public double Width { get; set; }
-public double Height { get; set; }
-public double CalculateArea()
-{
-return Width * Height;
-}
+  public double Width { get; set; }
+  public double Height { get; set; }
+  public double CalculateArea()
+  {
+    return Width * Height;
+  }
 }
 // Circle class
 public class Circle : IShape
 {
-public double Radius { get; set; }
-public double CalculateArea()
-{
-return Math.PI * Radius * Radius;
-}
+  public double Radius { get; set; }
+  public double CalculateArea()
+  {
+    return Math.PI * Radius * Radius;
+  }
 }
 // Triangle class
 public class Triangle : IShape
 {
-public double Base { get; set; }
-public double Height { get; set; }
-public double CalculateArea()
-{
-return 0.5 * Base * Height;
-}
+  public double Base { get; set; }
+  public double Height { get; set; }
+  public double CalculateArea()
+  {
+    return 0.5 * Base * Height;
+  }
 }
 // Usage
 IShape rectangle = new Rectangle { Width = 5, Height = 10 };
@@ -885,32 +869,32 @@ Let’s say we have a simple application that calculates discounts for different
 ```csharp
 public class Product
 {
-public string Name { get; set; }
-public double Price { get; set; }
-public double Discount { get; set; }
-public double GetDiscountedPrice()
-{
-// Repeated discount logic for electronics
-if (Name == "Electronics")
-{
-if (Discount > 0 && Discount < 1)
-{
-return Price * (1 - Discount);
-}
-return Price;
-}
-// Repeated discount logic for clothing
-if (Name == "Clothing")
-{
-if (Discount > 0 && Discount < 1)
-{
-return Price * (1 - Discount);
-}
-return Price;
-}
-// Other product types
-return Price; // No discount
-}
+  public string Name { get; set; }
+  public double Price { get; set; }
+  public double Discount { get; set; }
+  public double GetDiscountedPrice()
+  {
+    // Repeated discount logic for electronics
+    if (Name == "Electronics")
+    {
+      if (Discount > 0 && Discount < 1)
+      {
+        return Price * (1 - Discount);
+      }
+      return Price;
+    }
+    // Repeated discount logic for clothing
+    if (Name == "Clothing")
+    {
+      if (Discount > 0 && Discount < 1)
+      {
+        return Price * (1 - Discount);
+      }
+      return Price;
+    }
+    // Other product types
+    return Price; // No discount
+  }
 }
 // Usage
 var electronics = new Product { Name = "Electronics", Price = 1000, Discount = 0.1 };
@@ -929,21 +913,21 @@ To adhere to the DRY Principle, we can refactor the discount calculation into a 
 ```csharp
 public class Product
 {
-public string Name { get; set; }
-public double Price { get; set; }
-public double Discount { get; set; }
-public double GetDiscountedPrice()
-{
-return CalculateDiscountedPrice(Price, Discount);
-}
-private double CalculateDiscountedPrice(double price, double discount)
-{
-if (discount > 0 && discount < 1)
-{
-return price * (1 - discount);
-}
-return price; // No discount
-}
+  public string Name { get; set; }
+  public double Price { get; set; }
+  public double Discount { get; set; }
+  public double GetDiscountedPrice()
+  {
+    return CalculateDiscountedPrice(Price, Discount);
+  }
+  private double CalculateDiscountedPrice(double price, double discount)
+  {
+    if (discount > 0 && discount < 1)
+    {
+      return price * (1 - discount);
+    }
+    return price; // No discount
+  }
 }
 // Usage
 var electronics = new Product { Name = "Electronics", Price = 1000, Discount = 0.1 };
@@ -999,21 +983,21 @@ Consider a class designed to manage user accounts that includes a complex featur
 ```csharp
 public class UserAccount
 {
-public string Username { get; set; }
-public string Password { get; set; }
-// Unused feature for managing user preferences
-public string PreferredLanguage { get; set; }
-public string Theme { get; set; }
-public void Save()
-{
-// Code to save user account
-Console.WriteLine("User account saved.");
-}
-public void LoadPreferences()
-{
-// Code to load user preferences (currently not needed)
-Console.WriteLine("Loading user preferences...");
-}
+  public string Username { get; set; }
+  public string Password { get; set; }
+  // Unused feature for managing user preferences
+  public string PreferredLanguage { get; set; }
+  public string Theme { get; set; }
+  public void Save()
+  {
+    // Code to save user account
+    Console.WriteLine("User account saved.");
+  }
+  public void LoadPreferences()
+  {
+    // Code to load user preferences (currently not needed)
+    Console.WriteLine("Loading user preferences...");
+  }
 }
 ```
 
@@ -1027,13 +1011,13 @@ To adhere to the YAGNI Principle, we can simplify the UserAccount class by remov
 ```csharp
 public class UserAccount
 {
-public string Username { get; set; }
-public string Password { get; set; }
-public void Save()
-{
-// Code to save user account
-Console.WriteLine("User account saved.");
-}
+  public string Username { get; set; }
+  public string Password { get; set; }
+  public void Save()
+  {
+    // Code to save user account
+    Console.WriteLine("User account saved.");
+  }
 }
 // Usage
 var user = new UserAccount { Username = "john_doe", Password = "securepassword" };
@@ -1087,19 +1071,19 @@ Consider a simple application that handles user registration and includes both t
 ```csharp
 public class UserRegistration
 {
-public void RegisterUser(string username, string password)
-{
-// Business logic
-if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
-{
-Console.WriteLine("Username and password cannot be empty.");
-return;
-}
-// Simulate saving user to the database
-Console.WriteLine("User registered successfully!");
-// Presentation logic
-Console.WriteLine($"Welcome, {username}!");
-}
+  public void RegisterUser(string username, string password)
+  {
+    // Business logic
+    if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+    {
+      Console.WriteLine("Username and password cannot be empty.");
+      return;
+    }
+    // Simulate saving user to the database
+    Console.WriteLine("User registered successfully!");
+    // Presentation logic
+    Console.WriteLine($"Welcome, {username}!");
+  }
 }
 // Usage
 var registration = new UserRegistration();
@@ -1116,41 +1100,37 @@ To adhere to the SoC principle, we can refactor the code to separate the busines
 ```csharp
 public class UserRegistrationService
 {
-public bool RegisterUser(string username, string password)
-{
-// Business logic
-if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
-{
-return false;
-}
-// Simulate saving user to the database
-Console.WriteLine("User registered successfully!");
-return true;
-}
+  public bool RegisterUser(string username, string password)
+  {
+    // Business logic
+    if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+    {
+      return false;
+    }
+    // Simulate saving user to the database
+    Console.WriteLine("User registered successfully!");
+    return true;
+  }
 }
 public class UserRegistrationUI
 {
-private readonly UserRegistrationService _registrationService;
-public UserRegistrationUI(UserRegistrationService registrationService)
-{
-_registrationService = registrationService;
-}
-public void Register(string username, string password)
-{
-if (_registrationService.RegisterUser(username, password))
-{
-// Presentation logic
-Console.WriteLine($"Welcome, {username}!");
-}
-```
-
-else
-
-```csharp
-{
-Console.WriteLine("Username and password cannot be empty.");
-}
-}
+  private readonly UserRegistrationService _registrationService;
+  public UserRegistrationUI(UserRegistrationService registrationService)
+  {
+    _registrationService = registrationService;
+  }
+  public void Register(string username, string password)
+  {
+    if (_registrationService.RegisterUser(username, password))
+    {
+      // Presentation logic
+      Console.WriteLine($"Welcome, {username}!");
+    }
+    else
+    {
+      Console.WriteLine("Username and password cannot be empty.");
+    }
+  }
 }
 // Usage
 var registrationService = new UserRegistrationService();

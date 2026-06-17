@@ -6,7 +6,7 @@
 2. What is the difference between “Dispose” and “Finalize”?
 3. Can we force Garbage Collector to run?
 
-What is Garbage Collection(GC)?
+## What is Garbage Collection(GC)?
 
 In C#, memory management is a critical aspect of application development. The .NET framework provides various mechanisms and patterns to manage memory efficiently and avoid common pitfalls such as memory leaks. Below is a breakdown of key concepts:
 
@@ -27,11 +27,11 @@ The **Garbage Collector** is a part of the .NET runtime environment that automat
 ```csharp
 public class Program
 {
-static void Main(string[] args)
-{
-var obj = new object(); // Allocated on the managed heap
-// The Garbage Collector will automatically clean up the memory when obj is no longer in use
-}
+  static void Main(string[] args)
+  {
+    var obj = new object(); // Allocated on the managed heap
+    // The Garbage Collector will automatically clean up the memory when obj is no longer in use
+  }
 }
 ```
 
@@ -55,10 +55,10 @@ var obj = new object(); // Allocated on the managed heap
 public static extern int MessageBox(IntPtr hWnd, String text, String caption, uint type);
 class Program
 {
-static void Main()
-{
-MessageBox(IntPtr.Zero, "Hello, World!", "MyApp", 0); // Unmanaged code
-}
+  static void Main()
+  {
+    MessageBox(IntPtr.Zero, "Hello, World!", "MyApp", 0); // Unmanaged code
+  }
 }
 ```
 
@@ -71,7 +71,7 @@ The **Dispose Pattern** is a design pattern used to release unmanaged resources 
 ```csharp
 public class ResourceHolder : IDisposable
 {
-private bool disposed = false; // To detect redundant calls
+  private bool disposed = false; // To detect redundant calls
 ```
 
 // Public implementation of Dispose pattern callable by consumers.
@@ -79,42 +79,25 @@ private bool disposed = false; // To detect redundant calls
 ```csharp
 public void Dispose()
 {
-Dispose(true);
-```
-
-GC.SuppressFinalize(this); // Suppress finalization for this object
-
-```csharp
+  Dispose(true);
+  GC.SuppressFinalize(this); // Suppress finalization for this object
 }
-```
-
 // Protected implementation of Dispose pattern.
-
-```csharp
 protected virtual void Dispose(bool disposing)
 {
-if (!disposed)
-{
-if (disposing)
-{
-```
-
-// Free any other managed objects here.
-
-```csharp
-}
-```
-
-// Free any unmanaged resources here.
-
-disposed = true;
-
-```csharp
-}
+  if (!disposed)
+  {
+    if (disposing)
+    {
+      // Free any other managed objects here.
+    }
+    // Free any unmanaged resources here.
+    disposed = true;
+  }
 }
 ~ResourceHolder() // Finalizer
 {
-Dispose(false);
+  Dispose(false);
 }
 }
 ```
@@ -124,13 +107,13 @@ Dispose(false);
 ```csharp
 class Program
 {
-static void Main()
-{
-using (var resource = new ResourceHolder())
-{
-// Use the resource
-} // Automatically calls Dispose at the end of the using block
-}
+  static void Main()
+  {
+    using (var resource = new ResourceHolder())
+    {
+      // Use the resource
+    } // Automatically calls Dispose at the end of the using block
+  }
 }
 ```
 
@@ -143,18 +126,18 @@ A **Memory Leak** occurs when objects are no longer needed but are not properly 
 ```csharp
 public class Publisher
 {
-public event EventHandler SomeEvent;
+  public event EventHandler SomeEvent;
 }
 public class Subscriber
 {
-public void Subscribe(Publisher publisher)
-{
-publisher.SomeEvent += HandleEvent;
-}
-private void HandleEvent(object sender, EventArgs e)
-{
-// Event handling code
-}
+  public void Subscribe(Publisher publisher)
+  {
+    publisher.SomeEvent += HandleEvent;
+  }
+  private void HandleEvent(object sender, EventArgs e)
+  {
+    // Event handling code
+  }
 }
 ```
 
@@ -171,29 +154,20 @@ private void HandleEvent(object sender, EventArgs e)
 ```csharp
 class Program
 {
-static void Main()
-{
-var strongRef = new object(); // Strong reference
-var weakRef = new WeakReference(strongRef); // Weak reference
-```
-
-strongRef = null; // Removing the strong reference
-
-if (weakRef.IsAlive)
-
-```csharp
-{
-Console.WriteLine("Object is still alive.");
-}
-```
-
-else
-
-```csharp
-{
-Console.WriteLine("Object has been collected.");
-}
-}
+  static void Main()
+  {
+    var strongRef = new object(); // Strong reference
+    var weakRef = new WeakReference(strongRef); // Weak reference
+    strongRef = null; // Removing the strong reference
+    if (weakRef.IsAlive)
+    {
+      Console.WriteLine("Object is still alive.");
+    }
+    else
+    {
+      Console.WriteLine("Object has been collected.");
+    }
+  }
 }
 ```
 
@@ -242,11 +216,11 @@ Console.WriteLine("Object has been collected.");
 ```csharp
 public class ManagedResourceExample
 {
-public string ManagedString { get; set; }
-public ManagedResourceExample()
-{
-ManagedString = "This is a managed resource.";
-}
+  public string ManagedString { get; set; }
+  public ManagedResourceExample()
+  {
+    ManagedString = "This is a managed resource.";
+  }
 }
 ```
 
@@ -287,30 +261,26 @@ using System;
 using System.Runtime.InteropServices;
 public class UnmanagedResourceExample : IDisposable
 {
-private IntPtr unmanagedResource; // Represents an unmanaged resource
-public UnmanagedResourceExample()
-{
-// Allocate unmanaged resource
-unmanagedResource = Marshal.AllocHGlobal(100);
-}
-public void Dispose()
-{
-// Release unmanaged resource
-if (unmanagedResource != IntPtr.Zero)
-{
-Marshal.FreeHGlobal(unmanagedResource);
-unmanagedResource = IntPtr.Zero;
-}
-```
-
-GC.SuppressFinalize(this); // Prevent finalizer from running
-
-```csharp
-}
-~UnmanagedResourceExample()
-{
-Dispose(); // Finalizer calls Dispose to release unmanaged resources
-}
+  private IntPtr unmanagedResource; // Represents an unmanaged resource
+  public UnmanagedResourceExample()
+  {
+    // Allocate unmanaged resource
+    unmanagedResource = Marshal.AllocHGlobal(100);
+  }
+  public void Dispose()
+  {
+    // Release unmanaged resource
+    if (unmanagedResource != IntPtr.Zero)
+    {
+      Marshal.FreeHGlobal(unmanagedResource);
+      unmanagedResource = IntPtr.Zero;
+    }
+    GC.SuppressFinalize(this); // Prevent finalizer from running
+  }
+  ~UnmanagedResourceExample()
+  {
+    Dispose(); // Finalizer calls Dispose to release unmanaged resources
+  }
 }
 ```
 
@@ -336,7 +306,7 @@ In this example, unmanagedResource is an unmanaged resource allocated with Marsh
 
   - **Unmanaged Resources**: Lifecycle must be managed manually, typically using the IDisposable pattern to ensure proper cleanup.
 
-What is the difference between “Dispose” and “Finalize”?
+## What is the difference between “Dispose” and “Finalize”?
 
 In .NET, Dispose and Finalize are mechanisms used to release unmanaged resources and perform cleanup operations, but they serve different purposes and are used in different scenarios. Here's a detailed comparison:
 
@@ -357,41 +327,41 @@ In .NET, Dispose and Finalize are mechanisms used to release unmanaged resources
 ```csharp
 public class ResourceHolder : IDisposable
 {
-private IntPtr unmanagedResource;
-private bool disposed = false;
-public ResourceHolder()
-{
-// Allocate unmanaged resource
-unmanagedResource = /* allocation logic */;
-}
-// Implement the Dispose method
-public void Dispose()
-{
-Dispose(true);
-GC.SuppressFinalize(this);
-}
-protected virtual void Dispose(bool disposing)
-{
-if (!disposed)
-{
-if (disposing)
-{
-// Dispose managed resources if needed
-}
-// Free unmanaged resources
-if (unmanagedResource != IntPtr.Zero)
-{
-// Release unmanaged resource
-unmanagedResource = IntPtr.Zero;
-}
-disposed = true;
-}
-}
-// Destructor (Finalizer)
-~ResourceHolder()
-{
-Dispose(false);
-}
+  private IntPtr unmanagedResource;
+  private bool disposed = false;
+  public ResourceHolder()
+  {
+    // Allocate unmanaged resource
+    unmanagedResource = /* allocation logic */;
+  }
+  // Implement the Dispose method
+  public void Dispose()
+  {
+    Dispose(true);
+    GC.SuppressFinalize(this);
+  }
+  protected virtual void Dispose(bool disposing)
+  {
+    if (!disposed)
+    {
+      if (disposing)
+      {
+        // Dispose managed resources if needed
+      }
+      // Free unmanaged resources
+      if (unmanagedResource != IntPtr.Zero)
+      {
+        // Release unmanaged resource
+        unmanagedResource = IntPtr.Zero;
+      }
+      disposed = true;
+    }
+  }
+  // Destructor (Finalizer)
+  ~ResourceHolder()
+  {
+    Dispose(false);
+  }
 }
 ```
 
@@ -414,26 +384,26 @@ In this example, the Dispose method is called explicitly to clean up unmanaged r
 ```csharp
 public class ResourceHolderWithFinalizer
 {
-private IntPtr unmanagedResource;
-public ResourceHolderWithFinalizer()
-{
-// Allocate unmanaged resource
-unmanagedResource = /* allocation logic */;
-}
-~ResourceHolderWithFinalizer()
-{
-// Clean up unmanaged resources
-if (unmanagedResource != IntPtr.Zero)
-{
-// Release unmanaged resource
-unmanagedResource = IntPtr.Zero;
-}
-}
+  private IntPtr unmanagedResource;
+  public ResourceHolderWithFinalizer()
+  {
+    // Allocate unmanaged resource
+    unmanagedResource = /* allocation logic */;
+  }
+  ~ResourceHolderWithFinalizer()
+  {
+    // Clean up unmanaged resources
+    if (unmanagedResource != IntPtr.Zero)
+    {
+      // Release unmanaged resource
+      unmanagedResource = IntPtr.Zero;
+    }
+  }
 }
 ```
 
 In this example, the finalizer (~ResourceHolderWithFinalizer) is used to release unmanaged resources. This will be called by the garbage collector if Dispose was not called.
 
-Can we force Garbage Collector to run?
+## Can we force Garbage Collector to run?
 
 you can request the garbage collector (GC) to run manually in .NET using the GC class, but it's important to understand that this is generally not recommended as a routine practice. The .NET garbage collector is designed to be efficient and to run based on its own algorithms and heuristics, which are optimized for most scenarios. Forcing a garbage collection can lead to performance issues and might not provide the benefits you expect.

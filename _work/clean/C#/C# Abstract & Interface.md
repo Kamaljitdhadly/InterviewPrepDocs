@@ -8,7 +8,7 @@
 4. Can you declare abstract methods as private in C#?
 5. What is the difference between abstraction and abstract class
 
-What are abstract classes and interfaces
+## What are abstract classes and interfaces
 
 In C#, both **abstract classes** and **interfaces** are used to define contracts for classes to follow, but they have different characteristics and use cases. Here’s a detailed comparison between abstract classes and interfaces:
 
@@ -20,15 +20,16 @@ In C#, both **abstract classes** and **interfaces** are used to define contracts
 
 1.  **Can Contain Implementation**: Abstract classes can have fields, constructors, destructors, and methods with implementations. This allows you to provide some common functionality that derived classes can use or override.
 
+**Example:**
+
 ```csharp
-**Example**:
 public abstract class Animal
 {
-public abstract void MakeSound(); // Abstract method, no implementation
-public void Sleep() // Concrete method with implementation
-{
-Console.WriteLine("Sleeping...");
-}
+  public abstract void MakeSound(); // Abstract method, no implementation
+  public void Sleep() // Concrete method with implementation
+  {
+    Console.WriteLine("Sleeping...");
+  }
 }
 ```
 
@@ -54,16 +55,17 @@ Console.WriteLine("Sleeping...");
 
 1.  **No Implementation (Prior to C# 8.0)**: Interfaces cannot contain implementation details. They only define method signatures, properties, and events. However, C# 8.0 introduced default interface methods with implementation.
 
+**Example:**
+
 ```csharp
-**Example**:
 public interface IAnimal
 {
-void MakeSound(); // Method signature
-// C# 8.0 and later
-void Sleep() // Default implementation
-{
-Console.WriteLine("Sleeping...");
-}
+  void MakeSound(); // Method signature
+  // C# 8.0 and later
+  void Sleep() // Default implementation
+  {
+    Console.WriteLine("Sleeping...");
+  }
 }
 ```
 
@@ -110,42 +112,42 @@ Here's an example demonstrating an abstract class inheriting from an interface:
 using System;
 public interface IAnimal
 {
-void MakeSound(); // Method signature
-void Eat(); // Another method signature
+  void MakeSound(); // Method signature
+  void Eat(); // Another method signature
 }
 public abstract class Animal : IAnimal
 {
-// Implementing one method from the interface
-public abstract void MakeSound(); // Abstract method
-// Providing implementation for another method from the interface
-public void Eat()
-{
-Console.WriteLine("Eating...");
-}
-// Additional abstract method
-public abstract void Sleep(); // Additional abstract method
+  // Implementing one method from the interface
+  public abstract void MakeSound(); // Abstract method
+  // Providing implementation for another method from the interface
+  public void Eat()
+  {
+    Console.WriteLine("Eating...");
+  }
+  // Additional abstract method
+  public abstract void Sleep(); // Additional abstract method
 }
 public class Dog : Animal
 {
-// Providing implementation for the abstract methods
-public override void MakeSound()
-{
-Console.WriteLine("Woof!");
-}
-public override void Sleep()
-{
-Console.WriteLine("Sleeping...");
-}
+  // Providing implementation for the abstract methods
+  public override void MakeSound()
+  {
+    Console.WriteLine("Woof!");
+  }
+  public override void Sleep()
+  {
+    Console.WriteLine("Sleeping...");
+  }
 }
 class Program
 {
-static void Main(string[] args)
-{
-Dog myDog = new Dog();
-myDog.MakeSound(); // Output: Woof!
-myDog.Eat(); // Output: Eating...
-myDog.Sleep(); // Output: Sleeping...
-}
+  static void Main(string[] args)
+  {
+    Dog myDog = new Dog();
+    myDog.MakeSound(); // Output: Woof!
+    myDog.Eat(); // Output: Eating...
+    myDog.Sleep(); // Output: Sleeping...
+  }
 }
 ```
 
@@ -166,7 +168,7 @@ myDog.Sleep(); // Output: Sleeping...
 - **Flexibility**: This design provides flexibility in your class hierarchy, allowing you to mix and match implementations and contracts.
 
 ```csharp
-Do abstract class have Constructors in C#
+## Do abstract class have Constructors in C#
 **abstract classes** in C# can have constructors. These constructors can be used to initialize data or perform setup operations when an instance of a derived class is created. However, you cannot create an instance of an abstract class directly; constructors in abstract classes are called by constructors of derived classes.
 ```
 
@@ -186,36 +188,36 @@ Here’s an example of how constructors work in an abstract class:
 using System;
 public abstract class Animal
 {
-public string Name { get; set; }
-// Constructor in the abstract class
-protected Animal(string name)
-{
-Name = name;
-Console.WriteLine($"{Name} is being created.");
-}
-// Abstract method to be implemented by derived classes
-public abstract void MakeSound();
+  public string Name { get; set; }
+  // Constructor in the abstract class
+  protected Animal(string name)
+  {
+    Name = name;
+    Console.WriteLine($"{Name} is being created.");
+  }
+  // Abstract method to be implemented by derived classes
+  public abstract void MakeSound();
 }
 public class Dog : Animal
 {
-// Constructor in the derived class
-public Dog(string name) : base(name)
-{
-Console.WriteLine($"{Name} the dog is created.");
-}
-// Implementing the abstract method
-public override void MakeSound()
-{
-Console.WriteLine("Woof!");
-}
+  // Constructor in the derived class
+  public Dog(string name) : base(name)
+  {
+    Console.WriteLine($"{Name} the dog is created.");
+  }
+  // Implementing the abstract method
+  public override void MakeSound()
+  {
+    Console.WriteLine("Woof!");
+  }
 }
 class Program
 {
-static void Main()
-{
-Dog myDog = new Dog("Buddy");
-myDog.MakeSound();
-}
+  static void Main()
+  {
+    Dog myDog = new Dog("Buddy");
+    myDog.MakeSound();
+  }
 }
 ```
 
@@ -246,7 +248,7 @@ myDog.MakeSound();
 - **Abstract class constructors** are generally protected to prevent direct instantiation and ensure that they are only used through derived classes.
 
 ```csharp
-Can Abstract class be Sealed or Static in C#
+## Can Abstract class be Sealed or Static in C#
 ```
 
 an **abstract class** cannot be marked as sealed or static. Here’s why:
@@ -266,16 +268,16 @@ A **sealed class** is a class that cannot be inherited. This is the opposite of 
 ```csharp
 public abstract class Animal
 {
-public abstract void MakeSound();
+  public abstract void MakeSound();
 }
 // This will cause a compile-time error
 // public sealed class Dog : Animal
 // {
-// public override void MakeSound()
-// {
-// Console.WriteLine("Woof!");
-// }
-// }
+  // public override void MakeSound()
+  // {
+    // Console.WriteLine("Woof!");
+    // }
+    // }
 ```
 
 ### 2. Static Classes
@@ -293,16 +295,16 @@ A **static class** cannot be instantiated and can only contain static members. S
 ```csharp
 public abstract class Animal
 {
-public abstract void MakeSound();
+  public abstract void MakeSound();
 }
 // This will cause a compile-time error
 // public static class Animal
 // {
-// public static void MakeSound()
-// {
-// // Implementation
-// }
-// }
+  // public static void MakeSound()
+  // {
+    // // Implementation
+    // }
+    // }
 ```
 
 ### Summary
@@ -332,32 +334,32 @@ Here’s an example of the proper usage of access modifiers with abstract method
 ```csharp
 public abstract class Animal
 {
-// Abstract method with protected access
-protected abstract void MakeSound();
-// Abstract method with public access
-public abstract void Eat();
+  // Abstract method with protected access
+  protected abstract void MakeSound();
+  // Abstract method with public access
+  public abstract void Eat();
 }
 public class Dog : Animal
 {
-// Implementing the protected abstract method
-protected override void MakeSound()
-{
-Console.WriteLine("Woof!");
-}
-// Implementing the public abstract method
-public override void Eat()
-{
-Console.WriteLine("Dog is eating.");
-}
+  // Implementing the protected abstract method
+  protected override void MakeSound()
+  {
+    Console.WriteLine("Woof!");
+  }
+  // Implementing the public abstract method
+  public override void Eat()
+  {
+    Console.WriteLine("Dog is eating.");
+  }
 }
 class Program
 {
-static void Main()
-{
-Dog myDog = new Dog();
-myDog.MakeSound(); // Output: Woof!
-myDog.Eat(); // Output: Dog is eating.
-}
+  static void Main()
+  {
+    Dog myDog = new Dog();
+    myDog.MakeSound(); // Output: Woof!
+    myDog.Eat(); // Output: Dog is eating.
+  }
 }
 ```
 
@@ -371,7 +373,7 @@ myDog.Eat(); // Output: Dog is eating.
 
 Abstract methods in C# must be public or protected. They cannot be private because their purpose is to define a contract for derived classes to implement. Making them private would prevent derived classes from overriding them, defeating the purpose of an abstract method.
 
-What is the difference between abstraction and abstract class
+## What is the difference between abstraction and abstract class
 
 **abstraction** and **abstract classes** are related but distinct concepts in object-oriented programming. Here’s a detailed look at each and their differences:
 
@@ -398,8 +400,8 @@ What is the difference between abstraction and abstract class
 ```csharp
 public interface IShape
 {
-double GetArea();
-double GetPerimeter();
+  double GetArea();
+  double GetPerimeter();
 }
 ```
 
@@ -426,24 +428,24 @@ An **abstract class** is a specific type of class that cannot be instantiated on
 ```csharp
 public abstract class Shape
 {
-public abstract double GetArea(); // Abstract method
-public virtual double GetPerimeter() // Concrete method with default implementation
-{
-return 0;
-}
+  public abstract double GetArea(); // Abstract method
+  public virtual double GetPerimeter() // Concrete method with default implementation
+  {
+    return 0;
+  }
 }
 public class Rectangle : Shape
 {
-public double Width { get; set; }
-public double Height { get; set; }
-public override double GetArea()
-{
-return Width * Height;
-}
-public override double GetPerimeter()
-{
-return 2 * (Width + Height);
-}
+  public double Width { get; set; }
+  public double Height { get; set; }
+  public override double GetArea()
+  {
+    return Width * Height;
+  }
+  public override double GetPerimeter()
+  {
+    return 2 * (Width + Height);
+  }
 }
 ```
 

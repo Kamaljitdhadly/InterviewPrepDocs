@@ -63,39 +63,39 @@ Ensuring **thread safety** in a Singleton implementation is crucial to prevent m
 ```csharp
 public class Singleton
 {
-// Private static readonly instance, initialized lazily
-private static readonly Lazy<Singleton> _instance = new Lazy<Singleton>(() => new Singleton());
-// Private constructor to prevent instantiation from outside
-private Singleton()
-{
-// Initialization code here
-}
-// Public static property to get the instance
-public static Singleton Instance
-{
+  // Private static readonly instance, initialized lazily
+  private static readonly Lazy<Singleton> _instance = new Lazy<Singleton>(() => new Singleton());
+  // Private constructor to prevent instantiation from outside
+  private Singleton()
+  {
+    // Initialization code here
+  }
+  // Public static property to get the instance
+  public static Singleton Instance
+  {
 ```
 
 get
 
 ```csharp
 {
-return _instance.Value;
+  return _instance.Value;
 }
 }
 // Example method
 public void SomeMethod()
 {
-Console.WriteLine("Method called on Singleton instance.");
+  Console.WriteLine("Method called on Singleton instance.");
 }
 }
 // Usage
 class Program
 {
-static void Main(string[] args)
-{
-Singleton singleton = Singleton.Instance;
-singleton.SomeMethod();
-}
+  static void Main(string[] args)
+  {
+    Singleton singleton = Singleton.Instance;
+    singleton.SomeMethod();
+  }
 }
 ```
 
@@ -130,50 +130,50 @@ Here’s another way to implement a thread-safe Singleton using double-check loc
 ```csharp
 public class Singleton
 {
-private static Singleton _instance;
-private static readonly object _lock = new object();
-// Private constructor
-private Singleton()
-{
-// Initialization code here
-}
-public static Singleton Instance
-{
+  private static Singleton _instance;
+  private static readonly object _lock = new object();
+  // Private constructor
+  private Singleton()
+  {
+    // Initialization code here
+  }
+  public static Singleton Instance
+  {
 ```
 
 get
 
 ```csharp
 {
-// First check (no locking)
-if (_instance == null)
-{
-// Locking to ensure thread safety
-lock (_lock)
-{
-// Second check (with locking)
-if (_instance == null)
-{
-_instance = new Singleton();
-}
-}
-}
-return _instance;
+  // First check (no locking)
+  if (_instance == null)
+  {
+    // Locking to ensure thread safety
+    lock (_lock)
+    {
+      // Second check (with locking)
+      if (_instance == null)
+      {
+        _instance = new Singleton();
+      }
+    }
+  }
+  return _instance;
 }
 }
 public void SomeMethod()
 {
-Console.WriteLine("Method called on Singleton instance.");
+  Console.WriteLine("Method called on Singleton instance.");
 }
 }
 // Usage
 class Program
 {
-static void Main(string[] args)
-{
-Singleton singleton = Singleton.Instance;
-singleton.SomeMethod();
-}
+  static void Main(string[] args)
+  {
+    Singleton singleton = Singleton.Instance;
+    singleton.SomeMethod();
+  }
 }
 ```
 
@@ -198,44 +198,44 @@ The **Factory Method Pattern** provides a way to delegate the creation of object
 ```csharp
 public interface IAnimal
 {
-void Speak();
+  void Speak();
 }
 // Concrete Product 1
 public class Dog : IAnimal
 {
-public void Speak()
-{
-Console.WriteLine("Dog says: Woof!");
-}
+  public void Speak()
+  {
+    Console.WriteLine("Dog says: Woof!");
+  }
 }
 // Concrete Product 2
 public class Cat : IAnimal
 {
-public void Speak()
-{
-Console.WriteLine("Cat says: Meow!");
-}
+  public void Speak()
+  {
+    Console.WriteLine("Cat says: Meow!");
+  }
 }
 // Factory Class
 public abstract class AnimalFactory
 {
-public abstract IAnimal CreateAnimal();
+  public abstract IAnimal CreateAnimal();
 }
 // Concrete Factory for Dogs
 public class DogFactory : AnimalFactory
 {
-public override IAnimal CreateAnimal()
-{
-return new Dog();
-}
+  public override IAnimal CreateAnimal()
+  {
+    return new Dog();
+  }
 }
 // Concrete Factory for Cats
 public class CatFactory : AnimalFactory
 {
-public override IAnimal CreateAnimal()
-{
-return new Cat();
-}
+  public override IAnimal CreateAnimal()
+  {
+    return new Cat();
+  }
 }
 // Usage
 var dogFactory = new DogFactory();
@@ -263,74 +263,74 @@ Think of a **furniture store** that sells different styles of furniture like Vic
 ```csharp
 public interface IChair
 {
-void SitOn();
+  void SitOn();
 }
 // Abstract Product 2
 public interface ISofa
 {
-void LieOn();
+  void LieOn();
 }
 // Concrete Product 1: Modern Chair
 public class ModernChair : IChair
 {
-public void SitOn()
-{
-Console.WriteLine("Sitting on a modern chair.");
-}
+  public void SitOn()
+  {
+    Console.WriteLine("Sitting on a modern chair.");
+  }
 }
 // Concrete Product 2: Modern Sofa
 public class ModernSofa : ISofa
 {
-public void LieOn()
-{
-Console.WriteLine("Lying on a modern sofa.");
-}
+  public void LieOn()
+  {
+    Console.WriteLine("Lying on a modern sofa.");
+  }
 }
 // Concrete Product 1: Victorian Chair
 public class VictorianChair : IChair
 {
-public void SitOn()
-{
-Console.WriteLine("Sitting on a Victorian chair.");
-}
+  public void SitOn()
+  {
+    Console.WriteLine("Sitting on a Victorian chair.");
+  }
 }
 // Concrete Product 2: Victorian Sofa
 public class VictorianSofa : ISofa
 {
-public void LieOn()
-{
-Console.WriteLine("Lying on a Victorian sofa.");
-}
+  public void LieOn()
+  {
+    Console.WriteLine("Lying on a Victorian sofa.");
+  }
 }
 // Abstract Factory
 public interface IFurnitureFactory
 {
-IChair CreateChair();
-ISofa CreateSofa();
+  IChair CreateChair();
+  ISofa CreateSofa();
 }
 // Concrete Factory for Modern Furniture
 public class ModernFurnitureFactory : IFurnitureFactory
 {
-public IChair CreateChair()
-{
-return new ModernChair();
-}
-public ISofa CreateSofa()
-{
-return new ModernSofa();
-}
+  public IChair CreateChair()
+  {
+    return new ModernChair();
+  }
+  public ISofa CreateSofa()
+  {
+    return new ModernSofa();
+  }
 }
 // Concrete Factory for Victorian Furniture
 public class VictorianFurnitureFactory : IFurnitureFactory
 {
-public IChair CreateChair()
-{
-return new VictorianChair();
-}
-public ISofa CreateSofa()
-{
-return new VictorianSofa();
-}
+  public IChair CreateChair()
+  {
+    return new VictorianChair();
+  }
+  public ISofa CreateSofa()
+  {
+    return new VictorianSofa();
+  }
 }
 // Usage
 var modernFactory = new ModernFurnitureFactory();
@@ -362,68 +362,68 @@ Think of building a **burger** at a fast-food restaurant. You can customize it b
 ```csharp
 public class Burger
 {
-public string Bread { get; set; }
-public string Patty { get; set; }
-public string Toppings { get; set; }
-public string Sauce { get; set; }
-public void ShowDetails()
-{
-Console.WriteLine($"Burger with {Bread} bread, {Patty} patty, {Toppings}, and {Sauce}.");
-}
+  public string Bread { get; set; }
+  public string Patty { get; set; }
+  public string Toppings { get; set; }
+  public string Sauce { get; set; }
+  public void ShowDetails()
+  {
+    Console.WriteLine($"Burger with {Bread} bread, {Patty} patty, {Toppings}, and {Sauce}.");
+  }
 }
 // Builder Interface
 public interface IBurgerBuilder
 {
-void AddBread(string bread);
-void AddPatty(string patty);
-void AddToppings(string toppings);
-void AddSauce(string sauce);
-Burger Build();
+  void AddBread(string bread);
+  void AddPatty(string patty);
+  void AddToppings(string toppings);
+  void AddSauce(string sauce);
+  Burger Build();
 }
 // Concrete Builder
 public class BurgerBuilder : IBurgerBuilder
 {
-private Burger _burger = new Burger();
-public void AddBread(string bread)
-{
-_burger.Bread = bread;
-}
-public void AddPatty(string patty)
-{
-_burger.Patty = patty;
-}
-public void AddToppings(string toppings)
-{
-_burger.Toppings = toppings;
-}
-public void AddSauce(string sauce)
-{
-_burger.Sauce = sauce;
-}
-public Burger Build()
-{
-return _burger;
-}
+  private Burger _burger = new Burger();
+  public void AddBread(string bread)
+  {
+    _burger.Bread = bread;
+  }
+  public void AddPatty(string patty)
+  {
+    _burger.Patty = patty;
+  }
+  public void AddToppings(string toppings)
+  {
+    _burger.Toppings = toppings;
+  }
+  public void AddSauce(string sauce)
+  {
+    _burger.Sauce = sauce;
+  }
+  public Burger Build()
+  {
+    return _burger;
+  }
 }
 // Director Class
 public class Chef
 {
-private IBurgerBuilder _burgerBuilder;
-public Chef(IBurgerBuilder burgerBuilder)
-{
-_burgerBuilder = burgerBuilder;
-}
-public void MakeCheeseBurger()
-{
-_burgerBuilder.AddBread("Sesame");
-_burgerBuilder.AddPatty("Beef");
-_burgerBuilder.AddToppings("Cheese, Lettuce");
-_burgerBuilder.AddSauce("Ketchup");
-}
-public Burger GetBurger()
-{
-return _burgerBuilder.Build();
-}
+  private IBurgerBuilder _burgerBuilder;
+  public Chef(IBurgerBuilder burgerBuilder)
+  {
+    _burgerBuilder = burgerBuilder;
+  }
+  public void MakeCheeseBurger()
+  {
+    _burgerBuilder.AddBread("Sesame");
+    _burgerBuilder.AddPatty("Beef");
+    _burgerBuilder.AddToppings("Cheese, Lettuce");
+    _burgerBuilder.AddSauce("Ketchup");
+  }
+  public Burger GetBurger()
+  {
+    return _burgerBuilder.Build();
+  }
 }
 // Usage
 var burgerBuilder = new BurgerBuilder();
@@ -450,43 +450,43 @@ Think of a **3D game** where trees are scattered around the environment. Instead
 ```csharp
 public abstract class Shape
 {
-public abstract Shape Clone();
+  public abstract Shape Clone();
 }
 // Concrete Prototype 1
 public class Circle : Shape
 {
-public int Radius { get; set; }
-public Circle(int radius)
-{
-Radius = radius;
-}
-public override Shape Clone()
-{
-return new Circle(Radius);
-}
-public void Draw()
-{
-Console.WriteLine($"Circle with radius {Radius}");
-}
+  public int Radius { get; set; }
+  public Circle(int radius)
+  {
+    Radius = radius;
+  }
+  public override Shape Clone()
+  {
+    return new Circle(Radius);
+  }
+  public void Draw()
+  {
+    Console.WriteLine($"Circle with radius {Radius}");
+  }
 }
 // Concrete Prototype 2
 public class Rectangle : Shape
 {
-public int Width { get; set; }
-public int Height { get; set; }
-public Rectangle(int width, int height)
-{
-Width = width;
-Height = height;
-}
-public override Shape Clone()
-{
-return new Rectangle(Width, Height);
-}
-public void Draw()
-{
-Console.WriteLine($"Rectangle with width {Width} and height {Height}");
-}
+  public int Width { get; set; }
+  public int Height { get; set; }
+  public Rectangle(int width, int height)
+  {
+    Width = width;
+    Height = height;
+  }
+  public override Shape Clone()
+  {
+    return new Rectangle(Width, Height);
+  }
+  public void Draw()
+  {
+    Console.WriteLine($"Rectangle with width {Width} and height {Height}");
+  }
 }
 // Usage
 var originalCircle = new Circle(10);
@@ -532,28 +532,28 @@ Imagine you have a phone charger that only fits the UK plug (three pins), but yo
 ```csharp
 public interface ITarget
 {
-void Request();
+  void Request();
 }
 // New system that doesn't match the old one (Adaptee)
 public class Adaptee
 {
-public void SpecificRequest()
-{
-Console.WriteLine("Specific request in Adaptee");
-}
+  public void SpecificRequest()
+  {
+    Console.WriteLine("Specific request in Adaptee");
+  }
 }
 // Adapter makes Adaptee's interface compatible with ITarget
 public class Adapter : ITarget
 {
-private Adaptee _adaptee;
-public Adapter(Adaptee adaptee)
-{
-_adaptee = adaptee;
-}
-public void Request()
-{
-_adaptee.SpecificRequest(); // Adapting to the new method
-}
+  private Adaptee _adaptee;
+  public Adapter(Adaptee adaptee)
+  {
+    _adaptee = adaptee;
+  }
+  public void Request()
+  {
+    _adaptee.SpecificRequest(); // Adapting to the new method
+  }
 }
 // Usage
 ITarget adapter = new Adapter(new Adaptee());
@@ -575,33 +575,33 @@ Think of a gift box. You can add extra features to it—wrapping paper, a ribbon
 ```csharp
 public interface IComponent
 {
-string Operation();
+  string Operation();
 }
 public class ConcreteComponent : IComponent
 {
-public string Operation() => "I am a plain component";
+  public string Operation() => "I am a plain component";
 }
 // The base decorator
 public class Decorator : IComponent
 {
-protected IComponent _component;
-public Decorator(IComponent component)
-{
-_component = component;
-}
-public virtual string Operation()
-{
-return _component.Operation(); // Pass-through
-}
+  protected IComponent _component;
+  public Decorator(IComponent component)
+  {
+    _component = component;
+  }
+  public virtual string Operation()
+  {
+    return _component.Operation(); // Pass-through
+  }
 }
 // A concrete decorator that adds extra behavior
 public class ConcreteDecorator : Decorator
 {
-public ConcreteDecorator(IComponent component) : base(component) { }
-public override string Operation()
-{
-return $"[Decorated] {base.Operation()}";
-}
+  public ConcreteDecorator(IComponent component) : base(component) { }
+  public override string Operation()
+  {
+    return $"[Decorated] {base.Operation()}";
+  }
 }
 // Usage
 IComponent component = new ConcreteComponent();
@@ -626,36 +626,36 @@ Imagine a home theater system. It has multiple components like a DVD player, pro
 ```csharp
 public class DVDPlayer
 {
-public void TurnOn() => Console.WriteLine("DVD Player is On");
-public void Play() => Console.WriteLine("DVD is Playing");
+  public void TurnOn() => Console.WriteLine("DVD Player is On");
+  public void Play() => Console.WriteLine("DVD is Playing");
 }
 public class Projector
 {
-public void TurnOn() => Console.WriteLine("Projector is On");
+  public void TurnOn() => Console.WriteLine("Projector is On");
 }
 public class SoundSystem
 {
-public void TurnOn() => Console.WriteLine("Sound System is On");
+  public void TurnOn() => Console.WriteLine("Sound System is On");
 }
 // Facade that simplifies the operation of the entire system
 public class HomeTheaterFacade
 {
-private DVDPlayer _dvdPlayer;
-private Projector _projector;
-private SoundSystem _soundSystem;
-public HomeTheaterFacade(DVDPlayer dvdPlayer, Projector projector, SoundSystem soundSystem)
-{
-_dvdPlayer = dvdPlayer;
-_projector = projector;
-_soundSystem = soundSystem;
-}
-public void WatchMovie()
-{
-_dvdPlayer.TurnOn();
-_projector.TurnOn();
-_soundSystem.TurnOn();
-_dvdPlayer.Play();
-}
+  private DVDPlayer _dvdPlayer;
+  private Projector _projector;
+  private SoundSystem _soundSystem;
+  public HomeTheaterFacade(DVDPlayer dvdPlayer, Projector projector, SoundSystem soundSystem)
+  {
+    _dvdPlayer = dvdPlayer;
+    _projector = projector;
+    _soundSystem = soundSystem;
+  }
+  public void WatchMovie()
+  {
+    _dvdPlayer.TurnOn();
+    _projector.TurnOn();
+    _soundSystem.TurnOn();
+    _dvdPlayer.Play();
+  }
 }
 // Usage
 var dvdPlayer = new DVDPlayer();
@@ -682,42 +682,42 @@ A **folder** on your computer can contain files or other folders (which, in turn
 ```csharp
 public interface IFileSystemComponent
 {
-void Display();
+  void Display();
 }
 // Leaf (File)
 public class File : IFileSystemComponent
 {
-private string _name;
-public File(string name)
-{
-_name = name;
-}
-public void Display()
-{
-Console.WriteLine(_name);
-}
+  private string _name;
+  public File(string name)
+  {
+    _name = name;
+  }
+  public void Display()
+  {
+    Console.WriteLine(_name);
+  }
 }
 // Composite (Folder)
 public class Folder : IFileSystemComponent
 {
-private string _name;
-private List<IFileSystemComponent> _components = new List<IFileSystemComponent>();
-public Folder(string name)
-{
-_name = name;
-}
-public void AddComponent(IFileSystemComponent component)
-{
-_components.Add(component);
-}
-public void Display()
-{
-Console.WriteLine($"Folder: {_name}");
-foreach (var component in _components)
-{
-component.Display(); // Calls Display of both files and sub-folders
-}
-}
+  private string _name;
+  private List<IFileSystemComponent> _components = new List<IFileSystemComponent>();
+  public Folder(string name)
+  {
+    _name = name;
+  }
+  public void AddComponent(IFileSystemComponent component)
+  {
+    _components.Add(component);
+  }
+  public void Display()
+  {
+    Console.WriteLine($"Folder: {_name}");
+    foreach (var component in _components)
+    {
+      component.Display(); // Calls Display of both files and sub-folders
+    }
+  }
 }
 // Usage
 var file1 = new File("file1.txt");
@@ -745,24 +745,24 @@ Think of a **credit card** as a proxy for cash. Instead of carrying cash, you us
 ```csharp
 public class RealSubject : ISubject
 {
-public void Request()
-{
-Console.WriteLine("Real subject handling request.");
-}
+  public void Request()
+  {
+    Console.WriteLine("Real subject handling request.");
+  }
 }
 // Proxy that controls access to the real subject
 public class Proxy : ISubject
 {
-private RealSubject _realSubject;
-public void Request()
-{
-if (_realSubject == null)
-{
-_realSubject = new RealSubject(); // Lazy initialization
-}
-Console.WriteLine("Proxy checking access before forwarding the request.");
-_realSubject.Request();
-}
+  private RealSubject _realSubject;
+  public void Request()
+  {
+    if (_realSubject == null)
+    {
+      _realSubject = new RealSubject(); // Lazy initialization
+    }
+    Console.WriteLine("Proxy checking access before forwarding the request.");
+    _realSubject.Request();
+  }
 }
 // Usage
 ISubject proxy = new Proxy();
@@ -794,41 +794,41 @@ Imagine a YouTube channel (subject) and its subscribers (observers). When the ch
 ```csharp
 public class YouTubeChannel
 {
-private List<ISubscriber> subscribers = new List<ISubscriber>();
-public void Subscribe(ISubscriber subscriber)
-{
-subscribers.Add(subscriber);
-}
-public void NotifySubscribers(string videoTitle)
-{
-foreach (var subscriber in subscribers)
-{
-subscriber.Update(videoTitle);
-}
-}
-public void UploadVideo(string title)
-{
-Console.WriteLine($"Uploaded video: {title}");
-NotifySubscribers(title); // Notify all subscribers
-}
+  private List<ISubscriber> subscribers = new List<ISubscriber>();
+  public void Subscribe(ISubscriber subscriber)
+  {
+    subscribers.Add(subscriber);
+  }
+  public void NotifySubscribers(string videoTitle)
+  {
+    foreach (var subscriber in subscribers)
+    {
+      subscriber.Update(videoTitle);
+    }
+  }
+  public void UploadVideo(string title)
+  {
+    Console.WriteLine($"Uploaded video: {title}");
+    NotifySubscribers(title); // Notify all subscribers
+  }
 }
 // The Observer (Subscriber)
 public interface ISubscriber
 {
-void Update(string videoTitle);
+  void Update(string videoTitle);
 }
 // Concrete Observer
 public class Subscriber : ISubscriber
 {
-private string _name;
-public Subscriber(string name)
-{
-_name = name;
-}
-public void Update(string videoTitle)
-{
-Console.WriteLine($"{_name} notified of new video: {videoTitle}");
-}
+  private string _name;
+  public Subscriber(string name)
+  {
+    _name = name;
+  }
+  public void Update(string videoTitle)
+  {
+    Console.WriteLine($"{_name} notified of new video: {videoTitle}");
+  }
 }
 // Usage
 var channel = new YouTubeChannel();
@@ -857,40 +857,36 @@ Think of a **navigation app**. It can offer different routes to reach a destinat
 ```csharp
 public interface IRouteStrategy
 {
-void BuildRoute(string startPoint, string endPoint);
+  void BuildRoute(string startPoint, string endPoint);
 }
 // Concrete Strategy 1: Car Route
 public class CarRouteStrategy : IRouteStrategy
 {
-public void BuildRoute(string startPoint, string endPoint)
-{
-Console.WriteLine($"Building car route from {startPoint} to {endPoint}");
-}
+  public void BuildRoute(string startPoint, string endPoint)
+  {
+    Console.WriteLine($"Building car route from {startPoint} to {endPoint}");
+  }
 }
 // Concrete Strategy 2: Bike Route
 public class BikeRouteStrategy : IRouteStrategy
 {
-public void BuildRoute(string startPoint, string endPoint)
-{
-Console.WriteLine($"Building bike route from {startPoint} to {endPoint}");
-}
+  public void BuildRoute(string startPoint, string endPoint)
+  {
+    Console.WriteLine($"Building bike route from {startPoint} to {endPoint}");
+  }
 }
 // Context: Navigation
 public class Navigation
 {
-private IRouteStrategy _routeStrategy;
-public void SetRouteStrategy(IRouteStrategy routeStrategy)
-{
-_routeStrategy = routeStrategy;
-}
-public void BuildRoute(string startPoint, string endPoint)
-{
-```
-
-_routeStrategy.BuildRoute(startPoint, endPoint); // Delegate route building to the strategy
-
-```csharp
-}
+  private IRouteStrategy _routeStrategy;
+  public void SetRouteStrategy(IRouteStrategy routeStrategy)
+  {
+    _routeStrategy = routeStrategy;
+  }
+  public void BuildRoute(string startPoint, string endPoint)
+  {
+    _routeStrategy.BuildRoute(startPoint, endPoint); // Delegate route building to the strategy
+  }
 }
 // Usage
 var navigation = new Navigation();
@@ -917,58 +913,58 @@ Think of a **remote control** for a TV. Each button (command) encapsulates a spe
 ```csharp
 public interface ICommand
 {
-void Execute();
+  void Execute();
 }
 // Concrete Command 1: Turn TV On
 public class TurnOnCommand : ICommand
 {
-private TV _tv;
-public TurnOnCommand(TV tv)
-{
-_tv = tv;
-}
-public void Execute()
-{
-_tv.TurnOn();
-}
+  private TV _tv;
+  public TurnOnCommand(TV tv)
+  {
+    _tv = tv;
+  }
+  public void Execute()
+  {
+    _tv.TurnOn();
+  }
 }
 // Concrete Command 2: Turn TV Off
 public class TurnOffCommand : ICommand
 {
-private TV _tv;
-public TurnOffCommand(TV tv)
-{
-_tv = tv;
-}
-public void Execute()
-{
-_tv.TurnOff();
-}
+  private TV _tv;
+  public TurnOffCommand(TV tv)
+  {
+    _tv = tv;
+  }
+  public void Execute()
+  {
+    _tv.TurnOff();
+  }
 }
 // Receiver (TV)
 public class TV
 {
-public void TurnOn()
-{
-Console.WriteLine("TV is now ON");
-}
-public void TurnOff()
-{
-Console.WriteLine("TV is now OFF");
-}
+  public void TurnOn()
+  {
+    Console.WriteLine("TV is now ON");
+  }
+  public void TurnOff()
+  {
+    Console.WriteLine("TV is now OFF");
+  }
 }
 // Invoker (Remote Control)
 public class RemoteControl
 {
-private ICommand _command;
-public void SetCommand(ICommand command)
-{
-_command = command;
-}
-public void PressButton()
-{
-_command.Execute();
-}
+  private ICommand _command;
+  public void SetCommand(ICommand command)
+  {
+    _command = command;
+  }
+  public void PressButton()
+  {
+    _command.Execute();
+  }
 }
 // Usage
 var tv = new TV();
@@ -994,58 +990,50 @@ The **Chain of Responsibility Pattern** passes a request along a chain of handle
 ```csharp
 public abstract class SupportHandler
 {
-protected SupportHandler _nextHandler;
-public void SetNext(SupportHandler handler)
-{
-_nextHandler = handler;
-}
-public abstract void HandleRequest(string issue);
+  protected SupportHandler _nextHandler;
+  public void SetNext(SupportHandler handler)
+  {
+    _nextHandler = handler;
+  }
+  public abstract void HandleRequest(string issue);
 }
 // Concrete Handler 1: Basic Support
 public class BasicSupportHandler : SupportHandler
 {
-public override void HandleRequest(string issue)
-{
-if (issue == "basic")
-{
-Console.WriteLine("Basic support handled the issue.");
-}
-```
-
-else
-
-```csharp
-{
-_nextHandler?.HandleRequest(issue);
-}
-}
+  public override void HandleRequest(string issue)
+  {
+    if (issue == "basic")
+    {
+      Console.WriteLine("Basic support handled the issue.");
+    }
+    else
+    {
+      _nextHandler?.HandleRequest(issue);
+    }
+  }
 }
 // Concrete Handler 2: Senior Support
 public class SeniorSupportHandler : SupportHandler
 {
-public override void HandleRequest(string issue)
-{
-if (issue == "intermediate")
-{
-Console.WriteLine("Senior support handled the issue.");
-}
-```
-
-else
-
-```csharp
-{
-_nextHandler?.HandleRequest(issue);
-}
-}
+  public override void HandleRequest(string issue)
+  {
+    if (issue == "intermediate")
+    {
+      Console.WriteLine("Senior support handled the issue.");
+    }
+    else
+    {
+      _nextHandler?.HandleRequest(issue);
+    }
+  }
 }
 // Concrete Handler 3: Manager Support
 public class ManagerSupportHandler : SupportHandler
 {
-public override void HandleRequest(string issue)
-{
-Console.WriteLine("Manager handled the issue.");
-}
+  public override void HandleRequest(string issue)
+  {
+    Console.WriteLine("Manager handled the issue.");
+  }
 }
 // Usage
 var basicSupport = new BasicSupportHandler();
@@ -1074,46 +1062,46 @@ The **Mediator Pattern** reduces the communication complexity between objects by
 ```csharp
 public interface IChatMediator
 {
-void SendMessage(string message, User user);
+  void SendMessage(string message, User user);
 }
 // Concrete Mediator
 public class ChatMediator : IChatMediator
 {
-private List<User> _users = new List<User>();
-public void AddUser(User user)
-{
-_users.Add(user);
-}
-public void SendMessage(string message, User user)
-{
-foreach (var u in _users)
-{
-if (u != user)
-{
-u.ReceiveMessage(message);
-}
-}
-}
+  private List<User> _users = new List<User>();
+  public void AddUser(User user)
+  {
+    _users.Add(user);
+  }
+  public void SendMessage(string message, User user)
+  {
+    foreach (var u in _users)
+    {
+      if (u != user)
+      {
+        u.ReceiveMessage(message);
+      }
+    }
+  }
 }
 // User Class
 public class User
 {
-private IChatMediator _mediator;
-public string Name { get; }
-public User(string name, IChatMediator mediator)
-{
-Name = name;
-_mediator = mediator;
-}
-public void SendMessage(string message)
-{
-Console.WriteLine($"{Name} sends: {message}");
-_mediator.SendMessage(message, this);
-}
-public void ReceiveMessage(string message)
-{
-Console.WriteLine($"{Name} receives: {message}");
-}
+  private IChatMediator _mediator;
+  public string Name { get; }
+  public User(string name, IChatMediator mediator)
+  {
+    Name = name;
+    _mediator = mediator;
+  }
+  public void SendMessage(string message)
+  {
+    Console.WriteLine($"{Name} sends: {message}");
+    _mediator.SendMessage(message, this);
+  }
+  public void ReceiveMessage(string message)
+  {
+    Console.WriteLine($"{Name} receives: {message}");
+  }
 }
 // Usage
 var mediator = new ChatMediator();

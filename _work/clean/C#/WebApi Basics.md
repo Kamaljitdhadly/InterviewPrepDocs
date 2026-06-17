@@ -8,7 +8,7 @@
 4. What is MediaTypeFormatter class in Web API?
 5. What are Response Codes in Web API?
 
-What is the difference Rest API and Web API?
+## What is the difference Rest API and Web API?
 
 The terms **REST API** and **Web API** are often used interchangeably, but they have distinct meanings and uses. Here’s a breakdown of their differences:
 
@@ -158,7 +158,7 @@ REST (Representational State Transfer) is an architectural style for designing n
 
 - **RESTful** refers to the real-world implementation of these guidelines in web services and APIs.
 
-What is Content Negotiation in Web API?
+## What is Content Negotiation in Web API?
 
 **Content Negotiation** in Web API refers to the process of selecting the appropriate content format to return to the client based on the client's request. This process allows the API to serve the response in different formats, such as JSON, XML, or plain text, depending on what the client can accept and what the server can produce.
 
@@ -204,29 +204,31 @@ Consider a Web API that supports both JSON and XML formats:
 [HttpGet]
 public IHttpActionResult GetPerson(int id)
 {
-var person = new Person { Id = id, Name = "John Doe" };
-return Ok(person); // The format (JSON or XML) will be determined by content negotiation
+  var person = new Person { Id = id, Name = "John Doe" };
+  return Ok(person); // The format (JSON or XML) will be determined by content negotiation
 }
 ```
 
 - **Client Request for JSON**:
 
+Server Response
+
 ```csharp
 GET /api/person/1 HTTP/1.1
 Accept: application/json
-**Server Response**:
 {
-"Id": 1,
-"Name": "John Doe"
+  "Id": 1,
+  "Name": "John Doe"
 }
 ```
 
 - **Client Request for XML**:
 
+Server Response
+
 ```csharp
 GET /api/person/1 HTTP/1.1
 Accept: application/xml
-**Server Response**:
 <Person>
 <Id>1</Id>
 <Name>John Doe</Name>
@@ -250,14 +252,14 @@ In ASP.NET Web API, content negotiation can be configured and extended by adding
 ```csharp
 public static void Configure(HttpConfiguration config)
 {
-// Remove the XML formatter
-config.Formatters.Remove(config.Formatters.XmlFormatter);
-// Add a custom formatter
-config.Formatters.Add(new MyCustomFormatter());
+  // Remove the XML formatter
+  config.Formatters.Remove(config.Formatters.XmlFormatter);
+  // Add a custom formatter
+  config.Formatters.Add(new MyCustomFormatter());
 }
 ```
 
-What is MediaTypeFormatter class in Web API?
+## What is MediaTypeFormatter class in Web API?
 
 The MediaTypeFormatter class in ASP.NET Web API is a key component responsible for serializing and deserializing HTTP message bodies. It determines how data is formatted when sent to or received from the client, allowing the Web API to support multiple data formats such as JSON, XML, or custom formats.
 
@@ -313,11 +315,11 @@ public HttpResponseMessage Get()
 
 ```csharp
 {
-var person = new Person { Id = 1, Name = "John Doe" };
-var response = new HttpResponseMessage(HttpStatusCode.OK);
-// Use JsonMediaTypeFormatter to serialize the person object
-response.Content = new ObjectContent<Person>(person, new JsonMediaTypeFormatter());
-return response;
+  var person = new Person { Id = 1, Name = "John Doe" };
+  var response = new HttpResponseMessage(HttpStatusCode.OK);
+  // Use JsonMediaTypeFormatter to serialize the person object
+  response.Content = new ObjectContent<Person>(person, new JsonMediaTypeFormatter());
+  return response;
 }
 ```
 
@@ -328,12 +330,12 @@ You can add, remove, or configure the media type formatters in the HttpConfigura
 ```csharp
 public static void Configure(HttpConfiguration config)
 {
-// Remove the XML formatter if you don't want to support XML
-config.Formatters.Remove(config.Formatters.XmlFormatter);
-// Add a custom media type formatter
-config.Formatters.Add(new MyCustomFormatter());
-// Optionally, configure settings for a built-in formatter
-config.Formatters.JsonFormatter.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented;
+  // Remove the XML formatter if you don't want to support XML
+  config.Formatters.Remove(config.Formatters.XmlFormatter);
+  // Add a custom media type formatter
+  config.Formatters.Add(new MyCustomFormatter());
+  // Optionally, configure settings for a built-in formatter
+  config.Formatters.JsonFormatter.SerializerSettings.Formatting = Newtonsoft.Json.Formatting.Indented;
 }
 ```
 
@@ -346,26 +348,26 @@ If you need to support a custom format that is not covered by the built-in forma
 ```csharp
 public class MyCustomFormatter : MediaTypeFormatter
 {
-public MyCustomFormatter()
-{
-SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/my-custom-format"));
-}
-public override bool CanReadType(Type type)
-{
-return type == typeof(MyCustomType);
-}
-public override bool CanWriteType(Type type)
-{
-return type == typeof(MyCustomType);
-}
-public override Task<object> ReadFromStreamAsync(Type type, Stream readStream, HttpContent content, IFormatterLogger formatterLogger)
-{
-// Custom deserialization logic
-}
-public override Task WriteToStreamAsync(Type type, object value, Stream writeStream, HttpContent content, TransportContext transportContext)
-{
-// Custom serialization logic
-}
+  public MyCustomFormatter()
+  {
+    SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/my-custom-format"));
+  }
+  public override bool CanReadType(Type type)
+  {
+    return type == typeof(MyCustomType);
+  }
+  public override bool CanWriteType(Type type)
+  {
+    return type == typeof(MyCustomType);
+  }
+  public override Task<object> ReadFromStreamAsync(Type type, Stream readStream, HttpContent content, IFormatterLogger formatterLogger)
+  {
+    // Custom deserialization logic
+  }
+  public override Task WriteToStreamAsync(Type type, object value, Stream writeStream, HttpContent content, TransportContext transportContext)
+  {
+    // Custom serialization logic
+  }
 }
 ```
 
@@ -379,7 +381,7 @@ public override Task WriteToStreamAsync(Type type, object value, Stream writeStr
 
 - **Configuration**: You can configure which formatters to use in your Web API application via HttpConfiguration.
 
-What are Response Codes in Web API?
+## What are Response Codes in Web API?
 
 Response codes, also known as HTTP status codes, are standardized codes returned by a Web API to indicate the result of the client's request. These codes help the client understand whether the request was successful, if an error occurred, or if additional actions are needed.
 
@@ -524,22 +526,22 @@ Here's an example of how these response codes might be used in a Web API control
 ```csharp
 public IActionResult GetResource(int id)
 {
-var resource = _repository.GetResourceById(id);
-if (resource == null)
-{
-return NotFound(); // 404 Not Found
-}
-return Ok(resource); // 200 OK
+  var resource = _repository.GetResourceById(id);
+  if (resource == null)
+  {
+    return NotFound(); // 404 Not Found
+  }
+  return Ok(resource); // 200 OK
 }
 [HttpPost]
 public IActionResult CreateResource([FromBody] ResourceDto resourceDto)
 {
-if (!ModelState.IsValid)
-{
-return BadRequest(ModelState); // 400 Bad Request
-}
-var resource = _repository.AddResource(resourceDto);
-return CreatedAtRoute("GetResource", new { id = resource.Id }, resource); // 201 Created
+  if (!ModelState.IsValid)
+  {
+    return BadRequest(ModelState); // 400 Bad Request
+  }
+  var resource = _repository.AddResource(resourceDto);
+  return CreatedAtRoute("GetResource", new { id = resource.Id }, resource); // 201 Created
 }
 ```
 

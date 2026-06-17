@@ -15,29 +15,25 @@ Association represents a relationship between two classes where one class uses o
 ```csharp
 public class Driver
 {
-public string Name { get; set; }
-// The driver drives a car (unidirectional association)
-public void Drive(Car car)
-{
-Console.WriteLine($"{Name} is driving a {car.Model}");
-}
+  public string Name { get; set; }
+  // The driver drives a car (unidirectional association)
+  public void Drive(Car car)
+  {
+    Console.WriteLine($"{Name} is driving a {car.Model}");
+  }
 }
 public class Car
 {
-public string Model { get; set; }
+  public string Model { get; set; }
 }
 class Program
 {
-static void Main(string[] args)
-{
-Driver driver = new Driver { Name = "John" };
-Car car = new Car { Model = "Toyota" };
-```
-
-driver.Drive(car); // John is driving a Toyota
-
-```csharp
-}
+  static void Main(string[] args)
+  {
+    Driver driver = new Driver { Name = "John" };
+    Car car = new Car { Model = "Toyota" };
+    driver.Drive(car); // John is driving a Toyota
+  }
 }
 ```
 
@@ -56,28 +52,28 @@ Aggregation is a special form of association where one class (the whole) contain
 ```csharp
 public class Team
 {
-public string Name { get; set; }
-public List<Player> Players { get; set; } = new List<Player>();
-public void AddPlayer(Player player)
-{
-Players.Add(player);
-}
+  public string Name { get; set; }
+  public List<Player> Players { get; set; } = new List<Player>();
+  public void AddPlayer(Player player)
+  {
+    Players.Add(player);
+  }
 }
 public class Player
 {
-public string Name { get; set; }
+  public string Name { get; set; }
 }
 class Program
 {
-static void Main(string[] args)
-{
-Player player1 = new Player { Name = "Alice" };
-Player player2 = new Player { Name = "Bob" };
-Team team = new Team { Name = "Dream Team" };
-team.AddPlayer(player1);
-team.AddPlayer(player2);
-// Players still exist even if the team is destroyed
-}
+  static void Main(string[] args)
+  {
+    Player player1 = new Player { Name = "Alice" };
+    Player player2 = new Player { Name = "Bob" };
+    Team team = new Team { Name = "Dream Team" };
+    team.AddPlayer(player1);
+    team.AddPlayer(player2);
+    // Players still exist even if the team is destroyed
+  }
 }
 ```
 
@@ -96,26 +92,26 @@ Composition is a stronger form of association where one class (the whole) owns a
 ```csharp
 public class House
 {
-public Room LivingRoom { get; set; }
-public House()
-{
-// The room is created when the house is created
-LivingRoom = new Room();
-}
+  public Room LivingRoom { get; set; }
+  public House()
+  {
+    // The room is created when the house is created
+    LivingRoom = new Room();
+  }
 }
 public class Room
 {
-public string Type { get; set; } = "Living Room";
+  public string Type { get; set; } = "Living Room";
 }
 class Program
 {
-static void Main(string[] args)
-{
-House house = new House();
-Console.WriteLine("House has a " + house.LivingRoom.Type);
-// When the house is destroyed, the room is also destroyed
-house = null;
-}
+  static void Main(string[] args)
+  {
+    House house = new House();
+    Console.WriteLine("House has a " + house.LivingRoom.Type);
+    // When the house is destroyed, the room is also destroyed
+    house = null;
+  }
 }
 ```
 

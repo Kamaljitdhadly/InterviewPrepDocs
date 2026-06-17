@@ -8,7 +8,7 @@
 4. What are the Authentication techniques used to connect to SQL Server?
 5. What is ORM? What are the different types of ORM?
 
-What are the main concepts of ADO.NET?
+## What are the main concepts of ADO.NET?
 
 ADO.NET is a data access technology from Microsoft that provides a way to interact with relational databases and other data sources. It is part of the .NET Framework and provides a set of components for building data-driven applications. The main components of ADO.NET are:
 
@@ -74,7 +74,7 @@ Data commands include SqlCommand, OleDbCommand, OracleCommand, and other command
 
 ADO.NET provides a rich set of components for accessing, manipulating, and managing data in .NET applications. It supports a variety of data sources and is designed to work with both connected and disconnected data scenarios.
 
-What are the examples of ADO.NET?
+## What are the examples of ADO.NET?
 
 Sure! Here’s a basic example demonstrating the use of ADO.NET components to interact with a SQL Server database. This example includes connecting to the database, executing a query, and working with a DataSet and DataTable.
 
@@ -96,28 +96,28 @@ using System.Data;
 using System.Data.SqlClient;
 class Program
 {
-static void Main()
-{
-// Connection string (modify with your database details)
-string connectionString = "Server=your_server_name;Database=SampleDB;User Id=your_username;Password=your_password;";
-// SQL query to retrieve data
-string query = "SELECT EmployeeID, Name, Position FROM Employees";
-// Create a DataSet and DataTable
-DataSet dataSet = new DataSet();
-// Use SqlDataAdapter to fill the DataSet
-using (SqlDataAdapter dataAdapter = new SqlDataAdapter(query, connectionString))
-{
-// Fill the DataSet with data
-dataAdapter.Fill(dataSet, "Employees");
-}
-// Access the DataTable from the DataSet
-DataTable dataTable = dataSet.Tables["Employees"];
-// Display the data
-foreach (DataRow row in dataTable.Rows)
-{
-Console.WriteLine($"EmployeeID: {row["EmployeeID"]}, Name: {row["Name"]}, Position: {row["Position"]}");
-}
-}
+  static void Main()
+  {
+    // Connection string (modify with your database details)
+    string connectionString = "Server=your_server_name;Database=SampleDB;User Id=your_username;Password=your_password;";
+    // SQL query to retrieve data
+    string query = "SELECT EmployeeID, Name, Position FROM Employees";
+    // Create a DataSet and DataTable
+    DataSet dataSet = new DataSet();
+    // Use SqlDataAdapter to fill the DataSet
+    using (SqlDataAdapter dataAdapter = new SqlDataAdapter(query, connectionString))
+    {
+      // Fill the DataSet with data
+      dataAdapter.Fill(dataSet, "Employees");
+    }
+    // Access the DataTable from the DataSet
+    DataTable dataTable = dataSet.Tables["Employees"];
+    // Display the data
+    foreach (DataRow row in dataTable.Rows)
+    {
+      Console.WriteLine($"EmployeeID: {row["EmployeeID"]}, Name: {row["Name"]}, Position: {row["Position"]}");
+    }
+  }
 }
 ```
 
@@ -149,7 +149,7 @@ Console.WriteLine($"EmployeeID: {row["EmployeeID"]}, Name: {row["Name"]}, Positi
 
     - Iterate over the rows of the DataTable and print each row’s data to the console.
 
-What are the different Execute Methods of ADO.NET?
+## What are the different Execute Methods of ADO.NET?
 
 In ADO.NET, there are several methods provided by the SqlCommand class (and other command classes for different data providers) for executing SQL commands and stored procedures against a database. Here are the main Execute methods:
 
@@ -164,13 +164,13 @@ In ADO.NET, there are several methods provided by the SqlCommand class (and othe
 ```csharp
 using (SqlConnection connection = new SqlConnection(connectionString))
 {
-string commandText = "UPDATE Employees SET Position = 'Manager' WHERE EmployeeID = 1";
-using (SqlCommand command = new SqlCommand(commandText, connection))
-{
-connection.Open();
-int rowsAffected = command.ExecuteNonQuery();
-Console.WriteLine($"{rowsAffected} rows updated.");
-}
+  string commandText = "UPDATE Employees SET Position = 'Manager' WHERE EmployeeID = 1";
+  using (SqlCommand command = new SqlCommand(commandText, connection))
+  {
+    connection.Open();
+    int rowsAffected = command.ExecuteNonQuery();
+    Console.WriteLine($"{rowsAffected} rows updated.");
+  }
 }
 ```
 
@@ -185,13 +185,13 @@ Console.WriteLine($"{rowsAffected} rows updated.");
 ```csharp
 using (SqlConnection connection = new SqlConnection(connectionString))
 {
-string commandText = "SELECT COUNT(*) FROM Employees";
-using (SqlCommand command = new SqlCommand(commandText, connection))
-{
-connection.Open();
-int count = (int)command.ExecuteScalar();
-Console.WriteLine($"Total employees: {count}");
-}
+  string commandText = "SELECT COUNT(*) FROM Employees";
+  using (SqlCommand command = new SqlCommand(commandText, connection))
+  {
+    connection.Open();
+    int count = (int)command.ExecuteScalar();
+    Console.WriteLine($"Total employees: {count}");
+  }
 }
 ```
 
@@ -210,18 +210,18 @@ Copy code
 ```csharp
 using (SqlConnection connection = new SqlConnection(connectionString))
 {
-string commandText = "SELECT EmployeeID, Name, Position FROM Employees";
-using (SqlCommand command = new SqlCommand(commandText, connection))
-{
-connection.Open();
-using (SqlDataReader reader = command.ExecuteReader())
-{
-while (reader.Read())
-{
-Console.WriteLine($"EmployeeID: {reader["EmployeeID"]}, Name: {reader["Name"]}, Position: {reader["Position"]}");
-}
-}
-}
+  string commandText = "SELECT EmployeeID, Name, Position FROM Employees";
+  using (SqlCommand command = new SqlCommand(commandText, connection))
+  {
+    connection.Open();
+    using (SqlDataReader reader = command.ExecuteReader())
+    {
+      while (reader.Read())
+      {
+        Console.WriteLine($"EmployeeID: {reader["EmployeeID"]}, Name: {reader["Name"]}, Position: {reader["Position"]}");
+      }
+    }
+  }
 }
 ```
 
@@ -236,18 +236,18 @@ Console.WriteLine($"EmployeeID: {reader["EmployeeID"]}, Name: {reader["Name"]}, 
 ```csharp
 using (SqlConnection connection = new SqlConnection(connectionString))
 {
-string commandText = "SELECT EmployeeData FROM EmployeesXml WHERE EmployeeID = 1";
-using (SqlCommand command = new SqlCommand(commandText, connection))
-{
-connection.Open();
-using (XmlReader xmlReader = command.ExecuteXmlReader())
-{
-while (xmlReader.Read())
-{
-Console.WriteLine(xmlReader.ReadOuterXml());
-}
-}
-}
+  string commandText = "SELECT EmployeeData FROM EmployeesXml WHERE EmployeeID = 1";
+  using (SqlCommand command = new SqlCommand(commandText, connection))
+  {
+    connection.Open();
+    using (XmlReader xmlReader = command.ExecuteXmlReader())
+    {
+      while (xmlReader.Read())
+      {
+        Console.WriteLine(xmlReader.ReadOuterXml());
+      }
+    }
+  }
 }
 ```
 
@@ -263,7 +263,7 @@ Console.WriteLine(xmlReader.ReadOuterXml());
 
 Each of these methods is designed to handle different types of operations and return different types of results. Choosing the appropriate method depends on the nature of the SQL command and the type of result you expect to receive.
 
-What are the Authentication techniques used to connect to SQL Server?
+## What are the Authentication techniques used to connect to SQL Server?
 
 When connecting to SQL Server, authentication is crucial to ensure secure access to the database. SQL Server supports two primary authentication modes:
 
@@ -290,8 +290,8 @@ string connectionString = "Server=your_server_name;Database=your_database_name;I
 ```csharp
 using (SqlConnection connection = new SqlConnection(connectionString))
 {
-connection.Open();
-// Perform database operations
+  connection.Open();
+  // Perform database operations
 }
 ```
 
@@ -316,8 +316,8 @@ string connectionString = "Server=your_server_name;Database=your_database_name;U
 ```csharp
 using (SqlConnection connection = new SqlConnection(connectionString))
 {
-connection.Open();
-// Perform database operations
+  connection.Open();
+  // Perform database operations
 }
 ```
 
@@ -353,7 +353,7 @@ string connectionString = "Server=tcp:your_server.database.windows.net,1433;Data
 
 - **Azure SQL Authentication**: Supports SQL Authentication and Azure Active Directory Authentication.
 
-What is ORM? What are the different types of ORM?
+## What is ORM? What are the different types of ORM?
 
 **ORM (Object-Relational Mapping)** is a programming technique used to interact with a relational database by mapping database tables to objects in an application. ORM simplifies data manipulation by allowing developers to work with database records as objects, abstracting the complexities of SQL queries and data access.
 
@@ -371,9 +371,12 @@ What is ORM? What are the different types of ORM?
 
 1.  **Entity Framework (EF)**
 
-```csharp
 **Description**: Entity Framework is a popular ORM framework developed by Microsoft for .NET applications. It supports both Code First and Database First approaches, allowing developers to work with data using C# classes.
-**Features**:
+
+Features
+
+```csharp
+
 ```
 
 - **Code First**: Allows developers to define the database schema using C# classes and code.
@@ -382,44 +385,49 @@ What is ORM? What are the different types of ORM?
 
 - **Model First**: Allows developers to create a visual model and generate the database schema from it.
 
+**Example:**
+
 ```csharp
-**Example**:
 public class Employee
 {
-public int EmployeeID { get; set; }
-public string Name { get; set; }
-public string Position { get; set; }
+  public int EmployeeID { get; set; }
+  public string Name { get; set; }
+  public string Position { get; set; }
 }
 public class MyContext : DbContext
 {
-public DbSet<Employee> Employees { get; set; }
+  public DbSet<Employee> Employees { get; set; }
 }
 using (var context = new MyContext())
 {
-var employee = new Employee { Name = "John Doe", Position = "Developer" };
-context.Employees.Add(employee);
-context.SaveChanges();
+  var employee = new Employee { Name = "John Doe", Position = "Developer" };
+  context.Employees.Add(employee);
+  context.SaveChanges();
 }
 ```
 
 2.  **Dapper**
 
-```csharp
 **Description**: Dapper is a lightweight and fast micro-ORM for .NET. It provides a simple API for querying and mapping database results to objects, focusing on performance and simplicity.
-**Features**:
+
+Features
+
+```csharp
+
 ```
 
 - **Performance**: Known for high performance due to its minimalistic design.
 
 - **Flexibility**: Allows writing raw SQL queries and mapping results to objects.
 
+**Example:**
+
 ```csharp
-**Example**:
 using (var connection = new SqlConnection(connectionString))
 {
-string query = "SELECT EmployeeID, Name, Position FROM Employees WHERE EmployeeID = @Id";
-var employee = connection.QuerySingle<Employee>(query, new { Id = 1 });
-Console.WriteLine($"{employee.Name} - {employee.Position}");
+  string query = "SELECT EmployeeID, Name, Position FROM Employees WHERE EmployeeID = @Id";
+  var employee = connection.QuerySingle<Employee>(query, new { Id = 1 });
+  Console.WriteLine($"{employee.Name} - {employee.Position}");
 }
 ```
 

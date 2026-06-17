@@ -39,7 +39,7 @@ where num % 2 == 0
 select num;
 foreach (var num in evenNumbers)
 {
-Console.WriteLine(num); // Output: 2, 4
+  Console.WriteLine(num); // Output: 2, 4
 }
 ```
 
@@ -52,13 +52,13 @@ Console.WriteLine(num); // Output: 2, 4
 ```csharp
 using (var context = new MyDbContext())
 {
-var customers = from c in context.Customers
-where c.IsActive
-select c;
-foreach (var customer in customers)
-{
-Console.WriteLine(customer.Name);
-}
+  var customers = from c in context.Customers
+  where c.IsActive
+  select c;
+  foreach (var customer in customers)
+  {
+    Console.WriteLine(customer.Name);
+  }
 }
 ```
 
@@ -71,13 +71,13 @@ Console.WriteLine(customer.Name);
 ```csharp
 using (var context = new MyDbContext())
 {
-var orders = context.Orders
-.Where(o => o.OrderDate > DateTime.Now.AddDays(-30))
-.ToList();
-foreach (var order in orders)
-{
-Console.WriteLine(order.OrderNumber);
-}
+  var orders = context.Orders
+  .Where(o => o.OrderDate > DateTime.Now.AddDays(-30))
+  .ToList();
+  foreach (var order in orders)
+  {
+    Console.WriteLine(order.OrderNumber);
+  }
 }
 ```
 
@@ -94,7 +94,7 @@ where (string)person.Element("Age") > "18"
 select person.Element("Name").Value;
 foreach (var name in names)
 {
-Console.WriteLine(name);
+  Console.WriteLine(name);
 }
 ```
 
@@ -131,9 +131,9 @@ Console.WriteLine(name);
 ```csharp
 List<Employee> employees = new List<Employee>
 {
-new Employee { Name = "Alice", Age = 30 },
-new Employee { Name = "Bob", Age = 25 },
-new Employee { Name = "Charlie", Age = 35 }
+  new Employee { Name = "Alice", Age = 30 },
+  new Employee { Name = "Bob", Age = 25 },
+  new Employee { Name = "Charlie", Age = 35 }
 };
 // Query using LINQ
 var youngEmployees = from e in employees
@@ -149,7 +149,7 @@ foreach (var employee in youngEmployees)
 
 ```csharp
 {
-Console.WriteLine($"{employee.Name}, Age: {employee.Age}");
+  Console.WriteLine($"{employee.Name}, Age: {employee.Age}");
 }
 ```
 
@@ -165,7 +165,7 @@ In this example, LINQ is used to filter employees who are younger than 30 and th
 
 LINQ enhances productivity and maintainability in .NET applications by providing a powerful and expressive way to query and manipulate data.
 
-What is the difference between First and FirstOrDefault methods in LINQ?
+## What is the difference between First and FirstOrDefault methods in LINQ?
 
 In LINQ, First and FirstOrDefault are methods used to retrieve the first element from a sequence based on a condition. However, they have different behaviors when the sequence is empty or when no elements match the specified condition.
 
@@ -311,7 +311,7 @@ List<Employee> employees = dbContext.Employees.ToList(); // All data is fetched 
 IEnumerable<Employee> result = employees.Where(e => e.Salary > 5000);
 foreach (var emp in result)
 {
-Console.WriteLine($"{emp.Name} - {emp.Salary}");
+  Console.WriteLine($"{emp.Name} - {emp.Salary}");
 }
 ```
 
@@ -325,7 +325,7 @@ IQueryable<Employee> employeesQuery = dbContext.Employees; // Query is deferred
 var result = employeesQuery.Where(e => e.Salary > 5000);
 foreach (var emp in result)
 {
-Console.WriteLine($"{emp.Name} - {emp.Salary}");
+  Console.WriteLine($"{emp.Name} - {emp.Salary}");
 }
 ```
 

@@ -6,7 +6,7 @@
 2. What is Polymorphism and what are its types? When to use polymorphism?
 3. What is the difference between Method Overriding and Method Hiding?
 
-What is OOPS? What are the main concepts of OOPS?
+## What is OOPS? What are the main concepts of OOPS?
 
 ### Object-Oriented Programming (OOP)
 
@@ -33,31 +33,31 @@ Let's explore each concept with examples.
 ```csharp
 public abstract class Animal
 {
-public abstract void MakeSound(); // Abstract method, no implementation
+  public abstract void MakeSound(); // Abstract method, no implementation
 }
 public class Dog : Animal
 {
-public override void MakeSound()
-{
-Console.WriteLine("Bark");
-}
+  public override void MakeSound()
+  {
+    Console.WriteLine("Bark");
+  }
 }
 public class Cat : Animal
 {
-public override void MakeSound()
-{
-Console.WriteLine("Meow");
-}
+  public override void MakeSound()
+  {
+    Console.WriteLine("Meow");
+  }
 }
 class Program
 {
-static void Main(string[] args)
-{
-Animal dog = new Dog();
-dog.MakeSound(); // Output: Bark
-Animal cat = new Cat();
-cat.MakeSound(); // Output: Meow
-}
+  static void Main(string[] args)
+  {
+    Animal dog = new Dog();
+    dog.MakeSound(); // Output: Bark
+    Animal cat = new Cat();
+    cat.MakeSound(); // Output: Meow
+  }
 }
 ```
 
@@ -72,35 +72,35 @@ cat.MakeSound(); // Output: Meow
 ```csharp
 public class BankAccount
 {
-private decimal balance; // Private field
-public void Deposit(decimal amount)
-{
-if (amount > 0)
-{
-balance += amount;
-}
-}
-public void Withdraw(decimal amount)
-{
-if (amount > 0 && amount <= balance)
-{
-balance -= amount;
-}
-}
-public decimal GetBalance()
-{
-return balance;
-}
+  private decimal balance; // Private field
+  public void Deposit(decimal amount)
+  {
+    if (amount > 0)
+    {
+      balance += amount;
+    }
+  }
+  public void Withdraw(decimal amount)
+  {
+    if (amount > 0 && amount <= balance)
+    {
+      balance -= amount;
+    }
+  }
+  public decimal GetBalance()
+  {
+    return balance;
+  }
 }
 class Program
 {
-static void Main(string[] args)
-{
-BankAccount account = new BankAccount();
-account.Deposit(100);
-account.Withdraw(50);
-Console.WriteLine("Balance: " + account.GetBalance()); // Output: Balance: 50
-}
+  static void Main(string[] args)
+  {
+    BankAccount account = new BankAccount();
+    account.Deposit(100);
+    account.Withdraw(50);
+    Console.WriteLine("Balance: " + account.GetBalance()); // Output: Balance: 50
+  }
 }
 ```
 
@@ -115,36 +115,32 @@ Console.WriteLine("Balance: " + account.GetBalance()); // Output: Balance: 50
 ```csharp
 public class Vehicle
 {
-public int Speed { get; set; }
-public void Drive()
-{
-Console.WriteLine("Driving at " + Speed + " km/h");
-}
+  public int Speed { get; set; }
+  public void Drive()
+  {
+    Console.WriteLine("Driving at " + Speed + " km/h");
+  }
 }
 public class Car : Vehicle
 {
-public int NumberOfDoors { get; set; }
-public void Honk()
-{
-Console.WriteLine("Honking");
-}
+  public int NumberOfDoors { get; set; }
+  public void Honk()
+  {
+    Console.WriteLine("Honking");
+  }
 }
 class Program
 {
-static void Main(string[] args)
-{
-Car car = new Car
-{
-Speed = 120,
-```
-
-NumberOfDoors = 4
-
-```csharp
-};
-car.Drive(); // Output: Driving at 120 km/h
-car.Honk(); // Output: Honking
-}
+  static void Main(string[] args)
+  {
+    Car car = new Car
+    {
+      Speed = 120,
+      NumberOfDoors = 4
+    };
+    car.Drive(); // Output: Driving at 120 km/h
+    car.Honk(); // Output: Honking
+  }
 }
 ```
 
@@ -163,25 +159,25 @@ car.Honk(); // Output: Honking
 ```csharp
 public class Vehicle
 {
-public virtual void Drive()
-{
-Console.WriteLine("Vehicle is driving");
-}
+  public virtual void Drive()
+  {
+    Console.WriteLine("Vehicle is driving");
+  }
 }
 public class Car : Vehicle
 {
-public override void Drive()
-{
-Console.WriteLine("Car is driving");
-}
+  public override void Drive()
+  {
+    Console.WriteLine("Car is driving");
+  }
 }
 class Program
 {
-static void Main(string[] args)
-{
-Vehicle myCar = new Car();
-myCar.Drive(); // Output: Car is driving
-}
+  static void Main(string[] args)
+  {
+    Vehicle myCar = new Car();
+    myCar.Drive(); // Output: Car is driving
+  }
 }
 ```
 
@@ -196,23 +192,23 @@ myCar.Drive(); // Output: Car is driving
 ```csharp
 public class Calculator
 {
-public int Add(int a, int b)
-{
-return a + b;
-}
-public double Add(double a, double b)
-{
-return a + b;
-}
+  public int Add(int a, int b)
+  {
+    return a + b;
+  }
+  public double Add(double a, double b)
+  {
+    return a + b;
+  }
 }
 class Program
 {
-static void Main(string[] args)
-{
-Calculator calc = new Calculator();
-Console.WriteLine(calc.Add(5, 10)); // Output: 15
-Console.WriteLine(calc.Add(5.5, 10.5)); // Output: 16.0
-}
+  static void Main(string[] args)
+  {
+    Calculator calc = new Calculator();
+    Console.WriteLine(calc.Add(5, 10)); // Output: 15
+    Console.WriteLine(calc.Add(5.5, 10.5)); // Output: 16.0
+  }
 }
 ```
 
@@ -234,7 +230,7 @@ Console.WriteLine(calc.Add(5.5, 10.5)); // Output: 16.0
 
 These principles form the foundation of OOP and are essential for creating well-structured, reusable, and maintainable code in C#.
 
-What is Polymorphism and what are its types? When to use polymorphism?
+## What is Polymorphism and what are its types? When to use polymorphism?
 
 **Polymorphism** is a fundamental concept in object-oriented programming (OOP) that allows objects of different classes to be treated as objects of a common base class. It enables the same operation to behave differently on different classes. Polymorphism enhances flexibility and maintainability by allowing code to work with objects of various types through a unified interface.
 
@@ -257,31 +253,31 @@ Method overloading occurs when multiple methods in the same class share the same
 ```csharp
 public class Calculator
 {
-// Overloaded method with two integer parameters
-public int Add(int a, int b)
-{
-return a + b;
-}
-// Overloaded method with three integer parameters
-public int Add(int a, int b, int c)
-{
-return a + b + c;
-}
-// Overloaded method with two double parameters
-public double Add(double a, double b)
-{
-return a + b;
-}
+  // Overloaded method with two integer parameters
+  public int Add(int a, int b)
+  {
+    return a + b;
+  }
+  // Overloaded method with three integer parameters
+  public int Add(int a, int b, int c)
+  {
+    return a + b + c;
+  }
+  // Overloaded method with two double parameters
+  public double Add(double a, double b)
+  {
+    return a + b;
+  }
 }
 class Program
 {
-static void Main(string[] args)
-{
-Calculator calc = new Calculator();
-Console.WriteLine(calc.Add(5, 10)); // Output: 15
-Console.WriteLine(calc.Add(5, 10, 15)); // Output: 30
-Console.WriteLine(calc.Add(5.5, 10.5)); // Output: 16.0
-}
+  static void Main(string[] args)
+  {
+    Calculator calc = new Calculator();
+    Console.WriteLine(calc.Add(5, 10)); // Output: 15
+    Console.WriteLine(calc.Add(5, 10, 15)); // Output: 30
+    Console.WriteLine(calc.Add(5.5, 10.5)); // Output: 16.0
+  }
 }
 ```
 
@@ -296,36 +292,32 @@ Operator overloading allows you to redefine the way operators work with user-def
 ```csharp
 public class ComplexNumber
 {
-public double Real { get; set; }
-public double Imaginary { get; set; }
-public ComplexNumber(double real, double imaginary)
-{
-Real = real;
-Imaginary = imaginary;
-}
-// Overloading the + operator
-public static ComplexNumber operator +(ComplexNumber c1, ComplexNumber c2)
-{
-return new ComplexNumber(c1.Real + c2.Real, c1.Imaginary + c2.Imaginary);
-}
-public override string ToString()
-{
-return $"{Real} + {Imaginary}i";
-}
+  public double Real { get; set; }
+  public double Imaginary { get; set; }
+  public ComplexNumber(double real, double imaginary)
+  {
+    Real = real;
+    Imaginary = imaginary;
+  }
+  // Overloading the + operator
+  public static ComplexNumber operator +(ComplexNumber c1, ComplexNumber c2)
+  {
+    return new ComplexNumber(c1.Real + c2.Real, c1.Imaginary + c2.Imaginary);
+  }
+  public override string ToString()
+  {
+    return $"{Real} + {Imaginary}i";
+  }
 }
 class Program
 {
-static void Main(string[] args)
-{
-ComplexNumber c1 = new ComplexNumber(1.0, 2.0);
-ComplexNumber c2 = new ComplexNumber(3.0, 4.0);
-```
-
-ComplexNumber sum = c1 + c2; // Using the overloaded + operator
-
-```csharp
-Console.WriteLine(sum); // Output: 4 + 6i
-}
+  static void Main(string[] args)
+  {
+    ComplexNumber c1 = new ComplexNumber(1.0, 2.0);
+    ComplexNumber c2 = new ComplexNumber(3.0, 4.0);
+    ComplexNumber sum = c1 + c2; // Using the overloaded + operator
+    Console.WriteLine(sum); // Output: 4 + 6i
+  }
 }
 ```
 
@@ -340,37 +332,37 @@ Console.WriteLine(sum); // Output: 4 + 6i
 ```csharp
 public class Animal
 {
-// Virtual method to be overridden in derived classes
-public virtual void MakeSound()
-{
-Console.WriteLine("Animal sound");
-}
+  // Virtual method to be overridden in derived classes
+  public virtual void MakeSound()
+  {
+    Console.WriteLine("Animal sound");
+  }
 }
 public class Dog : Animal
 {
-// Overriding the MakeSound method in the Dog class
-public override void MakeSound()
-{
-Console.WriteLine("Bark");
-}
+  // Overriding the MakeSound method in the Dog class
+  public override void MakeSound()
+  {
+    Console.WriteLine("Bark");
+  }
 }
 public class Cat : Animal
 {
-// Overriding the MakeSound method in the Cat class
-public override void MakeSound()
-{
-Console.WriteLine("Meow");
-}
+  // Overriding the MakeSound method in the Cat class
+  public override void MakeSound()
+  {
+    Console.WriteLine("Meow");
+  }
 }
 class Program
 {
-static void Main(string[] args)
-{
-Animal myDog = new Dog();
-Animal myCat = new Cat();
-myDog.MakeSound(); // Output: Bark (Dog's implementation)
-myCat.MakeSound(); // Output: Meow (Cat's implementation)
-}
+  static void Main(string[] args)
+  {
+    Animal myDog = new Dog();
+    Animal myCat = new Cat();
+    myDog.MakeSound(); // Output: Bark (Dog's implementation)
+    myCat.MakeSound(); // Output: Meow (Cat's implementation)
+  }
 }
 ```
 
@@ -389,7 +381,7 @@ myCat.MakeSound(); // Output: Meow (Cat's implementation)
 
 Polymorphism allows for flexible and reusable code by enabling methods to behave differently based on the object they're acting upon. **Static polymorphism** (via method overloading and operator overloading) provides compile-time decision-making, while **dynamic polymorphism** (via method overriding) allows for runtime decision-making, enhancing the ability to extend and modify behavior in a controlled manner.
 
-What is the difference between Method Overriding and Method Hiding?
+## What is the difference between Method Overriding and Method Hiding?
 
 **Method Overriding** and **Method Hiding** are both techniques in C# that allow a derived class to define a new implementation of a method that is already defined in a base class. However, they operate differently in terms of how the base class method is treated and how the method resolution works at runtime and compile-time.
 
@@ -412,25 +404,25 @@ What is the difference between Method Overriding and Method Hiding?
 ```csharp
 public class BaseClass
 {
-public virtual void Display()
-{
-Console.WriteLine("BaseClass Display");
-}
+  public virtual void Display()
+  {
+    Console.WriteLine("BaseClass Display");
+  }
 }
 public class DerivedClass : BaseClass
 {
-public override void Display()
-{
-Console.WriteLine("DerivedClass Display");
-}
+  public override void Display()
+  {
+    Console.WriteLine("DerivedClass Display");
+  }
 }
 class Program
 {
-static void Main()
-{
-BaseClass obj = new DerivedClass();
-obj.Display(); // Output: DerivedClass Display
-}
+  static void Main()
+  {
+    BaseClass obj = new DerivedClass();
+    obj.Display(); // Output: DerivedClass Display
+  }
 }
 ```
 
@@ -457,27 +449,27 @@ obj.Display(); // Output: DerivedClass Display
 ```csharp
 public class BaseClass
 {
-public void Display()
-{
-Console.WriteLine("BaseClass Display");
-}
+  public void Display()
+  {
+    Console.WriteLine("BaseClass Display");
+  }
 }
 public class DerivedClass : BaseClass
 {
-public new void Display()
-{
-Console.WriteLine("DerivedClass Display");
-}
+  public new void Display()
+  {
+    Console.WriteLine("DerivedClass Display");
+  }
 }
 class Program
 {
-static void Main()
-{
-BaseClass obj = new DerivedClass();
-obj.Display(); // Output: BaseClass Display
-DerivedClass derivedObj = new DerivedClass();
-derivedObj.Display(); // Output: DerivedClass Display
-}
+  static void Main()
+  {
+    BaseClass obj = new DerivedClass();
+    obj.Display(); // Output: BaseClass Display
+    DerivedClass derivedObj = new DerivedClass();
+    derivedObj.Display(); // Output: DerivedClass Display
+  }
 }
 ```
 

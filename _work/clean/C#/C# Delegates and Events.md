@@ -5,7 +5,7 @@
 1. What are Delegates in C#? When to use delegates in real applications?
 2. What are Events in C#? When to use events in real applications?
 
-What are Delegates in C#? When to use delegates in real applications?
+## What are Delegates in C#? When to use delegates in real applications?
 
 A **delegate** in C# is a type that represents references to methods with a specific signature and return type. Delegates are similar to function pointers in C++, but they are type-safe and secure. They are commonly used for defining callback methods and event handling.
 
@@ -38,14 +38,14 @@ Next, define one or more methods that match the delegate's signature.
 ```csharp
 public class Calculator
 {
-public int Add(int a, int b)
-{
-return a + b;
-}
-public int Subtract(int a, int b)
-{
-return a - b;
-}
+  public int Add(int a, int b)
+  {
+    return a + b;
+  }
+  public int Subtract(int a, int b)
+  {
+    return a - b;
+  }
 }
 ```
 
@@ -56,21 +56,21 @@ You can create an instance of the delegate, pointing it to a method that matches
 ```csharp
 class Program
 {
-static void Main(string[] args)
-{
-// Create an instance of the Calculator class
-Calculator calculator = new Calculator();
-// Instantiate the delegate and point it to the Add method
-MathOperation operation = new MathOperation(calculator.Add);
-// Call the delegate
-int result = operation(5, 3);
-Console.WriteLine("Addition Result: " + result); // Output: Addition Result: 8
-// Point the delegate to the Subtract method
-operation = calculator.Subtract;
-// Call the delegate
-result = operation(5, 3);
-Console.WriteLine("Subtraction Result: " + result); // Output: Subtraction Result: 2
-}
+  static void Main(string[] args)
+  {
+    // Create an instance of the Calculator class
+    Calculator calculator = new Calculator();
+    // Instantiate the delegate and point it to the Add method
+    MathOperation operation = new MathOperation(calculator.Add);
+    // Call the delegate
+    int result = operation(5, 3);
+    Console.WriteLine("Addition Result: " + result); // Output: Addition Result: 8
+    // Point the delegate to the Subtract method
+    operation = calculator.Subtract;
+    // Call the delegate
+    result = operation(5, 3);
+    Console.WriteLine("Subtraction Result: " + result); // Output: Subtraction Result: 2
+  }
 }
 ```
 
@@ -91,16 +91,16 @@ A delegate can point to more than one method. This is known as multicasting. You
 ```csharp
 class Program
 {
-static void Main(string[] args)
-{
-Calculator calculator = new Calculator();
-MathOperation operation = calculator.Add;
-// Adding the Subtract method to the delegate's invocation list
-operation += calculator.Subtract;
-// Invoking the delegate will now call both Add and Subtract
-int result = operation(5, 3);
-Console.WriteLine("Final Result: " + result);
-}
+  static void Main(string[] args)
+  {
+    Calculator calculator = new Calculator();
+    MathOperation operation = calculator.Add;
+    // Adding the Subtract method to the delegate's invocation list
+    operation += calculator.Subtract;
+    // Invoking the delegate will now call both Add and Subtract
+    int result = operation(5, 3);
+    Console.WriteLine("Final Result: " + result);
+  }
 }
 ```
 
@@ -108,7 +108,7 @@ Console.WriteLine("Final Result: " + result);
 
 Delegates are a powerful feature in C# that allow methods to be passed as parameters, provide flexibility in defining callbacks, and are essential for event handling.
 
-What are Events in C#? When to use events in real applications?
+## What are Events in C#? When to use events in real applications?
 
 In C#, an **event** is a way for a class to provide notifications to clients of that class when something of interest occurs. Events are based on delegates and are a key part of the observer design pattern. When an event is raised, all the methods (event handlers) that are subscribed to the event are executed.
 
@@ -141,21 +141,21 @@ Next, declare an event using the delegate.
 ```csharp
 public class Process
 {
-public event NotifyEventHandler ProcessCompleted;
-public void StartProcess()
-{
-Console.WriteLine("Process Started.");
-// Simulating some work with a delay
-System.Threading.Thread.Sleep(2000);
-// Raise the event after the process is completed
-OnProcessCompleted("Process completed successfully.");
-}
-// Method to raise the event
-protected virtual void OnProcessCompleted(string message)
-{
-// Check if there are any subscribers
-ProcessCompleted?.Invoke(message);
-}
+  public event NotifyEventHandler ProcessCompleted;
+  public void StartProcess()
+  {
+    Console.WriteLine("Process Started.");
+    // Simulating some work with a delay
+    System.Threading.Thread.Sleep(2000);
+    // Raise the event after the process is completed
+    OnProcessCompleted("Process completed successfully.");
+  }
+  // Method to raise the event
+  protected virtual void OnProcessCompleted(string message)
+  {
+    // Check if there are any subscribers
+    ProcessCompleted?.Invoke(message);
+  }
 }
 ```
 
@@ -166,10 +166,10 @@ Subscribers (other classes) can subscribe to the event and provide event handler
 ```csharp
 public class EventSubscriber
 {
-public void OnProcessCompletedHandler(string message)
-{
-Console.WriteLine("Subscriber received this message: " + message);
-}
+  public void OnProcessCompletedHandler(string message)
+  {
+    Console.WriteLine("Subscriber received this message: " + message);
+  }
 }
 ```
 
@@ -182,16 +182,16 @@ The event is raised by the publisher when appropriate, usually after some condit
 ```csharp
 class Program
 {
-static void Main(string[] args)
-{
-// Create instances of the publisher and subscriber
-Process process = new Process();
-EventSubscriber subscriber = new EventSubscriber();
-// Subscribe to the event
-process.ProcessCompleted += subscriber.OnProcessCompletedHandler;
-// Start the process
-process.StartProcess();
-}
+  static void Main(string[] args)
+  {
+    // Create instances of the publisher and subscriber
+    Process process = new Process();
+    EventSubscriber subscriber = new EventSubscriber();
+    // Subscribe to the event
+    process.ProcessCompleted += subscriber.OnProcessCompletedHandler;
+    // Start the process
+    process.StartProcess();
+  }
 }
 ```
 
@@ -239,21 +239,21 @@ A delegate can be defined, instantiated, and invoked directly:
 public delegate void Notify(string message);
 public class Program
 {
-public static void Main(string[] args)
-{
-Notify notifyDelegate = ShowMessage;
-notifyDelegate("Hello via delegate!");
-notifyDelegate = ShowAnotherMessage;
-notifyDelegate("Hello again via delegate!");
-}
-public static void ShowMessage(string message)
-{
-Console.WriteLine(message);
-}
-public static void ShowAnotherMessage(string message)
-{
-Console.WriteLine("Another: " + message);
-}
+  public static void Main(string[] args)
+  {
+    Notify notifyDelegate = ShowMessage;
+    notifyDelegate("Hello via delegate!");
+    notifyDelegate = ShowAnotherMessage;
+    notifyDelegate("Hello again via delegate!");
+  }
+  public static void ShowMessage(string message)
+  {
+    Console.WriteLine(message);
+  }
+  public static void ShowAnotherMessage(string message)
+  {
+    Console.WriteLine("Another: " + message);
+  }
 }
 ```
 
@@ -265,36 +265,36 @@ An event encapsulates a delegate and restricts its invocation to the class where
 public delegate void Notify(string message);
 public class Process
 {
-public event Notify ProcessCompleted;
-public void StartProcess()
-{
-Console.WriteLine("Process Started.");
-System.Threading.Thread.Sleep(2000);
-OnProcessCompleted("Process completed successfully.");
-}
-protected virtual void OnProcessCompleted(string message)
-{
-ProcessCompleted?.Invoke(message); // Only this class can invoke the event
-}
+  public event Notify ProcessCompleted;
+  public void StartProcess()
+  {
+    Console.WriteLine("Process Started.");
+    System.Threading.Thread.Sleep(2000);
+    OnProcessCompleted("Process completed successfully.");
+  }
+  protected virtual void OnProcessCompleted(string message)
+  {
+    ProcessCompleted?.Invoke(message); // Only this class can invoke the event
+  }
 }
 public class EventSubscriber
 {
-public void OnProcessCompletedHandler(string message)
-{
-Console.WriteLine("Event received: " + message);
-}
+  public void OnProcessCompletedHandler(string message)
+  {
+    Console.WriteLine("Event received: " + message);
+  }
 }
 class Program
 {
-static void Main(string[] args)
-{
-Process process = new Process();
-EventSubscriber subscriber = new EventSubscriber();
-// Subscribing to the event
-process.ProcessCompleted += subscriber.OnProcessCompletedHandler;
-// Starting the process, which will raise the event
-process.StartProcess();
-}
+  static void Main(string[] args)
+  {
+    Process process = new Process();
+    EventSubscriber subscriber = new EventSubscriber();
+    // Subscribing to the event
+    process.ProcessCompleted += subscriber.OnProcessCompletedHandler;
+    // Starting the process, which will raise the event
+    process.StartProcess();
+  }
 }
 ```
 

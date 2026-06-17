@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { formatFile as formatCSharpClean } from './format-csharp-clean.mjs';
 
 const args = process.argv.slice(2);
 const topicIdx = args.indexOf('--topic');
@@ -221,7 +222,8 @@ for (const f of files) {
   if (only && !f.includes(only)) continue;
   const raw = fs.readFileSync(path.join(SRC, f), 'utf8');
   const baseName = f.replace(/\.md$/i, '');
-  const cleaned = normalize(raw, baseName);
+  let cleaned = normalize(raw, baseName);
+  if (CODE_LANG === 'csharp') cleaned = formatCSharpClean(cleaned);
   fs.writeFileSync(path.join(OUT, f), cleaned, 'utf8');
   console.log(`cleaned: ${f} (${raw.length} -> ${cleaned.length})`);
 }

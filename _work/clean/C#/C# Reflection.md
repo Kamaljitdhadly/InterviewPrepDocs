@@ -6,7 +6,7 @@
 2. What is Reflection?
 3. What is meant by Globalization and Localization?
 
-What is GAC?
+## What is GAC?
 
 The **Global Assembly Cache (GAC)** is a special folder in Windows that is used to store shared .NET assemblies that are intended to be used by multiple applications. Assemblies that are placed in the GAC are available globally across all applications on a machine, making it easier to manage and share common libraries between different .NET applications.
 
@@ -59,7 +59,7 @@ This command installs MyAssembly.dll into the GAC.
 
 The Global Assembly Cache (GAC) is a powerful feature of the .NET Framework that allows you to store and manage shared assemblies centrally, providing benefits like version control and reduced redundancy. However, it should be used carefully, particularly in modern .NET development, where dependency management has evolved with newer practices and tools.
 
-What is Reflection?
+## What is Reflection?
 
 **Reflection** in .NET is the process of inspecting and interacting with the metadata of types, assemblies, and objects at runtime. It allows you to dynamically discover information about objects, types, methods, properties, and other members in your code. Reflection is a powerful tool used for a variety of tasks, including dynamically invoking methods, accessing attributes, and creating instances of types at runtime.
 
@@ -98,46 +98,46 @@ using System;
 using System.Reflection;
 public class ExampleClass
 {
-public int ExampleProperty { get; set; }
-public void ExampleMethod()
-{
-Console.WriteLine("ExampleMethod called.");
-}
+  public int ExampleProperty { get; set; }
+  public void ExampleMethod()
+  {
+    Console.WriteLine("ExampleMethod called.");
+  }
 }
 class Program
 {
-static void Main()
-{
-// Get the type of the class
-Type type = typeof(ExampleClass);
-// Display the name of the type
-Console.WriteLine("Type: " + type.Name);
-// Get and display the properties of the type
-PropertyInfo[] properties = type.GetProperties();
-Console.WriteLine("Properties:");
-foreach (var property in properties)
-{
-Console.WriteLine("- " + property.Name);
-}
-// Get and display the methods of the type
-MethodInfo[] methods = type.GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly);
-Console.WriteLine("Methods:");
-foreach (var method in methods)
-{
-Console.WriteLine("- " + method.Name);
-}
-// Create an instance of the type
-var instance = Activator.CreateInstance(type);
-// Invoke a method on the instance
-MethodInfo exampleMethod = type.GetMethod("ExampleMethod");
-exampleMethod.Invoke(instance, null);
-// Set a property value on the instance
-PropertyInfo exampleProperty = type.GetProperty("ExampleProperty");
-exampleProperty.SetValue(instance, 42);
-// Get and display the property value
-int value = (int)exampleProperty.GetValue(instance);
-Console.WriteLine("ExampleProperty value: " + value);
-}
+  static void Main()
+  {
+    // Get the type of the class
+    Type type = typeof(ExampleClass);
+    // Display the name of the type
+    Console.WriteLine("Type: " + type.Name);
+    // Get and display the properties of the type
+    PropertyInfo[] properties = type.GetProperties();
+    Console.WriteLine("Properties:");
+    foreach (var property in properties)
+    {
+      Console.WriteLine("- " + property.Name);
+    }
+    // Get and display the methods of the type
+    MethodInfo[] methods = type.GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly);
+    Console.WriteLine("Methods:");
+    foreach (var method in methods)
+    {
+      Console.WriteLine("- " + method.Name);
+    }
+    // Create an instance of the type
+    var instance = Activator.CreateInstance(type);
+    // Invoke a method on the instance
+    MethodInfo exampleMethod = type.GetMethod("ExampleMethod");
+    exampleMethod.Invoke(instance, null);
+    // Set a property value on the instance
+    PropertyInfo exampleProperty = type.GetProperty("ExampleProperty");
+    exampleProperty.SetValue(instance, 42);
+    // Get and display the property value
+    int value = (int)exampleProperty.GetValue(instance);
+    Console.WriteLine("ExampleProperty value: " + value);
+  }
 }
 ```
 
@@ -183,7 +183,7 @@ Console.WriteLine("ExampleProperty value: " + value);
 
 Reflection is a powerful feature in .NET that allows you to dynamically inspect and interact with assemblies, types, and objects at runtime. While it provides great flexibility, it comes with performance costs and potential security implications, so it should be used judiciously.
 
-What is meant by Globalization and Localization?
+## What is meant by Globalization and Localization?
 
 **Globalization** and **Localization** are concepts used in software development to create applications that can be used by a global audience, supporting different languages, cultures, and regions.
 
@@ -226,15 +226,15 @@ using System;
 using System.Globalization;
 class Program
 {
-static void Main()
-{
-// Set the culture to US English
-CultureInfo cultureUS = new CultureInfo("en-US");
-Console.WriteLine("Date in US format: " + DateTime.Now.ToString(cultureUS));
-// Set the culture to French
-CultureInfo cultureFR = new CultureInfo("fr-FR");
-Console.WriteLine("Date in French format: " + DateTime.Now.ToString(cultureFR));
-}
+  static void Main()
+  {
+    // Set the culture to US English
+    CultureInfo cultureUS = new CultureInfo("en-US");
+    Console.WriteLine("Date in US format: " + DateTime.Now.ToString(cultureUS));
+    // Set the culture to French
+    CultureInfo cultureFR = new CultureInfo("fr-FR");
+    Console.WriteLine("Date in French format: " + DateTime.Now.ToString(cultureFR));
+  }
 }
 ```
 
@@ -248,14 +248,14 @@ using System.Resources;
 using System.Reflection;
 class Program
 {
-static void Main()
-{
-// Load the resource file
-ResourceManager rm = new ResourceManager("MyApp.Resources.Strings", Assembly.GetExecutingAssembly());
-// Get the localized string
-string greeting = rm.GetString("Hello", new CultureInfo("fr-FR"));
-Console.WriteLine(greeting); // Outputs "Bonjour" if properly localized
-}
+  static void Main()
+  {
+    // Load the resource file
+    ResourceManager rm = new ResourceManager("MyApp.Resources.Strings", Assembly.GetExecutingAssembly());
+    // Get the localized string
+    string greeting = rm.GetString("Hello", new CultureInfo("fr-FR"));
+    Console.WriteLine(greeting); // Outputs "Bonjour" if properly localized
+  }
 }
 ```
 

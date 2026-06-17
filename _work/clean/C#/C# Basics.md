@@ -40,11 +40,11 @@ Access specifiers, also known as access modifiers, are keywords in C# that defin
 ```csharp
 public class MyClass
 {
-public int MyProperty { get; set; }
-public void MyMethod()
-{
-// Method code here
-}
+  public int MyProperty { get; set; }
+  public void MyMethod()
+  {
+    // Method code here
+  }
 }
 ```
 
@@ -59,11 +59,11 @@ public void MyMethod()
 ```csharp
 public class MyClass
 {
-private int myField;
-private void MyMethod()
-{
-// Method code here
-}
+  private int myField;
+  private void MyMethod()
+  {
+    // Method code here
+  }
 }
 ```
 
@@ -78,18 +78,18 @@ private void MyMethod()
 ```csharp
 public class BaseClass
 {
-protected int myField;
-protected void MyMethod()
-{
-// Method code here
-}
+  protected int myField;
+  protected void MyMethod()
+  {
+    // Method code here
+  }
 }
 public class DerivedClass : BaseClass
 {
-public void AnotherMethod()
-{
-myField = 10; // Accessible due to protected access
-}
+  public void AnotherMethod()
+  {
+    myField = 10; // Accessible due to protected access
+  }
 }
 ```
 
@@ -104,11 +104,11 @@ myField = 10; // Accessible due to protected access
 ```csharp
 internal class MyClass
 {
-internal int MyProperty { get; set; }
-internal void MyMethod()
-{
-// Method code here
-}
+  internal int MyProperty { get; set; }
+  internal void MyMethod()
+  {
+    // Method code here
+  }
 }
 ```
 
@@ -123,11 +123,11 @@ internal void MyMethod()
 ```csharp
 public class MyClass
 {
-protected internal int MyProperty { get; set; }
-protected internal void MyMethod()
-{
-// Method code here
-}
+  protected internal int MyProperty { get; set; }
+  protected internal void MyMethod()
+  {
+    // Method code here
+  }
 }
 ```
 
@@ -142,11 +142,11 @@ protected internal void MyMethod()
 ```csharp
 public class MyClass
 {
-private protected int MyProperty { get; set; }
-private protected void MyMethod()
-{
-// Method code here
-}
+  private protected int MyProperty { get; set; }
+  private protected void MyMethod()
+  {
+    // Method code here
+  }
 }
 ```
 
@@ -164,7 +164,7 @@ private protected void MyMethod()
 
 - **Private Protected**: Accessible within the containing class and derived classes within the same assembly.
 
-What is the default access modifier class?
+## What is the default access modifier class?
 
 In C#, the default access modifier varies depending on the context in which it is used:
 
@@ -179,7 +179,7 @@ For a top-level class (a class that is not nested within another class), the def
 ```csharp
 class MyClass // Default is internal
 {
-// Class members
+  // Class members
 }
 ```
 
@@ -194,11 +194,11 @@ For members of a class, such as fields, methods, properties, constructors, etc.,
 ```csharp
 public class MyClass
 {
-int myField; // Default is private
-void MyMethod() // Default is private
-{
-// Method code here
-}
+  int myField; // Default is private
+  void MyMethod() // Default is private
+  {
+    // Method code here
+  }
 }
 ```
 
@@ -213,10 +213,10 @@ For classes that are nested within another class, the default access modifier is
 ```csharp
 public class OuterClass
 {
-class NestedClass // Default is private
-{
-// Nested class members
-}
+  class NestedClass // Default is private
+  {
+    // Nested class members
+  }
 }
 ```
 
@@ -228,7 +228,7 @@ class NestedClass // Default is private
 
 - **Nested Classes**: Default access modifier is private.
 
-What is the default access modifier interface?
+## What is the default access modifier interface?
 
 In C#, the default access modifier for members of an interface is always public. This applies to all methods, properties, events, and indexers defined within the interface.
 
@@ -243,9 +243,9 @@ In C#, the default access modifier for members of an interface is always public.
 ```csharp
 public interface IMyInterface
 {
-// All members are implicitly public
-void MyMethod(); // This is equivalent to "public void MyMethod();"
-int MyProperty { get; set; } // This is equivalent to "public int MyProperty { get; set; }"
+  // All members are implicitly public
+  void MyMethod(); // This is equivalent to "public void MyMethod();"
+  int MyProperty { get; set; } // This is equivalent to "public int MyProperty { get; set; }"
 }
 ```
 
@@ -257,7 +257,7 @@ int MyProperty { get; set; } // This is equivalent to "public int MyProperty { g
 
 - This ensures that any class or struct implementing the interface must provide a public implementation of the interface members.
 
-What is Property?
+## What is Property?
 
 In C#, a **property** is a member of a class that provides a flexible mechanism to read, write, or compute the value of a private field. Properties can be thought of as a combination of a field and methods (getters and setters) that control access to the data. They are typically used to encapsulate private fields and provide a controlled way to access and modify the data while maintaining encapsulation.
 
@@ -280,18 +280,18 @@ In C#, a **property** is a member of a class that provides a flexible mechanism 
 ```csharp
 public class Person
 {
-// Private field
-private string name;
-// Public property with a get and set accessor
-public string Name
-{
+  // Private field
+  private string name;
+  // Public property with a get and set accessor
+  public string Name
+  {
 ```
 
 get
 
 ```csharp
 {
-return name;
+  return name;
 }
 ```
 
@@ -299,10 +299,10 @@ set
 
 ```csharp
 {
-if (!string.IsNullOrEmpty(value))
-{
-name = value;
-}
+  if (!string.IsNullOrEmpty(value))
+  {
+    name = value;
+  }
 }
 }
 }
@@ -319,8 +319,8 @@ name = value;
 ```csharp
 public class Person
 {
-// Automatic property with a public get and set accessor
-public string Name { get; set; }
+  // Automatic property with a public get and set accessor
+  public string Name { get; set; }
 }
 ```
 
@@ -335,11 +335,11 @@ public string Name { get; set; }
 ```csharp
 public class Person
 {
-public string Name { get; } // No set accessor, so this is a read-only property
-public Person(string name)
-{
-Name = name; // Value can only be set in the constructor or within the class
-}
+  public string Name { get; } // No set accessor, so this is a read-only property
+  public Person(string name)
+  {
+    Name = name; // Value can only be set in the constructor or within the class
+  }
 }
 ```
 
@@ -348,11 +348,11 @@ Name = name; // Value can only be set in the constructor or within the class
 ```csharp
 public class Person
 {
-private string password;
-public string Password
-{
-set { password = value; } // No get accessor, so this is a write-only property
-}
+  private string password;
+  public string Password
+  {
+    set { password = value; } // No get accessor, so this is a write-only property
+  }
 }
 ```
 
@@ -366,7 +366,7 @@ set { password = value; } // No get accessor, so this is a write-only property
 
 - Properties maintain encapsulation while providing a clean interface for interacting with class data.
 
-What is Boxing and Unboxing? Where to use them in real applications?
+## What is Boxing and Unboxing? Where to use them in real applications?
 
 **Boxing** and **Unboxing** are concepts in C# related to converting value types to reference types and vice versa. They play an essential role in the runtime's handling of value types and reference types, particularly in scenarios involving collections, type conversion, and method calls.
 
@@ -449,7 +449,7 @@ int num = (int)list[0]; // Unboxing the object back to int
 ```csharp
 void Print(object obj)
 {
-Console.WriteLine(obj);
+  Console.WriteLine(obj);
 }
 int number = 42;
 Print(number); // Boxing the int to pass it as an object
@@ -474,7 +474,7 @@ Type type = num.GetType(); // Boxing occurs when calling a method like GetType
 
 - **Usage**: Although generics have reduced the need for boxing and unboxing, they are still necessary in certain situations, such as interacting with non-generic collections, APIs that work with object, and reflection. However, care should be taken to minimize unnecessary boxing and unboxing for performance reasons.
 
-What is the difference between “String” and “StringBuilder”
+## What is the difference between “String” and “StringBuilder”
 
 The String and StringBuilder classes in C# are both used to work with strings, but they differ significantly in terms of mutability, performance, and use cases. Here's a breakdown of the key differences:
 
@@ -629,28 +629,16 @@ break;
 int dayOfWeek = 3;
 switch (dayOfWeek)
 {
-```
-
-case 1:
-
-```csharp
-Console.WriteLine("Monday");
-break;
-```
-
-case 2:
-
-```csharp
-Console.WriteLine("Tuesday");
-break;
-```
-
-case 3:
-
-```csharp
-Console.WriteLine("Wednesday");
-break;
-// More cases
+  case 1:
+  Console.WriteLine("Monday");
+  break;
+  case 2:
+  Console.WriteLine("Tuesday");
+  break;
+  case 3:
+  Console.WriteLine("Wednesday");
+  break;
+  // More cases
 ```
 
 default:
@@ -676,10 +664,10 @@ The switch expression is a more concise and expressive way to handle multiple co
 ```csharp
 var result = expression switch
 {
-value1 => result1,
-value2 => result2,
-// More cases
-_ => defaultResult
+  value1 => result1,
+  value2 => result2,
+  // More cases
+  _ => defaultResult
 };
 ```
 
@@ -689,11 +677,11 @@ _ => defaultResult
 int dayOfWeek = 3;
 string dayName = dayOfWeek switch
 {
-1 => "Monday",
-2 => "Tuesday",
-3 => "Wednesday",
-// More cases
-_ => "Unknown day"
+  1 => "Monday",
+  2 => "Tuesday",
+  3 => "Wednesday",
+  // More cases
+  _ => "Unknown day"
 };
 Console.WriteLine(dayName);
 ```
@@ -756,7 +744,7 @@ if (obj is Type pattern)
 
 ```csharp
 {
-// Code using pattern
+  // Code using pattern
 }
 ```
 
@@ -767,7 +755,7 @@ object obj = 42;
 ```csharp
 if (obj is int number)
 {
-Console.WriteLine($"The number is {number}");
+  Console.WriteLine($"The number is {number}");
 }
 ```
 
@@ -786,22 +774,18 @@ Using dictionaries or similar data structures to map keys to actions or values c
 ```csharp
 var actions = new Dictionary<int, Action>
 {
-{ 1, () => Console.WriteLine("Action 1") },
-{ 2, () => Console.WriteLine("Action 2") },
-{ 3, () => Console.WriteLine("Action 3") }
+  { 1, () => Console.WriteLine("Action 1") },
+  { 2, () => Console.WriteLine("Action 2") },
+  { 3, () => Console.WriteLine("Action 3") }
 };
 int key = 2;
 if (actions.ContainsKey(key))
 {
-actions[key]();
+  actions[key]();
 }
-```
-
 else
-
-```csharp
 {
-Console.WriteLine("Default action");
+  Console.WriteLine("Default action");
 }
 ```
 
@@ -825,7 +809,7 @@ Console.WriteLine("Default action");
 
 - **Lookup Tables**: Use for mapping keys to actions or values, especially when conditions are numerous or complex.
 
-What is the difference between Finally and Finalize?
+## What is the difference between Finally and Finalize?
 
 In C#, finally and Finalize serve different purposes and are used in different contexts for managing resources and cleanup. Here's a detailed explanation of each and the differences between them:
 
@@ -849,22 +833,18 @@ try
 
 ```csharp
 {
-// Code that may throw an exception
-Console.WriteLine("In try block.");
+  // Code that may throw an exception
+  Console.WriteLine("In try block.");
 }
 catch (Exception ex)
 {
-// Exception handling
-Console.WriteLine($"Caught exception: {ex.Message}");
+  // Exception handling
+  Console.WriteLine($"Caught exception: {ex.Message}");
 }
-```
-
 finally
-
-```csharp
 {
-// Cleanup code that always executes
-Console.WriteLine("In finally block.");
+  // Cleanup code that always executes
+  Console.WriteLine("In finally block.");
 }
 ```
 
@@ -891,22 +871,14 @@ The Finalize method is used to perform cleanup operations on an object before it
 ```csharp
 protected override void Finalize()
 {
-```
-
-try
-
-```csharp
-{
-// Cleanup code here
-}
-```
-
-finally
-
-```csharp
-{
-base.Finalize(); // Call base class Finalize
-}
+  try
+  {
+    // Cleanup code here
+  }
+  finally
+  {
+    base.Finalize(); // Call base class Finalize
+  }
 }
 ```
 
@@ -915,12 +887,12 @@ base.Finalize(); // Call base class Finalize
 ```csharp
 class ResourceHolder
 {
-// Finalizer method
-~ResourceHolder()
-{
-// Code to release unmanaged resources
-Console.WriteLine("Finalizer called.");
-}
+  // Finalizer method
+  ~ResourceHolder()
+  {
+    // Code to release unmanaged resources
+    Console.WriteLine("Finalizer called.");
+  }
 }
 ```
 
@@ -968,7 +940,7 @@ Console.WriteLine("Finalizer called.");
 
 By understanding and applying these concepts appropriately, you can manage resources effectively and ensure that your application runs efficiently and without resource leaks.
 
-What is the difference between “throw ex” and “throw”?
+## What is the difference between “throw ex” and “throw”?
 
 In C#, the throw statement is used to raise exceptions. There are two primary ways to use throw: throw ex and throw. The difference between these two forms lies in how they handle the exception being thrown, particularly with regard to the preservation of the original exception information.
 
@@ -982,14 +954,14 @@ try
 
 ```csharp
 {
-// Code that may throw an exception
+  // Code that may throw an exception
 }
 catch (Exception ex)
 {
-// Handle exception or log it
-Console.WriteLine($"Caught exception: {ex.Message}");
-// Re-throw the same exception
-throw ex;
+  // Handle exception or log it
+  Console.WriteLine($"Caught exception: {ex.Message}");
+  // Re-throw the same exception
+  throw ex;
 }
 ```
 
@@ -1009,14 +981,14 @@ try
 
 ```csharp
 {
-// Code that may throw an exception
+  // Code that may throw an exception
 }
 catch (Exception ex)
 {
-// Handle exception or log it
-Console.WriteLine($"Caught exception: {ex.Message}");
-// Re-throw the same exception with preserved stack trace
-throw;
+  // Handle exception or log it
+  Console.WriteLine($"Caught exception: {ex.Message}");
+  // Re-throw the same exception with preserved stack trace
+  throw;
 }
 ```
 
@@ -1050,7 +1022,7 @@ throw;
 
 - **Avoid throw ex**: Avoid using throw ex unless you have a specific reason to manipulate the exception before re-throwing it and are aware of the implications regarding stack trace preservation.
 
-What are the types of constructor?
+## What are the types of constructor?
 
 In C#, constructors are special methods that are called when an instance of a class is created. They are used to initialize the object's state. There are several types of constructors in C#:
 
@@ -1063,14 +1035,14 @@ A default constructor is a constructor that takes no parameters. If no construct
 ```csharp
 public class Person
 {
-public string Name;
-public int Age;
-// Default constructor
-public Person()
-{
-Name = "Unknown";
-Age = 0;
-}
+  public string Name;
+  public int Age;
+  // Default constructor
+  public Person()
+  {
+    Name = "Unknown";
+    Age = 0;
+  }
 }
 ```
 
@@ -1083,14 +1055,14 @@ A parameterized constructor is a constructor that takes one or more parameters. 
 ```csharp
 public class Person
 {
-public string Name;
-public int Age;
-// Parameterized constructor
-public Person(string name, int age)
-{
-Name = name;
-Age = age;
-}
+  public string Name;
+  public int Age;
+  // Parameterized constructor
+  public Person(string name, int age)
+  {
+    Name = name;
+    Age = age;
+  }
 }
 ```
 
@@ -1103,12 +1075,12 @@ A static constructor is used to initialize static members of a class. It does no
 ```csharp
 public class Counter
 {
-public static int Count;
-// Static constructor
-static Counter()
-{
-Count = 0;
-}
+  public static int Count;
+  // Static constructor
+  static Counter()
+  {
+    Count = 0;
+  }
 }
 ```
 
@@ -1121,14 +1093,14 @@ A copy constructor is used to create a new instance of a class by copying an exi
 ```csharp
 public class Person
 {
-public string Name;
-public int Age;
-// Copy constructor
-public Person(Person other)
-{
-Name = other.Name;
-Age = other.Age;
-}
+  public string Name;
+  public int Age;
+  // Copy constructor
+  public Person(Person other)
+  {
+    Name = other.Name;
+    Age = other.Age;
+  }
 }
 ```
 
@@ -1160,7 +1132,7 @@ Age = other.Age;
 
 - **Use Copy Constructors** when you need to create a new object that is a copy of an existing one.
 
-What is Static constructor? What is the use in real applications?
+## What is Static constructor? What is the use in real applications?
 
 ### Static Constructor in C#
 
@@ -1177,7 +1149,7 @@ A **static constructor** in C# is a special type of constructor that is used to 
 ```csharp
 static ClassName()
 {
-// Initialization code
+  // Initialization code
 }
 ```
 
@@ -1204,14 +1176,14 @@ static ClassName()
 ```csharp
 public class Configuration
 {
-public static string ConnectionString;
-// Static constructor
-static Configuration()
-{
-// Initialization code
-ConnectionString = "Data Source=server;Initial Catalog=database;Integrated Security=True";
-Console.WriteLine("Static constructor called.");
-}
+  public static string ConnectionString;
+  // Static constructor
+  static Configuration()
+  {
+    // Initialization code
+    ConnectionString = "Data Source=server;Initial Catalog=database;Integrated Security=True";
+    Console.WriteLine("Static constructor called.");
+  }
 }
 ```
 
@@ -1224,13 +1196,13 @@ Console.WriteLine("Static constructor called.");
 ```csharp
 public class Logger
 {
-public static string LogFilePath;
-// Static constructor to initialize static field
-static Logger()
-{
-LogFilePath = "/var/log/application.log";
-// Additional initialization logic
-}
+  public static string LogFilePath;
+  // Static constructor to initialize static field
+  static Logger()
+  {
+    LogFilePath = "/var/log/application.log";
+    // Additional initialization logic
+  }
 }
 ```
 
@@ -1241,13 +1213,13 @@ LogFilePath = "/var/log/application.log";
 ```csharp
 public class Cache
 {
-private static Dictionary<string, object> _cache;
-// Static constructor for one-time setup
-static Cache()
-{
-_cache = new Dictionary<string, object>();
-// Additional one-time initialization
-}
+  private static Dictionary<string, object> _cache;
+  // Static constructor for one-time setup
+  static Cache()
+  {
+    _cache = new Dictionary<string, object>();
+    // Additional one-time initialization
+  }
 }
 ```
 
@@ -1258,13 +1230,13 @@ _cache = new Dictionary<string, object>();
 ```csharp
 public class DatabaseConnection
 {
-private static SqlConnection _connection;
-// Static constructor for lazy initialization
-static DatabaseConnection()
-{
-_connection = new SqlConnection("connection_string");
-_connection.Open();
-}
+  private static SqlConnection _connection;
+  // Static constructor for lazy initialization
+  static DatabaseConnection()
+  {
+    _connection = new SqlConnection("connection_string");
+    _connection.Open();
+  }
 }
 ```
 
@@ -1276,7 +1248,7 @@ _connection.Open();
 
 - **Ensure Thread-Safety**: Static constructors are automatically synchronized by the runtime, so you don’t need to handle synchronization explicitly. However, ensure that any code within the constructor is thread-safe if it interacts with shared resources.
 
-What is Private constructor? What is the use?
+## What is Private constructor? What is the use?
 
 ### Private Constructor in C#
 
@@ -1301,24 +1273,24 @@ A **private constructor** is a constructor with private access modifier. This me
 ```csharp
 public class Singleton
 {
-private static Singleton _instance;
-// Private constructor
-private Singleton()
-{
-// Initialization code
-}
-// Public method to access the single instance
-public static Singleton Instance
-{
-get
-{
-if (_instance == null)
-{
-_instance = new Singleton();
-}
-return _instance;
-}
-}
+  private static Singleton _instance;
+  // Private constructor
+  private Singleton()
+  {
+    // Initialization code
+  }
+  // Public method to access the single instance
+  public static Singleton Instance
+  {
+    get
+    {
+      if (_instance == null)
+      {
+        _instance = new Singleton();
+      }
+      return _instance;
+    }
+  }
 }
 ```
 
@@ -1329,14 +1301,14 @@ return _instance;
 ```csharp
 public static class Utility
 {
-// Private constructor to prevent instantiation
-private Utility()
-{
-}
-public static void PerformAction()
-{
-// Method implementation
-}
+  // Private constructor to prevent instantiation
+  private Utility()
+  {
+  }
+  public static void PerformAction()
+  {
+    // Method implementation
+  }
 }
 ```
 
@@ -1347,17 +1319,17 @@ public static void PerformAction()
 ```csharp
 public class Product
 {
-public string Name { get; private set; }
-// Private constructor
-private Product(string name)
-{
-Name = name;
-}
-// Factory method
-public static Product CreateProduct(string name)
-{
-return new Product(name);
-}
+  public string Name { get; private set; }
+  // Private constructor
+  private Product(string name)
+  {
+    Name = name;
+  }
+  // Factory method
+  public static Product CreateProduct(string name)
+  {
+    return new Product(name);
+  }
 }
 ```
 
@@ -1368,23 +1340,23 @@ return new Product(name);
 ```csharp
 public class ConfigurationManager
 {
-private static ConfigurationManager _instance;
-// Private constructor to prevent default instantiation
-private ConfigurationManager()
-{
-// Initialization code
-}
-public static ConfigurationManager Instance
-{
-get
-{
-if (_instance == null)
-{
-_instance = new ConfigurationManager();
-}
-return _instance;
-}
-}
+  private static ConfigurationManager _instance;
+  // Private constructor to prevent default instantiation
+  private ConfigurationManager()
+  {
+    // Initialization code
+  }
+  public static ConfigurationManager Instance
+  {
+    get
+    {
+      if (_instance == null)
+      {
+        _instance = new ConfigurationManager();
+      }
+      return _instance;
+    }
+  }
 }
 ```
 
@@ -1406,7 +1378,7 @@ return _instance;
 
 - **Encapsulation**: Ensure that the class logic aligns with the intended design pattern and encapsulates the creation logic effectively.
 
-What is Constructor overloading?
+## What is Constructor overloading?
 
 ### Constructor Overloading in C#
 
@@ -1431,26 +1403,26 @@ What is Constructor overloading?
 ```csharp
 public class Rectangle
 {
-public int Width { get; set; }
-public int Height { get; set; }
-// Parameterless constructor
-public Rectangle()
-{
-Width = 0;
-Height = 0;
-}
-// Constructor with one parameter (square)
-public Rectangle(int size)
-{
-Width = size;
-Height = size;
-}
-// Constructor with two parameters
-public Rectangle(int width, int height)
-{
-Width = width;
-Height = height;
-}
+  public int Width { get; set; }
+  public int Height { get; set; }
+  // Parameterless constructor
+  public Rectangle()
+  {
+    Width = 0;
+    Height = 0;
+  }
+  // Constructor with one parameter (square)
+  public Rectangle(int size)
+  {
+    Width = size;
+    Height = size;
+  }
+  // Constructor with two parameters
+  public Rectangle(int width, int height)
+  {
+    Width = width;
+    Height = height;
+  }
 }
 ```
 
@@ -1459,18 +1431,18 @@ Height = height;
 ```csharp
 public class Program
 {
-public static void Main()
-{
-// Using parameterless constructor
-Rectangle rect1 = new Rectangle();
-Console.WriteLine($"rect1 - Width: {rect1.Width}, Height: {rect1.Height}");
-// Using constructor with one parameter
-Rectangle rect2 = new Rectangle(10);
-Console.WriteLine($"rect2 - Width: {rect2.Width}, Height: {rect2.Height}");
-// Using constructor with two parameters
-Rectangle rect3 = new Rectangle(10, 20);
-Console.WriteLine($"rect3 - Width: {rect3.Width}, Height: {rect3.Height}");
-}
+  public static void Main()
+  {
+    // Using parameterless constructor
+    Rectangle rect1 = new Rectangle();
+    Console.WriteLine($"rect1 - Width: {rect1.Width}, Height: {rect1.Height}");
+    // Using constructor with one parameter
+    Rectangle rect2 = new Rectangle(10);
+    Console.WriteLine($"rect2 - Width: {rect2.Width}, Height: {rect2.Height}");
+    // Using constructor with two parameters
+    Rectangle rect3 = new Rectangle(10, 20);
+    Console.WriteLine($"rect3 - Width: {rect3.Width}, Height: {rect3.Height}");
+  }
 }
 ```
 
@@ -1502,7 +1474,7 @@ Console.WriteLine($"rect3 - Width: {rect3.Width}, Height: {rect3.Height}");
 
   - When using multiple constructors, consider providing default values for parameters where applicable to simplify object creation.
 
-What is Destructor?
+## What is Destructor?
 
 A **destructor** in C# is a special method that is used to perform cleanup operations on an object before it is reclaimed by the garbage collector. Destructors are used to release unmanaged resources or perform other cleanup tasks when an object is no longer needed.
 
@@ -1519,7 +1491,7 @@ A **destructor** in C# is a special method that is used to perform cleanup opera
 ```csharp
 ~ClassName()
 {
-// Cleanup code
+  // Cleanup code
 }
 ```
 
@@ -1546,27 +1518,27 @@ A **destructor** in C# is a special method that is used to perform cleanup opera
 ```csharp
 public class FileManager
 {
-private IntPtr fileHandle; // Unmanaged resource
-public FileManager(string filePath)
-{
-// Allocate unmanaged resource
-fileHandle = OpenFile(filePath);
-}
-// Destructor
-~FileManager()
-{
-// Release unmanaged resource
-CloseFile(fileHandle);
-}
-private IntPtr OpenFile(string filePath)
-{
-// Code to open file and return handle
-return new IntPtr(); // Placeholder
-}
-private void CloseFile(IntPtr handle)
-{
-// Code to close file handle
-}
+  private IntPtr fileHandle; // Unmanaged resource
+  public FileManager(string filePath)
+  {
+    // Allocate unmanaged resource
+    fileHandle = OpenFile(filePath);
+  }
+  // Destructor
+  ~FileManager()
+  {
+    // Release unmanaged resource
+    CloseFile(fileHandle);
+  }
+  private IntPtr OpenFile(string filePath)
+  {
+    // Code to open file and return handle
+    return new IntPtr(); // Placeholder
+  }
+  private void CloseFile(IntPtr handle)
+  {
+    // Code to close file handle
+  }
 }
 ```
 
@@ -1589,34 +1561,34 @@ private void CloseFile(IntPtr handle)
 ```csharp
 public class FileManager : IDisposable
 {
-private IntPtr fileHandle;
-private bool disposed = false;
-public FileManager(string filePath)
-{
-fileHandle = OpenFile(filePath);
-}
-public void Dispose()
-{
-Dispose(true);
-GC.SuppressFinalize(this);
-}
-protected virtual void Dispose(bool disposing)
-{
-if (!disposed)
-{
-if (disposing)
-{
-// Release managed resources
-}
-// Release unmanaged resources
-CloseFile(fileHandle);
-disposed = true;
-}
-}
-~FileManager()
-{
-Dispose(false);
-}
+  private IntPtr fileHandle;
+  private bool disposed = false;
+  public FileManager(string filePath)
+  {
+    fileHandle = OpenFile(filePath);
+  }
+  public void Dispose()
+  {
+    Dispose(true);
+    GC.SuppressFinalize(this);
+  }
+  protected virtual void Dispose(bool disposing)
+  {
+    if (!disposed)
+    {
+      if (disposing)
+      {
+        // Release managed resources
+      }
+      // Release unmanaged resources
+      CloseFile(fileHandle);
+      disposed = true;
+    }
+  }
+  ~FileManager()
+  {
+    Dispose(false);
+  }
 }
 ```
 
@@ -1630,7 +1602,7 @@ Dispose(false);
 
 By using destructors appropriately and implementing the IDisposable pattern where necessary, you can effectively manage resources and ensure that your objects are cleaned up properly when they are no longer needed.
 
-If base & child both class have constructors, which will be called first?
+## If base & child both class have constructors, which will be called first?
 
  **Base Class Constructor**: The base class constructor is called first.
 
@@ -1645,25 +1617,25 @@ Example with constructor chaining:
 ```csharp
 public class BaseClass
 {
-public BaseClass(string message)
-{
-Console.WriteLine("BaseClass Constructor: " + message);
-}
+  public BaseClass(string message)
+  {
+    Console.WriteLine("BaseClass Constructor: " + message);
+  }
 }
 public class DerivedClass : BaseClass
 {
-public DerivedClass() : base("Hello from BaseClass")
-{
-Console.WriteLine("DerivedClass Constructor");
-}
+  public DerivedClass() : base("Hello from BaseClass")
+  {
+    Console.WriteLine("DerivedClass Constructor");
+  }
 }
 public class Program
 {
-public static void Main()
-{
-// Creating an instance of DerivedClass
-DerivedClass obj = new DerivedClass();
-}
+  public static void Main()
+  {
+    // Creating an instance of DerivedClass
+    DerivedClass obj = new DerivedClass();
+  }
 }
 ```
 
@@ -1679,7 +1651,7 @@ DerivedClass Constructor
 
 - **Constructor Chaining**: You can use the base keyword to call a specific base class constructor from a derived class, but the base class constructor still runs before the derived class constructor.
 
-What is “this” keyword in C#? When to use it in real application?
+## What is “this” keyword in C#? When to use it in real application?
 
 The this keyword in C# is a reference to the current instance of the class in which it is used. It is used to refer to the members (fields, methods, constructors, etc.) of the current object. The this keyword is commonly used in several scenarios to make code clearer and to resolve ambiguity between class members and parameters or variables with the same name.
 
@@ -1692,12 +1664,12 @@ The this keyword in C# is a reference to the current instance of the class in wh
 ```csharp
 public class Person
 {
-private string name;
-public Person(string name)
-{
-// "this.name" refers to the class field, "name" refers to the parameter
-this.name = name;
-}
+  private string name;
+  public Person(string name)
+  {
+    // "this.name" refers to the class field, "name" refers to the parameter
+    this.name = name;
+  }
 }
 ```
 
@@ -1708,18 +1680,18 @@ this.name = name;
 ```csharp
 public class Person
 {
-private string name;
-private int age;
-// Constructor 1
-public Person(string name)
-{
-this.name = name;
-}
-// Constructor 2 (calls Constructor 1)
-public Person(string name, int age) : this(name)
-{
-this.age = age;
-}
+  private string name;
+  private int age;
+  // Constructor 1
+  public Person(string name)
+  {
+    this.name = name;
+  }
+  // Constructor 2 (calls Constructor 1)
+  public Person(string name, int age) : this(name)
+  {
+    this.age = age;
+  }
 }
 ```
 
@@ -1730,15 +1702,15 @@ this.age = age;
 ```csharp
 public class Button
 {
-public void Click()
-{
-// Pass the current instance to the event handler
-OnClick(this);
-}
-private void OnClick(Button sender)
-{
-Console.WriteLine("Button clicked!");
-}
+  public void Click()
+  {
+    // Pass the current instance to the event handler
+    OnClick(this);
+  }
+  private void OnClick(Button sender)
+  {
+    Console.WriteLine("Button clicked!");
+  }
 }
 ```
 
@@ -1749,18 +1721,18 @@ Console.WriteLine("Button clicked!");
 ```csharp
 public class Person
 {
-private string name;
-private int age;
-public Person SetName(string name)
-{
-this.name = name;
-return this;
-}
-public Person SetAge(int age)
-{
-this.age = age;
-return this;
-}
+  private string name;
+  private int age;
+  public Person SetName(string name)
+  {
+    this.name = name;
+    return this;
+  }
+  public Person SetAge(int age)
+  {
+    this.age = age;
+    return this;
+  }
 }
 // Usage:
 var person = new Person().SetName("John").SetAge(30);
@@ -1773,11 +1745,11 @@ var person = new Person().SetName("John").SetAge(30);
 ```csharp
 public static class StringExtensions
 {
-public static string ToUpperFirstLetter(this string input)
-{
-if (string.IsNullOrEmpty(input)) return input;
-return char.ToUpper(input[0]) + input.Substring(1);
-}
+  public static string ToUpperFirstLetter(this string input)
+  {
+    if (string.IsNullOrEmpty(input)) return input;
+    return char.ToUpper(input[0]) + input.Substring(1);
+  }
 }
 // Usage:
 string example = "hello";
@@ -1801,18 +1773,18 @@ Consider a scenario where you have a class representing a person, and you want t
 ```csharp
 public class Person
 {
-private string name;
-private int age;
-public Person SetName(string name)
-{
-this.name = name; // Use "this" to clarify that we are setting the class member
-return this; // Return the current instance
-}
-public Person SetAge(int age)
-{
-this.age = age;
-return this;
-}
+  private string name;
+  private int age;
+  public Person SetName(string name)
+  {
+    this.name = name; // Use "this" to clarify that we are setting the class member
+    return this; // Return the current instance
+  }
+  public Person SetAge(int age)
+  {
+    this.age = age;
+    return this;
+  }
 }
 // Usage in an application
 var person = new Person()
@@ -1821,7 +1793,7 @@ var person = new Person()
 Console.WriteLine($"Name: {person.Name}, Age: {person.Age}");
 ```
 
-What is the purpose of “using” keyword in C#?
+## What is the purpose of “using” keyword in C#?
 
 The using keyword in C# serves multiple purposes, each useful in different contexts. The two primary uses of the using keyword are:
 
@@ -1840,16 +1812,16 @@ using System;
 using System.Collections.Generic;
 public class Program
 {
-public static void Main()
-{
-List<string> names = new List<string>();
-names.Add("Alice");
-names.Add("Bob");
-foreach (string name in names)
-{
-Console.WriteLine(name);
-}
-}
+  public static void Main()
+  {
+    List<string> names = new List<string>();
+    names.Add("Alice");
+    names.Add("Bob");
+    foreach (string name in names)
+    {
+      Console.WriteLine(name);
+    }
+  }
 }
 ```
 
@@ -1870,15 +1842,15 @@ using System;
 using System.IO;
 public class Program
 {
-public static void Main()
-{
-string path = "example.txt";
-using (StreamWriter writer = new StreamWriter(path))
-{
-writer.WriteLine("Hello, World!");
-}
-// The StreamWriter object is automatically disposed of here
-}
+  public static void Main()
+  {
+    string path = "example.txt";
+    using (StreamWriter writer = new StreamWriter(path))
+    {
+      writer.WriteLine("Hello, World!");
+    }
+    // The StreamWriter object is automatically disposed of here
+  }
 }
 ```
 
@@ -1906,19 +1878,15 @@ try
 
 ```csharp
 {
-writer = new StreamWriter("example.txt");
-writer.WriteLine("Hello, World!");
+  writer = new StreamWriter("example.txt");
+  writer.WriteLine("Hello, World!");
 }
-```
-
 finally
-
-```csharp
 {
-if (writer != null)
-{
-writer.Dispose();
-}
+  if (writer != null)
+  {
+    writer.Dispose();
+  }
 }
 ```
 
@@ -1928,7 +1896,7 @@ writer.Dispose();
 
 - **using Statement**: Manages resources and ensures they are disposed of properly by automatically calling the Dispose method when the scope ends. This is particularly useful for handling unmanaged resources like files, network connections, and database connections.
 
-What is the difference between “is” and “as” operators?
+## What is the difference between “is” and “as” operators?
 
 In C#, the is and as operators are used for type checking and type conversion, respectively. Here's a breakdown of their differences and when to use each one:
 
@@ -1940,17 +1908,18 @@ In C#, the is and as operators are used for type checking and type conversion, r
 
 - **Example**:
 
+**Explanation:**
+
 ```csharp
 object obj = "Hello, World!";
 if (obj is string)
 {
-Console.WriteLine("The object is a string.");
+  Console.WriteLine("The object is a string.");
 }
 else
 {
-Console.WriteLine("The object is not a string.");
+  Console.WriteLine("The object is not a string.");
 }
-**Explanation**:
 ```
 
 - In this example, the is operator checks if obj is of type string. Since obj is a string, the condition evaluates to true, and "The object is a string." is printed.
@@ -1963,18 +1932,19 @@ Console.WriteLine("The object is not a string.");
 
 - **Example**:
 
+**Explanation:**
+
 ```csharp
 object obj = "Hello, World!";
 string str = obj as string;
 if (str != null)
 {
-Console.WriteLine("The object was successfully cast to a string.");
+  Console.WriteLine("The object was successfully cast to a string.");
 }
 else
 {
-Console.WriteLine("The object is not a string.");
+  Console.WriteLine("The object is not a string.");
 }
-**Explanation**:
 ```
 
 - In this example, the as operator attempts to cast obj to a string. If obj were not a string, str would be null, allowing the program to safely handle the failed conversion without throwing an exception.
@@ -1988,15 +1958,11 @@ object obj = "Hello, World!";
 ```csharp
 if (obj is string str)
 {
-Console.WriteLine($"The object is a string: {str}");
+  Console.WriteLine($"The object is a string: {str}");
 }
-```
-
 else
-
-```csharp
 {
-Console.WriteLine("The object is not a string.");
+  Console.WriteLine("The object is not a string.");
 }
 ```
 
@@ -2008,7 +1974,7 @@ Console.WriteLine("The object is not a string.");
 
 - **as**: Attempts to cast an object to a specified type, returning the object if successful, or null if unsuccessful.
 
-What is the difference between “Readonly” and “Constant” variables?
+## What is the difference between “Readonly” and “Constant” variables?
 
 In C#, both readonly and const are used to declare variables whose values cannot be changed once they are set. However, they have key differences in their behavior, usage, and when the values are assigned. Here's a detailed comparison:
 
@@ -2032,21 +1998,22 @@ In C#, both readonly and const are used to declare variables whose values cannot
 
 - **Example**:
 
+**Explanation:**
+
 ```csharp
 public class Circle
 {
-public const double Pi = 3.14159;
+  public const double Pi = 3.14159;
 }
 public class Program
 {
-public static void Main()
-{
-double radius = 5;
-double circumference = 2 * Circle.Pi * radius;
-Console.WriteLine("Circumference: " + circumference);
+  public static void Main()
+  {
+    double radius = 5;
+    double circumference = 2 * Circle.Pi * radius;
+    Console.WriteLine("Circumference: " + circumference);
+  }
 }
-}
-**Explanation**:
 ```
 
 - Pi is a const because its value (3.14159) will never change. The value of Pi is embedded directly into the compiled code wherever it is used.
@@ -2071,29 +2038,30 @@ Console.WriteLine("Circumference: " + circumference);
 
 - **Example**:
 
+**Explanation:**
+
 ```csharp
 public class Circle
 {
-public readonly double Radius;
-public static readonly double Pi = 3.14159;
-public Circle(double radius)
-{
-Radius = radius; // Assigned in the constructor
-}
-public double Circumference()
-{
-return 2 * Pi * Radius;
-}
+  public readonly double Radius;
+  public static readonly double Pi = 3.14159;
+  public Circle(double radius)
+  {
+    Radius = radius; // Assigned in the constructor
+  }
+  public double Circumference()
+  {
+    return 2 * Pi * Radius;
+  }
 }
 public class Program
 {
-public static void Main()
-{
-Circle circle = new Circle(5);
-Console.WriteLine("Circumference: " + circle.Circumference());
+  public static void Main()
+  {
+    Circle circle = new Circle(5);
+    Console.WriteLine("Circumference: " + circle.Circumference());
+  }
 }
-}
-**Explanation**:
 ```
 
 - Radius is a readonly field because it is set in the constructor and cannot be changed afterward. This allows for the creation of Circle objects with different radii, but once set, the Radius value cannot be modified.
@@ -2119,7 +2087,7 @@ Console.WriteLine("Circumference: " + circle.Circumference());
 
 Choosing between const and readonly depends on whether you need flexibility at runtime or absolute immutability at compile time.
 
-What is “Static” class? When to use it?
+## What is “Static” class? When to use it?
 
 A **static class** in C# is a class that cannot be instantiated and can only contain static members. Static members belong to the class itself rather than to instances of the class, meaning they are shared across all uses of the class.
 
@@ -2165,8 +2133,10 @@ A **static class** in C# is a class that cannot be instantiated and can only con
 
     - Static classes can be used to organize related constants in a single place, especially if those constants are used in multiple places within an application.
 
-```csharp
 **Example**: A ConfigurationSettings static class that holds application-wide constants like file paths or API URLs.
+
+```csharp
+
 ```
 
 4.  **Singleton Pattern**:
@@ -2181,7 +2151,7 @@ A **static class** in C# is a class that cannot be instantiated and can only con
 
 - They are ideal when you want to group related functionality together and ensure that the functionality is accessible without needing to create an object instance.
 
-What is the difference between “var” and “dynamic” in C#?
+## What is the difference between “var” and “dynamic” in C#?
 
 In C#, both var and dynamic are used to declare variables, but they differ significantly in how they handle types, when type checking occurs, and their overall behavior. Here’s a detailed comparison:
 
@@ -2205,12 +2175,13 @@ In C#, both var and dynamic are used to declare variables, but they differ signi
 
 - **Example**:
 
+**Explanation:**
+
 ```csharp
 var number = 10; // The compiler infers that 'number' is of type int.
 var name = "John"; // The compiler infers that 'name' is of type string.
 // Compilation error: 'name' is of type string, so you can't assign an integer to it.
 // name = 5;
-**Explanation**:
 ```
 
 - In the first line, var number is inferred as an int because 10 is an integer. Similarly, var name is inferred as a string because "John" is a string.
@@ -2233,6 +2204,8 @@ var name = "John"; // The compiler infers that 'name' is of type string.
 
 - **Example**:
 
+**Explanation:**
+
 ```csharp
 dynamic value = 10; // At runtime, 'value' is treated as an int.
 Console.WriteLine(value.GetType()); // Outputs: System.Int32
@@ -2240,7 +2213,6 @@ value = "Hello"; // Now 'value' is treated as a string at runtime.
 Console.WriteLine(value.GetType()); // Outputs: System.String
 // No compile-time error, but may cause a runtime error if 'value' is not an int at this point
 value++;
-**Explanation**:
 ```
 
 - The dynamic variable value first holds an int, then a string. The type is checked and resolved at runtime, allowing this flexibility.
@@ -2260,21 +2232,11 @@ value++;
 
 ```csharp
 var list = new List<int>(); // 'list' is inferred as List<int>
-```
-
 list.Add(1); // Valid operation
-
-```csharp
 dynamic dynList = new List<int>(); // 'dynList' is dynamic
-```
-
 dynList.Add(1); // Valid operation
-
 dynList = "Now I'm a string"; // Valid because 'dynList' is dynamic
-
 // Following will compile but may throw runtime error
-
-```csharp
 int length = dynList.Length; // 'Length' is not valid on a string at compile time
 ```
 
@@ -2284,7 +2246,7 @@ int length = dynList.Length; // 'Length' is not valid on a string at compile tim
 
 - **dynamic**: Use when you need more flexibility with types that are only known at runtime, such as when dealing with dynamic languages or loosely-typed APIs. However, it sacrifices type safety and may lead to runtime errors.
 
-What is the use of Yield keyword in C#?
+## What is the use of Yield keyword in C#?
 
 The yield keyword in C# is used to simplify the creation of iterators. It allows you to return elements one at a time in a method without having to create, manage, or maintain an entire collection in memory. The yield keyword can be used in methods that return IEnumerable, `IEnumerable<`T>, IEnumerator, or IEnumerator<T>.
 
@@ -2311,20 +2273,20 @@ using System;
 using System.Collections.Generic;
 public class Program
 {
-public static void Main()
-{
-foreach (int number in GenerateNumbers(1, 5))
-{
-Console.WriteLine(number);
-}
-}
-public static IEnumerable<int> GenerateNumbers(int start, int count)
-{
-for (int i = start; i < start + count; i++)
-{
-yield return i;
-}
-}
+  public static void Main()
+  {
+    foreach (int number in GenerateNumbers(1, 5))
+    {
+      Console.WriteLine(number);
+    }
+  }
+  public static IEnumerable<int> GenerateNumbers(int start, int count)
+  {
+    for (int i = start; i < start + count; i++)
+    {
+      yield return i;
+    }
+  }
 }
 ```
 
@@ -2343,28 +2305,24 @@ using System;
 using System.Collections.Generic;
 public class Program
 {
-public static void Main()
-{
-foreach (int number in GenerateNumbers(1, 10))
-{
-Console.WriteLine(number);
-}
-}
-public static IEnumerable<int> GenerateNumbers(int start, int count)
-{
-for (int i = start; i < start + count; i++)
-{
-if (i == 5)
-{
-```
-
-yield break; // Stop the iteration when i reaches 5
-
-```csharp
-}
-yield return i;
-}
-}
+  public static void Main()
+  {
+    foreach (int number in GenerateNumbers(1, 10))
+    {
+      Console.WriteLine(number);
+    }
+  }
+  public static IEnumerable<int> GenerateNumbers(int start, int count)
+  {
+    for (int i = start; i < start + count; i++)
+    {
+      if (i == 5)
+      {
+        yield break; // Stop the iteration when i reaches 5
+      }
+      yield return i;
+    }
+  }
 }
 ```
 
@@ -2414,9 +2372,9 @@ Common Use Cases for Enums
 [Flags]
 public enum FileAccess
 {
-Read = 1,
-Write = 2,
-Execute = 4
+  Read = 1,
+  Write = 2,
+  Execute = 4
 }
 With the [Flags] attribute, you can combine values like this:
 FileAccess access = FileAccess.Read | FileAccess.Write;

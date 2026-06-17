@@ -5,7 +5,7 @@
 1. Explain Generics in C#? When and why to use them?
 2. What are Collections in C# and what are their types?
 
- Explain Generics in C#? When and why to use them?
+## Explain Generics in C#? When and why to use them?
 
 **Generics** in C# provide a way to define classes, interfaces, and methods with a placeholder for the data type. This allows you to create type-safe and reusable code that can work with any data type without losing the benefits of type checking and performance.
 
@@ -26,31 +26,31 @@ A **generic class** allows you to define a class with a type parameter. This typ
 ```csharp
 public class Box<T>
 {
-private T _content;
-// Method to pack an item into the box
-public void Pack(T item)
-{
-_content = item;
-}
-// Method to unpack the item from the box
-public T Unpack()
-{
-return _content;
-}
+  private T _content;
+  // Method to pack an item into the box
+  public void Pack(T item)
+  {
+    _content = item;
+  }
+  // Method to unpack the item from the box
+  public T Unpack()
+  {
+    return _content;
+  }
 }
 class Program
 {
-static void Main(string[] args)
-{
-// Create a Box for int
-Box<int> intBox = new Box<int>();
-intBox.Pack(123);
-Console.WriteLine(intBox.Unpack()); // Output: 123
-// Create a Box for string
-Box<string> strBox = new Box<string>();
-strBox.Pack("Hello Generics");
-Console.WriteLine(strBox.Unpack()); // Output: Hello Generics
-}
+  static void Main(string[] args)
+  {
+    // Create a Box for int
+    Box<int> intBox = new Box<int>();
+    intBox.Pack(123);
+    Console.WriteLine(intBox.Unpack()); // Output: 123
+    // Create a Box for string
+    Box<string> strBox = new Box<string>();
+    strBox.Pack("Hello Generics");
+    Console.WriteLine(strBox.Unpack()); // Output: Hello Generics
+  }
 }
 ```
 
@@ -65,27 +65,27 @@ A **generic method** allows you to define a method with a type parameter. This a
 ```csharp
 public class Utility
 {
-// Generic method to swap two items
-public static void Swap<T>(ref T a, ref T b)
-{
-T temp = a;
-a = b;
-b = temp;
-}
+  // Generic method to swap two items
+  public static void Swap<T>(ref T a, ref T b)
+  {
+    T temp = a;
+    a = b;
+    b = temp;
+  }
 }
 class Program
 {
-static void Main(string[] args)
-{
-int x = 1, y = 2;
-Console.WriteLine($"Before swap: x = {x}, y = {y}");
-Utility.Swap(ref x, ref y);
-Console.WriteLine($"After swap: x = {x}, y = {y}");
-string a = "Hello", b = "World";
-Console.WriteLine($"Before swap: a = {a}, b = {b}");
-Utility.Swap(ref a, ref b);
-Console.WriteLine($"After swap: a = {a}, b = {b}");
-}
+  static void Main(string[] args)
+  {
+    int x = 1, y = 2;
+    Console.WriteLine($"Before swap: x = {x}, y = {y}");
+    Utility.Swap(ref x, ref y);
+    Console.WriteLine($"After swap: x = {x}, y = {y}");
+    string a = "Hello", b = "World";
+    Console.WriteLine($"Before swap: a = {a}, b = {b}");
+    Utility.Swap(ref a, ref b);
+    Console.WriteLine($"After swap: a = {a}, b = {b}");
+  }
 }
 ```
 
@@ -100,33 +100,33 @@ A **generic interface** allows you to define an interface with a type parameter.
 ```csharp
 public interface IRepository<T>
 {
-void Add(T item);
-T Get(int id);
+  void Add(T item);
+  T Get(int id);
 }
 public class Repository<T> : IRepository<T>
 {
-private readonly Dictionary<int, T> _storage = new Dictionary<int, T>();
-private int _nextId = 1;
-public void Add(T item)
-{
-_storage[_nextId++] = item;
-}
-public T Get(int id)
-{
-return _storage.ContainsKey(id) ? _storage[id] : default;
-}
+  private readonly Dictionary<int, T> _storage = new Dictionary<int, T>();
+  private int _nextId = 1;
+  public void Add(T item)
+  {
+    _storage[_nextId++] = item;
+  }
+  public T Get(int id)
+  {
+    return _storage.ContainsKey(id) ? _storage[id] : default;
+  }
 }
 class Program
 {
-static void Main(string[] args)
-{
-IRepository<string> stringRepo = new Repository<string>();
-stringRepo.Add("Hello");
-Console.WriteLine(stringRepo.Get(1)); // Output: Hello
-IRepository<int> intRepo = new Repository<int>();
-intRepo.Add(123);
-Console.WriteLine(intRepo.Get(1)); // Output: 123
-}
+  static void Main(string[] args)
+  {
+    IRepository<string> stringRepo = new Repository<string>();
+    stringRepo.Add("Hello");
+    Console.WriteLine(stringRepo.Get(1)); // Output: Hello
+    IRepository<int> intRepo = new Repository<int>();
+    intRepo.Add(123);
+    Console.WriteLine(intRepo.Get(1)); // Output: 123
+  }
 }
 ```
 
@@ -141,20 +141,20 @@ Console.WriteLine(intRepo.Get(1)); // Output: 123
 ```csharp
 public class Calculator<T> where T : struct, IComparable<T>
 {
-public T Max(T a, T b)
-{
-return a.CompareTo(b) >= 0 ? a : b;
-}
+  public T Max(T a, T b)
+  {
+    return a.CompareTo(b) >= 0 ? a : b;
+  }
 }
 class Program
 {
-static void Main(string[] args)
-{
-Calculator<int> intCalculator = new Calculator<int>();
-Console.WriteLine(intCalculator.Max(5, 10)); // Output: 10
-Calculator<double> doubleCalculator = new Calculator<double>();
-Console.WriteLine(doubleCalculator.Max(5.5, 10.1)); // Output: 10.1
-}
+  static void Main(string[] args)
+  {
+    Calculator<int> intCalculator = new Calculator<int>();
+    Console.WriteLine(intCalculator.Max(5, 10)); // Output: 10
+    Calculator<double> doubleCalculator = new Calculator<double>();
+    Console.WriteLine(doubleCalculator.Max(5.5, 10.1)); // Output: 10.1
+  }
 }
 ```
 
@@ -172,7 +172,7 @@ Console.WriteLine(doubleCalculator.Max(5.5, 10.1)); // Output: 10.1
 
 Generics in C# help you write more versatile, maintainable, and type-safe code, which is especially useful in collections and utility classes.
 
-What are Collections in C# and what are their types?
+## What are Collections in C# and what are their types?
 
 collections are classes that store and manage groups of related objects. They provide various functionalities to store, retrieve, and manipulate data. Collections are essential for handling and processing data in a structured way.
 
@@ -210,14 +210,14 @@ An **array** is a fixed-size, zero-based collection of elements of the same type
 using System;
 class Program
 {
-static void Main(string[] args)
-{
-int[] numbers = { 1, 2, 3, 4, 5 };
-foreach (int number in numbers)
-{
-Console.WriteLine(number);
-}
-}
+  static void Main(string[] args)
+  {
+    int[] numbers = { 1, 2, 3, 4, 5 };
+    foreach (int number in numbers)
+    {
+      Console.WriteLine(number);
+    }
+  }
 }
 ```
 
@@ -232,17 +232,17 @@ using System;
 using System.Collections;
 class Program
 {
-static void Main(string[] args)
-{
-ArrayList list = new ArrayList();
-list.Add(1);
-list.Add("Hello");
-list.Add(3.14);
-foreach (var item in list)
-{
-Console.WriteLine(item);
-}
-}
+  static void Main(string[] args)
+  {
+    ArrayList list = new ArrayList();
+    list.Add(1);
+    list.Add("Hello");
+    list.Add(3.14);
+    foreach (var item in list)
+    {
+      Console.WriteLine(item);
+    }
+  }
 }
 ```
 
@@ -257,16 +257,16 @@ using System;
 using System.Collections.Generic;
 class Program
 {
-static void Main(string[] args)
-{
-List<string> fruits = new List<string> { "Apple", "Banana", "Cherry" };
-fruits.Add("Date");
-fruits.Remove("Banana");
-foreach (string fruit in fruits)
-{
-Console.WriteLine(fruit);
-}
-}
+  static void Main(string[] args)
+  {
+    List<string> fruits = new List<string> { "Apple", "Banana", "Cherry" };
+    fruits.Add("Date");
+    fruits.Remove("Banana");
+    foreach (string fruit in fruits)
+    {
+      Console.WriteLine(fruit);
+    }
+  }
 }
 ```
 
@@ -281,19 +281,19 @@ using System;
 using System.Collections.Generic;
 class Program
 {
-static void Main(string[] args)
-{
-Dictionary<string, int> ageDict = new Dictionary<string, int>
-{
-{ "Alice", 30 },
-{ "Bob", 25 },
-{ "Charlie", 35 }
-};
-foreach (var kvp in ageDict)
-{
-Console.WriteLine($"{kvp.Key}: {kvp.Value}");
-}
-}
+  static void Main(string[] args)
+  {
+    Dictionary<string, int> ageDict = new Dictionary<string, int>
+    {
+      { "Alice", 30 },
+      { "Bob", 25 },
+      { "Charlie", 35 }
+    };
+    foreach (var kvp in ageDict)
+    {
+      Console.WriteLine($"{kvp.Key}: {kvp.Value}");
+    }
+  }
 }
 ```
 
@@ -308,17 +308,17 @@ using System;
 using System.Collections.Generic;
 class Program
 {
-static void Main(string[] args)
-{
-Queue<string> queue = new Queue<string>();
-queue.Enqueue("First");
-queue.Enqueue("Second");
-queue.Enqueue("Third");
-while (queue.Count > 0)
-{
-Console.WriteLine(queue.Dequeue());
-}
-}
+  static void Main(string[] args)
+  {
+    Queue<string> queue = new Queue<string>();
+    queue.Enqueue("First");
+    queue.Enqueue("Second");
+    queue.Enqueue("Third");
+    while (queue.Count > 0)
+    {
+      Console.WriteLine(queue.Dequeue());
+    }
+  }
 }
 ```
 
@@ -333,17 +333,17 @@ using System;
 using System.Collections.Generic;
 class Program
 {
-static void Main(string[] args)
-{
-Stack<string> stack = new Stack<string>();
-stack.Push("First");
-stack.Push("Second");
-stack.Push("Third");
-while (stack.Count > 0)
-{
-Console.WriteLine(stack.Pop());
-}
-}
+  static void Main(string[] args)
+  {
+    Stack<string> stack = new Stack<string>();
+    stack.Push("First");
+    stack.Push("Second");
+    stack.Push("Third");
+    while (stack.Count > 0)
+    {
+      Console.WriteLine(stack.Pop());
+    }
+  }
 }
 ```
 
@@ -358,20 +358,16 @@ using System;
 using System.Collections.Generic;
 class Program
 {
-static void Main(string[] args)
-{
-HashSet<string> set = new HashSet<string> { "Apple", "Banana", "Cherry" };
-set.Add("Date");
-```
-
-set.Add("Apple"); // Duplicate, will not be added
-
-```csharp
-foreach (string fruit in set)
-{
-Console.WriteLine(fruit);
-}
-}
+  static void Main(string[] args)
+  {
+    HashSet<string> set = new HashSet<string> { "Apple", "Banana", "Cherry" };
+    set.Add("Date");
+    set.Add("Apple"); // Duplicate, will not be added
+    foreach (string fruit in set)
+    {
+      Console.WriteLine(fruit);
+    }
+  }
 }
 ```
 
@@ -386,19 +382,19 @@ using System;
 using System.Collections.Generic;
 class Program
 {
-static void Main(string[] args)
-{
-SortedList<int, string> sortedList = new SortedList<int, string>
-{
-{ 2, "Two" },
-{ 1, "One" },
-{ 3, "Three" }
-};
-foreach (var kvp in sortedList)
-{
-Console.WriteLine($"{kvp.Key}: {kvp.Value}");
-}
-}
+  static void Main(string[] args)
+  {
+    SortedList<int, string> sortedList = new SortedList<int, string>
+    {
+      { 2, "Two" },
+      { 1, "One" },
+      { 3, "Three" }
+    };
+    foreach (var kvp in sortedList)
+    {
+      Console.WriteLine($"{kvp.Key}: {kvp.Value}");
+    }
+  }
 }
 ```
 
@@ -413,17 +409,17 @@ using System;
 using System.Collections.Generic;
 class Program
 {
-static void Main(string[] args)
-{
-LinkedList<string> linkedList = new LinkedList<string>();
-linkedList.AddLast("First");
-linkedList.AddLast("Second");
-linkedList.AddLast("Third");
-foreach (string item in linkedList)
-{
-Console.WriteLine(item);
-}
-}
+  static void Main(string[] args)
+  {
+    LinkedList<string> linkedList = new LinkedList<string>();
+    linkedList.AddLast("First");
+    linkedList.AddLast("Second");
+    linkedList.AddLast("Third");
+    foreach (string item in linkedList)
+    {
+      Console.WriteLine(item);
+    }
+  }
 }
 ```
 
@@ -438,12 +434,12 @@ using System;
 using System.Collections.ObjectModel;
 class Program
 {
-static void Main(string[] args)
-{
-ObservableCollection<string> observableCollection = new ObservableCollection<string>
-{
-"Item1",
-"Item2",
+  static void Main(string[] args)
+  {
+    ObservableCollection<string> observableCollection = new ObservableCollection<string>
+    {
+      "Item1",
+      "Item2",
 ```
 
 "Item3"
@@ -452,7 +448,7 @@ ObservableCollection<string> observableCollection = new ObservableCollection<str
 };
 observableCollection.CollectionChanged += (sender, e) =>
 {
-Console.WriteLine($"Collection changed: {e.Action}");
+  Console.WriteLine($"Collection changed: {e.Action}");
 };
 observableCollection.Add("Item4");
 observableCollection.Remove("Item2");

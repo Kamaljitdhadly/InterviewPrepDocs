@@ -4,7 +4,7 @@
 
 1. What is the difference between Process and Thread?
 
-What is the difference between Process and Thread?
+## What is the difference between Process and Thread?
 
 Let's break down these important concepts related to concurrent programming in C#.
 
@@ -29,23 +29,23 @@ using System;
 using System.Threading;
 class Program
 {
-static void Main(string[] args)
-{
-Thread thread1 = new Thread(DoWork);
-Thread thread2 = new Thread(DoWork);
-thread1.Start();
-thread2.Start();
-thread1.Join();
-thread2.Join();
-}
-static void DoWork()
-{
-for (int i = 0; i < 5; i++)
-{
-Console.WriteLine($"Thread {Thread.CurrentThread.ManagedThreadId} is working");
-Thread.Sleep(1000);
-}
-}
+  static void Main(string[] args)
+  {
+    Thread thread1 = new Thread(DoWork);
+    Thread thread2 = new Thread(DoWork);
+    thread1.Start();
+    thread2.Start();
+    thread1.Join();
+    thread2.Join();
+  }
+  static void DoWork()
+  {
+    for (int i = 0; i < 5; i++)
+    {
+      Console.WriteLine($"Thread {Thread.CurrentThread.ManagedThreadId} is working");
+      Thread.Sleep(1000);
+    }
+  }
 }
 ```
 
@@ -62,31 +62,31 @@ using System;
 using System.Threading;
 class Program
 {
-static void Main(string[] args)
-{
-Thread thread1 = new Thread(PrintNumbers);
-Thread thread2 = new Thread(PrintLetters);
-thread1.Start();
-thread2.Start();
-thread1.Join();
-thread2.Join();
-}
-static void PrintNumbers()
-{
-for (int i = 1; i <= 5; i++)
-{
-Console.WriteLine(i);
-Thread.Sleep(500);
-}
-}
-static void PrintLetters()
-{
-for (char c = 'A'; c <= 'E'; c++)
-{
-Console.WriteLine(c);
-Thread.Sleep(500);
-}
-}
+  static void Main(string[] args)
+  {
+    Thread thread1 = new Thread(PrintNumbers);
+    Thread thread2 = new Thread(PrintLetters);
+    thread1.Start();
+    thread2.Start();
+    thread1.Join();
+    thread2.Join();
+  }
+  static void PrintNumbers()
+  {
+    for (int i = 1; i <= 5; i++)
+    {
+      Console.WriteLine(i);
+      Thread.Sleep(500);
+    }
+  }
+  static void PrintLetters()
+  {
+    for (char c = 'A'; c <= 'E'; c++)
+    {
+      Console.WriteLine(c);
+      Thread.Sleep(500);
+    }
+  }
 }
 ```
 
@@ -106,31 +106,31 @@ using System.Net.Http;
 using System.Threading.Tasks;
 class Program
 {
-static void Main(string[] args)
-{
-Console.WriteLine("Synchronous Start");
-FetchDataSynchronously();
-Console.WriteLine("Synchronous End");
-Console.WriteLine("Asynchronous Start");
-FetchDataAsynchronously().Wait();
-Console.WriteLine("Asynchronous End");
-}
-static void FetchDataSynchronously()
-{
-using (var client = new HttpClient())
-{
-var result = client.GetStringAsync("https://www.example.com").Result;
-Console.WriteLine(result.Substring(0, 100)); // Print first 100 characters
-}
-}
-static async Task FetchDataAsynchronously()
-{
-using (var client = new HttpClient())
-{
-var result = await client.GetStringAsync("https://www.example.com");
-Console.WriteLine(result.Substring(0, 100)); // Print first 100 characters
-}
-}
+  static void Main(string[] args)
+  {
+    Console.WriteLine("Synchronous Start");
+    FetchDataSynchronously();
+    Console.WriteLine("Synchronous End");
+    Console.WriteLine("Asynchronous Start");
+    FetchDataAsynchronously().Wait();
+    Console.WriteLine("Asynchronous End");
+  }
+  static void FetchDataSynchronously()
+  {
+    using (var client = new HttpClient())
+    {
+      var result = client.GetStringAsync("https://www.example.com").Result;
+      Console.WriteLine(result.Substring(0, 100)); // Print first 100 characters
+    }
+  }
+  static async Task FetchDataAsynchronously()
+  {
+    using (var client = new HttpClient())
+    {
+      var result = await client.GetStringAsync("https://www.example.com");
+      Console.WriteLine(result.Substring(0, 100)); // Print first 100 characters
+    }
+  }
 }
 ```
 
@@ -159,20 +159,20 @@ using System;
 using System.Threading.Tasks;
 class Program
 {
-static void Main(string[] args)
-{
-Task task1 = Task.Run(() => DoWork(1));
-Task task2 = Task.Run(() => DoWork(2));
-Task.WaitAll(task1, task2);
-}
-static void DoWork(int id)
-{
-for (int i = 0; i < 5; i++)
-{
-Console.WriteLine($"Task {id} is working");
-Task.Delay(500).Wait();
-}
-}
+  static void Main(string[] args)
+  {
+    Task task1 = Task.Run(() => DoWork(1));
+    Task task2 = Task.Run(() => DoWork(2));
+    Task.WaitAll(task1, task2);
+  }
+  static void DoWork(int id)
+  {
+    for (int i = 0; i < 5; i++)
+    {
+      Console.WriteLine($"Task {id} is working");
+      Task.Delay(500).Wait();
+    }
+  }
 }
 ```
 
@@ -194,20 +194,20 @@ using System.Net.Http;
 using System.Threading.Tasks;
 class Program
 {
-static async Task Main(string[] args)
-{
-Console.WriteLine("Fetching data asynchronously...");
-string data = await FetchDataAsync();
-Console.WriteLine("Data fetched:");
-Console.WriteLine(data.Substring(0, 100)); // Print first 100 characters
-}
-static async Task<string> FetchDataAsync()
-{
-using (var client = new HttpClient())
-{
-return await client.GetStringAsync("https://www.example.com");
-}
-}
+  static async Task Main(string[] args)
+  {
+    Console.WriteLine("Fetching data asynchronously...");
+    string data = await FetchDataAsync();
+    Console.WriteLine("Data fetched:");
+    Console.WriteLine(data.Substring(0, 100)); // Print first 100 characters
+  }
+  static async Task<string> FetchDataAsync()
+  {
+    using (var client = new HttpClient())
+    {
+      return await client.GetStringAsync("https://www.example.com");
+    }
+  }
 }
 ```
 
