@@ -8,6 +8,8 @@ Every topic is written to help you **confidently answer questions out loud** in 
 
 ## 📚 Tracks
 
+### Languages & Frameworks
+
 | Track | Topics | Index |
 |-------|--------|-------|
 | 💜 **C#** | Language fundamentals, OOP, generics, delegates, LINQ, async | [docs/csharp](docs/csharp/README.md) |
@@ -15,6 +17,16 @@ Every topic is written to help you **confidently answer questions out loud** in 
 | 💛 **JavaScript** | Scope, closures, `this`, prototypes, event loop, promises | [docs/javascript](docs/javascript/README.md) |
 | 🗄️ **MS SQL Server** | Joins, indexes, window functions, transactions, tuning | [docs/sql-server](docs/sql-server/README.md) |
 | 🔺 **Angular** | Components, DI, RxJS, forms, change detection, signals | [docs/angular](docs/angular/README.md) |
+
+### DevOps, Cloud & Architecture
+
+| Track | Topics | Index |
+|-------|--------|-------|
+| 🐳 **Docker** | Images/containers, layers, volumes, networking, Compose, security | [docs/docker](docs/docker/README.md) |
+| ☸️ **Kubernetes** | Architecture, Pods/Deployments, Services, storage, Ingress, scaling, RBAC | [docs/kubernetes](docs/kubernetes/README.md) |
+| ☁️ **Azure Cloud** | Core concepts, compute, storage/DB, networking, identity, messaging | [docs/azure](docs/azure/README.md) |
+| 🧩 **Microservices** | Communication, data, gateway, resilience, observability, CQRS | [docs/microservices](docs/microservices/README.md) |
+| 🏗️ **System Design** | Scalability, load balancing, caching, sharding, CAP, queues, framework | [docs/system-design](docs/system-design/README.md) |
 
 ---
 
@@ -31,7 +43,7 @@ Every topic is written to help you **confidently answer questions out loud** in 
 
 ---
 
-## 🗓️ Suggested 4-week study plan
+## 🗓️ Suggested study plan
 
 | Week | Focus |
 |------|-------|
@@ -39,6 +51,10 @@ Every topic is written to help you **confidently answer questions out loud** in 
 | **Week 2** | Finish .NET (DI, EF Core, ASP.NET pipeline) |
 | **Week 3** | JavaScript (closures, `this`, event loop, promises) + Angular core |
 | **Week 4** | SQL Server (joins, indexes, window functions, transactions) + revise all Tricky sections |
+| **Week 5** | Docker + Kubernetes (containers → orchestration) |
+| **Week 6** | Azure Cloud (compute, storage, identity, messaging) |
+| **Week 7** | Microservices (communication, data, resilience, observability) |
+| **Week 8** | System Design (building blocks + practice the framework on real prompts) |
 
 > Tip: After each topic, close the file and try to explain it out loud from memory. If you can't, re-read the **Quick Recap**.
 

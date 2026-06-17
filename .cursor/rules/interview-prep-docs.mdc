@@ -6,8 +6,9 @@ alwaysApply: false
 
 # Interview Prep Knowledge Base — Authoring Rules
 
-Build a Markdown-only interview prep knowledge base covering 5 tracks:
-`csharp`, `dotnet`, `javascript`, `sql-server`, `angular`. No build tooling — files must render on GitHub.
+Build a Markdown-only interview prep knowledge base covering these tracks:
+`csharp`, `dotnet`, `javascript`, `sql-server`, `angular`, `docker`, `kubernetes`, `azure`,
+`microservices`, `system-design`. No build tooling — files must render on GitHub.
 
 ## Structure
 
@@ -32,4 +33,5 @@ Build a Markdown-only interview prep knowledge base covering 5 tracks:
 
 ## Build order
 
-C# → .NET → JavaScript → SQL Server → Angular. Finish all of a track's topics before moving on; summarize after each track.
+C# → .NET → JavaScript → SQL Server → Angular → Docker → Kubernetes → Azure → Microservices → System Design.
+Finish all of a track's topics before moving on; summarize after each track.
