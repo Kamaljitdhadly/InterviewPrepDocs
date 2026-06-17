@@ -1,37 +1,84 @@
 ---
-description: Authoring conventions for the Interview Prep Knowledge Base (C#, .NET, JS, SQL Server, Angular)
-globs: docs/**/*.md
-alwaysApply: false
+description: Interview Prep Docs repo — workflow, folders, study paths, and agent behavior
+alwaysApply: true
 ---
 
-# Interview Prep Knowledge Base — Authoring Rules
+# Interview Prep Docs
 
-Build a Markdown-only interview prep knowledge base covering these tracks:
-`csharp`, `dotnet`, `javascript`, `sql-server`, `angular`, `docker`, `kubernetes`, `azure`,
-`microservices`, `system-design`, `data-structures`. No build tooling — files must render on GitHub.
+Markdown-only interview knowledge base. **Do not** create or output `.docx`. **Do not** use a `docs/` folder or numbered `01-topic.md` naming.
 
-## Structure
+## Where things live
 
-- One Markdown file per major topic, numbered for reading order: `01-topic-name.md`.
-- Each track folder has a `README.md` index linking its topic files in study order.
-- Root `README.md` links all 5 tracks + a suggested study plan.
+| Path | Purpose |
+|------|---------|
+| `docx/{Topic}/` | Source Word files (read-only input) |
+| `_work/md/{Topic}/` | Pandoc extract + `media/` |
+| `_work/clean/{Topic}/` | Normalized full answers |
+| `_work/tight/{Topic}/` | **Primary study notes** — condensed prose, **all code blocks kept** |
+| `_work/STUDY.md` | Master index and learning paths |
+| `_work/topic-manifest.json` | Paths, cross-links, file relations |
+| `_work/*.mjs` | Pipeline scripts (normalize, format, audit) |
 
-## Every topic file MUST contain these sections (in order)
+**Default deliverable:** edit or create files under `_work/tight/` and `_work/clean/`. Point the user to `_work/tight/` for studying.
 
-1. **Concept Explanation** — precise, clear, not a textbook dump.
-2. **Code Example(s)** — runnable, idiomatic, well-commented, language-tagged.
-3. **Interview Q&A** — model answers phrased as spoken aloud. Tag each question difficulty: 🟢 Junior / 🟡 Mid / 🔴 Senior.
-4. **⚠️ Tricky / Gotchas** — misconceptions, "what's the output?" puzzles, subtle distinctions; explain *why* the confusion happens.
-5. **📌 Quick Recap** — bullet cheat sheet for last-minute revision.
+## Pipeline (from docx)
 
-## Quality bar
+```
+docx/{Topic}/*.docx
+  → _work/md/{Topic}/       pandoc extract
+  → _work/clean/{Topic}/    node _work/normalize.mjs --topic "Topic Name"
+  → _work/tight/{Topic}/    manual or agent tight pass (on request)
+```
 
-- Cover all levels (include 🟢/🟡/🔴 tagged questions per topic).
-- Every code block syntactically correct and language-tagged.
-- Use Markdown tables for comparisons; Mermaid blocks for diagrams (pipelines, event loop, etc.).
-- Scannable: headings, tables, bullets. Cross-link related topics via relative links.
+- Pandoc: `C:\Users\Hello\AppData\Local\Pandoc\pandoc.exe`
+- Quote topics with spaces in PowerShell: `--topic "Azure DevOps"`
+- After normalize, topic-specific formatter runs automatically (see `normalize.mjs`)
 
-## Build order
+## Markdown file format (all topics)
 
-C# → .NET → JavaScript → SQL Server → Angular → Docker → Kubernetes → Azure → Microservices → System Design → Data Structures.
-Finish all of a track's topics before moving on; summarize after each track.
+Match **Angular / C# / React** style:
+
+```markdown
+# {Topic Title}
+
+## Questions Covered
+
+1. First question?
+2. Second question?
+
+## First question?
+
+Answer with tables, bullets, and fenced code (`csharp`, `typescript`, `jsx`, `javascript`, `sql`, `yaml`, `bash` as appropriate).
+
+## Second question?
+
+...
+```
+
+**Tight pass rules:** shorten prose and use tables; **never drop code blocks** from clean; keep `## Questions Covered` and matching `##` answer headings; optional `## Related Topics` footer (via `node _work/enrich-tight-footers.mjs`).
+
+## Topics (18 folders, ~184 files)
+
+`C#`, `Sql Server`, `Javascript`, `TypeScript`, `Angular`, `React`, `Docker`, `Kubernetes`, `Azure Cloud`, `Azure DevOps`, `Microservices`, `System Design`, `Data Structures and Algorithms`, `Important Concepts`, `Certificates`, `Git`, `Bash`, `Testing`
+
+React and TypeScript were authored in-repo (no docx). Angular includes **Angular Modern Features** (signals, standalone). **Interview Comparisons** lives under Important Concepts.
+
+## Quality checks
+
+- `node _work/audit-all-tight.mjs` — global tight vs clean
+- `node _work/audit-react-tight.mjs`, `audit-typescript-tight.mjs`, etc. — per topic
+- `node _work/build-study-guide.mjs` — refresh `_work/STUDY.md`
+
+## Agent defaults
+
+- **Commits:** only when the user explicitly asks
+- **Scope:** minimal diffs; don’t refactor unrelated topics in the same task
+- **New topic files:** create **both** clean + tight; interview depth comparable to `Angular Basics` / `C# Basics`
+- **Images:** preserve `<img>` paths to `_work/md/{Topic}/media/...` when present
+- **Empty docx:** skip and note to user (e.g. `Azure DevOps Handwritten.docx`)
+
+## User phrasing
+
+- “create md files” → extract (if docx exists) + normalize → clean; offer tight pass if not done
+- “tight” / “do it” for a topic → produce or fix `_work/tight/{Topic}/`
+- “study” → `_work/tight/`; fuller detail → `_work/clean/`

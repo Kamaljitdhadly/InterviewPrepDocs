@@ -1,0 +1,48 @@
+---
+description: _work pipeline scripts — normalize, formatters, audits
+globs: _work/**/*.mjs
+alwaysApply: false
+---
+
+# Pipeline tooling (`_work/`)
+
+## Main entry
+
+```bash
+node _work/normalize.mjs --topic "Topic Name"
+```
+
+Reads `_work/md/{Topic}/`, writes `_work/clean/{Topic}/`. Pick formatter by topic name in `normalize.mjs`:
+
+| Topic match | Formatter |
+|-------------|-----------|
+| C# | `format-csharp-clean.mjs` |
+| Angular | `format-angular-clean.mjs` |
+| Javascript | `format-javascript-clean.mjs` |
+| TypeScript | `format-typescript-clean.mjs` |
+| React | `format-react-clean.mjs` |
+| Sql Server | `format-sqlserver-clean.mjs` |
+| Microservices | `format-microservices-clean.mjs` |
+| Docker / Kubernetes | respective `format-*-clean.mjs` |
+| Azure Cloud / DevOps | `format-azurecloud-clean.mjs` / `format-azuredevops-clean.mjs` |
+| DSA | `format-dsa-clean.mjs` |
+| Git, Bash, Certificates, Testing | `format-generic-clean.mjs` |
+
+## Other scripts
+
+- `build-study-guide.mjs` — regenerate `_work/STUDY.md`
+- `enrich-tight-footers.mjs` — append `## Related Topics` from `topic-manifest.json`
+- `audit-all-tight.mjs` — tight vs clean parity across all topics
+- `audit-{topic}-tight.mjs` — per-topic audits
+
+## Formatter conventions
+
+- Export `formatFile(raw, fileBaseName)` from `format-*-clean.mjs`
+- Reuse existing formatters (e.g. React/TypeScript extend Javascript/Angular) rather than duplicating
+- **Never** duplicate `export function formatFile` and `export { formatFile }` in the same file
+
+## Do not
+
+- Run destructive bulk “repair” on tight files without verifying TOC + code blocks
+- Use `git checkout` to fix content bugs — edit files surgically
+- Add `package.json` or build tooling unless the user requests it

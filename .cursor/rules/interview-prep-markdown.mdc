@@ -1,0 +1,46 @@
+---
+description: Authoring standards for _work/clean and _work/tight interview markdown
+globs: _work/**/*.md
+alwaysApply: false
+---
+
+# Interview markdown authoring
+
+## Structure (required)
+
+1. `# Title` — matches filename without `.md`
+2. `## Questions Covered` — numbered list; every item gets a matching answer section
+3. `## {exact question text}` — no leading number on the heading
+4. Optional `---` + `## Related Topics` at end (bullet list of linked topic/file names)
+
+## Answer quality
+
+- Interview-ready: precise definitions, comparison **tables**, when-to-use guidance
+- **Code:** runnable, idiomatic, language-tagged fences; multiple examples for core concepts
+- **No** emoji difficulty tags (🟢/🟡/🔴), no mandatory “Gotchas” / “Quick Recap” sections unless the user asks
+- Cross-topic comparisons → `Important Concepts/Interview Comparisons.md` or inline table
+
+## Tight vs clean
+
+| | clean | tight |
+|---|-------|-------|
+| Prose | Full explanations | Condensed bullets/tables |
+| Code blocks | All examples | **Identical** to clean |
+| TOC | Same questions | Same questions |
+| Target reduction | — | ~15–35% chars (not required for image-heavy docs) |
+
+## Topic-specific code languages
+
+- C# / .NET / Testing → `csharp`
+- Javascript / React / TypeScript → `javascript`, `jsx`, or `typescript`
+- Sql Server → `sql`
+- Docker / Azure CLI / Git / Bash → `bash`
+- Kubernetes / Azure DevOps pipelines → `yaml`
+- Microservices / System Design diagrams → `json` or mermaid when useful
+
+## Adding a new file
+
+1. Pick folder under `_work/clean/{Topic}/` and `_work/tight/{Topic}/`
+2. Write clean first, then tight (same code blocks)
+3. Add relations in `_work/topic-manifest.json` → `fileRelations` if it’s a hub file
+4. Run topic audit or `audit-all-tight.mjs`
