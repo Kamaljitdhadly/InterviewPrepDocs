@@ -2,7 +2,7 @@
 
 > **Start here.** All study notes live under `_work/tight/`. Clean (full) versions: `_work/clean/`.
 
-**Library stats:** 23 topics · 232 files · ~1630 questions
+**Library stats:** 27 topics · 253 files · ~1882 questions
 
 ---
 
@@ -27,9 +27,12 @@
 | 3 | **MongoDB** | MongoDB Basics, MongoDB CRUD Operations, MongoDB Querying and Indexing, MongoDB Schema Design, MongoDB with Node.js and .NET |
 | 4 | **TypeScript** | TypeScript Basics, TypeScript Types and Interfaces |
 | 5 | **Angular** | Angular Basics, Angular Modern Features, Angular Routing, Angular Forms & Pipes, Angular HTTP and Services, RxJS Basics, NgRx Basics |
-| 6 | **Azure Cloud** | Azure Basics, Azure Active Directory, Azure Compute |
-| 7 | **Azure Cloud 1** | Azure Basics, Azure Compute, Azure Networking, Azure Storage and Databases, Azure Identity and Entra ID |
-| 8 | **Azure DevOps** | Azure Devops Example |
+| 6 | **PostgreSQL** | PostgreSQL Basics, PostgreSQL Queries and Performance |
+| 7 | **Redis** | Redis Basics, Redis Caching Patterns, Redis with .NET and Node.js |
+| 8 | **GraphQL** | GraphQL Basics, GraphQL with .NET and Node.js |
+| 9 | **Testing** | Unit Testing, Integration Testing, E2E Testing, Test Pyramid and Best Practices |
+| 10 | **Azure Cloud 1** | Azure Basics, Azure Compute, Azure Networking, Azure Storage and Databases, Azure Identity and Entra ID |
+| 11 | **Azure DevOps** | Azure DevOps Basics and Boards, Azure DevOps Pipelines and CI-CD, Azure DevOps Deployment Strategies |
 
 ### React / Frontend Developer
 
@@ -37,7 +40,9 @@
 |------|-------|----------------|
 | 1 | **Javascript** | JavaScript Basics, JavaScript ES6 Features and Syntax, JavaScript Asynchronous Programming, JavaScript Functions & Scoping |
 | 2 | **TypeScript** | TypeScript Basics, TypeScript Types and Interfaces, TypeScript Generics |
-| 3 | **React** | React Basics, React Hooks, React Routing, React Forms, React HTTP and Data Fetching, React State Management, Redux Toolkit Basics, Next.js |
+| 3 | **React** | React Basics, React Hooks, React Routing, React Forms, React HTTP and Data Fetching, React State Management, Redux Toolkit Basics, React Testing, Next.js |
+| 4 | **GraphQL** | GraphQL Basics, GraphQL with .NET and Node.js |
+| 5 | **Testing** | Unit Testing, E2E Testing, Test Pyramid and Best Practices |
 
 ### DevOps & Cloud
 
@@ -45,10 +50,15 @@
 |------|-------|----------------|
 | 1 | **Docker** | Docker Basics, Docker Compose, Docker Networking, Docker Build and CICD Integration |
 | 2 | **Kubernetes** | Kubernetes Basics, Kubernetes Objects and Configurations, Kubernetes Networking and Storage, Kubernetes Deployment Strategies |
-| 3 | **Azure Cloud** | Azure Basics, Azure Networking, Azure Messaging |
+| 3 | **Terraform** | Terraform Basics, Terraform State Modules and Workflows, Terraform Multi-Cloud Providers |
 | 4 | **Azure Cloud 1** | Azure Basics, Azure Networking, Azure Messaging and Integration, Azure Security and Monitoring |
-| 5 | **Git** | Git Commands |
-| 6 | **Bash** | bash Commands |
+| 5 | **AWS** | AWS Basics, AWS Networking, AWS Security and Monitoring |
+| 6 | **Google Cloud** | Google Cloud Basics, Google Cloud Networking, Google Cloud Security and Monitoring |
+| 7 | **Important Concepts** | Cloud Provider Comparison |
+| 8 | **Azure DevOps** | Azure DevOps Pipelines and CI-CD, Azure DevOps Deployment Strategies, Azure DevOps Security Artifacts and Repos |
+| 9 | **Testing** | Integration Testing, Test Pyramid and Best Practices |
+| 10 | **Git** | Git Commands |
+| 11 | **Bash** | bash Commands |
 
 ### Microservices & System Design
 
@@ -56,7 +66,8 @@
 |------|-------|----------------|
 | 1 | **Microservices** | Microservices Basics, Microservices Communication, Microservices Service Discovery, Microservices Distributed Transactions |
 | 2 | **System Design** | System Design Basics, System Design CAP Theorem, System Design Design Patterns |
-| 3 | **Important Concepts** | OWASP, Important keywords |
+| 3 | **Redis** | Redis Basics, Redis Caching Patterns |
+| 4 | **Important Concepts** | Cloud Provider Comparison, Interview Comparisons, OWASP |
 
 ### MongoDB / NoSQL
 
@@ -100,6 +111,45 @@
 |------|-------|----------------|
 | 1 | **AI** | AI Basics, Prompt Engineering, RAG and Embeddings, AI Agents and Function Calling, Building AI Applications, AI Security and Responsible AI, Fine-tuning Evaluation and MLOps, AI System Design and MLOps |
 
+### Testing (Complete)
+
+| Step | Topic | Files to study |
+|------|-------|----------------|
+| 1 | **Testing** | Testing Concepts, Unit Testing, Integration Testing, E2E Testing, Test Pyramid and Best Practices |
+| 2 | **React** | React Testing |
+| 3 | **Microservices** | Microservices Testing, Microservices Shadow Testing |
+
+### Azure DevOps & CI/CD (Complete)
+
+| Step | Topic | Files to study |
+|------|-------|----------------|
+| 1 | **Azure DevOps** | Azure DevOps Basics and Boards, Azure DevOps Pipelines and CI-CD, Azure DevOps Deployment Strategies, Azure DevOps Security Artifacts and Repos, Azure Devops Example |
+| 2 | **Terraform** | Terraform Basics, Terraform State Modules and Workflows, Terraform Multi-Cloud Providers |
+| 3 | **Docker** | Docker Build and CICD Integration |
+| 4 | **Testing** | Integration Testing, Test Pyramid and Best Practices |
+
+### PostgreSQL (Complete)
+
+| Step | Topic | Files to study |
+|------|-------|----------------|
+| 1 | **PostgreSQL** | PostgreSQL Basics, PostgreSQL Queries and Performance, PostgreSQL Advanced Features |
+
+### Redis & Caching (Complete)
+
+| Step | Topic | Files to study |
+|------|-------|----------------|
+| 1 | **Redis** | Redis Basics, Redis Data Structures and Commands, Redis Caching Patterns, Redis with .NET and Node.js |
+
+### Multi-Cloud Comparison
+
+| Step | Topic | Files to study |
+|------|-------|----------------|
+| 1 | **Important Concepts** | Cloud Provider Comparison, Interview Comparisons |
+| 2 | **Azure Cloud 1** | Azure Basics |
+| 3 | **AWS** | AWS Basics |
+| 4 | **Google Cloud** | Google Cloud Basics |
+| 5 | **Terraform** | Terraform Multi-Cloud Providers |
+
 ---
 
 ## All topics
@@ -110,7 +160,7 @@
 | AWS | 10 | `_work/tight/AWS/` |
 | Angular | 19 | `_work/tight/Angular/` |
 | Azure Cloud | 13 | `_work/tight/Azure Cloud/` |
-| Azure DevOps | 1 | `_work/tight/Azure DevOps/` |
+| Azure DevOps | 5 | `_work/tight/Azure DevOps/` |
 | Bash | 1 | `_work/tight/Bash/` |
 | C# | 27 | `_work/tight/C#/` |
 | Certificates | 3 | `_work/tight/Certificates/` |
@@ -118,16 +168,20 @@
 | Docker | 12 | `_work/tight/Docker/` |
 | Git | 1 | `_work/tight/Git/` |
 | Google Cloud | 10 | `_work/tight/Google Cloud/` |
-| Important Concepts | 7 | `_work/tight/Important Concepts/` |
+| GraphQL | 2 | `_work/tight/GraphQL/` |
+| Important Concepts | 8 | `_work/tight/Important Concepts/` |
 | Javascript | 12 | `_work/tight/Javascript/` |
 | Kubernetes | 12 | `_work/tight/Kubernetes/` |
 | Microservices | 22 | `_work/tight/Microservices/` |
 | MongoDB | 10 | `_work/tight/MongoDB/` |
+| PostgreSQL | 3 | `_work/tight/PostgreSQL/` |
 | React | 16 | `_work/tight/React/` |
+| Redis | 4 | `_work/tight/Redis/` |
 | Security | 10 | `_work/tight/Security/` |
 | Sql Server | 11 | `_work/tight/Sql Server/` |
 | System Design | 8 | `_work/tight/System Design/` |
-| Testing | 1 | `_work/tight/Testing/` |
+| Terraform | 3 | `_work/tight/Terraform/` |
+| Testing | 5 | `_work/tight/Testing/` |
 | TypeScript | 4 | `_work/tight/TypeScript/` |
 
 ---
@@ -157,7 +211,7 @@
 
 ## Topic quick links
 
-**Other:** `AI` · `AWS` · `Bash` · `Certificates` · `Git` · `Google Cloud` · `MongoDB` · `Security` · `Testing`
+**Other:** `AI` · `AWS` · `Bash` · `Certificates` · `Git` · `Google Cloud` · `GraphQL` · `MongoDB` · `PostgreSQL` · `Redis` · `Security` · `Terraform` · `Testing`
 
 **Frontend:** `Angular` · `React`
 
