@@ -64,6 +64,13 @@
       "order": [
         { "topic": "Data Structures and Algorithms", "files": ["Data Structures and Algorithms Basics.md", "Data Structures and Algorithms Arrays.md", "Data Structures and Algorithms Linked Lists.md", "Data Structures and Algorithms Trees.md", "Data Structures and Algorithms Graphs.md", "Data Structures and Algorithms Algorithms Concepts.md"] }
       ]
+    },
+    {
+      "id": "ai-engineer",
+      "title": "AI / LLM Application Developer",
+      "order": [
+        { "topic": "AI", "files": ["AI Basics.md", "Prompt Engineering.md", "RAG and Embeddings.md", "AI Agents and Function Calling.md", "Building AI Applications.md", "AI Security and Responsible AI.md", "Fine-tuning Evaluation and MLOps.md", "AI System Design and MLOps.md"] }
+      ]
     }
   ],
   "topicGraph": {
@@ -79,7 +86,8 @@
     "Microservices": { "requires": ["Docker", "System Design"], "pairs": ["Kubernetes", "Security"] },
     "Security": { "requires": ["C#", "Javascript"], "pairs": ["Important Concepts", "Certificates"], "next": ["OWASP Top 10", "Authentication and Identity"] },
     "RxJS": { "requires": ["Angular"], "next": ["NgRx"] },
-    "NgRx": { "requires": ["RxJS", "Angular"] }
+    "NgRx": { "requires": ["RxJS", "Angular"] },
+    "AI": { "requires": ["C#", "Javascript"], "next": ["RAG and Embeddings.md", "Building AI Applications.md"], "pairs": ["Azure Cloud", "Microservices", "System Design"] }
   },
   "fileRelations": {
     "Angular/Angular Basics.md": ["Angular/Angular Modern Features.md", "Angular/Angular Routing.md", "TypeScript/TypeScript Basics.md"],
@@ -117,6 +125,14 @@
     "MongoDB/MongoDB Querying and Indexing.md": ["MongoDB/MongoDB Aggregation.md", "MongoDB/MongoDB Performance and Optimization.md"],
     "MongoDB/MongoDB Schema Design.md": ["MongoDB/MongoDB Replication.md", "Microservices/Microservices Data Management.md"],
     "MongoDB/MongoDB Replication.md": ["MongoDB/MongoDB Sharding.md"],
-    "MongoDB/MongoDB with Node.js and .NET.md": ["C#/C# ADO.NET and Entity Framework.md", "React/React HTTP and Data Fetching.md"]
+    "MongoDB/MongoDB with Node.js and .NET.md": ["C#/C# ADO.NET and Entity Framework.md", "React/React HTTP and Data Fetching.md"],
+    "AI/AI Basics.md": ["AI/Prompt Engineering.md", "AI/RAG and Embeddings.md", "Important Concepts/Interview Comparisons.md"],
+    "AI/Prompt Engineering.md": ["AI/RAG and Embeddings.md", "AI/AI Security and Responsible AI.md"],
+    "AI/RAG and Embeddings.md": ["AI/Building AI Applications.md", "AI/Fine-tuning Evaluation and MLOps.md"],
+    "AI/AI Agents and Function Calling.md": ["AI/Building AI Applications.md", "Microservices/Microservices Basics.md"],
+    "AI/Building AI Applications.md": ["Azure Cloud/Azure Basics.md", "C#/.NET Core Basics.md", "AI/AI System Design and MLOps.md"],
+    "AI/AI Security and Responsible AI.md": ["Security/Security Basics.md", "Security/API Security.md"],
+    "AI/Fine-tuning Evaluation and MLOps.md": ["AI/AI System Design and MLOps.md"],
+    "AI/AI System Design and MLOps.md": ["System Design/System Design Basics.md", "Microservices/Microservices Basics.md"]
   }
 }

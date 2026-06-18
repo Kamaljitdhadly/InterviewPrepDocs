@@ -2,7 +2,7 @@
 
 > **Start here.** All study notes live under `_work/tight/`. Clean (full) versions: `_work/clean/`.
 
-**Library stats:** 20 topics · 204 files · ~1161 questions
+**Library stats:** 21 topics · 212 files · ~1260 questions
 
 ---
 
@@ -74,12 +74,19 @@
 |------|-------|----------------|
 | 1 | **Data Structures and Algorithms** | Data Structures and Algorithms Basics, Data Structures and Algorithms Arrays, Data Structures and Algorithms Linked Lists, Data Structures and Algorithms Trees, Data Structures and Algorithms Graphs, Data Structures and Algorithms Algorithms Concepts |
 
+### AI / LLM Application Developer
+
+| Step | Topic | Files to study |
+|------|-------|----------------|
+| 1 | **AI** | AI Basics, Prompt Engineering, RAG and Embeddings, AI Agents and Function Calling, Building AI Applications, AI Security and Responsible AI, Fine-tuning Evaluation and MLOps, AI System Design and MLOps |
+
 ---
 
 ## All topics
 
 | Topic | Files | Folder |
 |-------|------:|--------|
+| AI | 8 | `_work/tight/AI/` |
 | Angular | 19 | `_work/tight/Angular/` |
 | Azure Cloud | 13 | `_work/tight/Azure Cloud/` |
 | Azure DevOps | 1 | `_work/tight/Azure DevOps/` |
@@ -128,11 +135,11 @@
 
 ## Topic quick links
 
+**Other:** `AI` · `Bash` · `Certificates` · `Git` · `MongoDB` · `Security` · `Testing`
+
 **Frontend:** `Angular` · `React`
 
 **Cloud:** `Azure Cloud` · `Azure DevOps`
-
-**Other:** `Bash` · `Certificates` · `Git` · `MongoDB` · `Security` · `Testing`
 
 **Backend & .NET:** `C#` · `Sql Server`
 
