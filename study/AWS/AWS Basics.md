@@ -249,4 +249,4 @@ Monitor with **Billing alarms** — free tier exhaustion charges real costs.
 - **AWS Compute.md** — EC2, Lambda, ECS, EKS
 - **AWS Identity and IAM.md** — accounts, roles, policies
 - **AWS CLI and Commands.md** — essential CLI operations
-- **Azure Cloud 1/Azure Basics.md** — compare with Azure
+- **Azure Cloud/Azure Basics.md** — compare with Azure

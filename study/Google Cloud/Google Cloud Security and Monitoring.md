@@ -233,4 +233,4 @@ Set **quota alerts** and review **CUD** commitments for steady Compute Engine / 
 - **Google Cloud Load Balancing and CDN.md** — Cloud Armor
 - **Google Cloud Networking.md** — VPC SC, firewall
 - **Security/Cloud and Infrastructure Security.md**
-- **AWS/AWS Security and Monitoring.md** · **Azure Cloud 1/Azure Security and Monitoring.md**
+- **AWS/AWS Security and Monitoring.md** · **Azure Cloud/Azure Security and Monitoring.md**

@@ -252,4 +252,4 @@ Microservices on AWS (typical):
 - **AWS Compute.md** — Lambda triggers
 - **AWS Storage and Databases.md** — S3 for claim-check
 - **Microservices/Microservices Communication.md** — patterns
-- **Azure Cloud 1/Azure Messaging and Integration.md** — Azure comparison
+- **Azure Cloud/Azure Messaging and Integration.md** — Azure comparison

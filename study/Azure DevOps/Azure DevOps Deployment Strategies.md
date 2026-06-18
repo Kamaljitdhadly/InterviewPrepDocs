@@ -344,5 +344,5 @@ SPAs produce static files (`dist/`) — no server-side runtime unless you use SS
 
 - Azure DevOps/Azure DevOps Pipelines and CI-CD.md
 - Kubernetes/Kubernetes Deployment Strategies.md
-- Azure Cloud 1/Azure Compute.md
+- Azure Cloud/Azure Compute.md
 - Docker/Docker Build and CICD Integration.md

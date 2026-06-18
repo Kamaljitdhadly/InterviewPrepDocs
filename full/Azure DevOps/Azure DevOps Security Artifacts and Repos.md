@@ -360,4 +360,4 @@ stages:
 - Azure DevOps/Azure DevOps Pipelines and CI-CD.md
 - Security/Secure Development Lifecycle.md
 - Terraform/Terraform Basics.md
-- Azure Cloud 1/Azure Identity and Entra ID.md
+- Azure Cloud/Azure Identity and Entra ID.md

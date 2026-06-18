@@ -1,8 +1,8 @@
 import fs from 'node:fs';
 import path from 'node:path';
 
-const TIGHT_ROOT = path.resolve('study');
-const CLEAN_ROOT = path.resolve('full');
+const STUDY_ROOT = path.resolve('study');
+const FULL_ROOT = path.resolve('full');
 
 function extractBlocks(text) {
   const b = [];
@@ -18,48 +18,48 @@ function parseQuestions(text) {
   return sec[1].split('\n').filter((l) => /^\d+\.\s/.test(l));
 }
 
-const topics = fs.readdirSync(TIGHT_ROOT, { withFileTypes: true })
+const topics = fs.readdirSync(STUDY_ROOT, { withFileTypes: true })
   .filter((d) => d.isDirectory())
   .map((d) => d.name)
   .sort();
 
 let total = 0;
 let issues = 0;
-let missingTight = 0;
+let missingStudy = 0;
 const report = [];
 
-console.log('=== GLOBAL TIGHT AUDIT ===\n');
+console.log('=== STUDY vs FULL AUDIT ===\n');
 
 for (const topic of topics) {
-  const cleanDir = path.join(CLEAN_ROOT, topic);
-  const tightDir = path.join(TIGHT_ROOT, topic);
-  if (!fs.existsSync(cleanDir)) continue;
-  const files = fs.readdirSync(cleanDir).filter((f) => f.endsWith('.md')).sort();
+  const fullDir = path.join(FULL_ROOT, topic);
+  const studyDir = path.join(STUDY_ROOT, topic);
+  if (!fs.existsSync(fullDir)) continue;
+  const files = fs.readdirSync(fullDir).filter((f) => f.endsWith('.md')).sort();
   let topicIssues = 0;
   for (const f of files) {
     total++;
-    const cleanPath = path.join(cleanDir, f);
-    const tightPath = path.join(tightDir, f);
-    const clean = fs.readFileSync(cleanPath, 'utf8');
-    if (!fs.existsSync(tightPath)) {
-      missingTight++;
+    const fullPath = path.join(fullDir, f);
+    const studyPath = path.join(studyDir, f);
+    const full = fs.readFileSync(fullPath, 'utf8');
+    if (!fs.existsSync(studyPath)) {
+      missingStudy++;
       topicIssues++;
       issues++;
-      report.push({ topic, file: f, flag: 'MISSING TIGHT' });
+      report.push({ topic, file: f, flag: 'MISSING STUDY' });
       continue;
     }
-    const tight = fs.readFileSync(tightPath, 'utf8');
-    const toc = parseQuestions(clean);
-    const tightToc = parseQuestions(tight);
-    const cb = extractBlocks(clean);
-    const tb = extractBlocks(tight);
+    const study = fs.readFileSync(studyPath, 'utf8');
+    const toc = parseQuestions(full);
+    const studyToc = parseQuestions(study);
+    const cb = extractBlocks(full);
+    const tb = extractBlocks(study);
     const missing = cb.filter((x) => !tb.some((y) => y === x));
-    const pct = clean.length ? ((1 - tight.length / clean.length) * 100).toFixed(1) : '0';
-    const flag = missing.length || (toc.length && toc.length !== tightToc.length) ? 'ISSUES' : 'OK';
+    const pct = full.length ? ((1 - study.length / full.length) * 100).toFixed(1) : '0';
+    const flag = missing.length || (toc.length && toc.length !== studyToc.length) ? 'ISSUES' : 'OK';
     if (flag === 'ISSUES') {
       topicIssues++;
       issues++;
-      report.push({ topic, file: f, flag, missing: missing.length, toc: `${toc.length}→${tightToc.length}`, pct });
+      report.push({ topic, file: f, flag, missing: missing.length, toc: `${toc.length}→${studyToc.length}`, pct });
     }
   }
   const status = topicIssues ? `${topicIssues} issue(s)` : 'OK';
@@ -73,4 +73,4 @@ for (const r of report.slice(0, 40)) {
 if (report.length > 40) console.log(`... +${report.length - 40} more`);
 
 console.log(`\nTotal: ${total} files across ${topics.length} topics`);
-console.log(`Issues: ${issues} (${missingTight} missing tight)`);
+console.log(`Issues: ${issues} (${missingStudy} missing study file)`);

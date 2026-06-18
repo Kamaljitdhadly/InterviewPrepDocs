@@ -226,4 +226,4 @@ Tag everything: `Environment`, `Project`, `Owner` — enforce with **Config rule
 - **AWS Networking.md** — security groups, Flow Logs
 - **AWS Load Balancing CDN and API Gateway.md** — WAF attachment
 - **Security/Cloud and Infrastructure Security.md** — cross-cloud security
-- **Azure Cloud 1/Azure Security and Monitoring.md** — Azure comparison
+- **Azure Cloud/Azure Security and Monitoring.md** — Azure comparison

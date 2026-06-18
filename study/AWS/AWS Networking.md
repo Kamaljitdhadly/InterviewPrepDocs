@@ -237,4 +237,4 @@ For AWS APIs (S3, DynamoDB) prefer **VPC endpoints** over NAT to reduce cost.
 - **AWS Compute.md** — EC2, Lambda, placement
 - **AWS Load Balancing CDN and API Gateway.md** — ALB, CloudFront
 - **AWS Security and Monitoring.md** — WAF, Flow Logs analysis
-- **Azure Cloud 1/Azure Networking.md** — Azure comparison
+- **Azure Cloud/Azure Networking.md** — Azure comparison

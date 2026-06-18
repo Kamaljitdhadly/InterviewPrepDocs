@@ -421,5 +421,5 @@ Reader checks `v` and migrates or rejects unknown versions — avoids silent des
 - Redis/Redis Caching Patterns.md
 - Redis/Redis Basics.md
 - C#/.NET Core Basics.md
-- Azure Cloud 1/Azure Storage and Databases.md
+- Azure Cloud/Azure Storage and Databases.md
 - Testing/Integration Testing.md

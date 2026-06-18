@@ -195,4 +195,4 @@ gcloud run services update myapi --vpc-connector=run-connector --vpc-egress=priv
 - **Google Cloud Compute.md** — MIG, Cloud Run networking
 - **Google Cloud Load Balancing and CDN.md** — global LB, CDN
 - **Google Cloud Storage and Databases.md** — private Cloud SQL
-- **AWS/AWS Networking.md** · **Azure Cloud 1/Azure Networking.md**
+- **AWS/AWS Networking.md** · **Azure Cloud/Azure Networking.md**

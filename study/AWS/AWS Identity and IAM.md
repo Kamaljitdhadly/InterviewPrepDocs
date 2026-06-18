@@ -250,5 +250,5 @@ Validate JWT: issuer, audience, expiry, signature — same as Entra ID pattern i
 
 - **AWS Security and Monitoring.md** — CloudTrail, GuardDuty
 - **AWS API Gateway.md** — authorizers
-- **Azure Cloud 1/Azure Identity and Entra ID.md** — compare identity models
+- **Azure Cloud/Azure Identity and Entra ID.md** — compare identity models
 - **Security/Authentication and Identity.md** — OAuth/OIDC fundamentals

@@ -243,4 +243,4 @@ The cost of fixing a bug rises sharply left → right: **minutes in IDE**, **hou
 - Azure DevOps/Azure DevOps Pipelines and CI-CD.md
 - Azure DevOps/Azure DevOps Deployment Strategies.md
 - Git/Git Commands.md
-- Azure Cloud 1/Azure Basics.md
+- Azure Cloud/Azure Basics.md

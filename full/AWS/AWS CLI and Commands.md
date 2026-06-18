@@ -234,4 +234,4 @@ Not for CI/CD — use local CLI or pipeline agents for automation.
 - **AWS Basics.md** — regions, IAM overview
 - **AWS Compute.md** — EC2, Lambda details
 - **AWS Identity and IAM.md** — roles, policies
-- **Azure Cloud 1/Azure Commands and CLI.md** — Azure CLI comparison
+- **Azure Cloud/Azure Commands and CLI.md** — Azure CLI comparison

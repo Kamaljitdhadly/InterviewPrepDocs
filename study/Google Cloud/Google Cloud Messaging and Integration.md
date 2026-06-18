@@ -232,4 +232,4 @@ GCP microservices default stack:
 - **Google Cloud Compute.md** — Cloud Run, Functions triggers
 - **Google Cloud Storage and Databases.md** — GCS Eventarc events
 - **Microservices/Microservices Communication.md**
-- **AWS/AWS Messaging and Integration.md** · **Azure Cloud 1/Azure Messaging and Integration.md**
+- **AWS/AWS Messaging and Integration.md** · **Azure Cloud/Azure Messaging and Integration.md**

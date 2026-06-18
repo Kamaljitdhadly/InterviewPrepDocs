@@ -216,7 +216,7 @@ App (OTel SDK) → APM (App Insights / X-Ray / Trace) + Logs + Metrics → Alert
 
 ## Related Topics
 
-- Azure Cloud 1/Azure Basics.md
+- Azure Cloud/Azure Basics.md
 - AWS/AWS Basics.md
 - Google Cloud/Google Cloud Basics.md
 - Important Concepts/Interview Comparisons.md

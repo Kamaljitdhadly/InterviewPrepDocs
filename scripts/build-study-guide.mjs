@@ -99,10 +99,9 @@ md += `
 
 ## Recently added / improved
 
-- **TypeScript** — new 4-file topic (Basics → Advanced)
-- **Angular Modern Features** — Signals, standalone, \`inject()\`, \`@if/@for\`, zoneless
-- **React** — 16-file library (Basics through Redux/Zustand/Next.js/Native)
-- **Related Topics** footers — cross-links at the bottom of key files
+- **Interview Scenarios** — 72 production-trap Q&As (C#, .NET, JS, SQL, Microservices, System Design)
+- **Folder layout** — \`study/\` (condensed), \`full/\` (detailed), \`extracted/\` (pandoc source)
+- **MongoDB, Redis, Terraform, PostgreSQL, GraphQL, Bash, AWS, GCP, AI** — expanded topic libraries
 - **Interview Comparisons** — side-by-side framework and architecture decisions
 
 ---
@@ -125,6 +124,18 @@ const anchors = {
   'Microservices': 'Architecture',
   'System Design': 'Architecture',
   'Data Structures and Algorithms': 'CS Fundamentals',
+  'Interview Scenarios': 'Interview prep',
+  'MongoDB': 'Backend & .NET',
+  'Redis': 'Architecture',
+  'Terraform': 'DevOps',
+  'PostgreSQL': 'Backend & .NET',
+  'GraphQL': 'Frontend',
+  'AI': 'AI / ML',
+  'AWS': 'Cloud',
+  'Google Cloud': 'Cloud',
+  'Bash': 'DevOps',
+  'Testing': 'Cross-cutting',
+  'Security': 'Cross-cutting',
   'Important Concepts': 'Cross-cutting',
 };
 

@@ -31,8 +31,9 @@
 | 7 | **Redis** | Redis Basics, Redis Caching Patterns, Redis with .NET and Node.js |
 | 8 | **GraphQL** | GraphQL Basics, GraphQL with .NET and Node.js |
 | 9 | **Testing** | Unit Testing, Integration Testing, E2E Testing, Test Pyramid and Best Practices |
-| 10 | **Azure Cloud 1** | Azure Basics, Azure Compute, Azure Networking, Azure Storage and Databases, Azure Identity and Entra ID |
+| 10 | **Azure Cloud** | Azure Basics, Azure Compute, Azure Networking, Azure Storage and Databases, Azure Identity and Entra ID |
 | 11 | **Azure DevOps** | Azure DevOps Basics and Boards, Azure DevOps Pipelines and CI-CD, Azure DevOps Deployment Strategies |
+| 12 | **Interview Scenarios** | C# Interview Scenarios, .NET Interview Scenarios, SQL Server Interview Scenarios |
 
 ### React / Frontend Developer
 
@@ -43,6 +44,7 @@
 | 3 | **React** | React Basics, React Hooks, React Routing, React Forms, React HTTP and Data Fetching, React State Management, Redux Toolkit Basics, React Testing, Next.js |
 | 4 | **GraphQL** | GraphQL Basics, GraphQL with .NET and Node.js |
 | 5 | **Testing** | Unit Testing, E2E Testing, Test Pyramid and Best Practices |
+| 6 | **Interview Scenarios** | JavaScript Interview Scenarios |
 
 ### DevOps & Cloud
 
@@ -51,7 +53,7 @@
 | 1 | **Docker** | Docker Basics, Docker Compose, Docker Networking, Docker Build and CICD Integration |
 | 2 | **Kubernetes** | Kubernetes Basics, Kubernetes Objects and Configurations, Kubernetes Networking and Storage, Kubernetes Deployment Strategies |
 | 3 | **Terraform** | Terraform Basics, Terraform State Modules and Workflows, Terraform Multi-Cloud Providers |
-| 4 | **Azure Cloud 1** | Azure Basics, Azure Networking, Azure Messaging and Integration, Azure Security and Monitoring |
+| 4 | **Azure Cloud** | Azure Basics, Azure Networking, Azure Messaging and Integration, Azure Security and Monitoring |
 | 5 | **AWS** | AWS Basics, AWS Networking, AWS Security and Monitoring |
 | 6 | **Google Cloud** | Google Cloud Basics, Google Cloud Networking, Google Cloud Security and Monitoring |
 | 7 | **Important Concepts** | Cloud Provider Comparison |
@@ -68,6 +70,7 @@
 | 2 | **System Design** | System Design Basics, System Design CAP Theorem, System Design Design Patterns |
 | 3 | **Redis** | Redis Basics, Redis Caching Patterns |
 | 4 | **Important Concepts** | Cloud Provider Comparison, Interview Comparisons, OWASP |
+| 5 | **Interview Scenarios** | System Design Interview Scenarios, Microservices Interview Scenarios |
 
 ### MongoDB / NoSQL
 
@@ -91,7 +94,7 @@
 
 | Step | Topic | Files to study |
 |------|-------|----------------|
-| 1 | **Azure Cloud 1** | Azure Basics, Azure Compute, Azure Networking, Azure Storage and Databases, Azure Identity and Entra ID, Azure Messaging and Integration, Azure Application Gateway and Load Balancer, Azure API Management and Gateways, Azure Commands and CLI, Azure Security and Monitoring |
+| 1 | **Azure Cloud** | Azure Basics, Azure Compute, Azure Networking, Azure Storage and Databases, Azure Identity and Entra ID, Azure Messaging and Integration, Azure Application Gateway and Load Balancer, Azure API Management and Gateways, Azure Commands and CLI, Azure Security and Monitoring |
 
 ### AWS Cloud (Complete)
 
@@ -151,7 +154,7 @@
 | Step | Topic | Files to study |
 |------|-------|----------------|
 | 1 | **Important Concepts** | Cloud Provider Comparison, Interview Comparisons |
-| 2 | **Azure Cloud 1** | Azure Basics |
+| 2 | **Azure Cloud** | Azure Basics |
 | 3 | **AWS** | AWS Basics |
 | 4 | **Google Cloud** | Google Cloud Basics |
 | 5 | **Terraform** | Terraform Multi-Cloud Providers |
@@ -215,33 +218,36 @@
 
 ## Recently added / improved
 
-- **TypeScript** — new 4-file topic (Basics → Advanced)
-- **Angular Modern Features** — Signals, standalone, `inject()`, `@if/@for`, zoneless
-- **React** — 16-file library (Basics through Redux/Zustand/Next.js/Native)
-- **Related Topics** footers — cross-links at the bottom of key files
+- **Interview Scenarios** — 72 production-trap Q&As (C#, .NET, JS, SQL, Microservices, System Design)
+- **Folder layout** — `study/` (condensed), `full/` (detailed), `extracted/` (pandoc source)
+- **MongoDB, Redis, Terraform, PostgreSQL, GraphQL, Bash, AWS, GCP, AI** — expanded topic libraries
 - **Interview Comparisons** — side-by-side framework and architecture decisions
 
 ---
 
 ## Topic quick links
 
-**Other:** `AI` · `AWS` · `Bash` · `Certificates` · `Git` · `Google Cloud` · `GraphQL` · `Interview Scenarios` · `MongoDB` · `PostgreSQL` · `Redis` · `Security` · `Terraform` · `Testing`
+**AI / ML:** `AI`
 
-**Frontend:** `Angular` · `React`
+**Cloud:** `AWS` · `Azure Cloud` · `Azure DevOps` · `Google Cloud`
 
-**Cloud:** `Azure Cloud` · `Azure DevOps`
+**Frontend:** `Angular` · `GraphQL` · `React`
 
-**Backend & .NET:** `C#` · `Sql Server`
+**DevOps:** `Bash` · `Docker` · `Kubernetes` · `Terraform`
+
+**Backend & .NET:** `C#` · `MongoDB` · `PostgreSQL` · `Sql Server`
+
+**Other:** `Certificates` · `Git`
 
 **CS Fundamentals:** `Data Structures and Algorithms`
 
-**DevOps:** `Docker` · `Kubernetes`
+**Cross-cutting:** `Important Concepts` · `Security` · `Testing`
 
-**Cross-cutting:** `Important Concepts`
+**Interview prep:** `Interview Scenarios`
 
 **Languages:** `Javascript` · `TypeScript`
 
-**Architecture:** `Microservices` · `System Design`
+**Architecture:** `Microservices` · `Redis` · `System Design`
 
 ---
 

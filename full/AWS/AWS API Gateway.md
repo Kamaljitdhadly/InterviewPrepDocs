@@ -217,4 +217,4 @@ Both sit at the **API edge** — auth, throttling, routing. APIM stronger for **
 - **AWS Compute.md** — Lambda functions
 - **AWS Identity and IAM.md** — IAM and Cognito authorizers
 - **AWS Load Balancing CDN and CDN.md** — ALB vs API Gateway
-- **Azure Cloud 1/Azure API Management and Gateways.md** — APIM comparison
+- **Azure Cloud/Azure API Management and Gateways.md** — APIM comparison

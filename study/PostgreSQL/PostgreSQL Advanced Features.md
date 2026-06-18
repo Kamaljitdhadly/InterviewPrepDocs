@@ -234,4 +234,4 @@ Choose PostgreSQL for **OSS, JSONB, cloud portability**; SQL Server for **deep M
 - PostgreSQL/PostgreSQL Queries and Performance.md
 - Sql Server/SQL Server Transactions and Locking.md
 - MongoDB/MongoDB Schema Design.md
-- Azure Cloud 1/Azure Storage and Databases.md
+- Azure Cloud/Azure Storage and Databases.md

@@ -225,4 +225,4 @@ Not for production CI — use Cloud Build or GitHub Actions with WIF.
 - **Google Cloud Basics.md** — projects, regions
 - **Google Cloud Compute.md** — GCE, Cloud Run details
 - **Google Cloud Identity and IAM.md** — roles, service accounts
-- **AWS/AWS CLI and Commands.md** · **Azure Cloud 1/Azure Commands and CLI.md**
+- **AWS/AWS CLI and Commands.md** · **Azure Cloud/Azure Commands and CLI.md**

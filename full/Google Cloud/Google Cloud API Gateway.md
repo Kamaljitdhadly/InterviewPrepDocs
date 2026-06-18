@@ -215,4 +215,4 @@ For **gRPC-first** microservices on GKE — often **Internal LB** or **service m
 - **Google Cloud Compute.md** — Cloud Run backends
 - **Google Cloud Identity and IAM.md** — service accounts, Firebase auth
 - **Google Cloud Load Balancing and CDN.md** — when LB alone is enough
-- **AWS/AWS API Gateway.md** · **Azure Cloud 1/Azure API Management and Gateways.md**
+- **AWS/AWS API Gateway.md** · **Azure Cloud/Azure API Management and Gateways.md**

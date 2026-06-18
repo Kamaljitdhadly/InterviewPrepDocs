@@ -230,4 +230,4 @@ See **Google Cloud API Gateway.md** for API management layer in front of Cloud R
 - **Google Cloud Compute.md** — MIG, Cloud Run
 - **Google Cloud Networking.md** — VPC, firewall for health checks
 - **Google Cloud API Gateway.md** — API layer vs raw LB
-- **AWS/AWS Load Balancing and CDN.md** · **Azure Cloud 1/Azure Application Gateway and Load Balancer.md**
+- **AWS/AWS Load Balancing and CDN.md** · **Azure Cloud/Azure Application Gateway and Load Balancer.md**

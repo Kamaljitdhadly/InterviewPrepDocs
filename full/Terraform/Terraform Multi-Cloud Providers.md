@@ -463,4 +463,4 @@ Pipelines:     orchestrate plan/apply with approvals
 - Terraform/Terraform State Modules and Workflows.md
 - Important Concepts/Cloud Provider Comparison.md
 - Azure DevOps/Azure DevOps Pipelines and CI-CD.md
-- Azure Cloud 1/Azure Basics.md
+- Azure Cloud/Azure Basics.md

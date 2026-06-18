@@ -228,5 +228,5 @@ For user-facing APIs on GCP, verify **OIDC JWT** audience matches your service.
 
 - **Google Cloud Security and Monitoring.md** — Cloud Audit Logs, VPC SC
 - **Google Cloud API Gateway.md** — API auth at gateway
-- **AWS/AWS Identity and IAM.md** · **Azure Cloud 1/Azure Identity and Entra ID.md**
+- **AWS/AWS Identity and IAM.md** · **Azure Cloud/Azure Identity and Entra ID.md**
 - **Security/Authentication and Identity.md**

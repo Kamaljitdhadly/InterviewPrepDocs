@@ -221,4 +221,4 @@ Public API with auth/throttle → API Gateway (see AWS API Gateway.md)
 - **AWS Networking.md** — subnets, security groups for ALB
 - **AWS API Gateway.md** — HTTP API vs ALB
 - **AWS Compute.md** — ASG registers with target groups
-- **Azure Cloud 1/Azure Application Gateway and Load Balancer.md** — Azure comparison
+- **Azure Cloud/Azure Application Gateway and Load Balancer.md** — Azure comparison

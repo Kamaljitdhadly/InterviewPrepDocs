@@ -227,4 +227,4 @@ Set **billing alerts** immediately — free tier overages charge real money.
 - **Google Cloud Compute.md** — GCE, Cloud Run, GKE, Functions
 - **Google Cloud Identity and IAM.md** — projects, roles, service accounts
 - **Google Cloud CLI and Commands.md** — gcloud essentials
-- **AWS/AWS Basics.md** · **Azure Cloud 1/Azure Basics.md** — cloud comparisons
+- **AWS/AWS Basics.md** · **Azure Cloud/Azure Basics.md** — cloud comparisons
