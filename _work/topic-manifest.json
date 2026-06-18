@@ -82,6 +82,13 @@
       ]
     },
     {
+      "id": "gcp-cloud",
+      "title": "Google Cloud (Complete)",
+      "order": [
+        { "topic": "Google Cloud", "files": ["Google Cloud Basics.md", "Google Cloud Compute.md", "Google Cloud Networking.md", "Google Cloud Storage and Databases.md", "Google Cloud Identity and IAM.md", "Google Cloud Messaging and Integration.md", "Google Cloud Load Balancing and CDN.md", "Google Cloud API Gateway.md", "Google Cloud CLI and Commands.md", "Google Cloud Security and Monitoring.md"] }
+      ]
+    },
+    {
       "id": "ai-engineer",
       "title": "AI / LLM Application Developer",
       "order": [
@@ -105,7 +112,8 @@
     "NgRx": { "requires": ["RxJS", "Angular"] },
     "AI": { "requires": ["C#", "Javascript"], "next": ["RAG and Embeddings.md", "Building AI Applications.md"], "pairs": ["Azure Cloud 1", "Microservices", "System Design"] },
     "Azure Cloud 1": { "requires": ["C#"], "next": ["Azure Networking.md", "Azure Identity and Entra ID.md"], "pairs": ["Azure DevOps", "Security", "AI", "AWS"] },
-    "AWS": { "requires": ["C#", "Javascript"], "next": ["AWS Networking.md", "AWS Identity and IAM.md"], "pairs": ["Azure Cloud 1", "Docker", "Kubernetes", "Security"] }
+    "AWS": { "requires": ["C#", "Javascript"], "next": ["AWS Networking.md", "AWS Identity and IAM.md"], "pairs": ["Azure Cloud 1", "Google Cloud", "Docker", "Kubernetes", "Security"] },
+    "Google Cloud": { "requires": ["C#", "Javascript"], "next": ["Google Cloud Networking.md", "Google Cloud Identity and IAM.md"], "pairs": ["AWS", "Azure Cloud 1", "Kubernetes", "Security"] }
   },
   "fileRelations": {
     "Angular/Angular Basics.md": ["Angular/Angular Modern Features.md", "Angular/Angular Routing.md", "TypeScript/TypeScript Basics.md"],
@@ -168,6 +176,16 @@
     "AWS/AWS API Gateway.md": ["Important Concepts/Interview Comparisons.md", "Azure Cloud 1/Azure API Management and Gateways.md"],
     "AWS/AWS CLI and Commands.md": ["Docker/Docker Build and CICD Integration.md"],
     "AWS/AWS Security and Monitoring.md": ["Security/Cloud and Infrastructure Security.md", "AWS/AWS Identity and IAM.md"],
+    "Google Cloud/Google Cloud Basics.md": ["Google Cloud/Google Cloud Compute.md", "Google Cloud/Google Cloud Identity and IAM.md", "Google Cloud/Google Cloud CLI and Commands.md", "AWS/AWS Basics.md", "Azure Cloud 1/Azure Basics.md"],
+    "Google Cloud/Google Cloud Compute.md": ["Google Cloud/Google Cloud Networking.md", "Google Cloud/Google Cloud Load Balancing and CDN.md", "Kubernetes/Kubernetes Basics.md"],
+    "Google Cloud/Google Cloud Networking.md": ["Google Cloud/Google Cloud Load Balancing and CDN.md", "Google Cloud/Google Cloud Storage and Databases.md"],
+    "Google Cloud/Google Cloud Storage and Databases.md": ["Google Cloud/Google Cloud Messaging and Integration.md", "MongoDB/MongoDB Basics.md"],
+    "Google Cloud/Google Cloud Identity and IAM.md": ["Google Cloud/Google Cloud API Gateway.md", "Security/Authentication and Identity.md"],
+    "Google Cloud/Google Cloud Messaging and Integration.md": ["Microservices/Microservices Communication.md"],
+    "Google Cloud/Google Cloud Load Balancing and CDN.md": ["Google Cloud/Google Cloud API Gateway.md"],
+    "Google Cloud/Google Cloud API Gateway.md": ["Important Concepts/Interview Comparisons.md", "AWS/AWS API Gateway.md"],
+    "Google Cloud/Google Cloud CLI and Commands.md": ["Docker/Docker Build and CICD Integration.md"],
+    "Google Cloud/Google Cloud Security and Monitoring.md": ["Security/Cloud and Infrastructure Security.md", "Google Cloud/Google Cloud Identity and IAM.md"],
     "AI/AI Security and Responsible AI.md": ["Security/Security Basics.md", "Security/API Security.md"],
     "AI/Fine-tuning Evaluation and MLOps.md": ["AI/AI System Design and MLOps.md"],
     "AI/AI System Design and MLOps.md": ["System Design/System Design Basics.md", "Microservices/Microservices Basics.md"]

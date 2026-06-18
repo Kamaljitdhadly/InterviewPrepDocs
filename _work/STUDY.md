@@ -2,7 +2,7 @@
 
 > **Start here.** All study notes live under `_work/tight/`. Clean (full) versions: `_work/clean/`.
 
-**Library stats:** 22 topics · 222 files · ~1509 questions
+**Library stats:** 23 topics · 232 files · ~1630 questions
 
 ---
 
@@ -88,6 +88,12 @@
 |------|-------|----------------|
 | 1 | **AWS** | AWS Basics, AWS Compute, AWS Networking, AWS Storage and Databases, AWS Identity and IAM, AWS Messaging and Integration, AWS Load Balancing and CDN, AWS API Gateway, AWS CLI and Commands, AWS Security and Monitoring |
 
+### Google Cloud (Complete)
+
+| Step | Topic | Files to study |
+|------|-------|----------------|
+| 1 | **Google Cloud** | Google Cloud Basics, Google Cloud Compute, Google Cloud Networking, Google Cloud Storage and Databases, Google Cloud Identity and IAM, Google Cloud Messaging and Integration, Google Cloud Load Balancing and CDN, Google Cloud API Gateway, Google Cloud CLI and Commands, Google Cloud Security and Monitoring |
+
 ### AI / LLM Application Developer
 
 | Step | Topic | Files to study |
@@ -111,6 +117,7 @@
 | Data Structures and Algorithms | 14 | `_work/tight/Data Structures and Algorithms/` |
 | Docker | 12 | `_work/tight/Docker/` |
 | Git | 1 | `_work/tight/Git/` |
+| Google Cloud | 10 | `_work/tight/Google Cloud/` |
 | Important Concepts | 7 | `_work/tight/Important Concepts/` |
 | Javascript | 12 | `_work/tight/Javascript/` |
 | Kubernetes | 12 | `_work/tight/Kubernetes/` |
@@ -150,7 +157,7 @@
 
 ## Topic quick links
 
-**Other:** `AI` · `AWS` · `Bash` · `Certificates` · `Git` · `MongoDB` · `Security` · `Testing`
+**Other:** `AI` · `AWS` · `Bash` · `Certificates` · `Git` · `Google Cloud` · `MongoDB` · `Security` · `Testing`
 
 **Frontend:** `Angular` · `React`
 
