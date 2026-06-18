@@ -75,6 +75,13 @@
       ]
     },
     {
+      "id": "aws-cloud",
+      "title": "AWS Cloud (Complete)",
+      "order": [
+        { "topic": "AWS", "files": ["AWS Basics.md", "AWS Compute.md", "AWS Networking.md", "AWS Storage and Databases.md", "AWS Identity and IAM.md", "AWS Messaging and Integration.md", "AWS Load Balancing and CDN.md", "AWS API Gateway.md", "AWS CLI and Commands.md", "AWS Security and Monitoring.md"] }
+      ]
+    },
+    {
       "id": "ai-engineer",
       "title": "AI / LLM Application Developer",
       "order": [
@@ -97,7 +104,8 @@
     "RxJS": { "requires": ["Angular"], "next": ["NgRx"] },
     "NgRx": { "requires": ["RxJS", "Angular"] },
     "AI": { "requires": ["C#", "Javascript"], "next": ["RAG and Embeddings.md", "Building AI Applications.md"], "pairs": ["Azure Cloud 1", "Microservices", "System Design"] },
-    "Azure Cloud 1": { "requires": ["C#"], "next": ["Azure Networking.md", "Azure Identity and Entra ID.md"], "pairs": ["Azure DevOps", "Security", "AI"] }
+    "Azure Cloud 1": { "requires": ["C#"], "next": ["Azure Networking.md", "Azure Identity and Entra ID.md"], "pairs": ["Azure DevOps", "Security", "AI", "AWS"] },
+    "AWS": { "requires": ["C#", "Javascript"], "next": ["AWS Networking.md", "AWS Identity and IAM.md"], "pairs": ["Azure Cloud 1", "Docker", "Kubernetes", "Security"] }
   },
   "fileRelations": {
     "Angular/Angular Basics.md": ["Angular/Angular Modern Features.md", "Angular/Angular Routing.md", "TypeScript/TypeScript Basics.md"],
@@ -150,6 +158,16 @@
     "Azure Cloud 1/Azure Application Gateway and Load Balancer.md": ["Azure Cloud 1/Azure API Management and Gateways.md"],
     "Azure Cloud 1/Azure API Management and Gateways.md": ["Important Concepts/Interview Comparisons.md"],
     "Azure Cloud 1/Azure Security and Monitoring.md": ["Security/Cloud and Infrastructure Security.md", "Azure Cloud 1/Azure Identity and Entra ID.md"],
+    "AWS/AWS Basics.md": ["AWS/AWS Compute.md", "AWS/AWS Identity and IAM.md", "AWS/AWS CLI and Commands.md", "Azure Cloud 1/Azure Basics.md"],
+    "AWS/AWS Compute.md": ["AWS/AWS Networking.md", "AWS/AWS Load Balancing and CDN.md"],
+    "AWS/AWS Networking.md": ["AWS/AWS Load Balancing and CDN.md", "AWS/AWS Storage and Databases.md"],
+    "AWS/AWS Storage and Databases.md": ["AWS/AWS Messaging and Integration.md", "MongoDB/MongoDB Basics.md"],
+    "AWS/AWS Identity and IAM.md": ["AWS/AWS API Gateway.md", "Security/Authentication and Identity.md"],
+    "AWS/AWS Messaging and Integration.md": ["Microservices/Microservices Communication.md"],
+    "AWS/AWS Load Balancing and CDN.md": ["AWS/AWS API Gateway.md"],
+    "AWS/AWS API Gateway.md": ["Important Concepts/Interview Comparisons.md", "Azure Cloud 1/Azure API Management and Gateways.md"],
+    "AWS/AWS CLI and Commands.md": ["Docker/Docker Build and CICD Integration.md"],
+    "AWS/AWS Security and Monitoring.md": ["Security/Cloud and Infrastructure Security.md", "AWS/AWS Identity and IAM.md"],
     "AI/AI Security and Responsible AI.md": ["Security/Security Basics.md", "Security/API Security.md"],
     "AI/Fine-tuning Evaluation and MLOps.md": ["AI/AI System Design and MLOps.md"],
     "AI/AI System Design and MLOps.md": ["System Design/System Design Basics.md", "Microservices/Microservices Basics.md"]

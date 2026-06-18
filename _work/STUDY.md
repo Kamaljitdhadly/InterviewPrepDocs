@@ -2,7 +2,7 @@
 
 > **Start here.** All study notes live under `_work/tight/`. Clean (full) versions: `_work/clean/`.
 
-**Library stats:** 22 topics · 222 files · ~1386 questions
+**Library stats:** 22 topics · 222 files · ~1509 questions
 
 ---
 
@@ -82,6 +82,12 @@
 |------|-------|----------------|
 | 1 | **Azure Cloud 1** | Azure Basics, Azure Compute, Azure Networking, Azure Storage and Databases, Azure Identity and Entra ID, Azure Messaging and Integration, Azure Application Gateway and Load Balancer, Azure API Management and Gateways, Azure Commands and CLI, Azure Security and Monitoring |
 
+### AWS Cloud (Complete)
+
+| Step | Topic | Files to study |
+|------|-------|----------------|
+| 1 | **AWS** | AWS Basics, AWS Compute, AWS Networking, AWS Storage and Databases, AWS Identity and IAM, AWS Messaging and Integration, AWS Load Balancing and CDN, AWS API Gateway, AWS CLI and Commands, AWS Security and Monitoring |
+
 ### AI / LLM Application Developer
 
 | Step | Topic | Files to study |
@@ -95,9 +101,9 @@
 | Topic | Files | Folder |
 |-------|------:|--------|
 | AI | 8 | `_work/tight/AI/` |
+| AWS | 10 | `_work/tight/AWS/` |
 | Angular | 19 | `_work/tight/Angular/` |
 | Azure Cloud | 13 | `_work/tight/Azure Cloud/` |
-| Azure Cloud 1 | 10 | `_work/tight/Azure Cloud 1/` |
 | Azure DevOps | 1 | `_work/tight/Azure DevOps/` |
 | Bash | 1 | `_work/tight/Bash/` |
 | C# | 27 | `_work/tight/C#/` |
@@ -144,7 +150,7 @@
 
 ## Topic quick links
 
-**Other:** `AI` · `Azure Cloud 1` · `Bash` · `Certificates` · `Git` · `MongoDB` · `Security` · `Testing`
+**Other:** `AI` · `AWS` · `Bash` · `Certificates` · `Git` · `MongoDB` · `Security` · `Testing`
 
 **Frontend:** `Angular` · `React`
 
