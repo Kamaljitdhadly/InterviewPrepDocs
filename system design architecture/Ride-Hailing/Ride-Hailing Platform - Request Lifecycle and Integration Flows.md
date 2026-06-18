@@ -9,6 +9,16 @@
 
 ---
 
+## Executive summary
+
+This document traces **every system hop** from user action to downstream side effect. Use it when implementing a feature that crosses service boundaries, writing integration tests, debugging production incidents, or onboarding to the platform.
+
+A ride is not a single API call — it is a **long-running distributed process** spanning 5–45 minutes, dozens of state transitions, hundreds of location events, and multiple payment operations. The flows below decompose that process into testable, observable units identified as FL-001 through FL-011.
+
+**Critical design rule:** The rider's `POST /rides/request` returns in under 300ms. Everything after that — matching, driver notification, assignment — is asynchronous. Tests and monitors must validate both the sync boundary and the async continuation.
+
+---
+
 ## 1. Purpose
 
 This document describes **end-to-end integration flows** across the ride-hailing platform: every system hop from client action to downstream side effects. It is the authoritative reference for request lifecycle behavior, including failure and compensation paths.
@@ -31,9 +41,30 @@ This document describes **end-to-end integration flows** across the ride-hailing
 | FL-010 | Driver cancellation | Driver cancels pre-start |
 | FL-011 | Scheduled ride | Future pickup time |
 
+### 2.1 End-to-end journey (narrative)
+
+The following is the **complete happy path** for an immediate ride, tying flows together:
+
+1. **Driver (FL-001)** opens app, goes ONLINE. Location batches flow every 3s into Redis GEO.
+2. **Rider (FL-002)** requests ride. BFF creates trip in `REQUESTED`, returns `tripId` immediately. Rider connects to SignalR.
+3. **Matching (FL-003)** consumes `TripRequested`, searches geo index, sends offer to nearest eligible driver. Driver accepts within 15s. Trip becomes `DRIVER_ASSIGNED`.
+4. **En route (FL-004)** Driver navigates to pickup. Rider sees live map updates via SignalR.
+5. **Start (FL-005)** Driver marks arrived, then starts trip. Status `IN_PROGRESS`. Payment pre-authorizes estimated fare.
+6. **In progress (FL-006)** Location streams continue. Route distance accumulates for final fare.
+7. **Complete (FL-007)** Driver ends trip. Final fare calculated. Payment captured. Receipt sent.
+8. **Rating (FL-008)** Rider rates driver asynchronously. Does not block receipt.
+
+Total wall-clock time: 10–40 minutes. Total synchronous API calls from rider perspective at booking: **one** (`POST /rides/request`).
+
 ---
 
 ## 3. FL-001 — Driver goes online
+
+Before any ride can be matched, the platform must know **which drivers are available and where they are**. Going online is not a simple flag — it starts the location heartbeat contract that Matching depends on.
+
+**Preconditions:** Driver account status is `APPROVED` (KYC complete). Vehicle documents valid. App version meets minimum requirement (enforced by BFF).
+
+**Postconditions:** Driver appears in Redis GEO for their `regionId`. Matching may include them in radius searches. If heartbeat stops for 30s, they are automatically excluded without manual offline action.
 
 ### 3.1 Sequence
 
@@ -70,7 +101,9 @@ Driver sends `OFFLINE` → Driver Profile updates → Location Service removes d
 
 ## 4. FL-002 — Ride request (immediate)
 
-This is the **primary platform flow**. The synchronous API path ends at trip creation; matching is asynchronous.
+This is the **primary revenue path** and the most latency-sensitive operation the platform exposes. Product research consistently shows rider abandonment rises sharply after 8–10 seconds without match feedback — but that feedback is delivered via SignalR, not by blocking the initial HTTP response.
+
+The sync path validates identity, scores fraud risk, computes fare estimate, and persists the trip. Only after the trip exists does the platform publish `TripRequested` for matching. That ordering guarantees every match attempt has a durable `tripId` — no orphaned offers.
 
 ### 4.1 Sequence
 
@@ -154,11 +187,15 @@ Duplicate `Idempotency-Key` within 24 hours returns the **same** `tripId` and st
 | Response serialization | 20 ms |
 | **Total** | **≤ 300 ms p99** |
 
+If fraud returns `CHALLENGE`, the sync path may extend to include step-up verification — excluded from the standard 300ms budget. If fraud returns `BLOCK`, the request fails fast with 403 and never creates a trip.
+
 ---
 
 ## 5. FL-003 — Driver offer and acceptance
 
-Triggered by `TripRequested` event on Service Bus.
+Matching is **event-driven**, not polled. The Matching Service consumes `TripRequested` from its Service Bus subscription and owns the loop until assignment or timeout.
+
+**Why sequential offers:** Notifying 50 nearby drivers simultaneously creates a "thundering herd" accept race, angers drivers who lose, and encourages unsafe driving to respond first. Sequential offer with 15-second timeout per driver is slower in theory but more predictable in production.
 
 ### 5.1 Sequence
 
@@ -217,6 +254,10 @@ If no driver accepts within **45 seconds**, Matching Service calls `Trip.cancel(
 
 ## 6. FL-004 — En route to pickup
 
+Once assigned, the rider's primary experience is **the map screen** — watching the driver approach. This phase is read-heavy on location data and SignalR. The Trip Service changes state only when the driver explicitly transitions to `DRIVER_EN_ROUTE`; map updates do not require trip document writes.
+
+Product expectation: ETA updates every 30 seconds or when the driver deviates significantly from route. Stale location (>5s) degrades trust; monitors alert on location freshness SLO breach during this phase.
+
 ### 6.1 State transitions
 
 ```text
@@ -239,6 +280,10 @@ Every 30 seconds during `DRIVER_EN_ROUTE` and `IN_PROGRESS`, Location Service re
 ---
 
 ## 7. FL-005 — Trip start
+
+Starting the trip is the **financial commitment point**. Until `IN_PROGRESS`, no pre-authorization occurs (beyond optional account verification at request time). The transition to `IN_PROGRESS` triggers `TripStarted` → Payment Service holds estimated fare plus buffer on the rider's payment method.
+
+If pre-auth fails (expired card, insufficient funds), the trip cannot start. Driver app shows actionable error; rider receives push to update payment method. The trip remains `ARRIVED` until resolved or cancelled.
 
 ### 7.1 Sequence
 
@@ -280,6 +325,10 @@ Driver app may auto-suggest "Arrived" when within 50 meters of pickup. Server va
 ---
 
 ## 9. FL-007 — Trip completion and payment
+
+Trip completion triggers the **payment saga** — the most consistency-sensitive distributed flow in the platform. The trip state moves to `COMPLETED` before capture succeeds; financial reconciliation handles failures asynchronously rather than blocking the driver.
+
+Drivers care that completion is acknowledged immediately (they can accept next ride). Riders care that capture is correct, not instantaneous. Architecture optimizes for driver flow with async capture and retry.
 
 ### 9.1 Sequence
 
@@ -420,6 +469,8 @@ If WebSocket unavailable: client polls `GET /rides/{id}` every 5 seconds. Cached
 ---
 
 ## 15. Error handling matrix
+
+Distributed systems fail partially. This matrix defines **expected behavior** — not best-effort hope. Integration tests must cover each row. On-call runbooks in ARCH-RHP-005 reference these failure modes.
 
 | Failure point | System response | User experience |
 |---------------|-----------------|-----------------|

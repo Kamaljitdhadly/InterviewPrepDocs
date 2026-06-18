@@ -9,15 +9,55 @@
 
 ---
 
+## Executive summary
+
+This document is the **service and data contract layer** of the ride-hailing platform. Where ARCH-RHP-001 explains *why* the system is shaped as it is, this document explains *what each service owns*, *how services communicate*, and *where data lives*.
+
+The central design choice is **strict data ownership**: no shared databases between services. If Payment Service needs trip fare data, it receives it in a `TripCompleted` event payload — it does not query Cosmos DB's trips container. That rule adds integration overhead but eliminates the class of bugs where one team's schema migration breaks another team's production path.
+
+The highest-volume path — **driver location** — is intentionally separated from the **trip state machine**. Location data is loss-tolerant and refreshed every few seconds; trip state is durable and legally significant. Mixing them in one store would force an impossible consistency model.
+
+---
+
 ## 1. Purpose
 
 This document specifies **microservice boundaries**, **API contracts**, **data ownership**, **storage technology selection**, and **messaging topology** for the ride-hailing platform.
+
+Readers should use this document when: defining a new API endpoint, choosing a datastore for a new feature, onboarding to a service team, or reviewing cross-service integration in a design review.
+
+---
+
+## 1.1 Service interaction overview
+
+```text
+                    ┌─────────────┐     ┌─────────────┐
+                    │  Rider BFF  │     │ Driver BFF  │
+                    └──────┬──────┘     └──────┬──────┘
+                           │                   │
+         ┌─────────────────┼───────────────────┼─────────────────┐
+         ▼                 ▼                   ▼                 ▼
+    ┌─────────┐      ┌───────────┐       ┌──────────┐      ┌──────────┐
+    │  Trip   │◄────►│ Matching  │◄─────►│ Location │      │ Payment  │
+    └────┬────┘      └───────────┘       └──────────┘      └──────────┘
+         │
+         │ trip-events (Service Bus)
+         ▼
+    ┌──────────┐  ┌──────────┐  ┌────────────┐  ┌─────────┐
+    │ Pricing  │  │  Fraud   │  │ Notification│  │ Rating  │
+    └──────────┘  └──────────┘  └────────────┘  └─────────┘
+```
+
+Solid lines are synchronous calls during request handling. The `trip-events` topic fans out asynchronous reactions — the Trip Service does not call Payment or Notification directly.
 
 ---
 
 ## 2. Service catalog
 
 ### 2.1 Identity Service
+
+Identity is the **trust anchor** for the entire platform. Every API call carries a JWT issued or validated through this service (or Entra External ID federation). The service does not know about trips, fares, or locations — it only answers: *who is this user, and what role do they have?*
+
+The `auth_version` claim enables **forced logout** after password reset or fraud detection without maintaining a per-request session table at 50M users. APIs reject tokens whose version lags the current value on the user record.
 
 | Attribute | Specification |
 |-----------|---------------|
@@ -69,6 +109,14 @@ Driver cannot receive offers unless `status = ONLINE` and Location Service confi
 
 ### 2.4 Location Service
 
+Location is the **highest-throughput subsystem**. At peak, it absorbs more writes per second than all other services combined. The design therefore never persists every GPS point to a transactional database on the hot path — that would be economically and operationally infeasible.
+
+Instead, the service implements a **lambda architecture** pattern:
+
+- **Speed layer:** Redis GEO holds only the latest position per driver for matching and map display
+- **Batch/stream layer:** Event Hubs retains raw events for analytics, fraud, and dispute investigation
+- **Serving layer:** Sampled route points written to cold storage during active trips for support queries
+
 | Attribute | Specification |
 |-----------|---------------|
 | **Owns** | Real-time driver positions, regional geo-index, sampled trip route history |
@@ -114,11 +162,15 @@ HSET driver:drv_456 regionId sea-metro tripId trip_8f3a2b updatedAt 1718724001 v
 GEORADIUS drivers:sea-metro -122.3321 47.6062 2 km WITHDIST ASC COUNT 50
 ```
 
-**Staleness policy:** Drivers without update in 30 seconds are excluded from matching queries (not deleted — marked stale in metadata).
+**Staleness policy:** Drivers without update in 30 seconds are excluded from matching queries (not deleted — marked stale in metadata). This prevents matching against drivers whose app crashed or lost GPS signal. The 30-second window balances rider experience (don't match "ghost" drivers) against urban canyon GPS dropouts (don't eject drivers too aggressively).
 
 ---
 
 ### 2.5 Matching Service
+
+Matching is the **marketplace brain**. Its job is not merely "find nearest driver" — it optimizes for pickup ETA, driver fairness (idle time), vehicle type match, rider safety (blocked drivers), and platform efficiency (minimize empty miles).
+
+The algorithm is deliberately **sequential offer** (one driver at a time with 15-second timeout) rather than broadcast (notify all nearby drivers simultaneously). Broadcast creates race conditions, wastes driver attention, and encourages dangerous phone use while driving. Sequential offer with fairness weighting is industry standard for a reason.
 
 | Attribute | Specification |
 |-----------|---------------|
@@ -152,6 +204,10 @@ CONFIG: initialRadius=1km, maxRadius=5km, offerTtl=15s, matchTimeout=45s
 ---
 
 ### 2.6 Trip Service
+
+The Trip Service is the **authoritative record of ride lifecycle**. No other service may set `status` on a trip document. Matching proposes an assignment; Trip Service commits it. Payment reports financial outcome; Trip Service records `paymentStatus` but does not execute charges.
+
+This single-writer model eliminates split-brain scenarios where a rider sees "cancelled" and a driver sees "active". Every transition requires `expectedVersion` — optimistic concurrency control that is cheap at trip scale and requires no distributed locks.
 
 | Attribute | Specification |
 |-----------|---------------|
@@ -222,6 +278,10 @@ Cached at `surge:{geohash}` with 30-second TTL. Recalculated by stream consumer 
 
 ### 2.8 Payment Service
 
+Money movement demands **strongest consistency** in the platform. Trip and location data can tolerate seconds of staleness; a double charge or lost capture is a customer incident and potential regulatory violation.
+
+Payment Service uses Azure SQL Hyperscale with an **append-only transaction log** pattern: charges and refunds are inserted, never updated. Corrections are new rows. PSP integration uses idempotency keys on every call because network timeouts make duplicate submission inevitable at scale.
+
 | Attribute | Specification |
 |-----------|---------------|
 | **Owns** | Payment ledger, PSP integration, driver payout batches |
@@ -275,6 +335,12 @@ Consumes: `TripMatched`, `TripCancelled`, `PaymentCaptured`, `RideOffer`.
 
 ## 3. BFF layer design
 
+The Backend-for-Frontend (BFF) pattern exists because **mobile clients and domain services have different optimization goals**. Domain services expose stable, normalized APIs designed for longevity. BFFs aggregate, trim, and shape responses for specific clients — reducing round trips over high-latency mobile networks.
+
+Without a BFF, the rider app might need four HTTP calls to render the "driver en route" screen: trip status, driver profile, vehicle details, and live location. The Rider BFF returns one payload.
+
+BFFs contain **orchestration logic** (call order, parallelization, timeout handling) but **no domain invariants**. A BFF never decides cancellation fees — it calls Trip and Payment services that own those rules.
+
 ### 3.1 Rider BFF
 
 Aggregates chatty backend calls into mobile-optimized responses.
@@ -302,6 +368,16 @@ Aggregates chatty backend calls into mobile-optimized responses.
 ---
 
 ## 4. Data architecture
+
+Data store selection follows **access pattern**, not team preference:
+
+| If you need… | Choose… | Because… |
+|--------------|---------|----------|
+| High-write documents with flexible schema | Cosmos DB | Horizontal partition scale, geo-replication |
+| ACID transactions and audit trail | Azure SQL | Mature ledger patterns, compliance tooling |
+| Sub-millisecond geo radius queries | Redis GEO | In-memory spatial commands |
+| Millions of events/sec append-only | Event Hubs | Purpose-built stream ingestion |
+| Reliable workflow messaging | Service Bus | DLQ, sessions, duplicate detection |
 
 ### 4.1 Storage allocation matrix
 
@@ -416,6 +492,12 @@ Pickup (47.606, -122.332)
 ### 7.2 ETA ranking
 
 For top 10 geo candidates, call **Azure Maps Matrix Routing API** (batched). Fallback: haversine distance ÷ average city speed when Maps circuit is open.
+
+#### Why Redis GEO instead of PostGIS or Elasticsearch
+
+PostGIS and Elasticsearch excel at complex polygon queries but add operational overhead and higher baseline latency than in-memory Redis at the 100K-driver-per-metro scale. Redis GEO radius search consistently delivers sub-10ms p99 in production ride-hailing workloads. H3 cell aggregation (used for surge) sits alongside Redis — cells for demand/supply math, Redis for live driver positions.
+
+Uber open-sourced **H3** for hexagonal grid indexing; this design supports either H3 or geohash for surge cells. The live matching index remains Redis GEO for simplicity and team familiarity.
 
 ---
 

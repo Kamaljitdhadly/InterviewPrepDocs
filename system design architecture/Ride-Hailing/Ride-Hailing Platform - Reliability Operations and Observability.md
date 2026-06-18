@@ -9,6 +9,16 @@
 
 ---
 
+## Executive summary
+
+Running a ride-hailing platform in production means operating a **24/7 real-time system** where Friday evening rush hour is a monthly load test. This document defines how the organization knows the system is healthy (observability), how it survives failures (resilience), and how teams respond when it does not (runbooks).
+
+**Observability is not optional logging.** Every production incident that took more than 30 minutes to diagnose is a telemetry gap. This platform mandates `tripId` on every log line, distributed traces across Service Bus consumers, and business funnel metrics — not just CPU graphs.
+
+**Resilience is designed, not hoped for.** Circuit breakers on Maps API, load shedding when regions overheat, and saga compensation on payment failure are first-class requirements — not post-launch additions.
+
+---
+
 ## 1. Purpose
 
 This document defines **service level objectives**, **resilience patterns**, **observability standards**, **alerting**, **runbooks**, and **operational testing** for the ride-hailing platform in production.
@@ -19,6 +29,8 @@ This document defines **service level objectives**, **resilience patterns**, **o
 
 ### 2.1 Customer-facing SLOs
 
+SLOs translate product promises into **measurable thresholds**. They are the contract between engineering and the business. Error budgets (allowed unreliability) prevent both over-engineering and under-investment.
+
 | Service | SLI | SLO (30-day) | Error budget |
 |---------|-----|--------------|--------------|
 | Ride request API | Success rate (2xx on POST /rides/request) | 99.9% | 43 min downtime |
@@ -27,6 +39,10 @@ This document defines **service level objectives**, **resilience patterns**, **o
 | Location freshness | Updates < 5s old during active trip | 95% | 5% stale acceptable |
 | Payment capture | Success after retries | 99.99% | Manual reconciliation for remainder |
 | Push delivery (offers) | Delivered within 10s | 99% | — |
+
+**Time to first offer** is the product SLO most visible to riders. It depends on supply (drivers online), location pipeline health, and matching algorithm — not just API latency. Dashboards must decompose p99 into geo query time, notification delivery, and driver response wait.
+
+---
 
 ### 2.2 Internal SLOs
 
@@ -48,6 +64,8 @@ When a customer-facing SLO is on track to breach within the month:
 ---
 
 ## 3. Resilience patterns
+
+Resilience patterns are **mandatory implementation requirements**, not suggestions. Service owners document which patterns apply in their service README; code review checks for missing timeouts on external calls.
 
 ### 3.1 Pattern catalog by service
 
@@ -103,6 +121,8 @@ WITH protection:
 ---
 
 ## 4. Observability architecture
+
+You cannot operate what you cannot see. The observability stack connects **symptoms** (rider complaints, driver Slack messages) to **causes** (Redis lag, Service Bus DLQ, Maps circuit open) in minutes — not hours.
 
 ### 4.1 Platform stack
 
@@ -187,6 +207,8 @@ ride_requested
 ```
 
 Drop-off percentage between stages tracked per `regionId` and hour-of-day. Product and ops review daily.
+
+**Example diagnostic:** If `offer_sent → offer_accepted` drops but `matching_started → offer_sent` is stable, the problem is driver-side (push delivery, app version, offer timeout too short) — not geo supply.
 
 ---
 

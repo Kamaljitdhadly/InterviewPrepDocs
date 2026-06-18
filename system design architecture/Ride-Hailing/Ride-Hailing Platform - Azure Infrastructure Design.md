@@ -9,6 +9,21 @@
 
 ---
 
+## Executive summary
+
+This document translates the logical architecture (ARCH-RHP-001) into **deployable Azure resources**. It follows the Azure Well-Architected Framework across reliability, security, cost, and operational excellence pillars.
+
+Key infrastructure decisions:
+
+- **Hub-spoke networking** with private endpoints — no data plane traffic on public internet
+- **Regional AKS clusters** as the unit of scale and failure isolation
+- **Managed services over self-hosted** for Redis, messaging, and real-time (SignalR, Event Hubs, Service Bus)
+- **Front Door + APIM** as the only public ingress points
+
+Estimated production footprint per large region: one AKS cluster (6–80 nodes autoscale), Redis Premium cluster, Cosmos account regional replica, Event Hubs 10–40 TU, Service Bus Premium namespace.
+
+---
+
 ## 1. Purpose
 
 This document defines the **physical and logical Azure deployment** for the ride-hailing platform: networking, compute, data services, identity integration, security controls, and multi-region strategy.
@@ -36,9 +51,25 @@ rg-rhp-edge-{region}         Regional APIM (if multi-instance)
 rg-rhp-observability-{region} Log Analytics, App Insights
 ```
 
+Resource groups enforce **blast radius boundaries**. Deleting `rg-rhp-aks-{region}` must not touch data in `rg-rhp-data-{region}`. IAM assignments are scoped to resource group where possible.
+
+---
+
+## 2.1 Environment separation
+
+| Environment | Subscription | Purpose | Data classification |
+|-------------|--------------|---------|---------------------|
+| Production | `sub-platform-prod` | Live traffic | Customer PII, payment tokens |
+| Staging | `sub-platform-nonprod` | Pre-prod integration tests | Synthetic + anonymized snapshots |
+| Development | `sub-platform-nonprod` | Feature development | Fake data only |
+
+Production secrets live in `sub-platform-security` Key Vault. Non-prod uses separate vaults with no network path to production data.
+
 ---
 
 ## 3. Network architecture
+
+Network design prioritizes **zero trust**: workloads assume breach; lateral movement is restricted by NSGs, network policies, and private endpoints.
 
 ### 3.1 Hub-spoke topology
 
@@ -92,6 +123,8 @@ Private DNS zones linked to hub/spoke VNets:
 
 ## 4. Edge and API layer
 
+The edge is the **only internet-facing attack surface** for APIs. All DDoS mitigation, bot filtering, and TLS termination happen here before traffic reaches AKS.
+
 ### 4.1 Azure Front Door (Premium)
 
 | Feature | Configuration |
@@ -143,6 +176,8 @@ APIM policy fragment (JWT validation):
 
 ## 5. Compute — AKS
 
+AKS hosts all domain microservices and BFFs. **Node pool separation** isolates location ingest (CPU/network heavy) from payment service (latency-sensitive, fewer replicas).
+
 ### 5.1 Cluster specification (per region, production)
 
 | Component | Specification |
@@ -189,6 +224,20 @@ namespace: platform          (ingress, cert-manager, otel-collector)
 ---
 
 ## 6. Data services
+
+Each data service was selected for a specific workload characteristic. The table below includes **why this Azure service** — not just what is deployed.
+
+### 6.0 Service selection rationale
+
+| Azure service | Workload fit | Why not alternative |
+|---------------|--------------|---------------------|
+| Cosmos DB | Trip documents, profiles | SQL would struggle with write scale + flexible schema per region |
+| Azure SQL Hyperscale | Payment ledger | Cosmos lacks cross-document ACID needed for ledger |
+| Redis Premium | Live geo index | Cosmos/SQL too slow for GEORADIUS at 10ms p99 |
+| Event Hubs | Location stream | Service Bus too expensive per event at 170K/sec |
+| Service Bus Premium | Domain events, DLQ | Event Grid lacks durable subscription processing patterns |
+| SignalR Service | 1M+ WebSocket connections | Self-hosted SignalR does not scale connections elastically |
+| Blob Storage | KYC documents, receipts | SQL not appropriate for binary payloads |
 
 ### 6.1 Azure Cosmos DB
 

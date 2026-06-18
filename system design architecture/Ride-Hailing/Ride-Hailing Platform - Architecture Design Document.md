@@ -11,11 +11,44 @@
 
 ---
 
+## Executive summary
+
+A ride-hailing platform at enterprise scale is fundamentally a **real-time marketplace**: it must match supply (drivers) with demand (riders) in seconds, track physical movement continuously, settle payments correctly, and remain available through regional peaks that dwarf normal web traffic patterns.
+
+Unlike a typical CRUD application, the dominant engineering challenges are **geospatial indexing at scale**, **high-frequency location ingestion**, **distributed state machines** (trip lifecycle), and **eventual consistency** in a system where users expect real-time feedback. A rider waiting more than eight seconds for a match will abandon; a driver missing a push notification loses income; a payment failure after a completed trip creates support cost and regulatory exposure.
+
+This architecture addresses those constraints by:
+
+- Isolating **hot paths** (location, matching) in regional cells with in-memory geo indexes
+- Treating the **Trip** as the single source of truth for ride state
+- Using **async messaging** for everything that does not need to block the initial API response
+- Deploying on **Azure** with managed services that scale horizontally without operating custom Kafka or self-hosted spatial databases
+
+The document set describes a target-state platform supporting approximately **50M monthly active riders**, **10M daily trips**, and **170K location writes per second** at global peak. Teams may implement phases incrementally (see §12) without violating the boundaries defined here.
+
+---
+
 ## 1. Purpose
 
 This document defines the **target enterprise architecture** for a multi-region ride-hailing platform comparable in scale and capability to Uber or Lyft. It establishes the logical structure, quality attributes, service boundaries, and design principles used across the platform.
 
 This is an **architecture design document**, not an interview guide. Implementation teams use it to align services, infrastructure, and operational models before build-out.
+
+The platform follows a **domain-driven decomposition**: services map to business capabilities (trips, payments, matching) rather than technical layers (database layer, API layer). That boundary discipline prevents the most common failure mode in large distributed systems — multiple teams writing to the same tables and corrupting invariants.
+
+---
+
+## 1.1 Stakeholders and concerns
+
+| Stakeholder | Primary concern | Architectural response |
+|-------------|-----------------|------------------------|
+| **Riders** | Fast match, accurate ETA, fair pricing | Regional geo index, SignalR updates, surge transparency |
+| **Drivers** | Reliable offers, accurate earnings | Push + SignalR redundancy, immutable payment ledger |
+| **Product** | Launch new cities without re-architecture | Metro cell model, configurable pricing rules |
+| **Finance** | Auditable revenue, PCI compliance | PSP tokenization, SQL ledger, idempotent capture |
+| **Legal / compliance** | Data residency, trip record retention | Regional Cosmos/SQL, 7-year retention policy |
+| **SRE** | Detect and recover from failures in minutes | SLOs, runbooks, regional isolation (ARCH-RHP-005) |
+| **Security** | Fraud, account takeover, GPS spoofing | Fraud service, WAF, device trust, stream anomaly detection |
 
 ---
 
@@ -70,6 +103,14 @@ This is an **architecture design document**, not an interview guide. Implementat
 - Mobile clients require sub-second perceived responsiveness for trip status
 - Location telemetry is the highest-volume data stream
 
+### 3.4 Why these constraints drive the design
+
+**Azure as mandated cloud** means the design uses first-party integration: Managed Identity to Key Vault, private endpoints to Cosmos DB, native SignalR Service for WebSocket scale, and Event Hubs for telemetry ingestion. Self-managing Kafka or Elasticsearch clusters is avoided unless a future ADR proves a gap.
+
+**AKS over serverless-only** reflects the need for long-running stream processors, predictable latency on matching loops, and optional service mesh. Azure Container Apps or Functions remain valid for auxiliary workers (outbox relay, receipt PDF generation) but core domain services run on AKS with explicit resource limits and pod disruption budgets.
+
+**Sub-second trip status** is a product perception requirement, not a hard network bound. The architecture achieves it via SignalR push with polling fallback — not by synchronous polling of ten microservices on every map frame.
+
 ---
 
 ## 4. Business capabilities
@@ -90,6 +131,8 @@ The platform is decomposed by **business capability**, not by team org chart.
 | **Ratings & trust** | Post-trip feedback, driver scores | Rating Service |
 | **Risk & fraud** | GPS spoofing, payment abuse | Fraud Service |
 
+Capabilities are intentionally **loosely coupled**. The Matching Service does not write trip records directly; it requests a state transition from Trip Service. Payment Service never mutates trip status — it reacts to `TripCompleted` events. This separation allows teams to deploy matching algorithm improvements without risking payment correctness.
+
 ---
 
 ## 5. Architecture principles
@@ -104,6 +147,8 @@ The platform is decomposed by **business capability**, not by team org chart.
 | P6 | **Fail operational, not ambiguous** | Explicit trip states; no silent partial success |
 | P7 | **Defense in depth** | WAF, mTLS internal mesh, managed identities, least privilege |
 | P8 | **Observable by design** | Correlation ID and `tripId` propagated across all tiers |
+
+Principles P2 and P3 together define the **critical path** for ride requests: the rider receives a `tripId` within 300ms; matching, push notifications, and analytics proceed asynchronously. This is the single most important latency decision in the system. Putting matching inside the synchronous request thread would couple rider perceived performance to geo query time, Maps API latency, and driver response — an unacceptable dependency chain.
 
 ---
 
@@ -138,6 +183,14 @@ The platform is decomposed by **business capability**, not by team org chart.
 | Peak driver location writes | 170K/sec (global) |
 | Peak ride request rate | 90/sec (global) |
 
+#### Capacity derivation notes
+
+The **170K location writes/sec** figure assumes ~500K drivers online globally, each reporting every 3 seconds: 500,000 ÷ 3 ≈ 167K writes/sec. Batching on the mobile client (sending 2–3 buffered points per request) reduces HTTP overhead but not event volume at the stream layer.
+
+**10M daily trips** with ~20 state transitions and location reads each implies billions of operations per day — but the read/write ratio is heavily skewed toward location (continuous during trips) versus trip document updates (discrete state changes). Storage planning must weight location stream retention and Redis memory over trip document count.
+
+**500K concurrent active trips** at peak drives SignalR connection planning: each active trip typically holds one rider connection (driver may share hub or use separate channel), contributing to the ~1M concurrent WebSocket connections cited in ARCH-RHP-004.
+
 ### 6.4 Consistency model
 
 | Domain | Consistency | Notes |
@@ -147,6 +200,8 @@ The platform is decomposed by **business capability**, not by team org chart.
 | Driver location (live) | Eventual | 3–5 second staleness acceptable |
 | Surge multiplier | Eventual | 30-second cache TTL |
 | Driver rating aggregate | Eventual | Updated via event consumer |
+
+Choosing strong consistency everywhere would make the platform unable to meet location write throughput. Choosing eventual consistency for trip state would produce rider/driver disagreements on whether a ride is active — unacceptable. The table above reflects deliberate **per-domain** trade-offs.
 
 ---
 
@@ -187,6 +242,20 @@ The platform is decomposed by **business capability**, not by team org chart.
 │ Azure Maps │ Payment PSP │ FCM/APNs │ KYC provider │ Entra External ID│
 └────────────────────────────────────────────────────────────────────────┘
 ```
+
+#### Layer responsibilities (detailed)
+
+**Client layer** — Native mobile apps (Swift/Kotlin) with offline-tolerant local state for active trips. Maps rendering uses client SDK (Google Maps or Mapbox) while positions come from platform SignalR. Web client is secondary; same BFF contracts.
+
+**Edge layer** — Terminates TLS, applies WAF rules, routes to nearest healthy region. No business logic at edge except caching of static pricing configuration bundles.
+
+**Experience layer (BFF)** — Adapts domain APIs for mobile bandwidth: combines trip summary + driver location + ETA into one payload. Enforces client-specific rate limits. Does not own business rules.
+
+**Domain services** — Encapsulate business logic and data ownership. Communicate via internal REST/gRPC (sync) and Service Bus (async). No service reads another service's database.
+
+**Data plane** — Polyglot persistence chosen per access pattern: Cosmos for high-write documents, SQL for ledger, Redis for geo, Event Hubs for streams.
+
+**External integrations** — Treated as unreliable: every external call has timeout, circuit breaker, and fallback where safe.
 
 ### 7.2 Regional topology
 
@@ -264,6 +333,12 @@ Full transition rules, triggers, and compensating actions: **ARCH-RHP-003**.
 | ADR-006 | Async matching after trip create | Sync matching in request thread | Meets 300ms API SLA; isolates matching failures |
 | ADR-007 | BFF per client type | Single API for all clients | Mobile payload optimization, separate rate limits |
 | ADR-008 | Azure SignalR for real-time | Self-hosted SignalR on AKS | Managed scale for connection spikes |
+
+#### ADR-006 expanded rationale (async matching)
+
+Synchronous matching would require the Rider BFF to block until a driver accepts — potentially 15–45 seconds. Mobile HTTP clients, load balancers, and API gateways typically timeout at 30–60 seconds. More critically, holding a server thread (or async continuation) per waiting rider does not scale: 5,000 concurrent matchers at Friday peak would exhaust connection pools.
+
+Async matching decouples **acceptance of the request** from **fulfillment of the match**. The rider watches progress via SignalR; the server scales matching workers independently based on Service Bus queue depth.
 
 ---
 
