@@ -156,6 +156,14 @@
         { "topic": "Google Cloud", "files": ["Google Cloud Basics.md"] },
         { "topic": "Terraform", "files": ["Terraform Multi-Cloud Providers.md"] }
       ]
+    },
+    {
+      "id": "interview-scenarios",
+      "title": "Tricky Interview Scenarios",
+      "order": [
+        { "topic": "Interview Scenarios", "files": ["System Design Interview Scenarios.md", "Microservices Interview Scenarios.md"] },
+        { "topic": "Interview Scenarios", "files": ["C# Interview Scenarios.md", ".NET Interview Scenarios.md", "JavaScript Interview Scenarios.md", "SQL Server Interview Scenarios.md"] }
+      ]
     }
   ],
   "topicGraph": {
@@ -182,7 +190,8 @@
     "Terraform": { "requires": ["Docker"], "pairs": ["Azure DevOps", "Azure Cloud 1", "AWS", "Google Cloud"], "next": ["Terraform State Modules and Workflows.md"] },
     "PostgreSQL": { "pairs": ["Sql Server", "MongoDB", "C#"], "next": ["PostgreSQL Queries and Performance.md"] },
     "GraphQL": { "requires": ["Javascript", "TypeScript"], "pairs": ["React", "C#", "Microservices"], "next": ["GraphQL with .NET and Node.js.md"] },
-    "Bash": { "requires": ["Git"], "pairs": ["Docker", "Azure DevOps", "Kubernetes"], "next": ["Bash Shell Scripting.md", "Bash System and DevOps Commands.md"] }
+    "Bash": { "requires": ["Git"], "pairs": ["Docker", "Azure DevOps", "Kubernetes"], "next": ["Bash Shell Scripting.md", "Bash System and DevOps Commands.md"] },
+    "Interview Scenarios": { "pairs": ["System Design", "Microservices", "C#", "Security"], "next": ["Microservices Interview Scenarios.md", "System Design Interview Scenarios.md"] }
   },
   "fileRelations": {
     "Angular/Angular Basics.md": ["Angular/Angular Modern Features.md", "Angular/Angular Routing.md", "TypeScript/TypeScript Basics.md"],
@@ -279,6 +288,12 @@
     "Bash/Bash Basics.md": ["Bash/Bash Text Processing and Pipes.md", "Bash/Bash Shell Scripting.md", "Git/Git Commands.md"],
     "Bash/Bash Text Processing and Pipes.md": ["Bash/Bash Shell Scripting.md", "Bash/Bash System and DevOps Commands.md"],
     "Bash/Bash Shell Scripting.md": ["Bash/Bash System and DevOps Commands.md", "Azure DevOps/Azure DevOps Pipelines and CI-CD.md"],
-    "Bash/Bash System and DevOps Commands.md": ["Docker/Docker Basics.md", "Kubernetes/Kubernetes Basics.md"]
+    "Bash/Bash System and DevOps Commands.md": ["Docker/Docker Basics.md", "Kubernetes/Kubernetes Basics.md"],
+    "Interview Scenarios/System Design Interview Scenarios.md": ["System Design/System Design Basics.md", "Interview Scenarios/Microservices Interview Scenarios.md", "Redis/Redis Caching Patterns.md"],
+    "Interview Scenarios/Microservices Interview Scenarios.md": ["Microservices/Microservices Distributed Transactions.md", "Microservices/Microservices Communication.md", "Interview Scenarios/System Design Interview Scenarios.md"],
+    "Interview Scenarios/C# Interview Scenarios.md": ["Interview Scenarios/.NET Interview Scenarios.md", "C#/.NET Core JSON Web Token.md"],
+    "Interview Scenarios/.NET Interview Scenarios.md": ["C#/WebApi Basics.md", "Security/Authentication and Identity.md", "Interview Scenarios/C# Interview Scenarios.md"],
+    "Interview Scenarios/JavaScript Interview Scenarios.md": ["Javascript/JavaScript Asynchronous Programming.md", "React/React HTTP and Data Fetching.md", "Security/Web Application Security.md"],
+    "Interview Scenarios/SQL Server Interview Scenarios.md": ["Sql Server/SQL Server Transactions and Locking.md", "Sql Server/SQL Server Query Optimization Techniques.md"]
   }
 }

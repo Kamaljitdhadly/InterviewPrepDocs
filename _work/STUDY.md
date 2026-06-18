@@ -2,7 +2,7 @@
 
 > **Start here.** All study notes live under `_work/tight/`. Clean (full) versions: `_work/clean/`.
 
-**Library stats:** 27 topics · 257 files · ~1937 questions
+**Library stats:** 28 topics · 263 files · ~2009 questions
 
 ---
 
@@ -156,6 +156,13 @@
 | 4 | **Google Cloud** | Google Cloud Basics |
 | 5 | **Terraform** | Terraform Multi-Cloud Providers |
 
+### Tricky Interview Scenarios
+
+| Step | Topic | Files to study |
+|------|-------|----------------|
+| 1 | **Interview Scenarios** | System Design Interview Scenarios, Microservices Interview Scenarios |
+| 2 | **Interview Scenarios** | C# Interview Scenarios, .NET Interview Scenarios, JavaScript Interview Scenarios, SQL Server Interview Scenarios |
+
 ---
 
 ## All topics
@@ -176,6 +183,7 @@
 | Google Cloud | 10 | `_work/tight/Google Cloud/` |
 | GraphQL | 2 | `_work/tight/GraphQL/` |
 | Important Concepts | 8 | `_work/tight/Important Concepts/` |
+| Interview Scenarios | 6 | `_work/tight/Interview Scenarios/` |
 | Javascript | 12 | `_work/tight/Javascript/` |
 | Kubernetes | 12 | `_work/tight/Kubernetes/` |
 | Microservices | 22 | `_work/tight/Microservices/` |
@@ -217,7 +225,7 @@
 
 ## Topic quick links
 
-**Other:** `AI` · `AWS` · `Bash` · `Certificates` · `Git` · `Google Cloud` · `GraphQL` · `MongoDB` · `PostgreSQL` · `Redis` · `Security` · `Terraform` · `Testing`
+**Other:** `AI` · `AWS` · `Bash` · `Certificates` · `Git` · `Google Cloud` · `GraphQL` · `Interview Scenarios` · `MongoDB` · `PostgreSQL` · `Redis` · `Security` · `Terraform` · `Testing`
 
 **Frontend:** `Angular` · `React`
 
