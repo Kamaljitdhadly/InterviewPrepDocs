@@ -1,18 +1,18 @@
 ---
-description: _work pipeline scripts — normalize, formatters, audits
-globs: _work/**/*.mjs
+description: Pipeline scripts — normalize, formatters, audits
+globs: scripts/**/*.mjs
 alwaysApply: false
 ---
 
-# Pipeline tooling (`_work/`)
+# Pipeline tooling (`scripts/`)
 
 ## Main entry
 
 ```bash
-node _work/normalize.mjs --topic "Topic Name"
+node scripts/normalize.mjs --topic "Topic Name"
 ```
 
-Reads `_work/md/{Topic}/`, writes `_work/clean/{Topic}/`. Pick formatter by topic name in `normalize.mjs`:
+Reads `extracted/{Topic}/`, writes `full/{Topic}/`. Pick formatter by topic name in `normalize.mjs`:
 
 | Topic match | Formatter |
 |-------------|-----------|
@@ -31,10 +31,10 @@ Reads `_work/md/{Topic}/`, writes `_work/clean/{Topic}/`. Pick formatter by topi
 
 ## Other scripts
 
-- `build-study-guide.mjs` — regenerate `_work/STUDY.md`
-- `enrich-tight-footers.mjs` — append `## Related Topics` from `topic-manifest.json`
-- `audit-all-tight.mjs` — tight vs clean parity across all topics
-- `audit-{topic}-tight.mjs` — per-topic audits
+- `build-study-guide.mjs` — regenerate `STUDY.md`
+- `enrich-study-footers.mjs` — append `## Related Topics` from `topic-manifest.json`
+- `audit-study-full.mjs` — study vs full parity across all topics
+- `audit-{topic}-study.mjs` — per-topic audits
 
 ## Formatter conventions
 
@@ -44,6 +44,6 @@ Reads `_work/md/{Topic}/`, writes `_work/clean/{Topic}/`. Pick formatter by topi
 
 ## Do not
 
-- Run destructive bulk “repair” on tight files without verifying TOC + code blocks
+- Run destructive bulk “repair” on study files without verifying TOC + code blocks
 - Use `git checkout` to fix content bugs — edit files surgically
 - Add `package.json` or build tooling unless the user requests it

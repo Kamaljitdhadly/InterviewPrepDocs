@@ -1,6 +1,6 @@
 ---
-description: Authoring standards for _work/clean and _work/tight interview markdown
-globs: _work/**/*.md
+description: Authoring standards for full and study interview markdown
+globs: "{study,full,extracted}/**/*.md"
 alwaysApply: false
 ---
 
@@ -20,12 +20,12 @@ alwaysApply: false
 - **No** emoji difficulty tags (🟢/🟡/🔴), no mandatory “Gotchas” / “Quick Recap” sections unless the user asks
 - Cross-topic comparisons → `Important Concepts/Interview Comparisons.md` or inline table
 
-## Tight vs clean
+## Study vs full
 
-| | clean | tight |
-|---|-------|-------|
+| | full | study |
+|---|------|-------|
 | Prose | Full explanations | Condensed bullets/tables |
-| Code blocks | All examples | **Identical** to clean |
+| Code blocks | All examples | **Identical** to full |
 | TOC | Same questions | Same questions |
 | Target reduction | — | ~15–35% chars (not required for image-heavy docs) |
 
@@ -40,7 +40,7 @@ alwaysApply: false
 
 ## Adding a new file
 
-1. Pick folder under `_work/clean/{Topic}/` and `_work/tight/{Topic}/`
-2. Write clean first, then tight (same code blocks)
-3. Add relations in `_work/topic-manifest.json` → `fileRelations` if it’s a hub file
-4. Run topic audit or `audit-all-tight.mjs`
+1. Pick folder under `full/{Topic}/` and `study/{Topic}/`
+2. Write full first, then study (same code blocks)
+3. Add relations in `topic-manifest.json` → `fileRelations` if it’s a hub file
+4. Run topic audit or `audit-study-full.mjs`

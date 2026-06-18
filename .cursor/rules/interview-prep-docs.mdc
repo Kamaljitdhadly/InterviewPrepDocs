@@ -12,22 +12,22 @@ Markdown-only interview knowledge base. **Do not** create or output `.docx`. **D
 | Path | Purpose |
 |------|---------|
 | `docx/{Topic}/` | Source Word files (read-only input) |
-| `_work/md/{Topic}/` | Pandoc extract + `media/` |
-| `_work/clean/{Topic}/` | Normalized full answers |
-| `_work/tight/{Topic}/` | **Primary study notes** — condensed prose, **all code blocks kept** |
-| `_work/STUDY.md` | Master index and learning paths |
-| `_work/topic-manifest.json` | Paths, cross-links, file relations |
-| `_work/*.mjs` | Pipeline scripts (normalize, format, audit) |
+| `extracted/{Topic}/` | Pandoc extract + `media/` |
+| `full/{Topic}/` | Normalized full answers |
+| `study/{Topic}/` | **Primary study notes** — condensed prose, **all code blocks kept** |
+| `STUDY.md` | Master index and learning paths |
+| `topic-manifest.json` | Paths, cross-links, file relations |
+| `scripts/*.mjs` | Pipeline scripts (normalize, format, audit) |
 
-**Default deliverable:** edit or create files under `_work/tight/` and `_work/clean/`. Point the user to `_work/tight/` for studying.
+**Default deliverable:** edit or create files under `study/` and `full/`. Point the user to `study/` for studying.
 
 ## Pipeline (from docx)
 
 ```
 docx/{Topic}/*.docx
-  → _work/md/{Topic}/       pandoc extract
-  → _work/clean/{Topic}/    node _work/normalize.mjs --topic "Topic Name"
-  → _work/tight/{Topic}/    manual or agent tight pass (on request)
+  → extracted/{Topic}/    pandoc extract
+  → full/{Topic}/         node scripts/normalize.mjs --topic "Topic Name"
+  → study/{Topic}/        manual or agent condensed pass (on request)
 ```
 
 - Pandoc: `C:\Users\Hello\AppData\Local\Pandoc\pandoc.exe`
@@ -55,7 +55,7 @@ Answer with tables, bullets, and fenced code (`csharp`, `typescript`, `jsx`, `ja
 ...
 ```
 
-**Tight pass rules:** shorten prose and use tables; **never drop code blocks** from clean; keep `## Questions Covered` and matching `##` answer headings; optional `## Related Topics` footer (via `node _work/enrich-tight-footers.mjs`).
+**Study pass rules:** shorten prose and use tables; **never drop code blocks** from full; keep `## Questions Covered` and matching `##` answer headings; optional `## Related Topics` footer (via `node scripts/enrich-study-footers.mjs`).
 
 ## Topics (18 folders, ~184 files)
 
@@ -65,20 +65,20 @@ React and TypeScript were authored in-repo (no docx). Angular includes **Angular
 
 ## Quality checks
 
-- `node _work/audit-all-tight.mjs` — global tight vs clean
-- `node _work/audit-react-tight.mjs`, `audit-typescript-tight.mjs`, etc. — per topic
-- `node _work/build-study-guide.mjs` — refresh `_work/STUDY.md`
+- `node scripts/audit-study-full.mjs` — global study vs full parity
+- `node scripts/audit-react-study.mjs`, `audit-typescript-study.mjs`, etc. — per topic
+- `node scripts/build-study-guide.mjs` — refresh `STUDY.md`
 
 ## Agent defaults
 
 - **Commits:** only when the user explicitly asks
 - **Scope:** minimal diffs; don’t refactor unrelated topics in the same task
-- **New topic files:** create **both** clean + tight; interview depth comparable to `Angular Basics` / `C# Basics`
-- **Images:** preserve `<img>` paths to `_work/md/{Topic}/media/...` when present
+- **New topic files:** create **both** full + study; interview depth comparable to `Angular Basics` / `C# Basics`
+- **Images:** preserve `<img>` paths to `extracted/{Topic}/media/...` when present
 - **Empty docx:** skip and note to user (e.g. `Azure DevOps Handwritten.docx`)
 
 ## User phrasing
 
-- “create md files” → extract (if docx exists) + normalize → clean; offer tight pass if not done
-- “tight” / “do it” for a topic → produce or fix `_work/tight/{Topic}/`
-- “study” → `_work/tight/`; fuller detail → `_work/clean/`
+- “create md files” → extract (if docx exists) + normalize → full; offer study pass if not done
+- “tight” / “condense” / “do it” for a topic → produce or fix `study/{Topic}/`
+- “study” → `study/`; fuller detail → `full/`
