@@ -1,145 +1,308 @@
 # Azure Networking
 
-1)  Each Datacenter location is called region
+## Questions Covered
+
+1. What is an Azure Virtual Network (VNet)?
+2. What are subnets, and why must resources live in a subnet?
+3. What is CIDR notation, and how do you plan IP address space?
+4. What is a Network Security Group (NSG)?
+5. What is Azure Bastion, and why use it over public RDP?
+6. What is VNet peering?
+7. What is a VPN Gateway vs ExpressRoute?
+8. What are Azure DNS and Private DNS zones?
+9. What are Service Endpoints vs Private Endpoints?
+10. What is Azure Firewall vs NSG?
+11. What is Azure Load Balancer (L4)?
+12. What is Azure Application Gateway (L7)?
+13. What is Azure Front Door vs Traffic Manager?
+14. What is VNet integration for App Service and Functions?
+
+## What is an Azure Virtual Network (VNet)?
+
+A **VNet** is your private network boundary in Azure — logically isolated from other tenants. Think of it as your organization's datacenter network in the cloud (AWS equivalent: **VPC**).
+
+| Property | Detail |
+|----------|--------|
+| **Scope** | Single region (regional resource) |
+| **Address space** | Private RFC 1918 ranges (e.g. `10.0.0.0/16`) |
+| **Default size** | Up to 65,536 addresses in `/16` |
+| **Isolation** | Other orgs' VNets cannot reach yours by default |
+
+```bash
+az network vnet create \
+  --resource-group rg-prod \
+  --name vnet-prod \
+  --address-prefix 10.0.0.0/16 \
+  --subnet-name subnet-web \
+  --subnet-prefix 10.0.1.0/24
+```
+
+Resources in the same VNet communicate by default. Cross-VNet requires **peering** or **gateways**.
+
+## What are subnets, and why must resources live in a subnet?
+
+**Subnets** divide a VNet's address space into segments. **Every** NIC (VM, App Service integration, Gateway, etc.) attaches to exactly one subnet.
+
+| Rule | Detail |
+|------|--------|
+| **No overlap** | Subnet ranges must not overlap within VNet |
+| **Reserved IPs** | Azure reserves 5 IPs per subnet (first 4 + last) |
+| **NSG association** | Apply NSG at subnet or NIC level |
+| **Special subnets** | `GatewaySubnet`, `AzureBastionSubnet` — dedicated names required |
+
+```text
+VNet 10.0.0.0/16
+  ├── subnet-web      10.0.1.0/24   (App Service, VMs)
+  ├── subnet-data     10.0.2.0/24   (SQL private endpoint)
+  ├── subnet-aks      10.0.3.0/22   (AKS nodes — larger for scaling)
+  └── GatewaySubnet   10.0.255.0/27 (VPN/ExpressRoute)
+```
+
+**Smaller attack surface:** Use `/24` or smaller subnets — don't assign `/16` to one subnet unless needed.
+
+## What is CIDR notation, and how do you plan IP address space?
+
+**CIDR** (Classless Inter-Domain Routing) defines IP ranges: `10.0.1.0/24`
+
+| CIDR | Addresses | Usable (Azure subnet) |
+|------|-----------|----------------------|
+| `/28` | 16 | ~11 |
+| `/24` | 256 | ~251 |
+| `/16` | 65,536 | ~65,531 |
+
+```text
+10.0.1.0/24 breakdown:
+  10.0.1.0   – network address (reserved)
+  10.0.1.1   – Azure default gateway (reserved)
+  10.0.1.2   – Azure DNS (reserved)
+  10.0.1.3   – reserved for future
+  10.0.1.4+  – usable for VMs
+  10.0.1.255 – broadcast (reserved)
+```
+
+**Planning tips:** Leave room for growth; avoid overlapping on-prem ranges if using VPN; use **/22 or /23** for AKS (needs many pod IPs with Azure CNI).
+
+## What is a Network Security Group (NSG)?
+
+**NSG** = stateful firewall rules for inbound/outbound traffic on NICs and subnets.
+
+| Priority | Rule | Action |
+|----------|------|--------|
+| 100 | Allow HTTPS inbound from Internet | Allow |
+| 200 | Allow RDP from Bastion subnet | Allow |
+| 4096 | DenyAllInbound (default) | Deny |
+
+```bash
+az network nsg rule create \
+  --resource-group rg-prod \
+  --nsg-name nsg-web \
+  --name AllowHTTPS \
+  --priority 100 \
+  --source-address-prefixes Internet \
+  --destination-port-ranges 443 \
+  --access Allow \
+  --protocol Tcp
+```
 
-2)  Each datacenter is called Zone
+**Default rules:** Allow VNet inbound; allow Azure Load Balancer; deny internet inbound. **First matching rule wins** (lower priority number = higher priority).
+
+**Critical:** Remove default RDP/SSH-from-internet rules on production VMs immediately after creation.
+
+## What is Azure Bastion, and why use it over public RDP?
+
+**Azure Bastion** provides browser-based RDP/SSH to VMs **without public IPs** on the VMs.
+
+| Approach | Security |
+|----------|----------|
+| **Public IP + RDP** | Port 3389 exposed — brute force risk |
+| **Bastion** | HTTPS to Azure; VM stays private |
+
+```bash
+az network bastion create \
+  --resource-group rg-prod \
+  --name bastion-prod \
+  --vnet-name vnet-prod \
+  --public-ip-address pip-bastion
+```
 
-3)  When there are more datacenters in a region, then the region is said to be **availability zones**
+Requires dedicated **`AzureBastionSubnet`** (`/26` minimum). Use **Standard SKU** for native client and scale.
 
-4)  **Subscription => many to many => Account**
+## What is VNet peering?
 
-| Logical Container for resources you **provision(create)** in the cloud | Identity a user who have access to resources |
-|----|----|
-| Can be attached to lots of accounts | can be attached to lots of subscription |
+**VNet peering** connects two VNets so resources communicate over Azure backbone — low latency, private.
+
+| Type | Scope |
+|------|-------|
+| **Regional peering** | Same region — both directions |
+| **Global peering** | Cross-region |
 
-5)  First Resource is going to be resource group
+```bash
+az network vnet peering create \
+  --resource-group rg-prod \
+  --name peer-to-hub \
+  --vnet-name vnet-spoke-app \
+  **--remote-vnet /subscriptions/{sub}/resourceGroups/rg-hub/providers/Microsoft.Network/virtualNetworks/vnet-hub \
+  --allow-vnet-access
+```
+
+**Hub-spoke topology:** Central hub VNet (firewall, VPN gateway); spoke VNets for apps — peer spokes to hub, not always spoke-to-spoke.
+
+**Not transitive:** Spoke A ↔ Hub ↔ Spoke B does **not** automatically allow A ↔ B.
 
-6)  Account
+## What is a VPN Gateway vs ExpressRoute?
 
-Region
+| | VPN Gateway | ExpressRoute |
+|---|-------------|--------------|
+| **Connection** | Encrypted tunnel over internet | Private dedicated circuit via ISP |
+| **Bandwidth** | Up to ~1.25 Gbps | 50 Mbps – 100 Gbps |
+| **Latency** | Variable | Consistent, lower |
+| **Cost** | Lower | Higher |
+| **Use case** | Dev, small offices, backup | Enterprise, compliance, high throughput |
+
+```text
+On-premises ──VPN/ExpressRoute──► Hub VNet ──peering──► Spoke VNets
+```
+
+**Site-to-Site VPN:** IPsec tunnel between on-prem VPN device and Azure VPN Gateway.
+
+## What are Azure DNS and Private DNS zones?
+
+| Service | Purpose |
+|---------|---------|
+| **Azure DNS (public)** | Host public domain records (A, CNAME, MX) |
+| **Private DNS zone** | Name resolution within VNets (e.g. `internal.contoso.com`) |
+
+```bash
+az network private-dns zone create \
+  --resource-group rg-prod \
+  --name internal.contoso.com
+
+az network private-dns link vnet create \
+  --resource-group rg-prod \
+  --zone-name internal.contoso.com \
+  --name link-prod \
+  --virtual-network vnet-prod \
+  --registration-enabled false
+```
 
-Management Groups (used to manage subscription)
+Private DNS links to **Private Endpoints** — `mydb.internal.contoso.com` resolves to private IP of Azure SQL.
 
-subscription (Logical Container for resources)
+## What are Service Endpoints vs Private Endpoints?
 
-Resource Group (Container for particular resources group together example **dev / test / production** and a subscription can have more than one resource group)
-
-Vnet and subnet
-
-Resources
-
-7)  Azure cloud shell providers UI similar to command line and allows to run commands againts azure cloud and we can also download azure cli and powershell to our pc as well
-
-8)  Some of the services are not available in all of the regions and pricing can be different in different regions
-
-9)  If we have a requirement where if one datacenter failure then region should still be available then we should go with region which has avaialblity zones
-
-10) SLA (Service level Agreement) is the uptime % of a cloud service and can be different based on what tier and pricing are used for service
-
-11) Cost management Plus Billing service available in azure to create budget and configure notification when getting close to budget
-
-12) **Azure Account, Azure app service** extenion in vs code
-
-13) <img src="_work/md/Azure Cloud/media/media/image1.png" style="width:8.93569in;height:4.29284in" />
-
-14) **Serverless => a resource that is completed/fully managed by cloud and users do not need to think about instance size(VM, CPU, Ram). Even when we talk about serverless it still runs on server, but user is not resposible to set instance size when creating resources**
-
-15) **Managed Service** => Cloud provider is responsible to manage service example app service is managed service, app service underlying machine and running software is managed by azure and user just need to take care of deploying code to app service
-
-16) **Unmanaged services** => VM is unmanaged service because user is responsible to manage what’s happening inside the virtual machine example updating security patches and framework
-
-17) Compute Services => **VM, App Services, AKS, Azure Functions(Serverless)**
-
-18) Connecting to window machine we use remote desktop app and to connect to Linux(ubuntu) VM we use Putty tool which uses SSH protocol\
-    Linux commands – sudo(run as administrative) apt install git
-
-19) **VM => Never leave a VM directly accessible from internet, hacker can do brute force attacks on rdp port 3389. No line of defence in front of VM web server. Linux SSH port - 22**
-
-20) **App services** => a fully managed web hosting for websites, publish you code and it just runs, no access to underlying resources
-
-21) **AKS(Azure Kubernetes Services) =>** managed services on azure, allow to deploy containers on Azure and manage using kubernetes tool which is most popular container management tool
-
-22) **Azure Functions =>** small function runs as result of event, automatically start, stop, autoscale
-
-23) **ACR(Azure Container Registry) =>** used to manage images
-
-<img src="_work/md/Azure Cloud/media/media/image2.png" style="width:9in;height:3.93444in" />
-
-24) Azure price calculator use it before creating resources
-
-25) When creating VM multiple resources created example **VM , Disk, Public IP, storage**
-
-<img src="_work/md/Azure Cloud/media/media/image3.png" style="width:7.97847in;height:2.58681in" />
-
-26) **Storage account =>** Its used in many resource type example Image of the virtual machine is stored in storage account and we do not have access to this storage account and it happens automatically behind the scene
-
-27) <img src="_work/md/Azure Cloud/media/media/image4.png" style="width:9in;height:4.98419in" />
-
-28) <img src="_work/md/Azure Cloud/media/media/image5.png" style="width:7.57699in;height:5.15833in" />
-
-29) <img src="_work/md/Azure Cloud/media/media/image6.png" style="width:8.91319in;height:5.54375in" />
-
-30) **ARM(Azure Resource manager)** **Template =>** a json file describing the resources to be created
-
-31) **VMSS(Virtual machine scale set) =>** a group of seperate virtual machine sharing same image, can be scaled out and in and load balancer should be placed in front of scale set
-
-32) **Virtual Network –** when we create a virtual network we do not really create physical netwrk, we are using existing network resources that are part of azure and inside azure network we create logically separated network. Resources in Vnet can communicate with each other by default. Think of it as organization private network. Scoped to single region.
-
-33) **Subnet –** Logical group of resources in Vnet and Subnet is protected with **NSG(Network Security Group).** Resources must be placed in subnet, it cannot be placed directly in Vnet. Resources in subnet can talk with resources in other subnets in same Vnet
-
-34) By Default NSG is open for window(RDP) or Linux(SSH), must be first thing to handle after VM creation
-
-35) Each Vnet has its own address range or IP Range, By Default 65536 address
-
-36) **CIDR(classless Inter-domain Routing) –** a method for representing an IP range
-
-37) <img src="_work/md/Azure Cloud/media/media/image7.png" style="width:5.73889in;height:3.92361in" />**’**
-
-38) **Network Peering –** so resources in two separate Vnet can talk with each other
-
-39) Larger the attack surface(IP range) **-** the greater the risk
-
-40) **Bastion** – a web based connection to VM, no open port is required.
-
-41) <img src="_work/md/Azure Cloud/media/media/image8.png" style="width:9.47639in;height:6.38125in" /><img src="_work/md/Azure Cloud/media/media/image9.png" style="width:11.12708in;height:5.80972in" /><img src="_work/md/Azure Cloud/media/media/image10.png" style="width:11.34931in;height:6.27014in" /><img src="_work/md/Azure Cloud/media/media/image11.png" style="width:11.27014in;height:6.34931in" /><img src="_work/md/Azure Cloud/media/media/image12.png" style="width:11.49236in;height:6.4125in" /><img src="_work/md/Azure Cloud/media/media/image13.png" style="width:11.5875in;height:6.50764in" />
-
-42) <img src="_work/md/Azure Cloud/media/media/image14.png" style="width:10.76181in;height:6.11111in" /><img src="_work/md/Azure Cloud/media/media/image15.png" style="width:8.50764in;height:6.50764in" /><img src="_work/md/Azure Cloud/media/media/image16.png" style="width:11.25417in;height:6.17431in" /><img src="_work/md/Azure Cloud/media/media/image8.png" style="width:9.47639in;height:6.38125in" />
-
-43) <img src="_work/md/Azure Cloud/media/media/image17.png" style="width:11.09514in;height:6.42847in" /><img src="_work/md/Azure Cloud/media/media/image18.png" style="width:11.09514in;height:5.76181in" />
-
-44) <img src="_work/md/Azure Cloud/media/media/image19.png" style="width:8.92083in;height:6.4125in" /><img src="_work/md/Azure Cloud/media/media/image20.png" style="width:10.17431in;height:6.20625in" /><img src="_work/md/Azure Cloud/media/media/image21.png" style="width:10.77778in;height:6.38125in" /><img src="_work/md/Azure Cloud/media/media/image22.png" style="width:11.19028in;height:6.47639in" /><img src="_work/md/Azure Cloud/media/media/image23.png" style="width:11.31736in;height:5.38125in" /><img src="_work/md/Azure Cloud/media/media/image24.png" style="width:10.60347in;height:6.28542in" /><img src="_work/md/Azure Cloud/media/media/image25.png" style="width:10.65069in;height:6.15903in" /><img src="_work/md/Azure Cloud/media/media/image26.png" style="width:8.88889in;height:5.98403in" /><img src="_work/md/Azure Cloud/media/media/image27.png" style="width:11.33333in;height:6.49236in" />
-
-45) **Service Endpoint** – Create a route from Vnet to the managed service<img src="_work/md/Azure Cloud/media/media/image28.png" style="width:9in;height:4.95783in" /><img src="_work/md/Azure Cloud/media/media/image29.png" style="width:9in;height:5.41815in" /><img src="_work/md/Azure Cloud/media/media/image30.png" style="width:9in;height:5.08886in" />
-
-46) <img src="_work/md/Azure Cloud/media/media/image31.png" style="width:5.98889in;height:6.09792in" /><img src="_work/md/Azure Cloud/media/media/image32.png" style="width:8.50625in;height:6.14444in" /><img src="_work/md/Azure Cloud/media/media/image33.png" style="width:9in;height:5.78416in" />
-
-<img src="_work/md/Azure Cloud/media/media/image34.png" style="width:9in;height:5.13613in" />
-
-<img src="_work/md/Azure Cloud/media/media/image35.png" style="width:9in;height:6.36213in" />
-
-<img src="_work/md/Azure Cloud/media/media/image36.png" style="width:5.75903in;height:6.34931in" /><img src="_work/md/Azure Cloud/media/media/image37.png" style="width:7.91597in;height:6.01181in" /><img src="_work/md/Azure Cloud/media/media/image38.png" style="width:9in;height:4.91144in" /><img src="_work/md/Azure Cloud/media/media/image39.png" style="width:11.07917in;height:5.65069in" /><img src="_work/md/Azure Cloud/media/media/image40.png" style="width:11.19028in;height:6.28542in" />
-
-<img src="_work/md/Azure Cloud/media/media/image41.png" style="width:10.23819in;height:5.11111in" />
-
-<img src="_work/md/Azure Cloud/media/media/image42.png" style="width:11.09514in;height:6.19028in" /><img src="_work/md/Azure Cloud/media/media/image43.png" style="width:10.92083in;height:6.33333in" />
-
-47) **Load Balancer –** Azure service that distributes load and check health of VMs and it works with VM and scale set
-
-48) **Application Gateway –** we traffic load balancer, can functionb as external endpoint of the web app and it works with VM, scale sets, App services, Kubernetes\
-    Features – web application firewall, protection rules based on OWASP rule set
-
-49) <img src="_work/md/Azure Cloud/media/media/image44.png" style="width:11.07917in;height:6.17431in" /><img src="_work/md/Azure Cloud/media/media/image45.png" style="width:11.17431in;height:5.60347in" /><img src="_work/md/Azure Cloud/media/media/image46.png" style="width:8.14306in;height:4.17431in" /><img src="_work/md/Azure Cloud/media/media/image47.png" style="width:10.5875in;height:5.84097in" />
-
-50) <img src="_work/md/Azure Cloud/media/media/image48.png" style="width:11.07917in;height:6.23819in" /><img src="_work/md/Azure Cloud/media/media/image49.png" style="width:11.12708in;height:5.07917in" /><img src="_work/md/Azure Cloud/media/media/image50.png" style="width:11.55556in;height:6.39653in" /><img src="_work/md/Azure Cloud/media/media/image51.png" style="width:11.55556in;height:6.42847in" />
-
-51) <img src="_work/md/Azure Cloud/media/media/image52.png" style="width:6.44656in;height:3.97584in" />
-
-<img src="_work/md/Azure Cloud/media/media/image53.png" style="width:11.15903in;height:6.38125in" /><img src="_work/md/Azure Cloud/media/media/image54.png" style="width:9.11111in;height:6.17431in" /><img src="_work/md/Azure Cloud/media/media/image55.png" style="width:10.30139in;height:6.14306in" />
-
-<img src="_work/md/Azure Cloud/media/media/image56.png" style="width:10.09514in;height:6.07917in" />
-
-<img src="_work/md/Azure Cloud/media/media/image57.png" style="width:10.07917in;height:6.28542in" /><img src="_work/md/Azure Cloud/media/media/image58.png" style="width:11.34931in;height:6.06319in" /><img src="_work/md/Azure Cloud/media/media/image59.png" style="width:10.34931in;height:6.28542in" />
-
-<img src="_work/md/Azure Cloud/media/media/image60.png" style="width:10.63472in;height:6.38125in" />
-
-<img src="_work/md/Azure Cloud/media/media/image61.png" style="width:9.80972in;height:6.23819in" />
+Both secure PaaS access from VNet — different mechanisms:
+
+| | Service Endpoint | Private Endpoint |
+|---|------------------|------------------|
+| **Traffic path** | Stays on Azure backbone; service keeps public IP | Private IP in your subnet |
+| **Data exfiltration risk** | Higher (any resource in VNet) | Lower (specific NIC) |
+| **DNS** | Public FQDN | Private DNS zone |
+| **Cost** | Free | Private endpoint hourly charge |
+| **Preferred today** | Legacy | **Recommended** for new designs |
+
+```bash
+# Private Endpoint for Storage Account
+az network private-endpoint create \
+  --resource-group rg-prod \
+  --name pe-storage \
+  --vnet-name vnet-prod \
+  --subnet subnet-data \
+  --private-connection-resource-id $(az storage account show -n mystorage -g rg-prod --query id -o tsv) \
+  --group-id blob \
+  --connection-name storage-connection
+```
+
+## What is Azure Firewall vs NSG?
+
+| | NSG | Azure Firewall |
+|---|-----|----------------|
+| **Layer** | L3/L4 (IP, port) | L3/L4 + L7 (FQDN, threat intel) |
+| **Scope** | Subnet/NIC | Hub VNet, centralized |
+| **Policy** | Allow/deny rules | DNAT, SNAT, app rules, IDPS |
+| **Cost** | Free | Premium SKU cost |
+
+Use **NSG** for basic segmentation. Add **Azure Firewall** in hub for centralized egress control, FQDN filtering, and logging.
+
+## What is Azure Load Balancer (L4)?
+
+**Azure Load Balancer** distributes TCP/UDP traffic at **Layer 4** — no URL/path awareness.
+
+| SKU | Scope |
+|-----|-------|
+| **Public** | Internet-facing |
+| **Internal** | Private VNet only |
+
+**Features:** Health probes, outbound SNAT, HA ports (for HA pairs).
+
+```bash
+az network lb create \
+  --resource-group rg-prod \
+  --name lb-web \
+  --sku Standard \
+  --public-ip-address pip-web \
+  --frontend-ip-name fe-ip \
+  --backend-pool-name be-pool
+```
+
+Works with **VMs and VMSS**. Unhealthy instances removed from rotation automatically.
+
+## What is Azure Application Gateway (L7)?
+
+**Application Gateway** is a **Layer 7** (HTTP/HTTPS) load balancer with advanced routing.
+
+| Feature | Detail |
+|---------|--------|
+| **URL/path routing** | `/api/*` → API pool; `/*` → web pool |
+| **SSL termination** | Centralized cert management |
+| **WAF** | OWASP rule sets, bot protection |
+| **Session affinity** | Cookie-based sticky sessions |
+| **Autoscaling** | Scale based on traffic |
+
+```text
+Internet → Application Gateway (WAF v2)
+              ├── Backend pool: App Service
+              ├── Backend pool: VMSS
+              └── Backend pool: AKS ingress
+```
+
+See **Azure Application Gateway and Load Balancer.md** for deep comparison.
+
+## What is Azure Front Door vs Traffic Manager?
+
+| Service | Layer | Use case |
+|---------|-------|----------|
+| **Traffic Manager** | DNS (L7 routing) | Global failover, geo-routing — no traffic proxy |
+| **Front Door** | L7 global CDN + WAF | Global load balancing, caching, SSL, WAF |
+| **CDN** | Content caching | Static asset delivery |
+
+```text
+Traffic Manager: DNS resolves to nearest healthy endpoint (no proxy)
+Front Door:      All traffic proxied through Microsoft edge — WAF, caching, routing
+```
+
+Use **Front Door** for global web apps needing WAF + CDN. **Traffic Manager** for simple DNS-based failover.
+
+## What is VNet integration for App Service and Functions?
+
+**Regional VNet Integration** lets App Service/Functions reach resources in a VNet (private SQL, internal APIs).
+
+```bash
+az webapp vnet-integration add \
+  --resource-group rg-prod \
+  --name myapi-prod \
+  --vnet vnet-prod \
+  --subnet subnet-appintegration
+```
+
+| Integration type | Direction |
+|------------------|-----------|
+| **Regional VNet Integration** | App → VNet (outbound to private resources) |
+| **Private Endpoint (inbound)** | VNet → App (private inbound access) |
+
+Subnet for integration must be delegated or dedicated (`/28` minimum). Required for accessing **Private Endpoint** databases from App Service.
+
+## Related Topics
+
+- **Azure Compute.md** — VM, App Service, AKS networking needs
+- **Azure Application Gateway and Load Balancer.md** — L4 vs L7 deep dive
+- **Azure Storage and Databases.md** — private endpoints for data
+- **Azure Security and Monitoring.md** — Firewall, DDoS protection

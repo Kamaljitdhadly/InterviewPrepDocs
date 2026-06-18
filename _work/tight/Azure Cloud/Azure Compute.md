@@ -1,117 +1,326 @@
 # Azure Compute
 
-<img src="_work/md/Azure Cloud/media/media/image1.png" style="width:9in;height:4.99205in" />
+## Questions Covered
 
-<img src="_work/md/Azure Cloud/media/media/image2.png" style="width:9in;height:4.99419in" />
+1. What Azure compute options exist, and when do you use each?
+2. What are Azure Virtual Machines, and how do you secure them?
+3. What is an Azure VM scale set (VMSS)?
+4. What is Azure App Service, and how does it compare to VMs?
+5. What are App Service plans, deployment slots, and scaling?
+6. What is Azure Kubernetes Service (AKS)?
+7. What is Azure Container Instances (ACI)?
+8. What is Azure Container Apps?
+9. What are Azure Functions, and what are hosting plans?
+10. What is Azure Batch?
+11. How do you choose VM size and series?
+12. What resources are created automatically when you deploy a VM?
+13. How does Azure compute integrate with load balancers?
 
-<img src="_work/md/Azure Cloud/media/media/image3.png" style="width:9in;height:5.13494in" />
+## What Azure compute options exist, and when do you use each?
 
-<img src="_work/md/Azure Cloud/media/media/image4.png" style="width:6.76458in;height:5.54931in" />
+| Service | Model | Best for |
+|---------|-------|----------|
+| **Virtual Machines** | IaaS | Full OS control, lift-and-shift, custom software |
+| **VM Scale Sets** | IaaS + autoscale | Identical VMs behind load balancer |
+| **App Service** | PaaS | Web apps, REST APIs, quick deploy |
+| **AKS** | PaaS (K8s) | Container orchestration, microservices |
+| **Container Instances** | Serverless containers | Simple, short-lived containers |
+| **Container Apps** | Serverless containers | Microservices, KEDA scaling, Dapr |
+| **Functions** | Serverless | Event-driven, small code units |
+| **Batch** | HPC | Large parallel compute jobs |
 
-<img src="_work/md/Azure Cloud/media/media/image5.png" style="width:9in;height:5.12503in" />
+```text
+Decision tree:
+  Need full OS control?           → VM / VMSS
+  Web app, minimal ops?           → App Service
+  Containers + orchestration?     → AKS (complex) or Container Apps (simple)
+  Event/cron triggered code?      → Functions
+  Run container once, no cluster? → ACI
+```
 
-<img src="_work/md/Azure Cloud/media/media/image6.png" style="width:9in;height:5.25015in" />
+## What are Azure Virtual Machines, and how do you secure them?
 
-<img src="_work/md/Azure Cloud/media/media/image7.png" style="width:9in;height:5.14615in" />
+**Azure VMs** are IaaS — you choose OS image, size, disk, networking. You manage the guest OS.
 
-<img src="_work/md/Azure Cloud/media/media/image8.png" style="width:9in;height:4.1839in" />
+**Creating a VM also creates:**
 
-<img src="_work/md/Azure Cloud/media/media/image9.png" style="width:9in;height:4.22268in" />
+| Resource | Purpose |
+|----------|---------|
+| **OS disk** | Boot volume (managed disk) |
+| **NIC** | Network interface in VNet/subnet |
+| **Public IP** (optional) | Internet access |
+| **NSG** (often) | Firewall rules on NIC or subnet |
+| **Storage account** (legacy) | Boot diagnostics (optional) |
 
-<img src="_work/md/Azure Cloud/media/media/image10.png" style="width:9in;height:5.22883in" />
+```bash
+az vm create \
+  --resource-group rg-prod \
+  --name vm-web-01 \
+  --image Win2022Datacenter \
+  --size Standard_D2s_v5 \
+  --vnet-name vnet-prod \
+  --subnet subnet-web \
+  --admin-username azureadmin \
+  --generate-ssh-keys \
+  --public-ip-address "" \
+  --nsg-rule NONE
+```
 
-<img src="_work/md/Azure Cloud/media/media/image11.png" style="width:9in;height:3.63305in" />
+**Security rules (critical):**
 
-<img src="_work/md/Azure Cloud/media/media/image12.png" style="width:9in;height:4.85158in" />
+| Risk | Mitigation |
+|------|------------|
+| **RDP/SSH exposed to internet** | No public IP; use **Bastion** or VPN |
+| **Brute force on port 3389/22** | NSG restrict source IPs; Just-in-Time VM access |
+| **Unpatched OS** | Azure Update Manager; patch schedules |
+| **No disk encryption** | Azure Disk Encryption or SSE by default |
 
-<img src="_work/md/Azure Cloud/media/media/image13.png" style="width:9in;height:3.34345in" />
+**Never** leave a production VM directly internet-facing without WAF/load balancer in front.
 
-<img src="_work/md/Azure Cloud/media/media/image14.png" style="width:9in;height:4.5895in" />
+## What is an Azure VM scale set (VMSS)?
 
-<img src="_work/md/Azure Cloud/media/media/image15.png" style="width:9in;height:3.70664in" />
+**VMSS** manages a group of identical VMs — same image, autoscale rules, load balancer backend pool.
 
-<img src="_work/md/Azure Cloud/media/media/image16.png" style="width:9in;height:4.82716in" />
+| Feature | Detail |
+|---------|--------|
+| **Autoscale** | CPU, queue depth, schedule-based |
+| **Load balancer** | Required in front for traffic distribution |
+| **Upgrade policies** | Rolling, manual, automatic OS upgrades |
+| **Zone support** | Spread instances across AZs |
 
-<img src="_work/md/Azure Cloud/media/media/image17.png" style="width:9in;height:6.19891in" />
+```bash
+az vmss create \
+  --resource-group rg-prod \
+  --name vmss-web \
+  --image Ubuntu2204 \
+  --upgrade-policy-mode automatic \
+  --instance-count 2 \
+  --load-balancer lb-web \
+  --vnet-name vnet-prod \
+  --subnet subnet-web
+```
 
-<img src="_work/md/Azure Cloud/media/media/image18.png" style="width:9in;height:4.1464in" />
+Use VMSS when you need **identical stateless VMs** that scale horizontally — not for single-server workloads.
 
-<img src="_work/md/Azure Cloud/media/media/image19.png" style="width:9in;height:5.0027in" />
+## What is Azure App Service, and how does it compare to VMs?
 
-<img src="_work/md/Azure Cloud/media/media/image20.png" style="width:9in;height:5.38698in" />
+**App Service** is a fully managed PaaS for web apps, REST APIs, and mobile backends. You deploy code; Azure runs IIS/Kestrel + OS.
 
-<img src="_work/md/Azure Cloud/media/media/image21.png" style="width:9in;height:5.04584in" />
+| Aspect | App Service | VM |
+|--------|-------------|-----|
+| **OS management** | Azure | You |
+| **Scaling** | Built-in (manual/autoscale) | VMSS + LB required |
+| **Deploy** | Git, ZIP, Docker, CI/CD | Manual / extension |
+| **Cost model** | App Service Plan (shared workers) | Per VM hour + disk |
+| **Use case** | Web/API workloads | Custom OS/software |
 
-<img src="_work/md/Azure Cloud/media/media/image22.png" style="width:9in;height:5.28138in" />
+```bash
+az webapp create \
+  --resource-group rg-prod \
+  --plan plan-prod \
+  --name myapi-prod \
+  --runtime "DOTNET:8"
+```
 
-<img src="_work/md/Azure Cloud/media/media/image23.png" style="width:9in;height:4.55704in" />
+**Built-in features:** SSL, deployment slots, autoscale, VNet integration, managed identity, Application Insights integration.
 
-<img src="_work/md/Azure Cloud/media/media/image24.png" style="width:8.99028in;height:6.49028in" />
+## What are App Service plans, deployment slots, and scaling?
 
-<img src="_work/md/Azure Cloud/media/media/image25.png" style="width:7.31389in;height:3.53889in" />
+**App Service Plan** = the compute workers your apps run on. Multiple apps can share one plan.
 
-<img src="_work/md/Azure Cloud/media/media/image26.png" style="width:9in;height:5.92458in" />
+| Plan tier | Features |
+|-----------|----------|
+| **Free/Shared** | Dev/test only; no SLA |
+| **Basic** | Manual scale; no slots |
+| **Standard** | Autoscale, 5 deployment slots, SLA |
+| **Premium v3** | More scale, zone redundancy, better perf |
+| **Isolated** | Dedicated hardware (ASE) |
 
-<img src="_work/md/Azure Cloud/media/media/image27.png" style="width:9in;height:3.0286in" />
+**Deployment slots** — run staging alongside production; swap with zero downtime.
 
-<img src="_work/md/Azure Cloud/media/media/image28.png" style="width:9in;height:4.89097in" />
+```bash
+az webapp deployment slot create --name myapi-prod --resource-group rg-prod --slot staging
+# Deploy to staging, test, then:
+az webapp deployment slot swap --name myapi-prod --resource-group rg-prod --slot staging
+```
 
-<img src="_work/md/Azure Cloud/media/media/image29.png" style="width:9in;height:5.61759in" />
+**Autoscale rules:**
 
-<img src="_work/md/Azure Cloud/media/media/image30.png" style="width:9in;height:3.86848in" />
+```bash
+az monitor autoscale create \
+  --resource-group rg-prod \
+  --resource myapi-prod \
+  --resource-type Microsoft.Web/serverfarms \
+  --min-count 2 --max-count 10 --count 2
+```
 
-<img src="_work/md/Azure Cloud/media/media/image31.png" style="width:9in;height:4.53526in" />
+## What is Azure Kubernetes Service (AKS)?
 
-<img src="_work/md/Azure Cloud/media/media/image32.png" style="width:9in;height:3.81188in" />
+**AKS** is managed Kubernetes — Azure runs the control plane (free); you manage node pools.
 
-<img src="_work/md/Azure Cloud/media/media/image33.png" style="width:9in;height:4.22233in" />
+| Component | Azure manages | You manage |
+|-----------|---------------|------------|
+| **Control plane** | API server, etcd, scheduler | — |
+| **Node pools** | — | VM size, count, patching |
+| **Networking** | — | CNI choice (Azure CNI, kubenet) |
+| **Workloads** | — | Pods, services, ingress |
 
-<img src="_work/md/Azure Cloud/media/media/image34.png" style="width:9in;height:4.79339in" />
+```bash
+az aks create \
+  --resource-group rg-prod \
+  --name aks-prod \
+  --node-count 3 \
+  --node-vm-size Standard_D2s_v5 \
+  --enable-managed-identity \
+  --network-plugin azure
 
-<img src="_work/md/Azure Cloud/media/media/image35.png" style="width:9in;height:4.38329in" />
+az aks get-credentials --resource-group rg-prod --name aks-prod
+kubectl get nodes
+```
 
-<img src="_work/md/Azure Cloud/media/media/image36.png" style="width:9in;height:4.6711in" />
+**When to choose AKS:** microservices, complex container orchestration, Helm charts, service mesh. **Overkill for:** single simple web app → use App Service or Container Apps.
 
-<img src="_work/md/Azure Cloud/media/media/image37.png" style="width:9in;height:4.34822in" />
+## What is Azure Container Instances (ACI)?
 
-<img src="_work/md/Azure Cloud/media/media/image38.png" style="width:9in;height:4.29149in" />
+**ACI** runs containers without managing VMs or Kubernetes — fastest way to run a container in Azure.
 
-<img src="_work/md/Azure Cloud/media/media/image39.png" style="width:9in;height:5.43909in" />
+| Pros | Cons |
+|------|------|
+| Seconds to start | No built-in load balancer |
+| Per-second billing | Limited networking (no native VNet until integrated) |
+| Simple API | Not for long-running scaled apps |
 
-<img src="_work/md/Azure Cloud/media/media/image40.png" style="width:9in;height:4.77967in" />
+```bash
+az container create \
+  --resource-group rg-dev \
+  --name aci-hello \
+  --image mcr.microsoft.com/azuredocs/aci-helloworld \
+  --dns-name-label myhello \
+  --ports 80
+```
 
-<img src="_work/md/Azure Cloud/media/media/image41.png" style="width:6.87222in;height:6.06875in" />
+Use ACI for **batch jobs, build agents, simple APIs**. For production scaled apps → AKS or Container Apps.
 
-<img src="_work/md/Azure Cloud/media/media/image42.png" style="width:9in;height:4.81732in" />
+## What is Azure Container Apps?
 
-<img src="_work/md/Azure Cloud/media/media/image43.png" style="width:9in;height:5.67486in" />
+**Container Apps** is serverless container hosting built on Kubernetes — without managing the cluster.
 
-<img src="_work/md/Azure Cloud/media/media/image44.png" style="width:9in;height:5.62759in" />
+| Feature | Detail |
+|---------|--------|
+| **KEDA scaling** | Scale to zero on HTTP/queue/custom metrics |
+| **Dapr integration** | Service invocation, pub/sub, secrets |
+| **Revision management** | Traffic splitting between revisions |
+| **Ingress** | Built-in HTTPS ingress |
 
-<img src="_work/md/Azure Cloud/media/media/image45.png" style="width:9in;height:6.02751in" />
+```bash
+az containerapp create \
+  --name ca-myapi \
+  --resource-group rg-prod \
+  --environment cae-prod \
+  --image myregistry.azurecr.io/myapi:v1 \
+  --target-port 8080 \
+  --ingress external \
+  --min-replicas 0 --max-replicas 10
+```
 
-<img src="_work/md/Azure Cloud/media/media/image46.png" style="width:9in;height:5.19003in" />
+Sweet spot between **ACI simplicity** and **AKS power**.
 
-<img src="_work/md/Azure Cloud/media/media/image47.png" style="width:9in;height:4.70936in" />
+## What are Azure Functions, and what are hosting plans?
 
-<img src="_work/md/Azure Cloud/media/media/image48.png" style="width:7.5in;height:6.28403in" />
+**Azure Functions** — event-driven serverless functions (C#, JS, Python, Java, PowerShell).
 
-<img src="_work/md/Azure Cloud/media/media/image49.png" style="width:9in;height:6.21627in" />
+| Plan | Behavior |
+|------|----------|
+| **Consumption** | Pay per execution; cold starts; auto-scale |
+| **Premium (EP)** | Pre-warmed instances; VNet; longer timeout |
+| **Dedicated (App Service)** | Runs on existing App Service Plan |
+| **Container Apps** | Functions on Container Apps environment |
 
-<img src="_work/md/Azure Cloud/media/media/image50.png" style="width:9in;height:3.12362in" />
+```csharp
+public class OrderFunctions
+{
+    [FunctionName("ProcessOrder")]
+    public async Task Run(
+        [ServiceBusTrigger("orders", Connection = "ServiceBusConnection")] string orderJson,
+        [CosmosDB(databaseName: "orders", collectionName: "items", ConnectionStringSetting = "CosmosConnection")]
+            IAsyncCollector<Order> collector,
+        ILogger log)
+    {
+        var order = JsonSerializer.Deserialize<Order>(orderJson);
+        await collector.AddAsync(order);
+        log.LogInformation("Stored order {Id}", order!.Id);
+    }
+}
+```
 
-<img src="_work/md/Azure Cloud/media/media/image51.png" style="width:9in;height:3.5259in" />
+**Triggers:** HTTP, Timer, Blob, Queue, Service Bus, Event Grid, Cosmos DB change feed.
 
-<img src="_work/md/Azure Cloud/media/media/image52.png" style="width:9in;height:4.98354in" />
+## What is Azure Batch?
 
-<img src="_work/md/Azure Cloud/media/media/image53.png" style="width:9in;height:5.01022in" />
+**Azure Batch** runs large-scale parallel and HPC workloads — renders, simulations, ETL.
 
-<img src="_work/md/Azure Cloud/media/media/image54.png" style="width:9in;height:4.02411in" />
+```text
+Job → Pool of compute nodes → Tasks run in parallel
+Auto-scales nodes based on queue depth
+```
 
-<img src="_work/md/Azure Cloud/media/media/image55.png" style="width:9in;height:4.78023in" />
+Use when you need **thousands of parallel tasks** — not for web serving.
 
-<img src="_work/md/Azure Cloud/media/media/image56.png" style="width:9in;height:5.59176in" />
+## How do you choose VM size and series?
 
-<img src="_work/md/Azure Cloud/media/media/image57.png" style="width:9in;height:5.42574in" />
+| Series | Purpose |
+|--------|---------|
+| **D/Ds/Dsv** | General purpose (balanced CPU/memory) |
+| **E/Esv** | Memory optimized |
+| **F/Fsv** | Compute optimized |
+| **B/Bsv** | Burstable (dev/test, low average CPU) |
+| **N** | GPU (ML, rendering) |
+| **L/M** | Storage/memory intensive |
 
-<img src="_work/md/Azure Cloud/media/media/image58.png" style="width:9in;height:4.13009in" />
+```bash
+az vm list-skus --location eastus --size Standard_D --output table
+```
+
+**Tips:** Start with **D2s_v5** for general workloads. Use **Azure Advisor** for right-sizing recommendations. **B-series** for dev; never for sustained production load without monitoring CPU credits.
+
+## What resources are created automatically when you deploy a VM?
+
+Typical VM deployment creates:
+
+```text
+Resource Group
+  ├── Virtual Machine
+  ├── OS Disk (managed)
+  ├── Network Interface (NIC)
+  ├── Virtual Network (if new)
+  ├── Subnet (if new)
+  ├── Public IP (if enabled)
+  ├── NSG (if default rules applied)
+  └── (Optional) Availability Set / Zone assignment
+```
+
+Use **Azure Pricing Calculator** — a D2s_v3 VM also bills for disk, IP, and bandwidth separately.
+
+## How does Azure compute integrate with load balancers?
+
+| Compute | Load balancer integration |
+|---------|--------------------------|
+| **VM / VMSS** | Azure Load Balancer or Application Gateway backend pool |
+| **App Service** | Built-in load balancing across plan instances |
+| **AKS** | Kubernetes Service (LoadBalancer/ClusterIP) + AGIC |
+| **ACI** | External LB required for multi-instance |
+| **Functions** | Built-in for HTTP triggers on Premium/Consumption |
+
+```text
+Internet → Application Gateway (L7) → VMSS / App Service / AKS
+Internet → Load Balancer (L4)       → VM / VMSS
+```
+
+See **Azure Application Gateway and Load Balancer.md** for details.
+
+## Related Topics
+
+- **Azure Basics.md** — IaaS/PaaS, SLAs, availability sets
+- **Azure Networking.md** — VNet, NSG, Bastion
+- **Azure Application Gateway and Load Balancer.md** — traffic distribution
+- **Azure Commands and CLI.md** — VM and App Service CLI
