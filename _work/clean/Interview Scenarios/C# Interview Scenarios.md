@@ -1,5 +1,11 @@
 # C# Interview Scenarios
 
+**What this is:** C# language and runtime traps that surface **under load or in long-running apps** — not syntax trivia. Interviewers describe a production symptom (hangs, memory leak, wrong data) and expect you to connect it to **threading, lifetime, async, or deferred execution**.
+
+**Why these matter:** Code that passes unit tests and works in dev often fails at scale because of `DbContext` lifetime, thread pool starvation, or `IEnumerable` double enumeration.
+
+**How to study:** For each scenario, name **symptom → root cause → fix → how you'd detect it in prod** (logs, counters, profilers).
+
 ## Questions Covered
 
 1. How do you log out a user when authentication uses stateless JWT?
@@ -17,41 +23,38 @@
 
 ## How do you log out a user when authentication uses stateless JWT?
 
-**Scenario:** SPA stores JWT in memory/localStorage. User clicks Logout. You cannot "invalidate" the JWT on the client alone — it is valid until `exp`.
+**Context:** SPA stores JWT in memory or localStorage. User clicks Logout. The token is still cryptographically valid until `exp` — anyone with a copy (or XSS theft) can call APIs until then.
 
-**What 90% miss:** Logout is a **server-side concern** for stateless JWT. Client delete ≠ security.
+**What trips people up:** "Delete the token on the client" as the complete security answer.
 
 | Approach | How it works | Trade-off |
 |----------|--------------|-----------|
-| **Short-lived access token + refresh token** | Logout revokes **refresh token** in DB/Redis denylist | Industry standard |
-| **Token blocklist (jti)** | Store `jti` until `exp` in Redis | Memory scales with logouts |
-| **Session version claim** | User has `token_version` in DB; bump on logout; API rejects old version | One DB read per request or cached |
-| **Rotate signing keys** | Nuclear option — invalidates everyone | Not per-user logout |
+| **Short-lived access + refresh token** | Logout revokes refresh token in DB/Redis | Industry standard; brief access token window remains |
+| **Token blocklist (`jti`)** | Store revoked `jti` in Redis until `exp` | Memory scales with logout volume |
+| **Session version claim** | Bump `token_version` in DB on logout; API rejects old version | Requires claim check or cache |
+| **Rotate signing keys** | Invalidates all tokens | Nuclear — not per-user logout |
 
 ```csharp
-// Refresh token store — logout removes it
 public async Task LogoutAsync(string userId, string refreshToken)
 {
     await _refreshStore.RevokeAsync(userId, refreshToken);
-    // Optional: blocklist current access token jti until exp
-    await _blocklist.AddAsync(jti, expiresAt);
+    await _blocklist.AddAsync(jti, expiresAt);  // optional: block current access token
 }
 ```
 
-**Interview answer:** "Client discards tokens for UX; server revokes refresh token and optionally blocklists `jti`. Access token may live until expiry unless we use very short TTL (5–15 min)."
+**Strong close:** "Client discard is UX; server revokes refresh and optionally blocklists `jti`. Keep access TTL short (5–15 min)."
 
-## A DbContext is registered as Scoped but injected into a Singleton — what breaks and how do you fix it?
+## A DbContext is registered as Scoped but injected into a Singleton — what breaks?
 
-**Scenario:** Developer injects `AppDbContext` into `EmailBackgroundService` registered as `IHostedService` singleton.
+**Context:** Developer injects `AppDbContext` into `EmailBackgroundService` (`IHostedService` singleton). App runs fine in tests; production shows random failures.
 
-**Symptoms:** `ObjectDisposedException`, stale data, thread-safety exceptions, or silent cross-request data bleed in tests.
+**Symptoms:** `ObjectDisposedException`, stale data, thread-safety exceptions, or cross-request data bleed.
 
-**Why:** `DbContext` is **not thread-safe** and scoped to a request/unit of work.
+**Why:** `DbContext` is **not thread-safe** and scoped to one unit of work (typically one HTTP request).
 
-**Fixes:**
+**Fix — create scope per operation:**
 
 ```csharp
-// Correct — create scope per operation
 public class EmailBackgroundService : BackgroundService
 {
     private readonly IServiceScopeFactory _scopeFactory;
@@ -71,27 +74,31 @@ public class EmailBackgroundService : BackgroundService
 | Wrong | Right |
 |-------|-------|
 | Singleton holds `DbContext` | `IServiceScopeFactory` + `using scope` |
-| Singleton holds scoped service | `IDbContextFactory<T>` for manual lifetime |
+| Singleton holds any scoped service | `IDbContextFactory<T>` for manual lifetime |
 
-## Production hangs under load — someone used `.Result` on Task in ASP.NET Core. Explain and fix.
+**Strong close:** "Scoped services in singletons need an explicit scope per operation — never capture `DbContext` in a long-lived object."
 
-**Scenario:** Library calls `GetDataAsync().Result` inside a request. Under concurrency, threads block waiting for thread pool threads → **thread pool starvation** → app stops responding.
+## Production hangs under load — `.Result` on Task in ASP.NET Core?
+
+**Context:** Library or legacy code calls `GetDataAsync().Result` inside a request handler. Low traffic works; under concurrency the app **stops responding**.
+
+**Mechanism:** ASP.NET Core uses thread pool threads for requests. `.Result` **blocks** a thread waiting for async I/O that needs another thread pool thread → **thread pool starvation** → deadlock-like hang.
 
 ```csharp
 // DEADLOCK / starvation pattern
-var data = _client.GetAsync(url).Result;  // blocks thread pool thread
+var data = _client.GetAsync(url).Result;
 
 // Fix
 var data = await _client.GetAsync(url).ConfigureAwait(false);
 ```
 
-**Diagnosis:** Thread pool queue length grows, `dotnet-counters` shows high `# of blocked threads`, Kestrel accepts connections but handlers never run.
+**Diagnosis:** Growing thread pool queue, `dotnet-counters` shows blocked threads, Kestrel accepts connections but handlers never complete.
 
-**Rule:** No `.Result`, `.Wait()`, `.GetAwaiter().GetResult()` on async I/O in ASP.NET Core request path — ever.
+**Strong close:** "No `.Result`, `.Wait()`, or `.GetAwaiter().GetResult()` on async I/O in the ASP.NET request path."
 
-## Two threads double-check a lazy singleton without volatile — can it return a half-initialized object?
+## Two threads double-check a lazy singleton without volatile?
 
-**Scenario:**
+**Context:** Classic double-checked locking without `volatile` or `Lazy<T>`:
 
 ```csharp
 private static Singleton? _instance;
@@ -106,7 +113,7 @@ public static Singleton Instance
             lock (_lock)
             {
                 if (_instance == null)
-                    _instance = new Singleton();  // reordering risk without volatile
+                    _instance = new Singleton();
             }
         }
         return _instance;
@@ -114,114 +121,129 @@ public static Singleton Instance
 }
 ```
 
-Without `volatile` on `_instance` (or `Lazy<T>`), CPU/memory reordering can expose **partially constructed** object to another thread (rare, architecture-dependent — but real on interview).
+**What trips people up:** "Lock makes it safe" — without `volatile`, CPU/memory reordering can expose a **partially constructed** object to another thread (ECMA memory model issue; rare but valid interview depth).
 
-**Correct:** `private static readonly Lazy<Singleton> _instance = new(() => new Singleton());` or `volatile` + DCL pattern.
+**Correct:** `private static readonly Lazy<Singleton> _instance = new(() => new Singleton());`
 
-## An event handler on a long-lived object prevents GC of a form/screen — how do you diagnose and fix?
+**Strong close:** "Use `Lazy<T>` or `volatile` + DCL — don't hand-roll unless you know the memory model."
 
-**Scenario:** `MessageBus.Subscribe(this, OnMessage)` in UI code; bus is static singleton. Form closes but stays in memory.
+## Event handler on long-lived object prevents GC?
 
-**Fix:** Unsubscribe in `Dispose`/`FormClosed`, or use **weak event** pattern, or `IOptions` change tokens instead of events.
+**Context:** UI form subscribes to static event bus; form closes but object stays in memory — users report memory growth after opening/closing screens.
 
 ```csharp
-// Leak
+// Leak — bus holds reference to form via delegate
 StaticEventHub.OrderPlaced += OnOrderPlaced;
 
-// Fix
-StaticEventHub.OrderPlaced -= OnOrderPlaced;  // in Dispose
+// Fix — unsubscribe in Dispose / FormClosed
+StaticEventHub.OrderPlaced -= OnOrderPlaced;
 ```
 
-**Diagnose:** dotMemory / Visual Studio heap — object retained by delegate target chain.
+**Diagnose:** dotMemory / Visual Studio heap snapshot — object retained by delegate target chain from static event source.
 
-## async void in a WinForms/WPF button click crashes the app intermittently — why?
+**Strong close:** "Long-lived publishers + short-lived subscribers require unsubscribe or weak events."
 
-**Scenario:**
+## async void in WinForms/WPF button click — intermittent crash?
+
+**Context:**
 
 ```csharp
 private async void Button_Click(object sender, EventArgs e)
 {
-    await _api.PlaceOrderAsync();  // exception here is unobserved → crashes process
+    await _api.PlaceOrderAsync();  // exception → unobserved → can crash process
 }
 ```
 
-`async void` exceptions propagate to `SynchronizationContext` — unhandled on UI thread.
+**Why:** `async void` exceptions propagate to `SynchronizationContext` — not to caller; unhandled on UI thread can terminate the app.
 
-**Fix:** `async Task` handler if possible, or try/catch inside `async void` and log. Prefer `AsyncRelayCommand` in MVVM.
+**Fix:** Use `async Task` handler where possible; always try/catch inside `async void`; prefer `AsyncRelayCommand` in MVVM.
 
-## HttpClient works in dev but DNS changes fail in production until restart — why?
+**Strong close:** "`async void` only for event handlers — catch inside; never for business logic you call directly."
 
-**Scenario:** `new HttpClient()` per request was "fixed" by single static `HttpClient` — but DNS of downstream service changed (blue/green deploy, new IP).
+## HttpClient DNS fails in production until restart?
 
-**Cause:** `HttpClient` with `SocketsHttpHandler` **caches DNS** for connection lifetime (default can be long).
+**Context:** Team "fixed" `new HttpClient()` per request by using one static `HttpClient`. After blue/green deploy, downstream DNS points to new IPs — app still connects to **old IP** until restart.
 
-**Fix (.NET 5+):**
+**Cause:** `SocketsHttpHandler` **pools connections** and caches DNS for connection lifetime (can be very long).
 
 ```csharp
 var handler = new SocketsHttpHandler
 {
-    PooledConnectionLifetime = TimeSpan.FromMinutes(2)  // refresh DNS periodically
+    PooledConnectionLifetime = TimeSpan.FromMinutes(2)
 };
 services.AddHttpClient<MyApiClient>()
     .ConfigurePrimaryHttpMessageHandler(() => handler);
 ```
 
-Use **`IHttpClientFactory`** — don't roll your own static `HttpClient`.
+**Strong close:** "Use `IHttpClientFactory` with bounded `PooledConnectionLifetime` — not static `HttpClient` or per-request disposal."
 
-## ConfigureAwait(false) in a library — when does it matter and when does it not?
+## ConfigureAwait(false) — when does it matter?
 
-**Scenario:** NuGet library author uses `ConfigureAwait(false)` everywhere; app developer wonders if they need it in ASP.NET Core controllers.
+**Context:** Library author uses `ConfigureAwait(false)` everywhere; app developer wonders if controllers need it too.
 
-| Location | Need ConfigureAwait(false)? |
-|----------|----------------------------|
-| **Library code** | Yes — don't capture caller context |
-| **ASP.NET Core app code** | No — no `SynchronizationContext` like old UI |
-| **UI (WPF/WinForms)** | App code usually wants context — don't use false in UI event handlers |
+| Location | Need `ConfigureAwait(false)`? |
+|----------|-------------------------------|
+| **Library / NuGet code** | Yes — don't capture caller's `SynchronizationContext` |
+| **ASP.NET Core app code** | No — no request `SynchronizationContext` like classic ASP.NET |
+| **WPF / WinForms app code** | Usually no in UI handlers — need UI thread for controls |
 
-Misuse in UI library → callbacks run on wrong thread, controls cross-thread exception.
+**Misuse:** `ConfigureAwait(false)` in UI library then touch controls → cross-thread exception.
 
-## A CancellationToken is ignored deep in the call stack — what user-visible bug appears?
+**Strong close:** "Libraries: false. ASP.NET Core apps: unnecessary. UI apps: usually keep context in UI code."
 
-**Scenario:** Client disconnects; Kestrel cancels token; repository ignores it and runs 30s report query anyway.
+## CancellationToken ignored deep in call stack?
 
-**Effects:** Wasted DB CPU, connection pool exhaustion, slow site for everyone.
+**Context:** Client disconnects or times out; Kestrel cancels the request token. Repository ignores it and runs a 30-second report query anyway.
+
+**Effects:** Wasted DB CPU, connection pool exhaustion, slow site for **other** users.
 
 ```csharp
 public async Task<List<Order>> GetOrdersAsync(CancellationToken ct = default)
 {
-    return await _db.Orders.ToListAsync(ct);  // pass ct through EVERY async call
+    return await _db.Orders.ToListAsync(ct);  // pass ct through EVERY async layer
 }
 ```
 
-**Interview point:** Cancellation is cooperative — must flow from controller → service → EF → HTTP client.
+**Strong close:** "Cancellation is cooperative — thread from controller to EF to `HttpClient`."
 
-## string.Intern seemed like a good cache — memory grows until OOM. What happened?
+## string.Intern — memory grows until OOM?
 
-**Scenario:** Intern every incoming SKU string from millions of products — intern pool **never releases** strings (lifetime = app domain).
+**Context:** Developer interns every incoming SKU string to "save memory" on millions of unique products.
 
-**Lesson:** `string.Intern` only for **small, finite** repeated set. For general dedup use your own bounded cache with eviction.
+**What happened:** Intern pool **never releases** strings (lifetime = app domain). Unique SKUs → unbounded intern table → OOM.
 
-## IEnumerable returned from a repository is enumerated twice — data is wrong in production. Why?
+**Lesson:** `string.Intern` only for **small, finite, repeated** sets. For general dedup use a **bounded cache with eviction**.
 
-**Scenario:**
+**Strong close:** "Intern is not a general-purpose string cache — it's permanent."
+
+## IEnumerable enumerated twice — wrong data in production?
+
+**Context:**
 
 ```csharp
-public IEnumerable<Order> GetOpenOrders() => _db.Orders.Where(o => o.Status == Open);
-// Caller:
+public IEnumerable<Order> GetOpenOrders() =>
+    _db.Orders.Where(o => o.Status == Open);
+
 var q = repo.GetOpenOrders();
-var count = q.Count();      // executes query
-var first = q.First();      // NEW query — data may have changed between
+var count = q.Count();     // query 1
+var first = q.First();     // query 2 — data may have changed
 ```
 
-**Fix:** Return `IQueryable` with clear contract, or materialize `ToListAsync()` once, or use **single enumeration** pattern.
+**Bugs this causes:** Wrong pagination, duplicate side effects, inconsistent counts in reports.
 
-Deferred execution surprises cause **duplicate charges**, **wrong pagination**, **modified collection during enum** bugs.
+**Fix:** Materialize once (`ToListAsync()`), or return `IQueryable` with explicit contract, or single-enumeration API.
 
-## A static ConcurrentDictionary cache never evicts entries — what production incident follows?
+**Strong close:** "Deferred execution means a new query per enumeration — materialize when you need a stable snapshot."
 
-**Scenario:** Cache key = `userId:productId` for every catalog browse — millions of unique keys → **LOH/gen2 pressure** → full GC pauses → SLA breach.
+## Static ConcurrentDictionary cache never evicts?
 
-**Fix:** Bounded cache (size + TTL), Redis with `maxmemory-policy`, or don't cache unbounded cardinality keys.
+**Context:** Cache key = `userId:productId` for every catalog browse — cardinality explodes with traffic.
+
+**Incident:** Gen2 / LOH pressure → full GC pauses → SLA breach; looks like "random" latency spikes.
+
+**Fix:** Bounded cache (size + TTL), Redis with `maxmemory-policy`, or don't cache unbounded-cardinality keys.
+
+**Strong close:** "Every cache needs an eviction story — unbounded in-process caches die from cardinality."
 
 ## Related Topics
 

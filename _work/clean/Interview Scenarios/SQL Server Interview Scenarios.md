@@ -1,5 +1,9 @@
 # SQL Server Interview Scenarios
 
+**What this is:** SQL Server behavior under **concurrency, scale, and operational stress** — not "write a SELECT." Interviewers describe symptoms (random 500s, wrong balances, failover writes to dead primary) and expect you to connect them to isolation levels, indexes, hints, and connection semantics.
+
+**Pair with:** Sql Server Transactions and Locking for fundamentals; Query Optimization for plan analysis.
+
 ## Questions Covered
 
 1. Two transactions deadlock — SQL Server picks victim. App shows random 500s. Full handling?
@@ -15,17 +19,17 @@
 11. Split `varchar(max)` update — log explodes, replication lag 2 hours. Cause?
 12. RowVersion optimistic concurrency — user overwrites without knowing. UX fix?
 
-## Two transactions deadlock — SQL Server picks victim. Full handling?
+## Two transactions deadlock — full handling?
 
-**Scenario:**
+**Context:**
 
 ```sql
 -- Tx A: lock Orders then OrderLines
 -- Tx B: lock OrderLines then Orders
--- Deadlock graph 1205 on one victim
+-- SQL Server detects cycle, kills victim — error 1205
 ```
 
-**90% miss:** Retry is **required** — not optional.
+**What trips people up:** Returning 500 to user without **retry** — deadlocks are expected under concurrency.
 
 ```csharp
 const int maxRetries = 3;
@@ -40,110 +44,135 @@ for (int i = 0; i < maxRetries; i++)
     }
     catch (SqlException ex) when (ex.Number == 1205)
     {
-        await Task.Delay(Random.Shared.Next(50, 200));
+        await Task.Delay(Random.Shared.Next(50, 200));  // jitter
     }
 }
 ```
 
-**Prevention:** Consistent lock order (always parent then child), shorter transactions, right indexes to reduce lock footprint.
+**Prevention:** Consistent lock order (parent before child), shorter transactions, indexes to reduce lock footprint.
 
-## Parameter sniffing: fast in dev, timeout in prod?
+**Strong close:** "1205 is normal — retry with jitter; fix design to reduce deadlock frequency."
 
-**Scenario:** Stored proc `@Status` first compiled with `Status=Open` (5M rows) — scan plan. Prod call `Status=Shipped` (100 rows) uses same plan — nested loop disaster or reverse.
+## Parameter sniffing — fast in dev, timeout in prod?
+
+**Context:** Stored procedure `@Status` first compiled with `Status = 'Open'` (millions of rows) — scan plan cached. Production call with `Status = 'Shipped'` (few rows) reuses bad plan — timeout or nested loop disaster.
 
 **Diagnose:**
 
 ```sql
 EXEC sp_BlitzCache @SortOrder = 'CPU';
--- Check @parameter_value vs actual in plan cache
+-- Compare parameter compile value vs actual in plan cache
 ```
 
-**Fixes:** `OPTION (RECOMPILE)`, `OPTIMIZE FOR UNKNOWN`, local variable trick (legacy), filtered indexes per status, `Query Store` force plan.
+**Fixes:** `OPTION (RECOMPILE)` for skewed params; `OPTIMIZE FOR UNKNOWN`; filtered indexes per status; Query Store force good plan.
 
-## READ COMMITTED but report counts rows twice during ETL?
+**Strong close:** "First parameter value bakes the plan — sniffing is a compile-time vs runtime data mismatch."
 
-**Scenario:** Long-running report `COUNT(*)` while ETL **inserts** rows committed in batches — count not repeatable if report scans twice.
+## READ COMMITTED — report counts rows twice during ETL?
 
-Or: **read skew** — two reads same row different values in one transaction without snapshot.
+**Context:** Long report runs `COUNT(*)` while ETL inserts committed batches — if report scans twice, counts differ. Or **non-repeatable read** within one transaction without snapshot.
 
-**Fix for consistent report:** `SNAPSHOT` or `REPEATABLE READ` for report transaction, or read from **read replica**, or **snapshot table** / cube.
+**What trips people up:** Assuming `READ COMMITTED` means stable reads throughout a transaction.
+
+**Fix:** `SNAPSHOT` isolation for report session; read from **replica**; or materialized snapshot / cube for reporting.
+
+**Strong close:** "Reporting needs repeatable read or snapshot — not default read committed across long scans."
 
 ## Index on LIKE '%@contoso.com' — still scan?
 
-**Scenario:** Leading wildcard prevents B-tree seek.
-
-**Options:**
+**Context:** Leading wildcard `%` prevents B-tree **seek** — index on `Email` cannot be used efficiently.
 
 | Approach | When |
 |----------|------|
-| **Full-text index** | Search emails, descriptions |
-| **Computed persisted column** | Parse domain, index domain |
-| **Elastic / OpenSearch** | Heavy search |
-| **Trigram (PostgreSQL)** | Not native SQL Server — use FTS |
+| **Full-text index** | Email/description search |
+| **Computed persisted column** | Extract domain, index domain |
+| **Elastic / OpenSearch** | Heavy search workloads |
 
 ```sql
-ALTER TABLE Users ADD EmailDomain AS SUBSTRING(Email, CHARINDEX('@', Email), 100) PERSISTED;
+ALTER TABLE Users ADD EmailDomain AS
+  SUBSTRING(Email, CHARINDEX('@', Email), 100) PERSISTED;
 CREATE INDEX IX_Users_EmailDomain ON Users(EmailDomain);
+WHERE EmailDomain = '@contoso.com'  -- seekable
 ```
+
+**Strong close:** "Sargability — leading wildcard kills B-tree; restructure data or use FTS."
 
 ## Identity hot spot — 10k inserts/sec?
 
-**Scenario:** `IDENTITY` on clustered PK — last page latch contention (insert same page).
+**Context:** `IDENTITY` on **clustered** primary key — all inserts hit the **last page** of the B-tree → latch contention (insert hot spot).
 
-**Fixes:** `SEQUENCE` with `HASH` distribution, partition scheme, `NEWSEQUENTIALID()` for GUIDs (different trade-off), In-Memory OLTP for extreme insert rates.
+**Fixes:** `SEQUENCE` with hash partition scheme; `NEWSEQUENTIALID()` for GUID clustered PK (different fragmentation trade-off); In-Memory OLTP for extreme insert rates.
+
+**Strong close:** "Monotonic clustered identity serializes inserts on one page — spread keys or partition."
 
 ## FK without index on child — parent DELETE blocks system?
 
-**Scenario:** `DELETE FROM Customers WHERE Id=1` must verify no `Orders` — table scan on Orders locks millions of rows.
+**Context:** `DELETE FROM Customers WHERE Id = 1` must verify no child `Orders` — without index on `Orders.CustomerId`, SQL Server **scans** Orders and locks huge ranges.
 
 ```sql
 CREATE INDEX IX_Orders_CustomerId ON Orders(CustomerId);
 ```
 
-**Symptom:** `LCK_M_S` blocking chain — one delete blocks all order inserts.
+**Symptom:** `LCK_M_S` blocking chain — one delete blocks all order activity.
 
-## NOLOCK fixed blocking — finance sees negative balance?
+**Strong close:** "Every FK child column needs an index — parent deletes/updates probe children."
 
-**Scenario:** Developer adds `(NOLOCK)` everywhere — reads **uncommitted** rows; rollback makes "ghost" debits vanish; balance wrong.
+## NOLOCK — finance sees negative balance?
 
-**Lesson:** `NOLOCK` = dirty read. Use `READ COMMITTED SNAPSHOT` at DB level instead:
+**Context:** Dev adds `(NOLOCK)` to fix blocking reports. Finance sees balances that **don't exist** — uncommitted rows read, then rolled back.
+
+**What happened:** `NOLOCK` = **dirty read** — not a isolation level, a read-uncommitted hint.
+
+**Better:**
 
 ```sql
 ALTER DATABASE Contoso SET READ_COMMITTED_SNAPSHOT ON;
 ```
 
-Readers don't block writers; readers see committed version without dirty reads.
+Readers see committed row version without blocking writers; no dirty reads.
 
-## Always On failover — app writes to old primary 30 seconds?
+**Strong close:** "NOLOCK trades correctness for speed — use RCSI instead for read/write concurrency."
 
-**Scenario:** Connection string points to listener; failover occurs; connection pool has open connections to old replica; `Login failed` or split writes.
+## Always On failover — app writes to old primary 30s?
 
-**Fix:** `MultiSubnetFailover=True`, connection retry, `ApplicationIntent=ReadOnly` for replicas, pool clear on failover detection, use **AG listener** not node name.
+**Context:** Failover completes; app still sends writes to old node — split brain or login failures.
+
+**Causes:** Connection string points to **node name** not listener; pool holds open connections to old primary; no `MultiSubnetFailover`.
+
+**Fix:** AG **listener** in connection string; `MultiSubnetFailover=True`; `ApplicationIntent=ReadOnly` for replicas; clear pool on failover notification in app if needed.
+
+**Strong close:** "Connection pool is sticky — listener + failover attributes + pool awareness."
 
 ## Tempdb full — three common causes?
 
 | Cause | Pattern |
 |-------|---------|
-| **Sort/hash spills** | Huge `ORDER BY` / `GROUP BY` without memory grant |
-| **Version store** | Long transactions under RCSI/MVCC |
-| **Table variables / #temp** | ETL creates millions of temp objects |
+| **Sort/hash spills** | Huge `ORDER BY` / `GROUP BY` without enough memory grant |
+| **Version store** | Long transactions under RCSI/MVCC — versions accumulate in tempdb |
+| **Temp tables / table variables** | ETL creates millions of `#temp` objects |
 
 ```sql
 SELECT * FROM sys.dm_db_file_space_usage;
 SELECT * FROM sys.dm_tran_active_snapshot_database_transactions;
 ```
 
+**Strong close:** "Tempdb is shared — spills, version store, and temp object churn are top culprits."
+
 ## Statistics stale by Friday?
 
-**Scenario:** Auto-update threshold (20% + 500 rows) not hit for large table with gradual data skew — plan picks nested loop on Friday peak.
+**Context:** Auto-update threshold (roughly 20% + 500 row change) not triggered on billion-row table with gradual skew. Monday plan OK; Friday peak traffic uses nested loop on wrong cardinality estimate.
 
-**Fix:** Manual `UPDATE STATISTICS`, `AUTO_UPDATE_STATISTICS_ASYNC`, Query Store plan regression alert.
+**Fix:** Scheduled `UPDATE STATISTICS`; `AUTO_UPDATE_STATISTICS_ASYNC`; Query Store alerts on regression.
+
+**Strong close:** "Auto-stats has a threshold — large tables need proactive maintenance."
 
 ## varchar(max) update — log explosion?
 
-**Scenario:** In-place update not possible — row moves, logs full old+new value, replication applies slowly.
+**Context:** Updating large `varchar(max)` column may not update in place — row moves, transaction log records full old + new value; replication/CDC applies slowly → hours of lag.
 
-**Fix:** Smaller row size, `TEXTIMAGE_ON` separate filegroup, avoid frequent large updates, CDC instead of replication for analytics.
+**Fix:** Smaller row design; avoid frequent large in-place updates; separate blob storage; CDC instead of transactional replication for analytics.
+
+**Strong close:** "Large row updates are log-heavy — design away from hot large-column updates."
 
 ## RowVersion concurrency — UX fix?
 
@@ -156,14 +185,15 @@ CREATE TABLE Orders (
 ```
 
 ```csharp
-// EF Core concurrency token
 catch (DbUpdateConcurrencyException)
 {
-    // Show user: "Someone else changed this order. Reload?"
+    // "Someone else changed this order. Reload and retry?"
 }
 ```
 
-Without handling — last write wins silently — lost update problem.
+**Without handling:** Last write wins — lost update, angry users.
+
+**Strong close:** "`rowversion` + catch concurrency exception + merge UI — never silent overwrite."
 
 ## Related Topics
 
