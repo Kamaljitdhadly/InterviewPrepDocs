@@ -44,7 +44,7 @@
         { "topic": "Azure DevOps", "files": ["Azure DevOps Pipelines and CI-CD.md", "Azure DevOps Deployment Strategies.md", "Azure DevOps Security Artifacts and Repos.md"] },
         { "topic": "Testing", "files": ["Integration Testing.md", "Test Pyramid and Best Practices.md"] },
         { "topic": "Git", "files": ["Git Commands.md"] },
-        { "topic": "Bash", "files": ["bash Commands.md"] }
+        { "topic": "Bash", "files": ["Bash Basics.md", "Bash Shell Scripting.md", "Bash Text Processing and Pipes.md", "Bash System and DevOps Commands.md"] }
       ]
     },
     {
@@ -126,6 +126,13 @@
       ]
     },
     {
+      "id": "bash-shell",
+      "title": "Bash & Shell (Complete)",
+      "order": [
+        { "topic": "Bash", "files": ["Bash Basics.md", "Bash Text Processing and Pipes.md", "Bash Shell Scripting.md", "Bash System and DevOps Commands.md", "bash Commands.md"] }
+      ]
+    },
+    {
       "id": "postgresql",
       "title": "PostgreSQL (Complete)",
       "order": [
@@ -174,7 +181,8 @@
     "Redis": { "pairs": ["Microservices", "System Design", "C#", "Azure Cloud 1"], "next": ["Redis Caching Patterns.md"] },
     "Terraform": { "requires": ["Docker"], "pairs": ["Azure DevOps", "Azure Cloud 1", "AWS", "Google Cloud"], "next": ["Terraform State Modules and Workflows.md"] },
     "PostgreSQL": { "pairs": ["Sql Server", "MongoDB", "C#"], "next": ["PostgreSQL Queries and Performance.md"] },
-    "GraphQL": { "requires": ["Javascript", "TypeScript"], "pairs": ["React", "C#", "Microservices"], "next": ["GraphQL with .NET and Node.js.md"] }
+    "GraphQL": { "requires": ["Javascript", "TypeScript"], "pairs": ["React", "C#", "Microservices"], "next": ["GraphQL with .NET and Node.js.md"] },
+    "Bash": { "requires": ["Git"], "pairs": ["Docker", "Azure DevOps", "Kubernetes"], "next": ["Bash Shell Scripting.md", "Bash System and DevOps Commands.md"] }
   },
   "fileRelations": {
     "Angular/Angular Basics.md": ["Angular/Angular Modern Features.md", "Angular/Angular Routing.md", "TypeScript/TypeScript Basics.md"],
@@ -267,6 +275,10 @@
     "PostgreSQL/PostgreSQL Queries and Performance.md": ["PostgreSQL/PostgreSQL Advanced Features.md", "Sql Server/SQL Server Query Optimization Techniques.md"],
     "GraphQL/GraphQL Basics.md": ["GraphQL/GraphQL with .NET and Node.js.md", "Important Concepts/Interview Comparisons.md"],
     "GraphQL/GraphQL with .NET and Node.js.md": ["C#/WebApi Basics.md", "React/React HTTP and Data Fetching.md"],
-    "Important Concepts/Cloud Provider Comparison.md": ["Azure Cloud 1/Azure Basics.md", "AWS/AWS Basics.md", "Google Cloud/Google Cloud Basics.md", "Terraform/Terraform Multi-Cloud Providers.md"]
+    "Important Concepts/Cloud Provider Comparison.md": ["Azure Cloud 1/Azure Basics.md", "AWS/AWS Basics.md", "Google Cloud/Google Cloud Basics.md", "Terraform/Terraform Multi-Cloud Providers.md"],
+    "Bash/Bash Basics.md": ["Bash/Bash Text Processing and Pipes.md", "Bash/Bash Shell Scripting.md", "Git/Git Commands.md"],
+    "Bash/Bash Text Processing and Pipes.md": ["Bash/Bash Shell Scripting.md", "Bash/Bash System and DevOps Commands.md"],
+    "Bash/Bash Shell Scripting.md": ["Bash/Bash System and DevOps Commands.md", "Azure DevOps/Azure DevOps Pipelines and CI-CD.md"],
+    "Bash/Bash System and DevOps Commands.md": ["Docker/Docker Basics.md", "Kubernetes/Kubernetes Basics.md"]
   }
 }

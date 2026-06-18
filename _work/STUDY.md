@@ -2,7 +2,7 @@
 
 > **Start here.** All study notes live under `_work/tight/`. Clean (full) versions: `_work/clean/`.
 
-**Library stats:** 27 topics · 253 files · ~1889 questions
+**Library stats:** 27 topics · 257 files · ~1937 questions
 
 ---
 
@@ -58,7 +58,7 @@
 | 8 | **Azure DevOps** | Azure DevOps Pipelines and CI-CD, Azure DevOps Deployment Strategies, Azure DevOps Security Artifacts and Repos |
 | 9 | **Testing** | Integration Testing, Test Pyramid and Best Practices |
 | 10 | **Git** | Git Commands |
-| 11 | **Bash** | bash Commands |
+| 11 | **Bash** | Bash Basics, Bash Shell Scripting, Bash Text Processing and Pipes, Bash System and DevOps Commands |
 
 ### Microservices & System Design
 
@@ -128,6 +128,12 @@
 | 3 | **Docker** | Docker Build and CICD Integration |
 | 4 | **Testing** | Integration Testing, Test Pyramid and Best Practices |
 
+### Bash & Shell (Complete)
+
+| Step | Topic | Files to study |
+|------|-------|----------------|
+| 1 | **Bash** | Bash Basics, Bash Text Processing and Pipes, Bash Shell Scripting, Bash System and DevOps Commands, bash Commands |
+
 ### PostgreSQL (Complete)
 
 | Step | Topic | Files to study |
@@ -161,7 +167,7 @@
 | Angular | 19 | `_work/tight/Angular/` |
 | Azure Cloud | 13 | `_work/tight/Azure Cloud/` |
 | Azure DevOps | 5 | `_work/tight/Azure DevOps/` |
-| Bash | 1 | `_work/tight/Bash/` |
+| Bash | 5 | `_work/tight/Bash/` |
 | C# | 27 | `_work/tight/C#/` |
 | Certificates | 3 | `_work/tight/Certificates/` |
 | Data Structures and Algorithms | 14 | `_work/tight/Data Structures and Algorithms/` |
