@@ -45,7 +45,7 @@
         { "topic": "Important Concepts", "files": ["Cloud Provider Comparison.md"] },
         { "topic": "Azure DevOps", "files": ["Azure DevOps Pipelines and CI-CD.md", "Azure DevOps Deployment Strategies.md", "Azure DevOps Security Artifacts and Repos.md"] },
         { "topic": "Testing", "files": ["Integration Testing.md", "Test Pyramid and Best Practices.md"] },
-        { "topic": "Git", "files": ["Git Commands.md"] },
+        { "topic": "Git", "files": ["Git Basics.md", "Git Branching and Merging.md", "Git Remote and Collaboration.md", "Git Advanced and Troubleshooting.md", "Git Commands.md"] },
         { "topic": "Bash", "files": ["Bash Basics.md", "Bash Shell Scripting.md", "Bash Text Processing and Pipes.md", "Bash System and DevOps Commands.md"] }
       ]
     },
@@ -129,6 +129,13 @@
       ]
     },
     {
+      "id": "git-vcs",
+      "title": "Git & Version Control (Complete)",
+      "order": [
+        { "topic": "Git", "files": ["Git Basics.md", "Git Branching and Merging.md", "Git Remote and Collaboration.md", "Git Advanced and Troubleshooting.md", "Git Commands.md"] }
+      ]
+    },
+    {
       "id": "bash-shell",
       "title": "Bash & Shell (Complete)",
       "order": [
@@ -193,6 +200,7 @@
     "Terraform": { "requires": ["Docker"], "pairs": ["Azure DevOps", "Azure Cloud", "AWS", "Google Cloud"], "next": ["Terraform State Modules and Workflows.md"] },
     "PostgreSQL": { "pairs": ["Sql Server", "MongoDB", "C#"], "next": ["PostgreSQL Queries and Performance.md"] },
     "GraphQL": { "requires": ["Javascript", "TypeScript"], "pairs": ["React", "C#", "Microservices"], "next": ["GraphQL with .NET and Node.js.md"] },
+    "Git": { "pairs": ["Azure DevOps", "Bash", "Docker"], "next": ["Git Branching and Merging.md", "Git Remote and Collaboration.md"] },
     "Bash": { "requires": ["Git"], "pairs": ["Docker", "Azure DevOps", "Kubernetes"], "next": ["Bash Shell Scripting.md", "Bash System and DevOps Commands.md"] },
     "Interview Scenarios": { "pairs": ["System Design", "Microservices", "C#", "Security"], "next": ["Microservices Interview Scenarios.md", "System Design Interview Scenarios.md"] }
   },
@@ -274,7 +282,11 @@
     "Testing/Integration Testing.md": ["Testing/E2E Testing.md", "Docker/Docker Basics.md", "PostgreSQL/PostgreSQL Basics.md"],
     "Testing/E2E Testing.md": ["Testing/Test Pyramid and Best Practices.md", "Azure DevOps/Azure DevOps Pipelines and CI-CD.md"],
     "Testing/Test Pyramid and Best Practices.md": ["Microservices/Microservices Testing.md", "Azure DevOps/Azure DevOps Pipelines and CI-CD.md"],
-    "Azure DevOps/Azure DevOps Basics and Boards.md": ["Azure DevOps/Azure DevOps Pipelines and CI-CD.md", "Git/Git Commands.md"],
+    "Git/Git Basics.md": ["Git/Git Branching and Merging.md", "Git/Git Remote and Collaboration.md", "Azure DevOps/Azure DevOps Basics and Boards.md"],
+    "Git/Git Branching and Merging.md": ["Git/Git Remote and Collaboration.md", "Git/Git Advanced and Troubleshooting.md"],
+    "Git/Git Remote and Collaboration.md": ["Git/Git Advanced and Troubleshooting.md", "Azure DevOps/Azure DevOps Pipelines and CI-CD.md"],
+    "Git/Git Advanced and Troubleshooting.md": ["Git/Git Commands.md", "Bash/Bash Basics.md"],
+    "Azure DevOps/Azure DevOps Basics and Boards.md": ["Azure DevOps/Azure DevOps Pipelines and CI-CD.md", "Git/Git Basics.md"],
     "Azure DevOps/Azure DevOps Pipelines and CI-CD.md": ["Azure DevOps/Azure DevOps Deployment Strategies.md", "Terraform/Terraform Basics.md", "Testing/Integration Testing.md"],
     "Azure DevOps/Azure DevOps Deployment Strategies.md": ["Kubernetes/Kubernetes Deployment Strategies.md", "Azure Cloud/Azure Compute.md"],
     "Azure DevOps/Azure DevOps Security Artifacts and Repos.md": ["Security/Secure Development Lifecycle.md", "Azure Cloud/Azure Identity and Entra ID.md"],
@@ -288,7 +300,7 @@
     "GraphQL/GraphQL Basics.md": ["GraphQL/GraphQL with .NET and Node.js.md", "Important Concepts/Interview Comparisons.md"],
     "GraphQL/GraphQL with .NET and Node.js.md": ["C#/WebApi Basics.md", "React/React HTTP and Data Fetching.md"],
     "Important Concepts/Cloud Provider Comparison.md": ["Azure Cloud/Azure Basics.md", "AWS/AWS Basics.md", "Google Cloud/Google Cloud Basics.md", "Terraform/Terraform Multi-Cloud Providers.md"],
-    "Bash/Bash Basics.md": ["Bash/Bash Text Processing and Pipes.md", "Bash/Bash Shell Scripting.md", "Git/Git Commands.md"],
+    "Bash/Bash Basics.md": ["Bash/Bash Text Processing and Pipes.md", "Bash/Bash Shell Scripting.md", "Git/Git Basics.md"],
     "Bash/Bash Text Processing and Pipes.md": ["Bash/Bash Shell Scripting.md", "Bash/Bash System and DevOps Commands.md"],
     "Bash/Bash Shell Scripting.md": ["Bash/Bash System and DevOps Commands.md", "Azure DevOps/Azure DevOps Pipelines and CI-CD.md"],
     "Bash/Bash System and DevOps Commands.md": ["Docker/Docker Basics.md", "Kubernetes/Kubernetes Basics.md"],

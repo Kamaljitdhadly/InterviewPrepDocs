@@ -2,7 +2,7 @@
 
 > **Start here.** All study notes live under `study/`. Full (detailed) versions: `full/`.
 
-**Library stats:** 28 topics · 263 files · ~2009 questions
+**Library stats:** 28 topics · 267 files · ~2049 questions
 
 ---
 
@@ -59,7 +59,7 @@
 | 7 | **Important Concepts** | Cloud Provider Comparison |
 | 8 | **Azure DevOps** | Azure DevOps Pipelines and CI-CD, Azure DevOps Deployment Strategies, Azure DevOps Security Artifacts and Repos |
 | 9 | **Testing** | Integration Testing, Test Pyramid and Best Practices |
-| 10 | **Git** | Git Commands |
+| 10 | **Git** | Git Basics, Git Branching and Merging, Git Remote and Collaboration, Git Advanced and Troubleshooting, Git Commands |
 | 11 | **Bash** | Bash Basics, Bash Shell Scripting, Bash Text Processing and Pipes, Bash System and DevOps Commands |
 
 ### Microservices & System Design
@@ -131,6 +131,12 @@
 | 3 | **Docker** | Docker Build and CICD Integration |
 | 4 | **Testing** | Integration Testing, Test Pyramid and Best Practices |
 
+### Git & Version Control (Complete)
+
+| Step | Topic | Files to study |
+|------|-------|----------------|
+| 1 | **Git** | Git Basics, Git Branching and Merging, Git Remote and Collaboration, Git Advanced and Troubleshooting, Git Commands |
+
 ### Bash & Shell (Complete)
 
 | Step | Topic | Files to study |
@@ -182,7 +188,7 @@
 | Certificates | 3 | `study/Certificates/` |
 | Data Structures and Algorithms | 14 | `study/Data Structures and Algorithms/` |
 | Docker | 12 | `study/Docker/` |
-| Git | 1 | `study/Git/` |
+| Git | 5 | `study/Git/` |
 | Google Cloud | 10 | `study/Google Cloud/` |
 | GraphQL | 2 | `study/GraphQL/` |
 | Important Concepts | 8 | `study/Important Concepts/` |
