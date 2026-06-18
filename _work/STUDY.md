@@ -2,7 +2,7 @@
 
 > **Start here.** All study notes live under `_work/tight/`. Clean (full) versions: `_work/clean/`.
 
-**Library stats:** 27 topics · 253 files · ~1882 questions
+**Library stats:** 27 topics · 253 files · ~1889 questions
 
 ---
 
