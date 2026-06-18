@@ -2,7 +2,7 @@
 
 > **Start here.** All study notes live under `_work/tight/`. Clean (full) versions: `_work/clean/`.
 
-**Library stats:** 21 topics · 212 files · ~1260 questions
+**Library stats:** 22 topics · 222 files · ~1386 questions
 
 ---
 
@@ -28,7 +28,8 @@
 | 4 | **TypeScript** | TypeScript Basics, TypeScript Types and Interfaces |
 | 5 | **Angular** | Angular Basics, Angular Modern Features, Angular Routing, Angular Forms & Pipes, Angular HTTP and Services, RxJS Basics, NgRx Basics |
 | 6 | **Azure Cloud** | Azure Basics, Azure Active Directory, Azure Compute |
-| 7 | **Azure DevOps** | Azure Devops Example |
+| 7 | **Azure Cloud 1** | Azure Basics, Azure Compute, Azure Networking, Azure Storage and Databases, Azure Identity and Entra ID |
+| 8 | **Azure DevOps** | Azure Devops Example |
 
 ### React / Frontend Developer
 
@@ -45,8 +46,9 @@
 | 1 | **Docker** | Docker Basics, Docker Compose, Docker Networking, Docker Build and CICD Integration |
 | 2 | **Kubernetes** | Kubernetes Basics, Kubernetes Objects and Configurations, Kubernetes Networking and Storage, Kubernetes Deployment Strategies |
 | 3 | **Azure Cloud** | Azure Basics, Azure Networking, Azure Messaging |
-| 4 | **Git** | Git Commands |
-| 5 | **Bash** | bash Commands |
+| 4 | **Azure Cloud 1** | Azure Basics, Azure Networking, Azure Messaging and Integration, Azure Security and Monitoring |
+| 5 | **Git** | Git Commands |
+| 6 | **Bash** | bash Commands |
 
 ### Microservices & System Design
 
@@ -74,6 +76,12 @@
 |------|-------|----------------|
 | 1 | **Data Structures and Algorithms** | Data Structures and Algorithms Basics, Data Structures and Algorithms Arrays, Data Structures and Algorithms Linked Lists, Data Structures and Algorithms Trees, Data Structures and Algorithms Graphs, Data Structures and Algorithms Algorithms Concepts |
 
+### Azure Cloud (Complete)
+
+| Step | Topic | Files to study |
+|------|-------|----------------|
+| 1 | **Azure Cloud 1** | Azure Basics, Azure Compute, Azure Networking, Azure Storage and Databases, Azure Identity and Entra ID, Azure Messaging and Integration, Azure Application Gateway and Load Balancer, Azure API Management and Gateways, Azure Commands and CLI, Azure Security and Monitoring |
+
 ### AI / LLM Application Developer
 
 | Step | Topic | Files to study |
@@ -89,6 +97,7 @@
 | AI | 8 | `_work/tight/AI/` |
 | Angular | 19 | `_work/tight/Angular/` |
 | Azure Cloud | 13 | `_work/tight/Azure Cloud/` |
+| Azure Cloud 1 | 10 | `_work/tight/Azure Cloud 1/` |
 | Azure DevOps | 1 | `_work/tight/Azure DevOps/` |
 | Bash | 1 | `_work/tight/Bash/` |
 | C# | 27 | `_work/tight/C#/` |
@@ -135,7 +144,7 @@
 
 ## Topic quick links
 
-**Other:** `AI` · `Bash` · `Certificates` · `Git` · `MongoDB` · `Security` · `Testing`
+**Other:** `AI` · `Azure Cloud 1` · `Bash` · `Certificates` · `Git` · `MongoDB` · `Security` · `Testing`
 
 **Frontend:** `Angular` · `React`
 

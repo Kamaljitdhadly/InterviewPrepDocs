@@ -12,6 +12,7 @@
         { "topic": "TypeScript", "files": ["TypeScript Basics.md", "TypeScript Types and Interfaces.md"] },
         { "topic": "Angular", "files": ["Angular Basics.md", "Angular Modern Features.md", "Angular Routing.md", "Angular Forms & Pipes.md", "Angular HTTP and Services.md", "RxJS Basics.md", "NgRx Basics.md"] },
         { "topic": "Azure Cloud", "files": ["Azure Basics.md", "Azure Active Directory.md", "Azure Compute.md"] },
+        { "topic": "Azure Cloud 1", "files": ["Azure Basics.md", "Azure Compute.md", "Azure Networking.md", "Azure Storage and Databases.md", "Azure Identity and Entra ID.md"] },
         { "topic": "Azure DevOps", "files": ["Azure Devops Example.md"] }
       ]
     },
@@ -31,6 +32,7 @@
         { "topic": "Docker", "files": ["Docker Basics.md", "Docker Compose.md", "Docker Networking.md", "Docker Build and CICD Integration.md"] },
         { "topic": "Kubernetes", "files": ["Kubernetes Basics.md", "Kubernetes Objects and Configurations.md", "Kubernetes Networking and Storage.md", "Kubernetes Deployment Strategies.md"] },
         { "topic": "Azure Cloud", "files": ["Azure Basics.md", "Azure Networking.md", "Azure Messaging.md"] },
+        { "topic": "Azure Cloud 1", "files": ["Azure Basics.md", "Azure Networking.md", "Azure Messaging and Integration.md", "Azure Security and Monitoring.md"] },
         { "topic": "Git", "files": ["Git Commands.md"] },
         { "topic": "Bash", "files": ["bash Commands.md"] }
       ]
@@ -66,6 +68,13 @@
       ]
     },
     {
+      "id": "azure-cloud",
+      "title": "Azure Cloud (Complete)",
+      "order": [
+        { "topic": "Azure Cloud 1", "files": ["Azure Basics.md", "Azure Compute.md", "Azure Networking.md", "Azure Storage and Databases.md", "Azure Identity and Entra ID.md", "Azure Messaging and Integration.md", "Azure Application Gateway and Load Balancer.md", "Azure API Management and Gateways.md", "Azure Commands and CLI.md", "Azure Security and Monitoring.md"] }
+      ]
+    },
+    {
       "id": "ai-engineer",
       "title": "AI / LLM Application Developer",
       "order": [
@@ -87,7 +96,8 @@
     "Security": { "requires": ["C#", "Javascript"], "pairs": ["Important Concepts", "Certificates"], "next": ["OWASP Top 10", "Authentication and Identity"] },
     "RxJS": { "requires": ["Angular"], "next": ["NgRx"] },
     "NgRx": { "requires": ["RxJS", "Angular"] },
-    "AI": { "requires": ["C#", "Javascript"], "next": ["RAG and Embeddings.md", "Building AI Applications.md"], "pairs": ["Azure Cloud", "Microservices", "System Design"] }
+    "AI": { "requires": ["C#", "Javascript"], "next": ["RAG and Embeddings.md", "Building AI Applications.md"], "pairs": ["Azure Cloud 1", "Microservices", "System Design"] },
+    "Azure Cloud 1": { "requires": ["C#"], "next": ["Azure Networking.md", "Azure Identity and Entra ID.md"], "pairs": ["Azure DevOps", "Security", "AI"] }
   },
   "fileRelations": {
     "Angular/Angular Basics.md": ["Angular/Angular Modern Features.md", "Angular/Angular Routing.md", "TypeScript/TypeScript Basics.md"],
@@ -130,7 +140,16 @@
     "AI/Prompt Engineering.md": ["AI/RAG and Embeddings.md", "AI/AI Security and Responsible AI.md"],
     "AI/RAG and Embeddings.md": ["AI/Building AI Applications.md", "AI/Fine-tuning Evaluation and MLOps.md"],
     "AI/AI Agents and Function Calling.md": ["AI/Building AI Applications.md", "Microservices/Microservices Basics.md"],
-    "AI/Building AI Applications.md": ["Azure Cloud/Azure Basics.md", "C#/.NET Core Basics.md", "AI/AI System Design and MLOps.md"],
+    "AI/Building AI Applications.md": ["Azure Cloud 1/Azure Basics.md", "C#/.NET Core Basics.md", "AI/AI System Design and MLOps.md"],
+    "Azure Cloud 1/Azure Basics.md": ["Azure Cloud 1/Azure Compute.md", "Azure Cloud 1/Azure Identity and Entra ID.md", "Azure Cloud 1/Azure Commands and CLI.md"],
+    "Azure Cloud 1/Azure Compute.md": ["Azure Cloud 1/Azure Networking.md", "Azure Cloud 1/Azure Application Gateway and Load Balancer.md"],
+    "Azure Cloud 1/Azure Networking.md": ["Azure Cloud 1/Azure Application Gateway and Load Balancer.md", "Azure Cloud 1/Azure Storage and Databases.md"],
+    "Azure Cloud 1/Azure Storage and Databases.md": ["Azure Cloud 1/Azure Messaging and Integration.md", "Sql Server/SQL Server Basics.md"],
+    "Azure Cloud 1/Azure Identity and Entra ID.md": ["Azure Cloud 1/Azure API Management and Gateways.md", "C#/.NET Core JSON Web Token.md"],
+    "Azure Cloud 1/Azure Messaging and Integration.md": ["Microservices/Microservices Communication.md"],
+    "Azure Cloud 1/Azure Application Gateway and Load Balancer.md": ["Azure Cloud 1/Azure API Management and Gateways.md"],
+    "Azure Cloud 1/Azure API Management and Gateways.md": ["Important Concepts/Interview Comparisons.md"],
+    "Azure Cloud 1/Azure Security and Monitoring.md": ["Security/Cloud and Infrastructure Security.md", "Azure Cloud 1/Azure Identity and Entra ID.md"],
     "AI/AI Security and Responsible AI.md": ["Security/Security Basics.md", "Security/API Security.md"],
     "AI/Fine-tuning Evaluation and MLOps.md": ["AI/AI System Design and MLOps.md"],
     "AI/AI System Design and MLOps.md": ["System Design/System Design Basics.md", "Microservices/Microservices Basics.md"]
