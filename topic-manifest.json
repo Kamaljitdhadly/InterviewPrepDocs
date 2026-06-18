@@ -54,10 +54,17 @@
       "title": "Microservices & System Design",
       "order": [
         { "topic": "Microservices", "files": ["Microservices Basics.md", "Microservices Communication.md", "Microservices Service Discovery.md", "Microservices Distributed Transactions.md"] },
-        { "topic": "System Design", "files": ["System Design Basics.md", "System Design CAP Theorem.md", "System Design Design Patterns.md"] },
+        { "topic": "System Design", "files": ["System Design Basics.md", "System Design CAP Theorem.md", "System Design Design Patterns.md", "Ride-Hailing Platform - Architecture Design Document.md", "Ride-Hailing Platform - Request Lifecycle and Integration Flows.md"] },
         { "topic": "Redis", "files": ["Redis Basics.md", "Redis Caching Patterns.md"] },
         { "topic": "Important Concepts", "files": ["Cloud Provider Comparison.md", "Interview Comparisons.md", "OWASP.md"] },
         { "topic": "Interview Scenarios", "files": ["System Design Interview Scenarios.md", "Microservices Interview Scenarios.md"] }
+      ]
+    },
+    {
+      "id": "ride-hailing-design",
+      "title": "Ride-Hailing Platform — Enterprise Architecture",
+      "order": [
+        { "topic": "System Design", "files": ["Ride-Hailing Platform - Architecture Design Document.md", "Ride-Hailing Platform - Services and Data Architecture.md", "Ride-Hailing Platform - Request Lifecycle and Integration Flows.md", "Ride-Hailing Platform - Azure Infrastructure Design.md", "Ride-Hailing Platform - Reliability Operations and Observability.md"] }
       ]
     },
     {
@@ -227,7 +234,12 @@
     "TypeScript/TypeScript Generics.md": ["TypeScript/TypeScript Advanced.md", "C#/C# Generics & Collections.md"],
     "React/Redux Toolkit Basics.md": ["Angular/NgRx Basics.md", "Important Concepts/Interview Comparisons.md"],
     "Angular/NgRx Basics.md": ["React/Redux Toolkit Basics.md", "Important Concepts/Interview Comparisons.md"],
-    "System Design/System Design Basics.md": ["Microservices/Microservices Basics.md", "Important Concepts/Interview Comparisons.md"],
+    "System Design/System Design Basics.md": ["Microservices/Microservices Basics.md", "Important Concepts/Interview Comparisons.md", "System Design/Ride-Hailing Platform - Architecture Design Document.md"],
+    "System Design/Ride-Hailing Platform - Architecture Design Document.md": ["System Design/Ride-Hailing Platform - Services and Data Architecture.md", "System Design/Ride-Hailing Platform - Request Lifecycle and Integration Flows.md"],
+    "System Design/Ride-Hailing Platform - Services and Data Architecture.md": ["System Design/Ride-Hailing Platform - Request Lifecycle and Integration Flows.md", "Redis/Redis Caching Patterns.md"],
+    "System Design/Ride-Hailing Platform - Request Lifecycle and Integration Flows.md": ["System Design/Ride-Hailing Platform - Azure Infrastructure Design.md", "Microservices/Microservices Distributed Transactions.md"],
+    "System Design/Ride-Hailing Platform - Azure Infrastructure Design.md": ["System Design/Ride-Hailing Platform - Reliability Operations and Observability.md", "Azure Cloud/Azure Messaging and Integration.md"],
+    "System Design/Ride-Hailing Platform - Reliability Operations and Observability.md": ["System Design/System Design Security and Monitoring and Logging.md", "Azure Cloud/Azure Security and Monitoring.md"],
     "Kubernetes/Kubernetes Basics.md": ["Docker/Docker Basics.md", "Important Concepts/Interview Comparisons.md"],
     "Security/Security Basics.md": ["Security/OWASP Top 10.md", "Security/Authentication and Identity.md", "Important Concepts/OWASP.md"],
     "Security/OWASP Top 10.md": ["Security/Web Application Security.md", "Security/API Security.md"],
@@ -304,7 +316,7 @@
     "Bash/Bash Text Processing and Pipes.md": ["Bash/Bash Shell Scripting.md", "Bash/Bash System and DevOps Commands.md"],
     "Bash/Bash Shell Scripting.md": ["Bash/Bash System and DevOps Commands.md", "Azure DevOps/Azure DevOps Pipelines and CI-CD.md"],
     "Bash/Bash System and DevOps Commands.md": ["Docker/Docker Basics.md", "Kubernetes/Kubernetes Basics.md"],
-    "Interview Scenarios/System Design Interview Scenarios.md": ["System Design/System Design Basics.md", "Interview Scenarios/Microservices Interview Scenarios.md", "Redis/Redis Caching Patterns.md"],
+    "Interview Scenarios/System Design Interview Scenarios.md": ["System Design/System Design Basics.md", "System Design/Ride-Hailing Platform - Architecture Design Document.md", "Interview Scenarios/Microservices Interview Scenarios.md", "Redis/Redis Caching Patterns.md"],
     "Interview Scenarios/Microservices Interview Scenarios.md": ["Microservices/Microservices Distributed Transactions.md", "Microservices/Microservices Communication.md", "Interview Scenarios/System Design Interview Scenarios.md"],
     "Interview Scenarios/C# Interview Scenarios.md": ["Interview Scenarios/.NET Interview Scenarios.md", "C#/.NET Core JSON Web Token.md"],
     "Interview Scenarios/.NET Interview Scenarios.md": ["C#/WebApi Basics.md", "Security/Authentication and Identity.md", "Interview Scenarios/C# Interview Scenarios.md"],

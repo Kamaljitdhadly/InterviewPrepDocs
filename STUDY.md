@@ -2,7 +2,7 @@
 
 > **Start here.** All study notes live under `study/`. Full (detailed) versions: `full/`.
 
-**Library stats:** 28 topics · 267 files · ~2049 questions
+**Library stats:** 28 topics · 272 files · ~2049 questions
 
 ---
 
@@ -67,10 +67,16 @@
 | Step | Topic | Files to study |
 |------|-------|----------------|
 | 1 | **Microservices** | Microservices Basics, Microservices Communication, Microservices Service Discovery, Microservices Distributed Transactions |
-| 2 | **System Design** | System Design Basics, System Design CAP Theorem, System Design Design Patterns |
+| 2 | **System Design** | System Design Basics, System Design CAP Theorem, System Design Design Patterns, Ride-Hailing Platform - Architecture Design Document, Ride-Hailing Platform - Request Lifecycle and Integration Flows |
 | 3 | **Redis** | Redis Basics, Redis Caching Patterns |
 | 4 | **Important Concepts** | Cloud Provider Comparison, Interview Comparisons, OWASP |
 | 5 | **Interview Scenarios** | System Design Interview Scenarios, Microservices Interview Scenarios |
+
+### Ride-Hailing Platform — Enterprise Architecture
+
+| Step | Topic | Files to study |
+|------|-------|----------------|
+| 1 | **System Design** | Ride-Hailing Platform - Architecture Design Document, Ride-Hailing Platform - Services and Data Architecture, Ride-Hailing Platform - Request Lifecycle and Integration Flows, Ride-Hailing Platform - Azure Infrastructure Design, Ride-Hailing Platform - Reliability Operations and Observability |
 
 ### MongoDB / NoSQL
 
@@ -202,7 +208,7 @@
 | Redis | 4 | `study/Redis/` |
 | Security | 10 | `study/Security/` |
 | Sql Server | 11 | `study/Sql Server/` |
-| System Design | 8 | `study/System Design/` |
+| System Design | 13 | `study/System Design/` |
 | Terraform | 3 | `study/Terraform/` |
 | Testing | 5 | `study/Testing/` |
 | TypeScript | 4 | `study/TypeScript/` |
