@@ -12,6 +12,12 @@
 8. Write a function to find the intersection of two arrays?
 9. Write a function to calculate the Fibonacci sequence up to a given number?
 10. Write a function to check whether a given string is a palindrome?
+11. Write a function to find two indices whose values add up to a target (Two Sum)?
+12. Write a function to flatten a nested array of arbitrary depth?
+13. Write a debounce function that delays invoking a callback until after a wait period?
+14. Write a function to remove duplicates from an array?
+15. Write a function to check whether a positive integer is prime?
+16. Write a function to reverse the order of words in a sentence?
 
 ## Write a function that returns the reverse of a string?
 
@@ -361,3 +367,216 @@ console.log(isPalindrome('A man, a plan, a canal: Panama')); // true
 3. **Mismatch** → `false`; loop completes → `true`.
 
 **Sample:** `madam` → true; `hello` → false; `A man, a plan, a canal: Panama` → true
+
+## Write a function to find two indices whose values add up to a target (Two Sum)?
+
+Classic hash-map problem — O(n) time, O(n) space.
+
+### Solution
+
+```javascript
+function twoSum(nums, target) {
+  const seen = new Map();
+
+  for (let i = 0; i < nums.length; i++) {
+    const complement = target - nums[i];
+
+    if (seen.has(complement)) {
+      return [seen.get(complement), i];
+    }
+
+    seen.set(nums[i], i);
+  }
+
+  return null;
+}
+
+console.log(twoSum([2, 7, 11, 15], 9));  // [0, 1]
+console.log(twoSum([3, 2, 4], 6));       // [1, 2]
+```
+
+### Explanation
+
+1. Store each value and its index in a `Map`.
+2. For each `nums[i]`, check if `target - nums[i]` was seen earlier.
+3. Return both indices on match; `null` if no pair exists.
+
+**Sample:** `[2, 7, 11, 15]`, target `9` → `[0, 1]`
+
+## Write a function to flatten a nested array of arbitrary depth?
+
+### Solution 1 — recursive
+
+```javascript
+function flattenArray(arr) {
+  const result = [];
+
+  for (const item of arr) {
+    if (Array.isArray(item)) {
+      result.push(...flattenArray(item));
+    } else {
+      result.push(item);
+    }
+  }
+
+  return result;
+}
+
+console.log(flattenArray([1, [2, [3, 4], 5], 6])); // [1, 2, 3, 4, 5, 6]
+```
+
+### Solution 2 — `flat(Infinity)` (ES2019+)
+
+```javascript
+function flattenArrayBuiltIn(arr) {
+  return arr.flat(Infinity);
+}
+
+console.log(flattenArrayBuiltIn([1, [2, [3, 4], 5], 6])); // [1, 2, 3, 4, 5, 6]
+```
+
+### Explanation
+
+| Approach | Notes |
+|----------|-------|
+| **Recursive** | Interview-friendly; works in any ES version |
+| **flat(Infinity)** | Built-in; mention when allowed |
+
+**Sample:** `[1, [2, [3, 4], 5], 6]` → `[1, 2, 3, 4, 5, 6]`
+
+## Write a debounce function that delays invoking a callback until after a wait period?
+
+Used for search boxes, resize handlers — only fire after the user **stops** typing for `wait` ms.
+
+### Solution
+
+```javascript
+function debounce(fn, wait) {
+  let timerId;
+
+  return function debounced(...args) {
+    clearTimeout(timerId);
+    timerId = setTimeout(() => fn.apply(this, args), wait);
+  };
+}
+
+// Usage
+const logSearch = debounce((term) => {
+  console.log('Searching for:', term);
+}, 300);
+
+logSearch('a');
+logSearch('an');
+logSearch('ang'); // only this runs after 300 ms quiet
+```
+
+### Explanation
+
+- Each call **clears** the previous timer and schedules a new one.
+- `fn.apply(this, args)` preserves `this` and arguments for the wrapped function.
+- Only the last call within the wait window executes.
+
+**Sample:** Rapid `logSearch` calls → one execution after 300 ms idle
+
+## Write a function to remove duplicates from an array?
+
+### Solution 1 — Set (unique values, original order)
+
+```javascript
+function removeDuplicates(arr) {
+  return [...new Set(arr)];
+}
+
+console.log(removeDuplicates([1, 2, 2, 3, 1, 4])); // [1, 2, 3, 4]
+```
+
+### Solution 2 — filter + indexOf (no Set)
+
+```javascript
+function removeDuplicatesManual(arr) {
+  return arr.filter((item, index) => arr.indexOf(item) === index);
+}
+
+console.log(removeDuplicatesManual(['a', 'b', 'a', 'c'])); // ['a', 'b', 'c']
+```
+
+### Explanation
+
+- **Set**: Fastest and clearest for primitives.
+- **indexOf === index**: Keeps first occurrence only; O(n²) but shows manual thinking.
+
+**Sample:** `[1, 2, 2, 3, 1, 4]` → `[1, 2, 3, 4]`
+
+## Write a function to check whether a positive integer is prime?
+
+A **prime** is a natural number **> 1** divisible only by **1** and itself. **2** is the only even prime.
+
+### Solution
+
+```javascript
+function isPrime(num) {
+  if (num <= 1) return false;
+  if (num === 2) return true;
+  if (num % 2 === 0) return false;
+
+  for (let i = 3; i * i <= num; i += 2) {
+    if (num % i === 0) return false;
+  }
+
+  return true;
+}
+
+console.log(isPrime(29));  // true
+console.log(isPrime(30));  // false
+console.log(isPrime(2));   // true
+```
+
+### Explanation
+
+1. Reject `≤ 1`; handle `2` and even numbers early.
+2. Test odd divisors from `3` up to `√num` (`i * i <= num`).
+3. Any factor found → not prime.
+
+**Sample:** `29` prime; `30` not; `2` prime
+
+## Write a function to reverse the order of words in a sentence?
+
+### Solution
+
+```javascript
+function reverseWords(sentence) {
+  return sentence
+    .trim()
+    .split(/\s+/)
+    .reverse()
+    .join(' ');
+}
+
+console.log(reverseWords('JavaScript is fun')); // fun is JavaScript
+```
+
+### Solution 2 — manual (no `reverse()`)
+
+```javascript
+function reverseWordsManual(sentence) {
+  const words = sentence.trim().split(/\s+/);
+  let result = '';
+
+  for (let i = words.length - 1; i >= 0; i--) {
+    result += words[i];
+    if (i > 0) result += ' ';
+  }
+
+  return result;
+}
+
+console.log(reverseWordsManual('C# is fun')); // fun is C#
+```
+
+### Explanation
+
+- **trim + split(/\s+/)**: Handles multiple spaces between words.
+- **reverse + join**: Concise built-in approach.
+- **Manual loop**: Mirrors C# word-reversal challenge.
+
+**Sample:** `JavaScript is fun` → `fun is JavaScript`

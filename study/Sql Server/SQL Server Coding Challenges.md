@@ -11,6 +11,12 @@
 7. Write a query to display an employee organizational hierarchy using a recursive CTE?
 8. Write a T-SQL query to reverse a string without using built-in reverse functions?
 9. Write a T-SQL query to check whether a given string is a palindrome?
+10. Write a query to find duplicate records in a table?
+11. Write a query to find the highest-paid employee in each department?
+12. Write a query to find customers who have never placed an order?
+13. Write a query to pivot monthly sales from rows into columns?
+14. Write a query to compare each row with the previous row using LAG?
+15. Write a query to find employees hired in the last N days?
 
 ## Write a SQL Server query to find the second-highest salary in an Employees table?
 
@@ -336,3 +342,223 @@ SELECT @input AS InputString,
 ```
 
 **Sample:** `madam` → palindrome; `hello` → not. Collation controls case sensitivity.
+
+## Write a query to find duplicate records in a table?
+
+`GROUP BY` + `HAVING COUNT(*) > 1`, or join back to list full rows.
+
+```sql
+CREATE TABLE Customers (
+    CustomerId INT PRIMARY KEY,
+    Email      NVARCHAR(200),
+    Name       NVARCHAR(100)
+);
+
+INSERT INTO Customers (CustomerId, Email, Name) VALUES
+(1, 'alice@contoso.com', 'Alice'),
+(2, 'bob@contoso.com',   'Bob'),
+(3, 'alice@contoso.com', 'Alice Copy'),
+(4, 'carol@contoso.com', 'Carol');
+```
+
+```sql
+SELECT Email,
+       COUNT(*) AS DuplicateCount
+FROM Customers
+GROUP BY Email
+HAVING COUNT(*) > 1;
+```
+
+```sql
+SELECT c.*
+FROM Customers c
+INNER JOIN (
+    SELECT Email
+    FROM Customers
+    GROUP BY Email
+    HAVING COUNT(*) > 1
+) d ON c.Email = d.Email
+ORDER BY c.Email, c.CustomerId;
+```
+
+**Sample:** `alice@contoso.com` × 2
+
+## Write a query to find the highest-paid employee in each department?
+
+`ROW_NUMBER() OVER (PARTITION BY DepartmentId ORDER BY Salary DESC)` → `rn = 1`.
+
+```sql
+CREATE TABLE DeptEmployees (
+    EmployeeId   INT PRIMARY KEY,
+    Name         NVARCHAR(100),
+    DepartmentId INT,
+    Salary       DECIMAL(10, 2)
+);
+
+INSERT INTO DeptEmployees (EmployeeId, Name, DepartmentId, Salary) VALUES
+(1, 'Alice', 10, 90000),
+(2, 'Bob',   10, 75000),
+(3, 'Carol', 20, 82000),
+(4, 'Dave',  20, 95000),
+(5, 'Eve',   20, 88000);
+```
+
+```sql
+WITH Ranked AS (
+    SELECT Name,
+           DepartmentId,
+           Salary,
+           ROW_NUMBER() OVER (
+               PARTITION BY DepartmentId
+               ORDER BY Salary DESC, EmployeeId
+           ) AS rn
+    FROM DeptEmployees
+)
+SELECT Name, DepartmentId, Salary
+FROM Ranked
+WHERE rn = 1;
+```
+
+**Sample:** Dept 10 → Alice; Dept 20 → Dave
+
+## Write a query to find customers who have never placed an order?
+
+`LEFT JOIN` + `WHERE child IS NULL`, or `NOT EXISTS`.
+
+```sql
+CREATE TABLE CustomersNoOrder (
+    CustomerId INT PRIMARY KEY,
+    Name       NVARCHAR(100)
+);
+
+CREATE TABLE CustomerOrders (
+    OrderId    INT PRIMARY KEY,
+    CustomerId INT,
+    OrderDate  DATE
+);
+
+INSERT INTO CustomersNoOrder VALUES (1, 'Alice'), (2, 'Bob'), (3, 'Carol');
+INSERT INTO CustomerOrders VALUES (101, 1, '2025-01-10'), (102, 1, '2025-02-01');
+```
+
+```sql
+SELECT c.CustomerId,
+       c.Name
+FROM CustomersNoOrder c
+LEFT JOIN CustomerOrders o ON c.CustomerId = o.CustomerId
+WHERE o.OrderId IS NULL;
+```
+
+```sql
+SELECT c.CustomerId,
+       c.Name
+FROM CustomersNoOrder c
+WHERE NOT EXISTS (
+    SELECT 1
+    FROM CustomerOrders o
+    WHERE o.CustomerId = c.CustomerId
+);
+```
+
+**Sample:** Bob and Carol — no orders
+
+## Write a query to pivot monthly sales from rows into columns?
+
+`CASE` + `SUM`, or `PIVOT` operator.
+
+```sql
+CREATE TABLE MonthlySales (
+    SaleYear  INT,
+    SaleMonth INT,
+    Amount    DECIMAL(10, 2)
+);
+
+INSERT INTO MonthlySales (SaleYear, SaleMonth, Amount) VALUES
+(2024, 1, 1000),
+(2024, 2, 1200),
+(2024, 3,  900),
+(2025, 1, 1100),
+(2025, 2, 1300);
+```
+
+```sql
+SELECT SaleYear,
+       SUM(CASE WHEN SaleMonth = 1 THEN Amount ELSE 0 END) AS Jan,
+       SUM(CASE WHEN SaleMonth = 2 THEN Amount ELSE 0 END) AS Feb,
+       SUM(CASE WHEN SaleMonth = 3 THEN Amount ELSE 0 END) AS Mar
+FROM MonthlySales
+GROUP BY SaleYear
+ORDER BY SaleYear;
+```
+
+```sql
+SELECT SaleYear, [1] AS Jan, [2] AS Feb, [3] AS Mar
+FROM (
+    SELECT SaleYear, SaleMonth, Amount
+    FROM MonthlySales
+) src
+PIVOT (
+    SUM(Amount) FOR SaleMonth IN ([1], [2], [3])
+) p
+ORDER BY SaleYear;
+```
+
+**Sample:** 2024 → Jan `1000`, Feb `1200`, Mar `900`
+
+## Write a query to compare each row with the previous row using LAG?
+
+`LAG(col) OVER (ORDER BY ...)` for prior-row value and delta.
+
+```sql
+CREATE TABLE DailyRevenue (
+    RevenueDate DATE PRIMARY KEY,
+    Revenue     DECIMAL(10, 2)
+);
+
+INSERT INTO DailyRevenue (RevenueDate, Revenue) VALUES
+('2025-01-01', 1000),
+('2025-01-02', 1250),
+('2025-01-03', 1100),
+('2025-01-04', 1400);
+```
+
+```sql
+SELECT RevenueDate,
+       Revenue,
+       LAG(Revenue) OVER (ORDER BY RevenueDate) AS PreviousRevenue,
+       Revenue - LAG(Revenue) OVER (ORDER BY RevenueDate) AS DayOverDayChange
+FROM DailyRevenue
+ORDER BY RevenueDate;
+```
+
+**Sample:** `2025-01-02` → previous `1000`, change `+250`
+
+## Write a query to find employees hired in the last N days?
+
+`HireDate >= DATEADD(DAY, -@days, CAST(GETDATE() AS DATE))`.
+
+```sql
+CREATE TABLE HiredEmployees (
+    EmployeeId INT PRIMARY KEY,
+    Name       NVARCHAR(100),
+    HireDate   DATE
+);
+
+INSERT INTO HiredEmployees (EmployeeId, Name, HireDate) VALUES
+(1, 'Alice', '2025-06-01'),
+(2, 'Bob',   '2025-05-15'),
+(3, 'Carol', '2025-06-10');
+```
+
+```sql
+DECLARE @days INT = 30;
+
+SELECT EmployeeId,
+       Name,
+       HireDate
+FROM HiredEmployees
+WHERE HireDate >= DATEADD(DAY, -@days, CAST(GETDATE() AS DATE))
+ORDER BY HireDate DESC;
+```
+
+**Sample:** `@days = 30` → recent hires in rolling window

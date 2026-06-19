@@ -2,248 +2,384 @@
 
 ## Questions Covered
 
-1. Write a program in C# Sharp to reverse a string?
-2. Write a program in C# Sharp to reverse the order of the given words?
-3. Write a program in C# Sharp to find if a given string is palindrome or not?
-4. Write a C# program to find the substring from a given string
-5. Write a C# program to find if a positive integer is prime or not?
+1. Write a program in C# to reverse a string?
+2. Write a program in C# to reverse the order of words in a sentence?
+3. Write a program in C# to check whether a string is a palindrome?
+4. Write a C# program to extract a substring from a given string?
+5. Write a C# program to check whether a positive integer is prime?
+6. Write a C# method to find two indices whose values add up to a target (Two Sum)?
+7. Write a C# method to check whether two strings are anagrams?
+8. Write a C# method to count vowels in a string?
+9. Write a C# method to find the second largest element in an array?
+10. Write a C# method to remove duplicates from a list?
+11. Write a C# method to generate the Fibonacci sequence up to a given number?
+12. Write a C# program to print FizzBuzz for numbers 1 to N?
 
-## Write a program in C# Sharp to reverse a string?
+## Write a program in C# to reverse a string?
 
-Reverse without built-in methods: copy chars end-to-start into `char[]`, return `new string(charArray)`.
+Copy chars end-to-start into `char[]`, return `new string(charArray)`.
 
 ```csharp
-using System;
-
-class Program
+static string ReverseString(string str)
 {
-    static void Main()
-    {
-        Console.Write("Enter a string: ");
-        string originalString = Console.ReadLine();
+    char[] charArray = new char[str.Length];
+    int index = 0;
 
-        string reversedString = ReverseString(originalString);
-        Console.WriteLine("Reversed string: " + reversedString);
+    for (int i = str.Length - 1; i >= 0; i--)
+    {
+        charArray[index] = str[i];
+        index++;
     }
 
-    static string ReverseString(string str)
-    {
-        char[] charArray = new char[str.Length];
-        int index = 0;
-
-        for (int i = str.Length - 1; i >= 0; i--)
-        {
-            charArray[index] = str[i];
-            index++;
-        }
-        return new string(charArray);
-    }
+    return new string(charArray);
 }
+
+// Usage
+Console.WriteLine(ReverseString("OpenAI")); // IAnepO
 ```
 
 **Sample:** `OpenAI` → `IAnepO`
 
-## Write a program in C# Sharp to reverse the order of the given words?
+## Write a program in C# to reverse the order of words in a sentence?
 
-Manual space-split (`SplitWords`), then reverse-concatenate.
+`Split` + `Array.Reverse` + `Join`, or manual `SplitWords` loop.
 
 ```csharp
-using System;
-
-class Program
+static string ReverseWords(string sentence)
 {
-    static void Main()
-    {
-        Console.Write("Enter a sentence: ");
-        string sentence = Console.ReadLine();
+    string[] words = sentence.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+    Array.Reverse(words);
+    return string.Join(' ', words);
+}
 
-        string reversedSentence = ReverseWords(sentence);
-        Console.WriteLine("Reversed sentence: " + reversedSentence);
+// Usage
+Console.WriteLine(ReverseWords("C# is fun")); // fun is C#
+```
+
+```csharp
+static string ReverseWordsManual(string sentence)
+{
+    string[] words = SplitWords(sentence);
+    string reversed = "";
+
+    for (int i = words.Length - 1; i >= 0; i--)
+    {
+        reversed += words[i];
+        if (i > 0) reversed += " ";
     }
 
-    static string ReverseWords(string sentence)
-    {
-        string[] words = SplitWords(sentence);
-        string reversedSentence = "";
+    return reversed;
+}
 
-        for (int i = words.Length - 1; i >= 0; i--)
-        {
-            reversedSentence += words[i];
-            if (i > 0)
-                reversedSentence += " ";
-        }
-        return reversedSentence;
+static string[] SplitWords(string sentence)
+{
+    int wordCount = 0;
+    for (int i = 0; i < sentence.Length; i++)
+    {
+        if (sentence[i] == ' ')
+            wordCount++;
     }
 
-    static string[] SplitWords(string sentence)
+    string[] words = new string[wordCount + 1];
+    string word = "";
+    int index = 0;
+
+    foreach (char c in sentence)
     {
-        int wordCount = 0;
-        for (int i = 0; i < sentence.Length; i++)
+        if (c == ' ')
         {
-            if (sentence[i] == ' ')
-                wordCount++;
+            words[index++] = word;
+            word = "";
         }
-
-        string[] words = new string[wordCount + 1];
-        string word = "";
-        int index = 0;
-
-        for (int i = 0; i < sentence.Length; i++)
+        else
         {
-            if (sentence[i] == ' ')
-            {
-                words[index] = word;
-                word = "";
-                index++;
-            }
-            else
-            {
-                word += sentence[i];
-            }
+            word += c;
         }
-        words[index] = word;
-        return words;
     }
+
+    words[index] = word;
+    return words;
 }
 ```
 
 **Sample:** `C# is fun` → `fun is C#`
 
-## Write a program in C# Sharp to find if a given string is palindrome or not?
+## Write a program in C# to check whether a string is a palindrome?
 
-Compare `str[i]` vs `str[length - i - 1]` from both ends; mismatch → `false`.
+Compare `str[i]` vs `str[length - i - 1]` from both ends.
 
 ```csharp
-using System;
-
-class Program
+static bool IsPalindrome(string str)
 {
-    static void Main()
+    int length = str.Length;
+
+    for (int i = 0; i < length / 2; i++)
     {
-        Console.Write("Enter a string: ");
-        string inputString = Console.ReadLine();
-
-        bool isPalindrome = IsPalindrome(inputString);
-
-        if (isPalindrome)
-            Console.WriteLine("The string is a palindrome.");
-        else
-            Console.WriteLine("The string is not a palindrome.");
+        if (str[i] != str[length - i - 1])
+            return false;
     }
 
-    static bool IsPalindrome(string str)
-    {
-        int length = str.Length;
-        for (int i = 0; i < length / 2; i++)
-        {
-            if (str[i] != str[length - i - 1])
-                return false;
-        }
-        return true;
-    }
+    return true;
 }
+
+// Usage
+Console.WriteLine(IsPalindrome("madam"));  // True
+Console.WriteLine(IsPalindrome("hello"));  // False
 ```
 
-**Sample:** `madam` → palindrome; `hello` → not
+**Sample:** `madam` → true; `hello` → false
 
-## Write a C# program to find the substring from a given string
+## Write a C# program to extract a substring from a given string?
 
-Validate bounds, copy `length` chars from `startIndex` into `char[]`.
+Validate bounds; copy `length` chars from `startIndex`.
 
 ```csharp
-using System;
-
-class Program
+static string GetSubstring(string str, int startIndex, int length)
 {
-    static void Main()
-    {
-        Console.Write("Enter the main string: ");
-        string mainString = Console.ReadLine();
+    if (startIndex < 0 || startIndex >= str.Length)
+        throw new ArgumentOutOfRangeException(nameof(startIndex));
+    if (length < 0 || startIndex + length > str.Length)
+        throw new ArgumentOutOfRangeException(nameof(length));
 
-        Console.Write("Enter the start index of the substring: ");
-        int startIndex = int.Parse(Console.ReadLine());
+    char[] buffer = new char[length];
 
-        Console.Write("Enter the length of the substring: ");
-        int length = int.Parse(Console.ReadLine());
+    for (int i = 0; i < length; i++)
+        buffer[i] = str[startIndex + i];
 
-        if (startIndex < 0 || startIndex >= mainString.Length)
-        {
-            Console.WriteLine("Invalid start index.");
-            return;
-        }
-        if (length < 0 || startIndex + length > mainString.Length)
-        {
-            Console.WriteLine("Invalid length.");
-            return;
-        }
-
-        string substring = GetSubstring(mainString, startIndex, length);
-        Console.WriteLine("Substring: " + substring);
-    }
-
-    static string GetSubstring(string str, int startIndex, int length)
-    {
-        char[] charArray = new char[length];
-        int index = 0;
-
-        for (int i = startIndex; i < startIndex + length; i++)
-        {
-            charArray[index] = str[i];
-            index++;
-        }
-        return new string(charArray);
-    }
+    return new string(buffer);
 }
+
+// Usage
+Console.WriteLine(GetSubstring("Hello, World!", 7, 5)); // World
 ```
 
 **Sample:** `"Hello, World!"` start `7`, len `5` → `World`
 
-## Write a C# program to find if a positive integer is prime or not?
+## Write a C# program to check whether a positive integer is prime?
 
-**Prime:** natural number **> 1**, divisible only by **1** and itself. **1** not prime; **2** only even prime. Examples: 2,3,5,7 vs composite 4,6,8.
+`≤1` false → `2` true → even false → test odd `i` where `i*i ≤ num`.
 
 ```csharp
-using System;
-
-class Program
+static bool IsPrime(int num)
 {
-    static void Main()
+    if (num <= 1) return false;
+    if (num == 2) return true;
+    if (num % 2 == 0) return false;
+
+    for (int i = 3; i * i <= num; i += 2)
     {
-        Console.Write("Enter a positive integer: ");
-        int number;
-
-        if (int.TryParse(Console.ReadLine(), out number) && number > 0)
-        {
-            bool isPrime = IsPrime(number);
-
-            if (isPrime)
-                Console.WriteLine($"{number} is a prime number.");
-            else
-                Console.WriteLine($"{number} is not a prime number.");
-        }
-        else
-        {
-            Console.WriteLine("Invalid input. Please enter a positive integer.");
-        }
+        if (num % i == 0)
+            return false;
     }
 
-    static bool IsPrime(int num)
-    {
-        if (num <= 1)
-            return false;
-        if (num == 2)
-            return true;
-        if (num % 2 == 0)
-            return false;
-
-        for (int i = 3; i * i <= num; i += 2)
-        {
-            if (num % i == 0)
-                return false;
-        }
-        return true;
-    }
+    return true;
 }
+
+// Usage
+Console.WriteLine(IsPrime(29));  // True
+Console.WriteLine(IsPrime(30));  // False
 ```
 
-**IsPrime:** `≤1` false → `2` true → even false → test odd `i` where `i*i ≤ num`. **Sample:** `29` prime, `30` not.
+**Sample:** `29` prime; `30` not
+
+## Write a C# method to find two indices whose values add up to a target (Two Sum)?
+
+`Dictionary<int,int>` value → index; check complement each step.
+
+```csharp
+static int[]? TwoSum(int[] nums, int target)
+{
+    var seen = new Dictionary<int, int>();
+
+    for (int i = 0; i < nums.Length; i++)
+    {
+        int complement = target - nums[i];
+
+        if (seen.TryGetValue(complement, out int index))
+            return new[] { index, i };
+
+        seen[nums[i]] = i;
+    }
+
+    return null;
+}
+
+// Usage
+Console.WriteLine(string.Join(", ", TwoSum(new[] { 2, 7, 11, 15 }, 9)!)); // 0, 1
+```
+
+**Sample:** `[2, 7, 11, 15]`, target `9` → `0, 1`
+
+## Write a C# method to check whether two strings are anagrams?
+
+Normalize → sort chars → `SequenceEqual`.
+
+```csharp
+using System.Linq;
+
+static bool AreAnagrams(string str1, string str2)
+{
+    static string Normalize(string s) =>
+        new string(s.Where(char.IsLetterOrDigit).Select(char.ToLowerInvariant).ToArray());
+
+    var a = Normalize(str1);
+    var b = Normalize(str2);
+
+    if (a.Length != b.Length) return false;
+
+    var charsA = a.ToCharArray();
+    var charsB = b.ToCharArray();
+    Array.Sort(charsA);
+    Array.Sort(charsB);
+
+    return charsA.SequenceEqual(charsB);
+}
+
+// Usage
+Console.WriteLine(AreAnagrams("Listen", "Silent")); // True
+```
+
+**Sample:** `Listen` / `Silent` → true
+
+## Write a C# method to count vowels in a string?
+
+Single pass; `vowels.Contains(c)`.
+
+```csharp
+static int CountVowels(string str)
+{
+    const string vowels = "aeiouAEIOU";
+    int count = 0;
+
+    foreach (char c in str)
+    {
+        if (vowels.Contains(c))
+            count++;
+    }
+
+    return count;
+}
+
+// Usage
+Console.WriteLine(CountVowels("Hello, World!")); // 3
+```
+
+**Sample:** `Hello, World!` → `3` vowels
+
+## Write a C# method to find the second largest element in an array?
+
+Track `largest` and `secondLargest` in one pass.
+
+```csharp
+static int FindSecondLargest(int[] arr)
+{
+    if (arr.Length < 2)
+        throw new ArgumentException("Array must contain at least two elements.");
+
+    int largest = int.MinValue;
+    int secondLargest = int.MinValue;
+
+    foreach (int num in arr)
+    {
+        if (num > largest)
+        {
+            secondLargest = largest;
+            largest = num;
+        }
+        else if (num > secondLargest && num < largest)
+        {
+            secondLargest = num;
+        }
+    }
+
+    if (secondLargest == int.MinValue)
+        throw new InvalidOperationException("No distinct second largest value.");
+
+    return secondLargest;
+}
+
+// Usage
+Console.WriteLine(FindSecondLargest(new[] { 10, 5, 8, 1, 12, 3 })); // 10
+```
+
+**Sample:** `[10, 5, 8, 1, 12, 3]` → `10`
+
+## Write a C# method to remove duplicates from a list?
+
+`HashSet.Add` — only add to result when new.
+
+```csharp
+static List<T> RemoveDuplicates<T>(IEnumerable<T> items)
+{
+    var seen = new HashSet<T>();
+    var result = new List<T>();
+
+    foreach (var item in items)
+    {
+        if (seen.Add(item))
+            result.Add(item);
+    }
+
+    return result;
+}
+
+// Usage
+var unique = RemoveDuplicates(new[] { 1, 2, 2, 3, 1, 4 });
+Console.WriteLine(string.Join(", ", unique)); // 1, 2, 3, 4
+```
+
+**Sample:** `[1, 2, 2, 3, 1, 4]` → `1, 2, 3, 4`
+
+## Write a C# method to generate the Fibonacci sequence up to a given number?
+
+Push `a` while `a <= max`; `(a, b) = (b, a + b)`.
+
+```csharp
+static List<int> FibonacciUpTo(int max)
+{
+    if (max < 0)
+        throw new ArgumentOutOfRangeException(nameof(max));
+
+    var sequence = new List<int>();
+    int a = 0, b = 1;
+
+    while (a <= max)
+    {
+        sequence.Add(a);
+        (a, b) = (b, a + b);
+    }
+
+    return sequence;
+}
+
+// Usage
+Console.WriteLine(string.Join(", ", FibonacciUpTo(10))); // 0, 1, 1, 2, 3, 5, 8
+```
+
+**Sample:** `max = 10` → `0, 1, 1, 2, 3, 5, 8`
+
+## Write a C# program to print FizzBuzz for numbers 1 to N?
+
+Check `% 3` and `% 5` together first for `FizzBuzz`.
+
+```csharp
+static IEnumerable<string> FizzBuzz(int n)
+{
+    for (int i = 1; i <= n; i++)
+    {
+        bool fizz = i % 3 == 0;
+        bool buzz = i % 5 == 0;
+
+        if (fizz && buzz) yield return "FizzBuzz";
+        else if (fizz) yield return "Fizz";
+        else if (buzz) yield return "Buzz";
+        else yield return i.ToString();
+    }
+}
+
+// Usage
+Console.WriteLine(string.Join(", ", FizzBuzz(15)));
+// 1, 2, Fizz, 4, Buzz, Fizz, 7, 8, Fizz, Buzz, 11, Fizz, 13, 14, FizzBuzz
+```
+
+**Sample:** `FizzBuzz(15)` ends with `..., 14, FizzBuzz`
