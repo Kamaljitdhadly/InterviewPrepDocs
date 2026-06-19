@@ -2,115 +2,162 @@
 
 ## Questions Covered
 
-1. Write a function that returns the reverse of a string.
-2. Write a function that checks whether two strings are anagrams or not.
-3. Write a function that returns the number of vowels in a string.
-4. Write a function to sort an array of numbers in ascending order.
-5. Write a function to merge two arrays into a single sorted array.
-6. Write a function to find the second largest element in an array.
-7. Write a function to find the longest common prefix among an array of strings.
-8. Write a function to find the intersection of two arrays.
-9. Write a function to calculate the Fibonacci sequence up to a given number.
+1. Write a function that returns the reverse of a string?
+2. Write a function that checks whether two strings are anagrams or not?
+3. Write a function that returns the number of vowels in a string?
+4. Write a function to sort an array of numbers in ascending order?
+5. Write a function to merge two arrays into a single sorted array?
+6. Write a function to find the second largest element in an array?
+7. Write a function to find the longest common prefix among an array of strings?
+8. Write a function to find the intersection of two arrays?
+9. Write a function to calculate the Fibonacci sequence up to a given number?
+10. Write a function to check whether a given string is a palindrome?
 
-## Write a function that returns the reverse of a string.
+## Write a function that returns the reverse of a string?
+
+**Built-in:** `split('').reverse().join('')`
 
 ```javascript
 function reverseString(str) {
   return str.split('').reverse().join('');
 }
-// Usage
+
 const originalString = 'Hello, World!';
 const reversedString = reverseString(originalString);
 console.log(reversedString); // !dlroW ,olleH
 ```
 
-## Write a function that checks whether two strings are anagrams or not.
+**Manual loop** (no `reverse()`):
+
+```javascript
+function reverseStringManual(str) {
+  let reversed = '';
+  for (let i = str.length - 1; i >= 0; i--) {
+    reversed += str[i];
+  }
+  return reversed;
+}
+
+console.log(reverseStringManual('OpenAI')); // IAnepO
+```
+
+**Sample:** `Hello, World!` → `!dlroW ,olleH`; `OpenAI` → `IAnepO`
+
+## Write a function that checks whether two strings are anagrams or not?
+
+Normalize (strip non-alphanumeric, lowercase) → sort chars → compare.
 
 ```javascript
 function areAnagrams(str1, str2) {
-  // Remove non-alphanumeric characters and convert to lowercase
   const normalize = str => str.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
-  // Normalize both strings
+
   const normalizedStr1 = normalize(str1);
   const normalizedStr2 = normalize(str2);
-  // If lengths differ, they cannot be anagrams
+
   if (normalizedStr1.length !== normalizedStr2.length) {
     return false;
   }
-  // Convert strings to character arrays, sort them, and join back to strings
+
   const sortedStr1 = normalizedStr1.split('').sort().join('');
   const sortedStr2 = normalizedStr2.split('').sort().join('');
-  // Compare the sorted strings
+
   return sortedStr1 === sortedStr2;
 }
-// Usage
-const str1 = 'Listen';
-const str2 = 'Silent';
-console.log(areAnagrams(str1, str2)); // true
+
+console.log(areAnagrams('Listen', 'Silent')); // true
+console.log(areAnagrams('Hello', 'World'));   // false
 ```
 
-## Write a function that returns the number of vowels in a string.
+**Sample:** `Listen` / `Silent` → `true`
+
+## Write a function that returns the number of vowels in a string?
+
+Single pass; `vowels.includes(char)`.
 
 ```javascript
 function countVowels(str) {
-  // Define a set of vowels
   const vowels = 'aeiouAEIOU';
-  // Initialize a count variable
   let count = 0;
-  // Iterate through the string and count vowels
-  for (let char of str) {
+
+  for (const char of str) {
     if (vowels.includes(char)) {
       count++;
     }
   }
   return count;
 }
-// Usage
+
 const exampleString = 'Hello, World!';
-const numberOfVowels = countVowels(exampleString);
-console.log(numberOfVowels); // 3 (e, o, o)
+console.log(countVowels(exampleString)); // 3
 ```
 
-## Write a function to sort an array of numbers in ascending order.
+**Sample:** `Hello, World!` → `3` vowels
 
-Use `(a, b) => a - b` on a `slice()` copy — default `sort()` is lexicographic:
+## Write a function to sort an array of numbers in ascending order?
+
+Default `sort()` is lexicographic — use `(a, b) => a - b` on a `slice()` copy.
 
 ```javascript
 function sortNumbersAscending(arr) {
   return arr.slice().sort((a, b) => a - b);
 }
-// Usage
+
 const numbers = [10, 5, 8, 1, 12, 3];
-const sortedNumbers = sortNumbersAscending(numbers);
-console.log(sortedNumbers); // [1, 3, 5, 8, 10, 12]
+console.log(sortNumbersAscending(numbers)); // [1, 3, 5, 8, 10, 12]
 ```
 
-## Write a function to merge two arrays into a single sorted array.
+**Bubble sort** (no `sort()`):
+
+```javascript
+function bubbleSort(arr) {
+  const result = arr.slice();
+  for (let i = 0; i < result.length - 1; i++) {
+    for (let j = 0; j < result.length - i - 1; j++) {
+      if (result[j] > result[j + 1]) {
+        [result[j], result[j + 1]] = [result[j + 1], result[j]];
+      }
+    }
+  }
+  return result;
+}
+
+console.log(bubbleSort([10, 5, 8, 1, 12, 3])); // [1, 3, 5, 8, 10, 12]
+```
+
+**Sample:** `[10, 5, 8, 1, 12, 3]` → `[1, 3, 5, 8, 10, 12]`
+
+## Write a function to merge two arrays into a single sorted array?
+
+`concat` then numeric `sort`.
 
 ```javascript
 function mergeAndSortArrays(arr1, arr2) {
-  // Combine the two arrays
   const combinedArray = arr1.concat(arr2);
-  // Sort the combined array in ascending order
   return combinedArray.sort((a, b) => a - b);
 }
-// Usage
+
 const array1 = [3, 1, 4, 1, 5];
 const array2 = [9, 2, 6, 5, 3];
-const sortedMergedArray = mergeAndSortArrays(array1, array2);
-console.log(sortedMergedArray); // [1, 1, 2, 3, 3, 4, 5, 5, 6, 9]
+console.log(mergeAndSortArrays(array1, array2));
+// [1, 1, 2, 3, 3, 4, 5, 5, 6, 9]
 ```
 
-## Write a function to find the second largest element in an array.
+**Sample:** merged sorted `[1, 1, 2, 3, 3, 4, 5, 5, 6, 9]`
+
+## Write a function to find the second largest element in an array?
+
+Track `largest` and `secondLargest` in one pass.
 
 ```javascript
 function findSecondLargest(arr) {
   if (arr.length < 2) {
     throw new Error('Array must contain at least two elements.');
   }
+
   let largest = -Infinity;
   let secondLargest = -Infinity;
-  for (let num of arr) {
+
+  for (const num of arr) {
     if (num > largest) {
       secondLargest = largest;
       largest = num;
@@ -118,62 +165,62 @@ function findSecondLargest(arr) {
       secondLargest = num;
     }
   }
+
   if (secondLargest === -Infinity) {
     throw new Error('Array does not contain a second distinct largest element.');
   }
+
   return secondLargest;
 }
-// Usage
+
 const numbers = [10, 5, 8, 1, 12, 3];
-const secondLargest = findSecondLargest(numbers);
-console.log(secondLargest); // 10
+console.log(findSecondLargest(numbers)); // 10
 ```
 
-## Write a function to find the longest common prefix among an array of strings.
+**Sample:** `[10, 5, 8, 1, 12, 3]` → `10`
 
-Sort; compare first and last string char-by-char:
+## Write a function to find the longest common prefix among an array of strings?
+
+Sort array; compare first vs last string char-by-char.
 
 ```javascript
 function longestCommonPrefix(strs) {
   if (strs.length === 0) {
     return '';
   }
-  // Sort the array
+
   strs.sort();
-  // Take the first and last strings in the sorted array
   const first = strs[0];
   const last = strs[strs.length - 1];
   let i = 0;
+
   while (i < first.length && i < last.length && first[i] === last[i]) {
     i++;
   }
-  // The common prefix is the substring from start to index i
+
   return first.substring(0, i);
 }
-// Usage
+
 const strings = ['flower', 'flow', 'flight'];
-const commonPrefix = longestCommonPrefix(strings);
-console.log(commonPrefix); // 'fl'
+console.log(longestCommonPrefix(strings)); // fl
 ```
 
-## Write a function to find the intersection of two arrays.
+**Sample:** `['flower', 'flow', 'flight']` → `'fl'`
+
+## Write a function to find the intersection of two arrays?
+
+`Set` on arr1 + `filter` arr2. Unique variant wraps result in `Set`.
 
 ```javascript
 function intersectArrays(arr1, arr2) {
-  // Create a Set from the first array
   const set1 = new Set(arr1);
-  // Filter the second array to include only elements present in the Set
-  const intersection = arr2.filter(item => set1.has(item));
-  return intersection;
+  return arr2.filter(item => set1.has(item));
 }
-// Usage
+
 const array1 = [1, 2, 2, 1];
 const array2 = [2, 2];
-const result = intersectArrays(array1, array2);
-console.log(result); // [2, 2]
+console.log(intersectArrays(array1, array2)); // [2, 2]
 ```
-
-**Unique intersection (no duplicates):**
 
 ```javascript
 function intersectUniqueArrays(arr1, arr2) {
@@ -181,31 +228,64 @@ function intersectUniqueArrays(arr1, arr2) {
   const intersection = new Set(arr2.filter(item => set1.has(item)));
   return [...intersection];
 }
-// Usage
-const array1 = [1, 2, 2, 1];
-const array2 = [2, 2];
-const result = intersectUniqueArrays(array1, array2);
-console.log(result); // [2]
+
+console.log(intersectUniqueArrays([1, 2, 2, 1], [2, 2])); // [2]
 ```
 
-## Write a function to calculate the Fibonacci sequence up to a given number.
+**Sample:** `[1,2,2,1] ∩ [2,2]` → `[2, 2]` or unique `[2]`
+
+## Write a function to calculate the Fibonacci sequence up to a given number?
+
+Push `a` while `a <= max`; advance `[a, b] = [b, a + b]`.
 
 ```javascript
 function fibonacciUpTo(max) {
   if (max < 0) {
     throw new Error('The maximum number must be non-negative.');
   }
+
   const sequence = [];
-  let a = 0, b = 1;
-  // Generate Fibonacci numbers until reaching or exceeding max
+  let a = 0;
+  let b = 1;
+
   while (a <= max) {
     sequence.push(a);
-    [a, b] = [b, a + b]; // Update a and b for the next Fibonacci number
+    [a, b] = [b, a + b];
   }
+
   return sequence;
 }
-// Usage
+
 const maxNumber = 10;
-const fibonacciSequence = fibonacciUpTo(maxNumber);
-console.log(fibonacciSequence); // [0, 1, 1, 2, 3, 5, 8]
+console.log(fibonacciUpTo(maxNumber)); // [0, 1, 1, 2, 3, 5, 8]
 ```
+
+**Sample:** `max = 10` → `[0, 1, 1, 2, 3, 5, 8]`
+
+## Write a function to check whether a given string is a palindrome?
+
+Two pointers from both ends after optional normalize.
+
+```javascript
+function isPalindrome(str) {
+  const s = str.toLowerCase().replace(/[^a-z0-9]/g, '');
+  let left = 0;
+  let right = s.length - 1;
+
+  while (left < right) {
+    if (s[left] !== s[right]) {
+      return false;
+    }
+    left++;
+    right--;
+  }
+
+  return true;
+}
+
+console.log(isPalindrome('madam'));  // true
+console.log(isPalindrome('hello'));  // false
+console.log(isPalindrome('A man, a plan, a canal: Panama')); // true
+```
+
+**Sample:** `madam` → true; `hello` → false
