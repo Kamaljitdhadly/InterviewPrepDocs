@@ -1,9 +1,11 @@
 # Data Structures and Algorithms Strings
+
 ## Questions Covered
 
-1. How do you reverse a string or check if it is a palindrome?
-2. How do you find the longest substring without repeating characters?
-3. How do you implement string matching algorithms (e.g., KMP)?
+- How do you reverse a string or check if it is a palindrome?
+- How do you find the longest substring without repeating characters?
+- How do you implement string matching algorithms (e.g., KMP)?
+
 ## How do you reverse a string or check if it is a palindrome?
 
 Here's how you can reverse a string and check if it is a palindrome using C#:
@@ -29,11 +31,11 @@ public class StringUtils
 
 **Explanation**:
 
-1.  **Convert the string** to a character array.
+- **Convert the string** to a character array.
 
-2.  **Reverse the array** using Array.Reverse.
+- **Reverse the array** using Array.Reverse.
 
-3.  **Create a new string** from the reversed character array.
+- **Create a new string** from the reversed character array.
 
 ### 2. Check if a String is a Palindrome
 
@@ -69,11 +71,11 @@ public class StringUtils
 
 **Explanation**:
 
-1.  **Clean the string**: Remove non-alphanumeric characters and convert to lowercase.
+- **Clean the string**: Remove non-alphanumeric characters and convert to lowercase.
 
-2.  **Reverse the cleaned string**.
+- **Reverse the cleaned string**.
 
-3.  **Compare the cleaned string** with its reversed version to check for palindrome properties.
+- **Compare the cleaned string** with its reversed version to check for palindrome properties.
 
 ### Summary
 
@@ -82,6 +84,7 @@ public class StringUtils
 - **Check for Palindrome**: Clean the string by removing non-alphanumeric characters and converting to lowercase, then compare it with its reversed version.
 
 These methods provide efficient ways to handle string manipulation and palindrome checking in C#.
+
 ## How do you find the longest substring without repeating characters?
 
 To find the longest substring without repeating characters, you can use the sliding window technique with a hash set to keep track of characters. This approach ensures that you efficiently find the maximum length substring in linear time. Here’s how you can implement it in C#:
@@ -119,17 +122,17 @@ public class StringUtils
 
 ### Explanation
 
-1.  **Initialize a HashSet**: seen is used to store characters in the current window of the substring.
+- **Initialize a HashSet**: seen is used to store characters in the current window of the substring.
 
-2.  **Two Pointers**: Use left and right pointers to define the current window in the string.
+- **Two Pointers**: Use left and right pointers to define the current window in the string.
 
-3.  **Expand the Window**: Move the right pointer to expand the window by including new characters.
+- **Expand the Window**: Move the right pointer to expand the window by including new characters.
 
-4.  **Shrink the Window**: If a character is repeated (i.e., seen contains the character at right), move the left pointer to shrink the window until the repeated character is removed.
+- **Shrink the Window**: If a character is repeated (i.e., seen contains the character at right), move the left pointer to shrink the window until the repeated character is removed.
 
-5.  **Update Maximum Length**: After adjusting the window, update maxLength with the size of the current window if it's larger than the previous maximum length.
+- **Update Maximum Length**: After adjusting the window, update maxLength with the size of the current window if it's larger than the previous maximum length.
 
-6.  **Return Result**: The maxLength will be the length of the longest substring without repeating characters.
+- **Return Result**: The maxLength will be the length of the longest substring without repeating characters.
 
 ### Example Usage
 
@@ -148,6 +151,7 @@ public class Program
 In this example, the longest substring without repeating characters is "abc" with a length of 3.
 
 This approach is efficient with a time complexity of O(n), where n is the length of the string, making it well-suited for handling long strings.
+
 ## How do you implement string matching algorithms (e.g., KMP)?
 
 The Knuth-Morris-Pratt (KMP) algorithm is a well-known string matching algorithm that efficiently finds occurrences of a "pattern" string within a "text" string. The KMP algorithm preprocesses the pattern to create a longest prefix suffix (LPS) array, which helps in skipping unnecessary comparisons.
@@ -288,9 +292,9 @@ public class Program
 
 **Explanation**:
 
-1.  **Compute LPS Array**: Preprocess the pattern to build the LPS array which will help to skip characters in the pattern.
+- **Compute LPS Array**: Preprocess the pattern to build the LPS array which will help to skip characters in the pattern.
 
-2.  **Search for Pattern**: Traverse the text using the KMP algorithm. Use the LPS array to skip characters and find matches efficiently.
+- **Search for Pattern**: Traverse the text using the KMP algorithm. Use the LPS array to skip characters and find matches efficiently.
 
 ### Summary
 

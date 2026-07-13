@@ -1,18 +1,18 @@
 # Data Structures and Algorithms Doubly Linkedlist
 
-**Doubly Linked List (Data Structure)**
+Doubly Linked List (Data Structure)
 
 A **Doubly Linked List (DLL)** is a linear data structure in which each node contains:
 
-1.  **Data** – the actual value.
+- **Data** – the actual value.
 
-2.  **Next** – a reference (pointer) to the next node.
+- **Next** – a reference (pointer) to the next node.
 
-3.  **Prev** – a reference (pointer) to the previous node.
+- **Prev** – a reference (pointer) to the previous node.
 
 Unlike a **Singly Linked List**, where you can only move forward, a **Doubly Linked List** allows you to move **both forward and backward**.
 
-**Real-Life Example**
+### Real-Life Example
 
 Think of a train.
 
@@ -28,7 +28,7 @@ You can move in either direction.
 
 A doubly linked list works the same way.
 
-**Structure of a Node**
+Structure of a Node
 
 Each node has three parts.
 
@@ -44,7 +44,7 @@ Each node has three parts.
 
 - **Next** points to the next node.
 
-**Visualization**
+Visualization
 
 A doubly linked list containing four values:
 
@@ -54,7 +54,7 @@ Head
 
 v
 
-NULL \<- \[10\] \<-\> \[20\] \<-\> \[30\] \<-\> \[40\] -\> NULL
+- NULL \<- \[10\] \<-\> \[20\] \<-\> \[30\] \<-\> \[40\] -\> NULL
 
 Or showing the pointers explicitly:
 
@@ -68,7 +68,7 @@ The first node's Prev is **NULL**.
 
 The last node's Next is **NULL**.
 
-**Memory Representation**
+Memory Representation
 
 Nodes are stored at different memory locations.
 
@@ -83,7 +83,7 @@ Notice that memory is **not contiguous**.
 
 The nodes are connected using references.
 
-**Why Use a Doubly Linked List?**
+### Why Use a Doubly Linked List?
 
 Suppose you're browsing a web browser.
 
@@ -99,9 +99,9 @@ A singly linked list cannot easily move backward.
 
 A doubly linked list can.
 
-**Basic Operations**
+### Basic Operations
 
-**1. Traversal (Forward)**
+1. Traversal (Forward)
 
 Head
 
@@ -123,7 +123,7 @@ Time Complexity
 
 O(n)
 
-**2. Traversal (Backward)**
+2. Traversal (Backward)
 
 If you have a **Tail** pointer:
 
@@ -147,7 +147,7 @@ Time Complexity
 
 O(n)
 
-**3. Search**
+3. Search
 
 Find 30
 
@@ -165,7 +165,7 @@ Time Complexity
 
 O(n)
 
-**4. Insertion at Beginning**
+4. Insertion at Beginning
 
 Before
 
@@ -179,19 +179,19 @@ After
 
 Steps
 
-1.  Create new node.
+- Create new node.
 
-2.  new.Next = Head
+- new.Next = Head
 
-3.  Head.Prev = new
+- Head.Prev = new
 
-4.  Head = new
+- Head = new
 
 Time Complexity
 
 O(1)
 
-**5. Insertion at End**
+5. Insertion at End
 
 Before
 
@@ -213,7 +213,7 @@ Without Tail:
 
 O(n)
 
-**6. Insertion in Middle**
+6. Insertion in Middle
 
 Before
 
@@ -239,7 +239,7 @@ Time Complexity
 
 O(n)
 
-**7. Deletion**
+7. Deletion
 
 Delete 20
 
@@ -263,7 +263,7 @@ O(n)
 
 If you already have a reference to the node being deleted, the pointer updates themselves take **O(1)**.
 
-**Time Complexity**
+### Time Complexity
 
 | **Operation**                | **Complexity** |
 |------------------------------|----------------|
@@ -276,7 +276,7 @@ If you already have a reference to the node being deleted, the pointer updates t
 | Insert in Middle             | O(n)           |
 | Delete                       | O(n)           |
 
-**C# Node Class**
+C# Node Class
 
 public class Node
 
@@ -302,7 +302,7 @@ Prev = null;
 
 }
 
-**Simple C# Example**
+Simple C# Example
 
 using System;
 
@@ -372,7 +372,7 @@ Output
 
 30
 
-**Advantages**
+Advantages
 
 - Can traverse in both directions.
 
@@ -382,7 +382,7 @@ Output
 
 - Useful for browser history, music playlists, undo/redo functionality, and LRU caches.
 
-**Disadvantages**
+Disadvantages
 
 - Uses more memory because each node stores two pointers (Prev and Next).
 
@@ -390,7 +390,7 @@ Output
 
 - Slightly slower due to the extra pointer maintenance.
 
-**Singly vs Doubly Linked List**
+Singly vs Doubly Linked List
 
 | **Feature**       | **Singly Linked List** | **Doubly Linked List** |
 |-------------------|------------------------|------------------------|
@@ -401,7 +401,7 @@ Output
 | Delete Given Node | More difficult         | Easier                 |
 | Implementation    | Simpler                | More complex           |
 
-**Array vs Doubly Linked List**
+Array vs Doubly Linked List
 
 | **Feature**         | **Array**  | **Doubly Linked List** |
 |---------------------|------------|------------------------|
@@ -416,7 +416,7 @@ Output
 \*\* With Head and Tail pointers or a direct node reference.\
 \*\*\* O(n) if you must first search for the node.
 
-**Real-World Applications**
+Real-World Applications
 
 - Browser **Back** and **Forward** navigation.
 
@@ -430,23 +430,23 @@ Output
 
 - Navigation systems.
 
-**Common Interview Questions**
+Common Interview Questions
 
-1.  What is a doubly linked list?
+- What is a doubly linked list?
 
-2.  How is it different from a singly linked list?
+- How is it different from a singly linked list?
 
-3.  Why does it require more memory?
+- Why does it require more memory?
 
-4.  Why is deletion easier in a doubly linked list?
+- Why is deletion easier in a doubly linked list?
 
-5.  When would you choose a doubly linked list over an array?
+- When would you choose a doubly linked list over an array?
 
-6.  Why is random access still **O(n)**?
+- Why is random access still **O(n)**?
 
-7.  What are the advantages of maintaining both **Head** and **Tail** pointers?
+- What are the advantages of maintaining both **Head** and **Tail** pointers?
 
-**Summary**
+Summary
 
 | **Feature**         | **Doubly Linked List** |
 |---------------------|------------------------|
@@ -460,7 +460,7 @@ Output
 | Delete (Known Node) | O(1)                   |
 | Extra Memory        | Two pointers per node  |
 
-**Key Takeaways**
+Key Takeaways
 
 - A **Doubly Linked List** extends a singly linked list by adding a **Prev pointer** to every node.
 

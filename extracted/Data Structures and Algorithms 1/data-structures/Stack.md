@@ -1,18 +1,18 @@
 # Data Structures and Algorithms Stack
 
-**Stack (Data Structure)**
+Stack (Data Structure)
 
 A **Stack** is a **linear data structure** that follows the **LIFO (Last In, First Out)** principle.
 
 This means:
 
-**The last element inserted is the first element removed.**
+The last element inserted is the first element removed.
 
 Think of a stack of plates.
 
 The last plate placed on top is the first plate you take.
 
-**Real-Life Example**
+### Real-Life Example
 
 A stack of books:
 
@@ -38,7 +38,7 @@ If you want to remove a book, you remove **Book3 first**.
 
 This is **LIFO**.
 
-**Stack Terminology**
+Stack Terminology
 
 A stack has one main end:
 
@@ -46,19 +46,19 @@ Top
 
 ↓
 
-\[30\]
+- \[30\]
 
-\[20\]
+- \[20\]
 
-\[10\]
+- \[10\]
 
 - **Top** → The position where insertion and deletion happen.
 
 - Unlike a queue, a stack does not have a front and rear.
 
-**Basic Operations**
+### Basic Operations
 
-**1. Push (Insert)**
+1. Push (Insert)
 
 Adds an element to the top of the stack.
 
@@ -72,7 +72,7 @@ Top
 
 ↓
 
-\[10\]
+- \[10\]
 
 Push 20:
 
@@ -80,9 +80,9 @@ Top
 
 ↓
 
-\[20\]
+- \[20\]
 
-\[10\]
+- \[10\]
 
 Push 30:
 
@@ -90,17 +90,17 @@ Top
 
 ↓
 
-\[30\]
+- \[30\]
 
-\[20\]
+- \[20\]
 
-\[10\]
+- \[10\]
 
 Time Complexity:
 
 O(1)
 
-**2. Pop (Remove)**
+2. Pop (Remove)
 
 Removes the top element.
 
@@ -110,11 +110,11 @@ Top
 
 ↓
 
-\[30\]
+- \[30\]
 
-\[20\]
+- \[20\]
 
-\[10\]
+- \[10\]
 
 Pop:
 
@@ -126,15 +126,15 @@ Top
 
 ↓
 
-\[20\]
+- \[20\]
 
-\[10\]
+- \[10\]
 
 Time Complexity:
 
 O(1)
 
-**3. Peek (View Top)**
+3. Peek (View Top)
 
 Returns the top element without removing it.
 
@@ -144,11 +144,11 @@ Top
 
 ↓
 
-\[50\]
+- \[50\]
 
-\[30\]
+- \[30\]
 
-\[10\]
+- \[10\]
 
 Peek:
 
@@ -160,13 +160,13 @@ Time Complexity:
 
 O(1)
 
-**4. IsEmpty**
+4. IsEmpty
 
 Checks whether the stack contains elements.
 
 Example:
 
-Stack = \[\]
+- Stack = \[\]
 
 Result:
 
@@ -176,13 +176,13 @@ Time Complexity:
 
 O(1)
 
-**Stack Operations Example**
+Stack Operations Example
 
 Start:
 
 Empty
 
-**Push 10**
+Push 10
 
 Top
 
@@ -190,7 +190,7 @@ Top
 
 10
 
-**Push 20**
+Push 20
 
 Top
 
@@ -200,7 +200,7 @@ Top
 
 10
 
-**Push 30**
+Push 30
 
 Top
 
@@ -212,7 +212,7 @@ Top
 
 10
 
-**Pop**
+Pop
 
 Remove 30
 
@@ -224,21 +224,21 @@ Top
 
 10
 
-**Peek**
+Peek
 
 Returns:
 
 20
 
-**How Stack is Implemented**
+How Stack is Implemented
 
 A stack can be implemented using:
 
-1.  Array
+- Array
 
-2.  Linked List
+- Linked List
 
-**Stack Using Array**
+Stack Using Array
 
 Example:
 
@@ -246,7 +246,7 @@ Index
 
 0 1 2
 
-\[10\]\[20\]\[30\]
+- \[10\]\[20\]\[30\]
 
 ↑
 
@@ -258,11 +258,11 @@ Example:
 
 top = 2
 
-**Push Operation**
+Push Operation
 
 Before:
 
-\[10\]\[20\]\[ \]
+- \[10\]\[20\]\[ \]
 
 ↑
 
@@ -270,17 +270,17 @@ Top
 
 Push 30:
 
-\[10\]\[20\]\[30\]
+- \[10\]\[20\]\[30\]
 
 ↑
 
 Top
 
-**Pop Operation**
+Pop Operation
 
 Before:
 
-\[10\]\[20\]\[30\]
+- \[10\]\[20\]\[30\]
 
 ↑
 
@@ -288,13 +288,13 @@ Top
 
 Remove 30:
 
-\[10\]\[20\]\[ \]
+- \[10\]\[20\]\[ \]
 
 ↑
 
 Top
 
-**Stack Using Linked List**
+Stack Using Linked List
 
 A stack can also be created using nodes.
 
@@ -304,7 +304,7 @@ Top
 
 v
 
-\[30\] → \[20\] → \[10\] → NULL
+- \[30\] → \[20\] → \[10\] → NULL
 
 Push:
 
@@ -318,7 +318,7 @@ Both operations:
 
 O(1)
 
-**Time Complexity**
+### Time Complexity
 
 | **Operation** | **Complexity** |
 |---------------|----------------|
@@ -328,7 +328,7 @@ O(1)
 | IsEmpty       | O(1)           |
 | Search        | O(n)           |
 
-**C# Example**
+C# Example
 
 .NET provides a built-in stack:
 
@@ -362,7 +362,7 @@ Console.WriteLine(stack.Peek());
 
 }
 
-Output:
+- Output:
 
 30
 
@@ -370,7 +370,7 @@ Output:
 
 20
 
-**Stack vs Queue**
+Stack vs Queue
 
 | **Feature**     | **Stack**       | **Queue**       |
 |-----------------|-----------------|-----------------|
@@ -380,9 +380,9 @@ Output:
 | Example         | Stack of plates | Waiting line    |
 | Main Operations | Push/Pop        | Enqueue/Dequeue |
 
-**Applications of Stack**
+Applications of Stack
 
-**1. Function Calls**
+1. Function Calls
 
 Programming languages use a **call stack**.
 
@@ -432,7 +432,7 @@ Remove B()
 
 Then A.
 
-**2. Undo/Redo**
+2. Undo/Redo
 
 Text editors use stacks.
 
@@ -456,7 +456,7 @@ Hello
 
 Undo removes the latest change first.
 
-**3. Browser History**
+3. Browser History
 
 Back button uses a stack.
 
@@ -478,7 +478,7 @@ GitHub removed
 
 Return to YouTube.
 
-**4. Expression Evaluation**
+4. Expression Evaluation
 
 Stacks are used for:
 
@@ -498,11 +498,11 @@ Invalid:
 
 (10 + 20\]
 
-**5. Depth First Search (DFS)**
+5. Depth First Search (DFS)
 
 Graph and tree traversal often uses a stack.
 
-**Stack Overflow**
+Stack Overflow
 
 A **stack overflow** happens when too many function calls are added to the call stack.
 
@@ -532,7 +532,7 @@ Eventually:
 
 Stack Overflow Exception
 
-**Stack vs Array**
+Stack vs Array
 
 | **Feature**   | **Stack** | **Array**   |
 |---------------|-----------|-------------|
@@ -542,27 +542,27 @@ Stack Overflow Exception
 | Delete        | Top       | Anywhere    |
 | Random Access | No        | Yes         |
 
-**Common Interview Questions**
+Common Interview Questions
 
-1.  What is a stack?
+- What is a stack?
 
-2.  Why is stack called LIFO?
+- Why is stack called LIFO?
 
-3.  Difference between stack and queue?
+- Difference between stack and queue?
 
-4.  What happens internally during a function call?
+- What happens internally during a function call?
 
-5.  What is stack overflow?
+- What is stack overflow?
 
-6.  How can a stack be implemented using an array?
+- How can a stack be implemented using an array?
 
-7.  How can a stack be implemented using a linked list?
+- How can a stack be implemented using a linked list?
 
-8.  What are real-world uses of stacks?
+- What are real-world uses of stacks?
 
-9.  Why are push and pop operations O(1)?
+- Why are push and pop operations O(1)?
 
-**Summary**
+Summary
 
 | **Feature**     | **Stack**             |
 |-----------------|-----------------------|
@@ -576,7 +576,7 @@ Stack Overflow Exception
 | Storage         | Array or Linked List  |
 | C# Class        | Stack\<T\>            |
 
-**Key Takeaways**
+Key Takeaways
 
 - A **Stack** follows **Last In, First Out (LIFO)**.
 

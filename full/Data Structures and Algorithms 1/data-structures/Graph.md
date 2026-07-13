@@ -4,9 +4,9 @@ A **Graph** is a **non-linear data structure** that represents relationships bet
 
 A graph consists of:
 
-1.  **Vertices (Nodes)** → The entities.
+- **Vertices (Nodes)** → The entities.
 
-2.  **Edges** → The connections between entities.
+- **Edges** → The connections between entities.
 
 # Real-Life Example
 
@@ -41,6 +41,7 @@ Here:
 - Friend connections = Edges
 
 # Graph Terminology
+
 ## 1. Vertex (Node)
 
 A single entity in a graph.
@@ -52,6 +53,7 @@ A ---- B
 A and B are vertices.
 
 ------------------------------------------------------------------------
+
 ## 2. Edge
 
 A connection between two vertices.
@@ -63,6 +65,7 @@ A -------- B
 The line between A and B is an edge.
 
 ------------------------------------------------------------------------
+
 ## 3. Adjacent Vertices
 
 Two vertices connected by an edge.
@@ -76,6 +79,7 @@ A and B are adjacent.
 B and C are adjacent.
 
 ------------------------------------------------------------------------
+
 ## 4. Degree
 
 Number of edges connected to a vertex.
@@ -99,6 +103,7 @@ Degree of C:
 because C has four connections.
 
 ------------------------------------------------------------------------
+
 ## 5. Path
 
 A sequence of vertices connected by edges.
@@ -110,6 +115,7 @@ A → B → C → D
 This is a path from A to D.
 
 ------------------------------------------------------------------------
+
 ## 6. Cycle
 
 A path that starts and ends at the same vertex.
@@ -178,7 +184,7 @@ Checking:
 
 "Is A connected to C?"
 
-matrix\[A\]\[C\]
+- matrix\[A\]\[C\]
 
 Time:
 
@@ -419,13 +425,13 @@ A → B → C → D
 
 ### BFS Algorithm
 
-1.  Start from a node.
+- Start from a node.
 
-2.  Add it to queue.
+- Add it to queue.
 
-3.  Visit neighbors.
+- Visit neighbors.
 
-4.  Repeat.
+- Repeat.
 
 Complexity:
 
@@ -466,6 +472,7 @@ O(V + E)
 ------------------------------------------------------------------------
 
 # Shortest Path Algorithms
+
 ## 1. Dijkstra Algorithm
 
 Finds shortest path from one node.
@@ -487,6 +494,7 @@ Complexity:
 O((V+E) log V)
 
 ------------------------------------------------------------------------
+
 ## 2. Bellman-Ford Algorithm
 
 Handles negative weights.
@@ -500,6 +508,7 @@ Complexity:
 O(VE)
 
 ------------------------------------------------------------------------
+
 ## 3. Floyd-Warshall Algorithm
 
 Finds shortest paths between all pairs.
@@ -513,6 +522,7 @@ O(V³)
 # Minimum Spanning Tree Algorithms
 
 Used to connect all nodes with minimum cost.
+
 ## 1. Kruskal Algorithm
 
 Uses:
@@ -520,6 +530,7 @@ Uses:
 - Sorting edges
 
 - Union-Find data structure
+
 ## 2. Prim Algorithm
 
 Uses:
@@ -529,6 +540,7 @@ Uses:
 - Heap
 
 # Graph Implementation in C#
+
 ## Using Adjacency List
 
 using System;
@@ -549,9 +561,9 @@ public void AddEdge(int source, int destination)
 
 if (!adj.ContainsKey(source))
 
-adj\[source\] = new List\<int\>();
+- adj\[source\] = new List\<int\>();
 
-adj\[source\].Add(destination);
+- adj\[source\].Add(destination);
 
 }
 
@@ -560,6 +572,7 @@ adj\[source\].Add(destination);
 ------------------------------------------------------------------------
 
 # Real-World Applications
+
 ## 1. Social Networks
 
 Users = Nodes
@@ -567,6 +580,7 @@ Users = Nodes
 Friendships = Edges
 
 ------------------------------------------------------------------------
+
 ## 2. Google Maps
 
 Cities = Nodes
@@ -576,6 +590,7 @@ Roads = Edges
 Distance = Weight
 
 ------------------------------------------------------------------------
+
 ## 3. Internet Networks
 
 Routers = Nodes
@@ -583,6 +598,7 @@ Routers = Nodes
 Connections = Edges
 
 ------------------------------------------------------------------------
+
 ## 4. Recommendation Systems
 
 Example:
@@ -590,6 +606,7 @@ Example:
 User → Movie → Actor
 
 ------------------------------------------------------------------------
+
 ## 5. Dependency Management
 
 Example:
@@ -607,6 +624,7 @@ App
 +-- Library B
 
 ------------------------------------------------------------------------
+
 ## 6. Microservices Architecture
 
 Example:
@@ -631,25 +649,25 @@ Services and communication channels can be represented as graphs.
 
 # Common Interview Questions
 
-1.  What is a graph data structure?
+- What is a graph data structure?
 
-2.  Difference between tree and graph?
+- Difference between tree and graph?
 
-3.  Difference between BFS and DFS?
+- Difference between BFS and DFS?
 
-4.  What is adjacency matrix?
+- What is adjacency matrix?
 
-5.  What is adjacency list?
+- What is adjacency list?
 
-6.  When would you use BFS over DFS?
+- When would you use BFS over DFS?
 
-7.  How do you detect cycles in a graph?
+- How do you detect cycles in a graph?
 
-8.  Explain Dijkstra's algorithm.
+- Explain Dijkstra's algorithm.
 
-9.  What is a weighted graph?
+- What is a weighted graph?
 
-10. What is a directed graph?
+- What is a directed graph?
 
 # Summary
 
@@ -665,6 +683,7 @@ Services and communication channels can be represented as graphs.
 | Applications | Maps, Networks, Social Media |
 
 ------------------------------------------------------------------------
+
 ## Key Takeaways
 
 - A **Graph represents relationships between objects**.

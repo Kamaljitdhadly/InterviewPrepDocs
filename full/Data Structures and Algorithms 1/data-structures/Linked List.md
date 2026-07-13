@@ -4,7 +4,7 @@ A linked list is a linear data structure where elements are stored as separate o
 
 Unlike an array, the elements are not stored next to each other in memory.
 
-**Basic idea**
+Basic idea
 
 Each node has two parts:
 
@@ -12,7 +12,7 @@ Each node has two parts:
 
 - Next — a reference to the next node.
 
-**Structure of a node**
+Structure of a node
 
 Node
 
@@ -20,7 +20,7 @@ Data
 
 Next
 
-**Visualization**
+Visualization
 
 A linked list storing 10, 20, 30, 40:
 
@@ -44,7 +44,7 @@ NULL
 
 The last node points to NULL, meaning the list ends there.
 
-**How memory looks**
+How memory looks
 
 Nodes can be scattered in memory:
 
@@ -63,7 +63,7 @@ Notice:
 
 - The list is connected through references.
 
-**Why use a linked list?**
+### Why use a linked list?
 
 Suppose an array is full:
 
@@ -95,9 +95,9 @@ In a linked list, you simply create a new node and connect it:
 
 50
 
-**Basic operations**
+Basic operations
 
-**1. Traversal**
+1. Traversal
 
 Visit each node one by one.
 
@@ -109,11 +109,11 @@ Visit each node one by one.
 
 40
 
-Output: 10, 20, 30, 40
+- Output: 10, 20, 30, 40
 
 Time Complexity: O(n)
 
-**2. Searching**
+2. Searching
 
 Find 30:
 
@@ -127,7 +127,7 @@ Check 10 → Check 20 → Found 30
 
 Time Complexity: O(n)
 
-**3. Insertion at the beginning**
+3. Insertion at the beginning
 
 Before:
 
@@ -149,15 +149,15 @@ Insert 5:
 
 Steps:
 
-1.  Create a new node (5).
+- Create a new node (5).
 
-2.  Point its Next to the old head.
+- Point its Next to the old head.
 
-3.  Update Head to the new node.
+- Update Head to the new node.
 
 Time Complexity: O(1)
 
-**4. Insertion at the end**
+4. Insertion at the end
 
 Before:
 
@@ -185,7 +185,7 @@ If we also keep a Tail pointer, insertion at the end becomes:
 
 O(1)
 
-**5. Deletion**
+5. Deletion
 
 Delete 20.
 
@@ -209,7 +209,7 @@ After:
 
 The previous node (10) now points directly to 30.
 
-**Why random access is slow**
+### Why random access is slow
 
 Suppose you want the 4th element.
 
@@ -225,7 +225,7 @@ Array:
 
 50
 
-Direct access: array\[3\] → 40
+- Direct access: array\[3\] → 40
 
 O(1)
 
@@ -245,7 +245,7 @@ O(n)
 
 A linked list has no index-based direct access.
 
-**Time complexity**
+Time complexity
 
 | **Operation**               | **Complexity** |
 |-----------------------------|----------------|
@@ -258,11 +258,11 @@ A linked list has no index-based direct access.
 | Insert in middle            | O(n)           |
 | Delete                      | O(n)           |
 
-**C# node class**
+C# node class
 
-**Simple linked list example**
+Simple linked list example
 
-Output:
+- Output:
 
 10
 
@@ -270,7 +270,7 @@ Output:
 
 30
 
-**Advantages**
+Advantages
 
 - Dynamic size — can grow or shrink easily.
 
@@ -280,7 +280,7 @@ Output:
 
 - No costly array resizing.
 
-**Disadvantages**
+Disadvantages
 
 - Slow random access (O(n)).
 
@@ -290,7 +290,7 @@ Output:
 
 - Searching is slower than arrays.
 
-**Array vs Linked List**
+Array vs Linked List
 
 | **Feature**         | **Array**  | **Linked List** |
 |---------------------|------------|-----------------|
@@ -306,7 +306,7 @@ Output:
 
 \*\* O(1) if a Tail pointer is maintained.
 
-**When should you use a linked list?**
+When should you use a linked list?
 
 Use a linked list when:
 
@@ -326,21 +326,21 @@ Avoid it when:
 
 - Cache performance matters.
 
-**Common interview questions**
+Common interview questions
 
-1.  What is a linked list?
+- What is a linked list?
 
-2.  Why doesn't it require contiguous memory?
+- Why doesn't it require contiguous memory?
 
-3.  Why is accessing the nth element O(n)?
+- Why is accessing the nth element O(n)?
 
-4.  Why is insertion at the beginning O(1)?
+- Why is insertion at the beginning O(1)?
 
-5.  Why does it use more memory than an array?
+- Why does it use more memory than an array?
 
-6.  How can insertion at the end become O(1)?
+- How can insertion at the end become O(1)?
 
-**Summary**
+Summary
 
 <table style="width:47%;">
 <colgroup>
@@ -390,7 +390,7 @@ Avoid it when:
 </tbody>
 </table>
 
-**Key takeaway**
+Key takeaway
 
 A linked list is a chain of nodes, where each node stores data and a reference to the next node. It is excellent for frequent insertions and deletions, but poor for direct index-based access because you must traverse the list node by node.
 

@@ -1,22 +1,22 @@
 # Data Structures and Algorithms Dynamic Array List
 
-**Dynamic Array (Data Structure)**
+Dynamic Array (Data Structure)
 
 A **dynamic array** is an array that **automatically grows (and sometimes shrinks) in size** when needed. Unlike a traditional array, you don't have to know the size in advance.
 
 In C#, the most common dynamic array is **List\<T\>**.
 
-**Why Do We Need Dynamic Arrays?**
+### Why Do We Need Dynamic Arrays?
 
 Imagine you create a traditional array:
 
-int\[\] numbers = new int\[5\];
+- int\[\] numbers = new int\[5\];
 
 It can store **only 5 elements**.
 
 If you try to add a 6th element:
 
-\[10\]\[20\]\[30\]\[40\]\[50\]
+- \[10\]\[20\]\[30\]\[40\]\[50\]
 
 There is no more space.
 
@@ -32,7 +32,7 @@ Doing this manually is inconvenient.
 
 A **dynamic array** does this automatically.
 
-**Real-Life Example**
+### Real-Life Example
 
 Imagine a bookshelf with **5 slots**.
 
@@ -50,21 +50,21 @@ A normal bookshelf says:
 
 A dynamic bookshelf says:
 
-1.  Buy a larger bookshelf.
+- Buy a larger bookshelf.
 
-2.  Move all books.
+- Move all books.
 
-3.  Add the new book.
+- Add the new book.
 
 The process is automatic.
 
-**How Dynamic Arrays Work**
+How Dynamic Arrays Work
 
 Suppose the capacity is **4**.
 
 Capacity = 4
 
-\[10\]\[20\]\[30\]\[40\]
+- \[10\]\[20\]\[30\]\[40\]
 
 Now insert **50**.
 
@@ -72,7 +72,7 @@ There is no space.
 
 The dynamic array performs these steps:
 
-**Step 1: Allocate a Larger Array**
+Step 1: Allocate a Larger Array
 
 Usually, it **doubles** the capacity.
 
@@ -80,29 +80,29 @@ Old Capacity = 4
 
 New Capacity = 8
 
-**Step 2: Copy Elements**
+Step 2: Copy Elements
 
 Old array
 
-\[10\]\[20\]\[30\]\[40\]
+- \[10\]\[20\]\[30\]\[40\]
 
 ↓
 
 New array
 
-\[10\]\[20\]\[30\]\[40\]\[ \]\[ \]\[ \]\[ \]
+- \[10\]\[20\]\[30\]\[40\]\[ \]\[ \]\[ \]\[ \]
 
-**Step 3: Delete the Old Array**
+Step 3: Delete the Old Array
 
 Old memory is released
 
-**Step 4: Insert New Element**
+Step 4: Insert New Element
 
-\[10\]\[20\]\[30\]\[40\]\[50\]\[ \]\[ \]\[ \]
+- \[10\]\[20\]\[30\]\[40\]\[50\]\[ \]\[ \]\[ \]
 
 Done!
 
-**Visualization**
+Visualization
 
 Initially
 
@@ -128,23 +128,23 @@ Allocate Capacity = 8
 
 +----+----+----+----+----+----+----+----+
 
-**Size vs Capacity**
+Size vs Capacity
 
 This is one of the most important interview concepts.
 
-**Size**
+Size
 
 Number of actual elements.
 
-\[10\]\[20\]\[30\]
+- \[10\]\[20\]\[30\]
 
 Size = 3
 
-**Capacity**
+Capacity
 
 Amount of allocated memory.
 
-\[10\]\[20\]\[30\]\[ \]\[ \]\[ \]\[ \]\[ \]
+- \[10\]\[20\]\[30\]\[ \]\[ \]\[ \]\[ \]\[ \]
 
 Capacity = 8
 
@@ -152,7 +152,7 @@ Notice
 
 Size ≠ Capacity
 
-**Example**
+### Example
 
 Capacity = 8
 
@@ -166,7 +166,7 @@ Size = 4
 
 Capacity = 8
 
-**Growth Strategy**
+Growth Strategy
 
 Most programming languages use approximately **2× growth**.
 
@@ -200,7 +200,7 @@ Example
 
 This reduces the number of expensive resize operations.
 
-**Why Not Increase by 1 Every Time?**
+### Why Not Increase by 1 Every Time?
 
 Suppose capacity grows like this:
 
@@ -234,21 +234,21 @@ If you insert **100,000 elements**, this would require almost **100,000 copies**
 
 Doubling the capacity keeps resizing infrequent.
 
-**Time Complexity**
+### Time Complexity
 
-**Access**
+Access
 
-array\[i\]
-
-O(1)
-
-**Update**
-
-array\[i\] = value
+- array\[i\]
 
 O(1)
 
-**Search**
+Update
+
+- array\[i\] = value
+
+O(1)
+
+Search
 
 Linear Search
 
@@ -258,7 +258,7 @@ Binary Search (sorted)
 
 O(log n)
 
-**Insert at End**
+Insert at End
 
 Usually
 
@@ -268,7 +268,7 @@ Sometimes (when resize occurs)
 
 O(n)
 
-**Why Is Append Considered O(1)?**
+### Why Is Append Considered O(1)?
 
 Although resizing takes **O(n)** because all elements must be copied, it happens only occasionally.
 
@@ -292,19 +292,19 @@ Because most insertions don't resize, the **average cost per append** is **amort
 
 **Amortized Analysis:** A few expensive operations are spread across many cheap operations, making the average cost per operation constant.
 
-**Insert in Middle**
+Insert in Middle
 
 O(n)
 
 Elements must shift.
 
-**Delete**
+Delete
 
 O(n)
 
 Elements shift left.
 
-**Memory Representation**
+Memory Representation
 
 Old Array
 
@@ -344,7 +344,7 @@ Old memory
 
 Released
 
-**Advantages**
+Advantages
 
 - Automatically grows when needed.
 
@@ -356,7 +356,7 @@ Released
 
 - Ideal when the number of elements is unknown.
 
-**Disadvantages**
+Disadvantages
 
 - Resizing is expensive because it copies all elements.
 
@@ -366,7 +366,7 @@ Released
 
 - Requires contiguous memory, so allocating very large arrays may become difficult.
 
-**Dynamic Arrays in Different Languages**
+Dynamic Arrays in Different Languages
 
 | **Language** | **Dynamic Array** |
 |--------------|-------------------|
@@ -376,7 +376,7 @@ Released
 | Python       | list              |
 | JavaScript   | Array             |
 
-**C# Example**
+C# Example
 
 using System;
 
@@ -414,7 +414,7 @@ Console.WriteLine(number);
 
 }
 
-Output:
+- Output:
 
 10
 
@@ -426,7 +426,7 @@ Output:
 
 50
 
-**Array vs Dynamic Array**
+Array vs Dynamic Array
 
 | **Feature**      | **Array**            | **Dynamic Array (List\<T\>)** |
 |------------------|----------------------|-------------------------------|
@@ -439,23 +439,23 @@ Output:
 | Resize           | Manual               | Automatic                     |
 | Best Use         | Known fixed size     | Unknown or changing size      |
 
-**Common Interview Questions**
+Common Interview Questions
 
-1.  What is a dynamic array?
+- What is a dynamic array?
 
-2.  How is a dynamic array different from a traditional array?
+- How is a dynamic array different from a traditional array?
 
-3.  Why is appending to a dynamic array considered **amortized O(1)** instead of always **O(1)**?
+- Why is appending to a dynamic array considered **amortized O(1)** instead of always **O(1)**?
 
-4.  What is the difference between **size** and **capacity**?
+- What is the difference between **size** and **capacity**?
 
-5.  Why do most implementations double the capacity instead of increasing it by one?
+- Why do most implementations double the capacity instead of increasing it by one?
 
-6.  Does a dynamic array store elements contiguously?
+- Does a dynamic array store elements contiguously?
 
-7.  Why are insertions and deletions in the middle still **O(n)**?
+- Why are insertions and deletions in the middle still **O(n)**?
 
-**Summary**
+Summary
 
 | **Feature**     | **Dynamic Array**             |
 |-----------------|-------------------------------|
@@ -469,7 +469,7 @@ Output:
 | Search          | O(n), or O(log n) if sorted   |
 | Example in C#   | List\<T\>                     |
 
-**Key Takeaways**
+Key Takeaways
 
 - A **dynamic array** behaves like a normal array but automatically resizes when it runs out of space.
 

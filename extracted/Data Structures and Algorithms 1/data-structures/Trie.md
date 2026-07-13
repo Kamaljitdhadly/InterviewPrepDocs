@@ -1,6 +1,6 @@
 # Data Structures and Algorithms Trie
 
-**Trie (Data Structure)**
+Trie (Data Structure)
 
 A **Trie** (pronounced as **"try"**) is a special type of **tree data structure** used to store and search **strings efficiently**.
 
@@ -14,9 +14,9 @@ It is also called a:
 
 The main idea of a Trie is:
 
-**Each node represents a character, and paths from the root represent words or prefixes.**
+Each node represents a character, and paths from the root represent words or prefixes.
 
-**Real-Life Example**
+### Real-Life Example
 
 Think about the search box in Google.
 
@@ -36,7 +36,7 @@ How does it quickly find these?
 
 A Trie stores words by their common prefixes.
 
-**Basic Trie Structure**
+Basic Trie Structure
 
 Suppose we store:
 
@@ -68,7 +68,7 @@ ca
 
 is stored only once.
 
-**How Trie Stores Words**
+How Trie Stores Words
 
 Let's insert:
 
@@ -134,13 +134,13 @@ app
 
 is a complete word.
 
-**Trie Node Structure**
+Trie Node Structure
 
 Each Trie node usually contains:
 
-1.  Children references
+- Children references
 
-2.  A flag indicating end of word
+- A flag indicating end of word
 
 Example:
 
@@ -148,19 +148,19 @@ Example:
 
 \| Character \|
 
-\| Children\[\] \|
+- \| Children\[\] \|
 
 \| IsEndOfWord \|
 
 +----------------+
 
-**Trie Node Example in C#**
+Trie Node Example in C#
 
 class TrieNode
 
 {
 
-public TrieNode\[\] Children = new TrieNode\[26\];
+- public TrieNode\[\] Children = new TrieNode\[26\];
 
 public bool IsEndOfWord;
 
@@ -168,19 +168,19 @@ public bool IsEndOfWord;
 
 Here:
 
-Children\[0\] = a
+- Children\[0\] = a
 
-Children\[1\] = b
+- Children\[1\] = b
 
-Children\[2\] = c
+- Children\[2\] = c
 
 ...
 
 Because English alphabet has 26 characters.
 
-**Trie Operations**
+Trie Operations
 
-**1. Insert**
+1. Insert
 
 Insert the word:
 
@@ -234,7 +234,7 @@ t\*
 
 Mark t as the end of the word.
 
-**2. Search**
+2. Search
 
 Search:
 
@@ -282,7 +282,7 @@ Therefore:
 
 "ca" is not a complete word
 
-**3. Prefix Search**
+3. Prefix Search
 
 This is where Trie is powerful.
 
@@ -314,13 +314,13 @@ Prefix exists
 
 It does not matter whether it is a complete word.
 
-**Time Complexity**
+### Time Complexity
 
 Let:
 
 L = length of the word
 
-**Insert**
+Insert
 
 Example:
 
@@ -336,7 +336,7 @@ Complexity:
 
 O(L)
 
-**Search**
+Search
 
 Search:
 
@@ -346,7 +346,7 @@ Visit each character:
 
 O(L)
 
-**Prefix Search**
+Prefix Search
 
 Example:
 
@@ -356,7 +356,7 @@ Complexity:
 
 O(L)
 
-**Trie vs Hash Table**
+Trie vs Hash Table
 
 | **Feature**     | **Trie**  | **Hash Table** |
 |-----------------|-----------|----------------|
@@ -366,7 +366,7 @@ O(L)
 | Ordered Data    | Yes       | No             |
 | String Handling | Better    | Good           |
 
-**Why Use Trie Instead of HashSet?**
+### Why Use Trie Instead of HashSet?
 
 Suppose you have:
 
@@ -428,9 +428,9 @@ a → p → p
 
 Instantly find all matches.
 
-**Trie Applications**
+Trie Applications
 
-**1. Auto Complete**
+1. Auto Complete
 
 Example:
 
@@ -450,7 +450,7 @@ career
 
 Trie stores these prefixes.
 
-**2. Spell Checker**
+2. Spell Checker
 
 Example:
 
@@ -468,11 +468,11 @@ ape
 
 It can suggest corrections.
 
-**3. Dictionary Search**
+3. Dictionary Search
 
 A dictionary application can store millions of words efficiently.
 
-**4. IP Routing**
+4. IP Routing
 
 Routers use variations of Trie called:
 
@@ -482,7 +482,7 @@ Routers use variations of Trie called:
 
 For IP address lookup.
 
-**5. Search Engines**
+5. Search Engines
 
 Used for:
 
@@ -490,7 +490,7 @@ Used for:
 
 - Prefix matching
 
-**6. Word Games**
+6. Word Games
 
 Examples:
 
@@ -500,7 +500,7 @@ Examples:
 
 - Crossword helpers
 
-**Trie Implementation in C#**
+Trie Implementation in C#
 
 Example:
 
@@ -536,11 +536,11 @@ if(!current.Children.ContainsKey(c))
 
 {
 
-current.Children\[c\] = new TrieNode();
+- current.Children\[c\] = new TrieNode();
 
 }
 
-current = current.Children\[c\];
+- current = current.Children\[c\];
 
 }
 
@@ -562,7 +562,7 @@ if(!current.Children.ContainsKey(c))
 
 return false;
 
-current = current.Children\[c\];
+- current = current.Children\[c\];
 
 }
 
@@ -572,7 +572,7 @@ return current.IsEndOfWord;
 
 }
 
-**Trie vs Binary Tree**
+Trie vs Binary Tree
 
 | **Feature**     | **Trie**         | **Binary Tree**     |
 |-----------------|------------------|---------------------|
@@ -581,7 +581,7 @@ return current.IsEndOfWord;
 | Children        | Many             | Usually 2           |
 | Main Use        | Prefix searching | Searching/traversal |
 
-**Trie vs BST**
+Trie vs BST
 
 | **Feature**   | **Trie**      | **BST**             |
 |---------------|---------------|---------------------|
@@ -590,38 +590,38 @@ return current.IsEndOfWord;
 | Prefix Search | Excellent     | Not efficient       |
 | Ordering      | Lexical order | Sorted order        |
 
-**Common Interview Questions**
+Common Interview Questions
 
-1.  What is a Trie?
+- What is a Trie?
 
-2.  Why is Trie called a Prefix Tree?
+- Why is Trie called a Prefix Tree?
 
-3.  How does Trie perform prefix search efficiently?
+- How does Trie perform prefix search efficiently?
 
-4.  Difference between Trie and HashMap?
+- Difference between Trie and HashMap?
 
-5.  Why does Trie consume more memory?
+- Why does Trie consume more memory?
 
-6.  How do you delete a word from Trie?
+- How do you delete a word from Trie?
 
-7.  How is autocomplete implemented using Trie?
+- How is autocomplete implemented using Trie?
 
-8.  What is the time complexity of Trie operations?
+- What is the time complexity of Trie operations?
 
-**Advantages**
+Advantages
 
 ✅ Very fast string searching\
 ✅ Excellent for prefix matching\
 ✅ Avoids repeated storage of common prefixes\
 ✅ Useful for autocomplete systems
 
-**Disadvantages**
+Disadvantages
 
 ❌ High memory consumption\
 ❌ More complex implementation\
 ❌ Not useful for non-string data
 
-**Summary**
+Summary
 
 | **Feature**   | **Trie**                         |
 |---------------|----------------------------------|
@@ -634,7 +634,7 @@ return current.IsEndOfWord;
 | Prefix Search | O(L)                             |
 | Main Use      | Autocomplete, dictionary, search |
 
-**Key Takeaways**
+Key Takeaways
 
 - A **Trie stores strings character by character**.
 

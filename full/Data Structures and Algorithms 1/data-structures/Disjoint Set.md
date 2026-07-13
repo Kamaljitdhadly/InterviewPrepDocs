@@ -1,6 +1,6 @@
 # Data Structures and Algorithms Disjoint Set
 
-**Disjoint Set (Union-Find) Data Structure**
+Disjoint Set (Union-Find) Data Structure
 
 A **Disjoint Set** is a data structure used to manage a collection of **non-overlapping (disjoint) sets**.
 
@@ -12,9 +12,9 @@ It is also called:
 
 The main purpose:
 
-**Efficiently track groups and determine whether two elements belong to the same group.**
+Efficiently track groups and determine whether two elements belong to the same group.
 
-**Real-Life Example**
+### Real-Life Example
 
 Imagine students in a school.
 
@@ -46,15 +46,15 @@ No
 
 This is exactly what Disjoint Set solves.
 
-**Main Operations**
+Main Operations
 
 A Disjoint Set has two primary operations:
 
-1.  **Find**
+- **Find**
 
-2.  **Union**
+- **Union**
 
-**1. Find Operation**
+1. Find Operation
 
 The **Find** operation tells which set an element belongs to.
 
@@ -74,7 +74,7 @@ Group 2
 
 Usually, each group has a representative element called the **root/parent**.
 
-**2. Union Operation**
+2. Union Operation
 
 The **Union** operation merges two sets.
 
@@ -92,7 +92,7 @@ After:
 
 {A,B,C,D}
 
-**How Disjoint Set Works Internally**
+How Disjoint Set Works Internally
 
 Initially:
 
@@ -120,7 +120,7 @@ Meaning:
 
 Each element is a separate set.
 
-**Performing Union**
+Performing Union
 
 Union(0,1)
 
@@ -162,7 +162,7 @@ Now we have:
 
 {4}
 
-**Find Operation**
+Find Operation
 
 Find(1):
 
@@ -182,7 +182,7 @@ Root:
 
 2
 
-**Problem: Long Chains**
+Problem: Long Chains
 
 A bad union can create a chain:
 
@@ -216,7 +216,7 @@ O(n)
 
 To solve this, we use optimizations.
 
-**Optimization 1: Path Compression**
+Optimization 1: Path Compression
 
 Path compression makes future searches faster.
 
@@ -258,7 +258,7 @@ Now every node directly points to root.
 
 Future Find operations become much faster.
 
-**Optimization 2: Union by Rank / Size**
+Optimization 2: Union by Rank / Size
 
 When merging two sets:
 
@@ -304,7 +304,7 @@ Attach B under A:
 
 This keeps height small.
 
-**Time Complexity**
+### Time Complexity
 
 With both optimizations:
 
@@ -327,31 +327,31 @@ For all practical purposes:
 
 α(n) ≈ O(1)
 
-**Implementation in C#**
+Implementation in C#
 
 class DisjointSet
 
 {
 
-private int\[\] parent;
+- private int\[\] parent;
 
-private int\[\] rank;
+- private int\[\] rank;
 
 public DisjointSet(int n)
 
 {
 
-parent = new int\[n\];
+- parent = new int\[n\];
 
-rank = new int\[n\];
+- rank = new int\[n\];
 
 for(int i = 0; i \< n; i++)
 
 {
 
-parent\[i\] = i;
+- parent\[i\] = i;
 
-rank\[i\] = 0;
+- rank\[i\] = 0;
 
 }
 
@@ -361,15 +361,15 @@ public int Find(int x)
 
 {
 
-if(parent\[x\] != x)
+- if(parent\[x\] != x)
 
 {
 
-parent\[x\] = Find(parent\[x\]);
+- parent\[x\] = Find(parent\[x\]);
 
 }
 
-return parent\[x\];
+- return parent\[x\];
 
 }
 
@@ -385,19 +385,19 @@ if(rootX == rootY)
 
 return;
 
-if(rank\[rootX\] \< rank\[rootY\])
+- if(rank\[rootX\] \< rank\[rootY\])
 
 {
 
-parent\[rootX\] = rootY;
+- parent\[rootX\] = rootY;
 
 }
 
-else if(rank\[rootX\] \> rank\[rootY\])
+- else if(rank\[rootX\] \> rank\[rootY\])
 
 {
 
-parent\[rootY\] = rootX;
+- parent\[rootY\] = rootX;
 
 }
 
@@ -405,9 +405,9 @@ else
 
 {
 
-parent\[rootY\] = rootX;
+- parent\[rootY\] = rootX;
 
-rank\[rootX\]++;
+- rank\[rootX\]++;
 
 }
 
@@ -427,7 +427,7 @@ Console.WriteLine(ds.Find(0));
 
 Console.WriteLine(ds.Find(2));
 
-Output:
+- Output:
 
 0
 
@@ -439,9 +439,9 @@ Because:
 
 are in the same set.
 
-**Applications of Disjoint Set**
+Applications of Disjoint Set
 
-**1. Kruskal's Algorithm (Minimum Spanning Tree)**
+1. Kruskal's Algorithm (Minimum Spanning Tree)
 
 This is the most famous use.
 
@@ -471,7 +471,7 @@ Adding edge creates a cycle
 
 Skip it.
 
-**2. Cycle Detection in Graphs**
+2. Cycle Detection in Graphs
 
 Example:
 
@@ -495,7 +495,7 @@ If true:
 
 Cycle exists
 
-**3. Network Connectivity**
+3. Network Connectivity
 
 Example:
 
@@ -515,7 +515,7 @@ Use:
 
 Find(A) == Find(B)
 
-**4. Social Networks**
+4. Social Networks
 
 Groups of connected users:
 
@@ -531,7 +531,7 @@ User C
 
 Find communities.
 
-**5. Image Processing**
+5. Image Processing
 
 Finding connected regions:
 
@@ -545,7 +545,7 @@ Example:
 
 Identify separate objects.
 
-**Disjoint Set vs Graph Traversal**
+Disjoint Set vs Graph Traversal
 
 | **Feature** | **Disjoint Set**           | **BFS/DFS**        |
 |-------------|----------------------------|--------------------|
@@ -555,7 +555,7 @@ Identify separate objects.
 | Memory      | Less                       | More               |
 | Used in     | Kruskal, cycle detection   | Path finding       |
 
-**Disjoint Set vs HashSet**
+Disjoint Set vs HashSet
 
 | **Feature**    | **Disjoint Set** | **HashSet**       |
 |----------------|------------------|-------------------|
@@ -564,29 +564,29 @@ Identify separate objects.
 | Purpose        | Connectivity     | Membership        |
 | Example        | Network groups   | Duplicate removal |
 
-**Common Interview Questions**
+Common Interview Questions
 
-1.  What is Disjoint Set?
+- What is Disjoint Set?
 
-2.  Why is it called Union-Find?
+- Why is it called Union-Find?
 
-3.  Explain Find operation.
+- Explain Find operation.
 
-4.  Explain Union operation.
+- Explain Union operation.
 
-5.  What is path compression?
+- What is path compression?
 
-6.  What is union by rank?
+- What is union by rank?
 
-7.  How does DSU detect cycles?
+- How does DSU detect cycles?
 
-8.  How is DSU used in Kruskal's algorithm?
+- How is DSU used in Kruskal's algorithm?
 
-9.  What is the time complexity of DSU?
+- What is the time complexity of DSU?
 
-10. Difference between DFS and DSU?
+- Difference between DFS and DSU?
 
-**Summary**
+Summary
 
 | **Feature**  | **Disjoint Set**                        |
 |--------------|-----------------------------------------|
@@ -597,7 +597,7 @@ Identify separate objects.
 | Complexity   | Almost O(1)                             |
 | Used In      | Graph algorithms, connectivity problems |
 
-**Key Takeaways**
+Key Takeaways
 
 - A **Disjoint Set manages multiple independent groups**.
 

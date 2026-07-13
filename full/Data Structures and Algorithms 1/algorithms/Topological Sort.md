@@ -1,6 +1,6 @@
 # Data Structures and Algorithms Topological Sort
 
-**Topological Sort in Data Structures and Algorithms**
+Topological Sort in Data Structures and Algorithms
 
 **Topological Sort** is an ordering of the vertices (nodes) of a **Directed Acyclic Graph (DAG)** such that:
 
@@ -8,7 +8,7 @@ For every directed edge u → v, node u appears before node v in the ordering.
 
 In simple words:
 
-**A task must appear before the tasks that depend on it.**
+A task must appear before the tasks that depend on it.
 
 **Real-Life Example: Task Dependencies**
 
@@ -36,7 +36,7 @@ A valid topological order:
 
 Design UI → Develop Frontend → Deploy Application
 
-**Important Rule**
+Important Rule
 
 Topological sorting works only for:
 
@@ -44,7 +44,7 @@ Directed Acyclic Graph (DAG)
 
 Meaning:
 
-**Directed**
+Directed
 
 Edges have direction:
 
@@ -54,7 +54,7 @@ means:
 
 A must happen before B
 
-**Acyclic**
+Acyclic
 
 No cycles.
 
@@ -110,7 +110,7 @@ A C B D
 
 Both are correct.
 
-**Where is Topological Sort Used?**
+Where is Topological Sort Used?
 
 Common applications:
 
@@ -142,15 +142,15 @@ Your Application
 
 Deployment
 
-**Approaches for Topological Sort**
+Approaches for Topological Sort
 
 There are two common algorithms:
 
-1.  **Kahn's Algorithm (BFS approach)**
+- **Kahn's Algorithm (BFS approach)**
 
-2.  **DFS based approach**
+- **DFS based approach**
 
-**1. Kahn's Algorithm (BFS)**
+1. Kahn's Algorithm (BFS)
 
 Kahn's algorithm uses:
 
@@ -158,9 +158,9 @@ Kahn's algorithm uses:
 
 - Indegree count
 
-**What is Indegree?**
+What is Indegree?
 
-**Indegree = Number of incoming edges to a node**
+Indegree = Number of incoming edges to a node
 
 Example:
 
@@ -174,7 +174,7 @@ Indegree(B) = 2
 
 because two edges are coming into B.
 
-**Example**
+### Example
 
 Graph:
 
@@ -201,15 +201,15 @@ Indegree table:
 | C        | 1            |
 | D        | 2            |
 
-**Kahn's Algorithm Steps**
+Kahn's Algorithm Steps
 
-**Step 1: Find nodes with indegree 0**
+Step 1: Find nodes with indegree 0
 
 A
 
 Add to queue.
 
-**Step 2: Remove A**
+Step 2: Remove A
 
 Order:
 
@@ -225,7 +225,7 @@ Add:
 
 B, C
 
-**Step 3: Remove B and C**
+Step 3: Remove B and C
 
 Order:
 
@@ -235,13 +235,13 @@ Reduce D:
 
 D: 2 → 0
 
-**Step 4: Remove D**
+Step 4: Remove D
 
 Final order:
 
 A B C D
 
-**Kahn's Algorithm C# Implementation**
+Kahn's Algorithm C# Implementation
 
 List\<int\> TopologicalSort(
 
@@ -251,7 +251,7 @@ int vertices)
 
 {
 
-int\[\] indegree = new int\[vertices\];
+- int\[\] indegree = new int\[vertices\];
 
 foreach(var node in graph)
 
@@ -261,7 +261,7 @@ foreach(var neighbor in node.Value)
 
 {
 
-indegree\[neighbor\]++;
+- indegree\[neighbor\]++;
 
 }
 
@@ -273,7 +273,7 @@ for(int i=0;i\<vertices;i++)
 
 {
 
-if(indegree\[i\]==0)
+- if(indegree\[i\]==0)
 
 queue.Enqueue(i);
 
@@ -289,13 +289,13 @@ int node = queue.Dequeue();
 
 result.Add(node);
 
-foreach(var neighbor in graph\[node\])
+- foreach(var neighbor in graph\[node\])
 
 {
 
-indegree\[neighbor\]--;
+- indegree\[neighbor\]--;
 
-if(indegree\[neighbor\]==0)
+- if(indegree\[neighbor\]==0)
 
 {
 
@@ -311,7 +311,7 @@ return result;
 
 }
 
-**Complexity of Kahn's Algorithm**
+Complexity of Kahn's Algorithm
 
 Time:
 
@@ -327,7 +327,7 @@ where:
 
 - E = edges
 
-**Cycle Detection Using Kahn's Algorithm**
+Cycle Detection Using Kahn's Algorithm
 
 Important property:
 
@@ -353,7 +353,7 @@ Therefore:
 
 Topological sort impossible
 
-**2. DFS Based Topological Sort**
+2. DFS Based Topological Sort
 
 DFS approach uses:
 
@@ -391,7 +391,7 @@ Reverse:
 
 A B C
 
-**DFS Implementation**
+DFS Implementation
 
 void DFS(
 
@@ -399,19 +399,19 @@ int node,
 
 Dictionary\<int,List\<int\>\> graph,
 
-bool\[\] visited,
+- bool\[\] visited,
 
 Stack\<int\> stack)
 
 {
 
-visited\[node\] = true;
+- visited\[node\] = true;
 
-foreach(var neighbor in graph\[node\])
+- foreach(var neighbor in graph\[node\])
 
 {
 
-if(!visited\[neighbor\])
+- if(!visited\[neighbor\])
 
 {
 
@@ -435,7 +435,7 @@ Console.Write(stack.Pop());
 
 }
 
-**DFS Complexity**
+DFS Complexity
 
 Time:
 
@@ -445,7 +445,7 @@ Space:
 
 O(V)
 
-**Kahn vs DFS Topological Sort**
+Kahn vs DFS Topological Sort
 
 | **Feature**     | **Kahn**  | **DFS**                     |
 |-----------------|-----------|-----------------------------|
@@ -513,7 +513,7 @@ Frontend
 
 This is a topological sort problem.
 
-**Topological Sort vs Shortest Path**
+Topological Sort vs Shortest Path
 
 | **Topological Sort**    | **Shortest Path**        |
 |-------------------------|--------------------------|
@@ -522,7 +522,7 @@ This is a topological sort problem.
 | Dependency problems     | Routing problems         |
 | No distance calculation | Calculates cost          |
 
-**Topological Sort vs Tree Traversal**
+Topological Sort vs Tree Traversal
 
 Tree:
 
@@ -542,7 +542,7 @@ C → B
 
 A node can have multiple dependencies.
 
-**Common Interview Problems**
+Common Interview Problems
 
 | **Problem**          | **Concept**                 |
 |----------------------|-----------------------------|
@@ -553,7 +553,7 @@ A node can have multiple dependencies.
 | Task scheduling      | DAG ordering                |
 | Package installation | Dependency resolution       |
 
-**Interview Explanation (Senior Developer)**
+Interview Explanation (Senior Developer)
 
 "Topological sort is an ordering of vertices in a directed acyclic graph where every node appears before its dependent nodes. It is commonly used for dependency resolution problems. It can be implemented using Kahn's algorithm, which uses indegree and BFS, or using DFS with a stack. Both approaches have O(V+E) time complexity. If a directed graph contains a cycle, topological sorting is not possible."
 

@@ -1,10 +1,10 @@
 # Data Structures and Algorithms Binary Search Tree
 
-**Binary Search Tree (BST)**
+Binary Search Tree (BST)
 
 A **Binary Search Tree (BST)** is a special type of **Binary Tree** where every node follows an ordering rule:
 
-**All values in the left subtree are smaller than the node value, and all values in the right subtree are greater than the node value.**
+All values in the left subtree are smaller than the node value, and all values in the right subtree are greater than the node value.
 
 Rule:
 
@@ -44,7 +44,7 @@ For node 30:
 
 20 \< 30 \< 40 ✅
 
-**Why Use BST?**
+### Why Use BST?
 
 A normal binary tree does not have any ordering.
 
@@ -64,7 +64,7 @@ O(n)
 
 A BST organizes data so searching becomes faster.
 
-**BST Node Structure**
+BST Node Structure
 
 Each node contains:
 
@@ -108,19 +108,19 @@ Right = null;
 
 }
 
-**Creating a BST**
+Creating a BST
 
 Insert values:
 
 50, 30, 70, 20, 40
 
-**Step 1**
+Step 1
 
 Insert 50:
 
 50
 
-**Step 2**
+Step 2
 
 Insert 30:
 
@@ -132,7 +132,7 @@ Insert 30:
 
 30
 
-**Step 3**
+Step 3
 
 Insert 70:
 
@@ -144,7 +144,7 @@ Insert 70:
 
 30 70
 
-**Step 4**
+Step 4
 
 Insert 20:
 
@@ -162,7 +162,7 @@ Insert 20:
 
 20
 
-**Step 5**
+Step 5
 
 Insert 40:
 
@@ -180,9 +180,9 @@ Insert 40:
 
 20 40
 
-**BST Operations**
+BST Operations
 
-**1. Search**
+1. Search
 
 Searching is the biggest advantage of BST.
 
@@ -202,23 +202,23 @@ Find 40:
 
 Steps:
 
-**Compare with root**
+Compare with root
 
 40 \< 50
 
 Go left.
 
-**Compare with 30**
+Compare with 30
 
 40 \> 30
 
 Go right.
 
-**Found**
+Found
 
 40
 
-**Search Algorithm**
+Search Algorithm
 
 bool Search(Node root, int value)
 
@@ -240,7 +240,7 @@ return Search(root.Right, value);
 
 }
 
-**2. Insert**
+2. Insert
 
 Insertion follows the same search path.
 
@@ -286,13 +286,13 @@ Result:
 
 65
 
-**3. Delete**
+3. Delete
 
 Deletion is the most complex BST operation.
 
 There are three cases.
 
-**Case 1: Delete Leaf Node**
+Case 1: Delete Leaf Node
 
 Leaf node has no children.
 
@@ -322,7 +322,7 @@ After:
 
 Simply remove it.
 
-**Case 2: Delete Node With One Child**
+Case 2: Delete Node With One Child
 
 Example:
 
@@ -348,7 +348,7 @@ Replace 30 with its child:
 
 40
 
-**Case 3: Delete Node With Two Children**
+Case 3: Delete Node With Two Children
 
 Example:
 
@@ -382,11 +382,11 @@ After deletion:
 
 30 70
 
-**BST Traversals**
+BST Traversals
 
 BST supports all tree traversals.
 
-**1. Inorder Traversal**
+1. Inorder Traversal
 
 Order:
 
@@ -400,7 +400,7 @@ Example:
 
 30 70
 
-Output:
+- Output:
 
 30 50 70
 
@@ -408,29 +408,29 @@ Important:
 
 Inorder traversal of BST always gives sorted order.
 
-**2. Preorder Traversal**
+2. Preorder Traversal
 
 Order:
 
 Root → Left → Right
 
-Output:
+- Output:
 
 50 30 70
 
 Used for copying trees.
 
-**3. Postorder Traversal**
+3. Postorder Traversal
 
 Order:
 
 Left → Right → Root
 
-Output:
+- Output:
 
 30 70 50
 
-**BST Time Complexity**
+BST Time Complexity
 
 For a balanced BST:
 
@@ -444,7 +444,7 @@ Why?
 
 Because each comparison eliminates half of the tree.
 
-**Worst Case BST**
+Worst Case BST
 
 A BST can become unbalanced.
 
@@ -488,7 +488,7 @@ This is why we have:
 
 - Red-Black Tree
 
-**BST vs Binary Tree**
+BST vs Binary Tree
 
 | **Feature** | **Binary Tree**   | **BST**               |
 |-------------|-------------------|-----------------------|
@@ -498,7 +498,7 @@ This is why we have:
 | Inorder     | Random order      | Sorted order          |
 | Usage       | General hierarchy | Fast searching        |
 
-**BST vs AVL Tree**
+BST vs AVL Tree
 
 | **Feature** | **BST**         | **AVL**              |
 |-------------|-----------------|----------------------|
@@ -508,9 +508,9 @@ This is why we have:
 | Memory      | Less            | More (stores height) |
 | Complexity  | Easier          | More complex         |
 
-**Real-World Applications**
+Real-World Applications
 
-**1. Database Indexes**
+1. Database Indexes
 
 Used to quickly find records.
 
@@ -526,7 +526,7 @@ BST
 
 Employee Record
 
-**2. Searching and Sorting**
+2. Searching and Sorting
 
 BST can maintain sorted data dynamically.
 
@@ -540,39 +540,39 @@ Inorder:
 
 10 20 30 50 70
 
-**3. Symbol Tables**
+3. Symbol Tables
 
 Compilers store:
 
 Variable Name → Information
 
-**4. Auto-complete (with modifications)**
+4. Auto-complete (with modifications)
 
 Can be used with string-based BST variants.
 
-**Common Interview Questions**
+Common Interview Questions
 
-1.  What is a Binary Search Tree?
+- What is a Binary Search Tree?
 
-2.  What is the difference between Binary Tree and BST?
+- What is the difference between Binary Tree and BST?
 
-3.  Why is searching faster in BST?
+- Why is searching faster in BST?
 
-4.  Why does inorder traversal of BST give sorted values?
+- Why does inorder traversal of BST give sorted values?
 
-5.  Explain BST deletion cases.
+- Explain BST deletion cases.
 
-6.  What happens when BST becomes skewed?
+- What happens when BST becomes skewed?
 
-7.  Difference between BST and AVL Tree?
+- Difference between BST and AVL Tree?
 
-8.  How do you find minimum and maximum value in BST?
+- How do you find minimum and maximum value in BST?
 
-9.  How do you find lowest common ancestor in BST?
+- How do you find lowest common ancestor in BST?
 
-10. How do you validate whether a binary tree is a BST?
+- How do you validate whether a binary tree is a BST?
 
-**Summary**
+Summary
 
 | **Feature**  | **BST**                      |
 |--------------|------------------------------|
@@ -585,7 +585,7 @@ Can be used with string-based BST variants.
 | Best Feature | Fast searching               |
 | Problem      | Can become unbalanced        |
 
-**Key Takeaways**
+Key Takeaways
 
 - A **BST is an ordered binary tree**.
 

@@ -1,28 +1,28 @@
 # Data Structures and Algorithms Two Pointers
 
-**Two Pointer Technique in Data Structures and Algorithms**
+Two Pointer Technique in Data Structures and Algorithms
 
 **Two Pointer** is an algorithmic technique where we use **two variables (pointers/indexes)** to traverse a data structure, usually an array or string, to solve problems efficiently.
 
 The main idea:
 
-**Use two positions in the data structure and move them intelligently instead of using nested loops.**
+Use two positions in the data structure and move them intelligently instead of using nested loops.
 
 It often reduces problems from **O(n²)** to **O(n)**.
 
-**Why Do We Need Two Pointers?**
+### Why Do We Need Two Pointers?
 
 Consider finding two numbers whose sum equals a target.
 
 Array:
 
-\[1, 2, 3, 4, 6\]
+- \[1, 2, 3, 4, 6\]
 
 Target:
 
 6
 
-**Brute Force Approach**
+Brute Force Approach
 
 Try every pair:
 
@@ -42,7 +42,7 @@ Time:
 
 O(n²)
 
-**Two Pointer Approach**
+Two Pointer Approach
 
 Because the array is sorted:
 
@@ -52,7 +52,7 @@ left right
 
 ↓ ↓
 
-\[1, 2, 3, 4, 6\]
+- \[1, 2, 3, 4, 6\]
 
 Calculate:
 
@@ -64,7 +64,7 @@ left right
 
 ↓ ↓
 
-\[1,2,3,4,6\]
+- \[1,2,3,4,6\]
 
 Now:
 
@@ -76,7 +76,7 @@ left right
 
 ↓ ↓
 
-\[1,2,3,4,6\]
+- \[1,2,3,4,6\]
 
 Now:
 
@@ -84,7 +84,7 @@ Now:
 
 Found.
 
-**Two Pointer Pattern**
+Two Pointer Pattern
 
 Basic structure:
 
@@ -96,7 +96,7 @@ while(left \< right)
 
 {
 
-// process arr\[left\] and arr\[right\]
+- // process arr\[left\] and arr\[right\]
 
 if(condition)
 
@@ -108,17 +108,17 @@ right--;
 
 }
 
-**Types of Two Pointer Techniques**
+Types of Two Pointer Techniques
 
 There are mainly three patterns:
 
-1.  Opposite Direction Pointers
+- Opposite Direction Pointers
 
-2.  Same Direction Pointers
+- Same Direction Pointers
 
-3.  Fast and Slow Pointers
+- Fast and Slow Pointers
 
-**1. Opposite Direction Pointers**
+1. Opposite Direction Pointers
 
 Pointers start from both ends.
 
@@ -126,7 +126,7 @@ Example:
 
 left → ← right
 
-\[1,2,3,4,5\]
+- \[1,2,3,4,5\]
 
 Used in:
 
@@ -138,15 +138,15 @@ Used in:
 
 - Container problems
 
-**Example 1: Two Sum in Sorted Array**
+### Example 1: Two Sum in Sorted Array
 
 Problem:
 
 Find two numbers that add to target.
 
-Input:
+- Input:
 
-\[2,3,5,8,11\]
+- \[2,3,5,8,11\]
 
 Target = 13
 
@@ -160,11 +160,11 @@ right = 11
 
 Answer:
 
-\[2,11\]
+- \[2,11\]
 
 C#:
 
-bool TwoSum(int\[\] nums, int target)
+- bool TwoSum(int\[\] nums, int target)
 
 {
 
@@ -176,7 +176,7 @@ while(left \< right)
 
 {
 
-int sum = nums\[left\] + nums\[right\];
+- int sum = nums\[left\] + nums\[right\];
 
 if(sum == target)
 
@@ -202,11 +202,11 @@ Time: O(n)
 
 Space: O(1)
 
-**Example 2: Reverse Array**
+### Example 2: Reverse Array
 
-Input:
+- Input:
 
-\[1,2,3,4,5\]
+- \[1,2,3,4,5\]
 
 Pointers:
 
@@ -214,11 +214,11 @@ left right
 
 ↓ ↓
 
-\[1,2,3,4,5\]
+- \[1,2,3,4,5\]
 
 Swap:
 
-\[5,2,3,4,1\]
+- \[5,2,3,4,1\]
 
 Move pointers:
 
@@ -226,11 +226,11 @@ left right
 
 Final:
 
-\[5,4,3,2,1\]
+- \[5,4,3,2,1\]
 
 Code:
 
-void Reverse(int\[\] arr)
+- void Reverse(int\[\] arr)
 
 {
 
@@ -242,11 +242,11 @@ while(left \< right)
 
 {
 
-int temp = arr\[left\];
+- int temp = arr\[left\];
 
-arr\[left\] = arr\[right\];
+- arr\[left\] = arr\[right\];
 
-arr\[right\] = temp;
+- arr\[right\] = temp;
 
 left++;
 
@@ -256,7 +256,7 @@ right--;
 
 }
 
-**Example 3: Valid Palindrome**
+### Example 3: Valid Palindrome
 
 Problem:
 
@@ -298,7 +298,7 @@ while(left \< right)
 
 {
 
-if(s\[left\] != s\[right\])
+- if(s\[left\] != s\[right\])
 
 return false;
 
@@ -312,7 +312,7 @@ return true;
 
 }
 
-**2. Same Direction Pointers**
+2. Same Direction Pointers
 
 Both pointers move from left to right.
 
@@ -322,7 +322,7 @@ slow →
 
 fast →
 
-\[1,2,3,4,5\]
+- \[1,2,3,4,5\]
 
 Used for:
 
@@ -334,13 +334,13 @@ Used for:
 
 **Example: Remove Duplicates from Sorted Array**
 
-Input:
+- Input:
 
-\[1,1,2,2,3\]
+- \[1,1,2,2,3\]
 
 Need:
 
-\[1,2,3\]
+- \[1,2,3\]
 
 Use:
 
@@ -354,7 +354,7 @@ slow
 
 ↓
 
-\[1,1,2,2,3\]
+- \[1,1,2,2,3\]
 
 ↑
 
@@ -362,7 +362,7 @@ fast
 
 Code:
 
-int RemoveDuplicates(int\[\] nums)
+- int RemoveDuplicates(int\[\] nums)
 
 {
 
@@ -372,13 +372,13 @@ for(int fast = 1; fast \< nums.Length; fast++)
 
 {
 
-if(nums\[fast\] != nums\[slow\])
+- if(nums\[fast\] != nums\[slow\])
 
 {
 
 slow++;
 
-nums\[slow\] = nums\[fast\];
+- nums\[slow\] = nums\[fast\];
 
 }
 
@@ -394,7 +394,7 @@ Time: O(n)
 
 Space: O(1)
 
-**3. Fast and Slow Pointer (Floyd's Algorithm)**
+3. Fast and Slow Pointer (Floyd's Algorithm)
 
 One pointer moves faster than another.
 
@@ -470,11 +470,11 @@ Answer:
 
 3
 
-**Two Pointer vs Sliding Window**
+Two Pointer vs Sliding Window
 
 They are related.
 
-**Two Pointer**
+Two Pointer
 
 General technique:
 
@@ -486,17 +486,17 @@ Example:
 
 Find pair sum
 
-**Sliding Window**
+Sliding Window
 
 A specialized two-pointer technique:
 
-\[left .... right\]
+- \[left .... right\]
 
 Example:
 
 Longest substring
 
-**Two Pointer vs Prefix Sum**
+Two Pointer vs Prefix Sum
 
 | **Two Pointer**       | **Prefix Sum**        |
 |-----------------------|-----------------------|
@@ -505,7 +505,7 @@ Longest substring
 | O(1) extra space      | O(n) extra space      |
 | Good for pairs/ranges | Good for sums         |
 
-**Common Two Pointer Problems**
+Common Two Pointer Problems
 
 | **Problem**               | **Pattern**            |
 |---------------------------|------------------------|
@@ -525,7 +525,7 @@ Problem:
 
 Heights:
 
-\[1,8,6,2,5,4,8,3,7\]
+- \[1,8,6,2,5,4,8,3,7\]
 
 Need maximum water.
 
@@ -539,7 +539,7 @@ L R
 
 Area:
 
-min(height\[L\],height\[R\]) \* width
+- min(height\[L\],height\[R\]) \* width
 
 Move smaller height pointer.
 
@@ -547,9 +547,9 @@ Why?
 
 The smaller side limits the water.
 
-**Common Mistakes**
+Common Mistakes
 
-**1. Using Two Pointers Without Sorting**
+1. Using Two Pointers Without Sorting
 
 For problems like:
 
@@ -557,7 +557,7 @@ Two Sum
 
 the array usually needs to be sorted first.
 
-**2. Wrong Pointer Movement**
+2. Wrong Pointer Movement
 
 Example:
 
@@ -569,7 +569,7 @@ If sum is too large:
 
 right--
 
-**3. Infinite Loops**
+3. Infinite Loops
 
 Always ensure:
 
@@ -577,7 +577,7 @@ while(left \< right)
 
 and pointers move.
 
-**Interview Explanation (Senior Developer)**
+Interview Explanation (Senior Developer)
 
 "The two-pointer technique uses two indexes to traverse an array or linked list efficiently. Instead of checking all combinations with nested loops, pointers are moved based on conditions to reduce complexity. Common patterns include opposite-direction pointers for sorted array problems, same-direction pointers for in-place modifications, and fast/slow pointers for linked list cycle detection. Most two-pointer solutions achieve O(n) time and O(1) space."
 

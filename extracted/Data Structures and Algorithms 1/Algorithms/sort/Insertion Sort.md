@@ -1,6 +1,6 @@
 # Data Structures and Algorithms Insertion Sort
 
-**Insertion Sort**
+Insertion Sort
 
 **Insertion Sort** is a simple comparison-based sorting algorithm that builds the final sorted array **one element at a time**.
 
@@ -50,11 +50,11 @@ Insertion step
 
 ![](media/image1.wmf)
 
-**How Insertion Sort Works**
+### How Insertion Sort Works
 
 Example:
 
-\[5, 3, 8, 4, 2\]
+- \[5, 3, 8, 4, 2\]
 
 We divide the array into:
 
@@ -64,7 +64,7 @@ We divide the array into:
 
 Initially:
 
-\[5\] \[3,8,4,2\]
+- \[5\] \[3,8,4,2\]
 
 ↑
 
@@ -72,11 +72,11 @@ Sorted
 
 The first element is considered already sorted.
 
-**Step 1: Insert 3**
+Step 1: Insert 3
 
 Current:
 
-Sorted: \[5\]
+- Sorted: \[5\]
 
 Key = 3
 
@@ -86,23 +86,23 @@ Compare:
 
 Move 5 right:
 
-\[5,5,8,4,2\]
+- \[5,5,8,4,2\]
 
 Insert 3:
 
-\[3,5,8,4,2\]
+- \[3,5,8,4,2\]
 
 Now:
 
-\[3,5\] \[8,4,2\]
+- \[3,5\] \[8,4,2\]
 
 Sorted part grows.
 
-**Step 2: Insert 8**
+Step 2: Insert 8
 
 Current:
 
-\[3,5\] \[8,4,2\]
+- \[3,5\] \[8,4,2\]
 
 Key:
 
@@ -116,13 +116,13 @@ Already in correct position.
 
 Array:
 
-\[3,5,8,4,2\]
+- \[3,5,8,4,2\]
 
-**Step 3: Insert 4**
+Step 3: Insert 4
 
 Current:
 
-\[3,5,8\] \[4,2\]
+- \[3,5,8\] \[4,2\]
 
 Key:
 
@@ -134,7 +134,7 @@ Compare from right:
 
 Array:
 
-\[3,5,8,8,2\]
+- \[3,5,8,8,2\]
 
 Compare:
 
@@ -142,7 +142,7 @@ Compare:
 
 Array:
 
-\[3,5,5,8,2\]
+- \[3,5,5,8,2\]
 
 Compare:
 
@@ -150,39 +150,39 @@ Compare:
 
 Insert:
 
-\[3,4,5,8,2\]
+- \[3,4,5,8,2\]
 
-**Step 4: Insert 2**
+Step 4: Insert 2
 
 Current:
 
-\[3,4,5,8\] \[2\]
+- \[3,4,5,8\] \[2\]
 
 Shift larger elements:
 
-\[2,3,4,5,8\]
+- \[2,3,4,5,8\]
 
 Final sorted array:
 
-\[2,3,4,5,8\]
+- \[2,3,4,5,8\]
 
-**Algorithm Steps**
+### Algorithm Steps
 
-1.  Assume first element is sorted.
+- Assume first element is sorted.
 
-2.  Pick the next element (called **key**).
+- Pick the next element (called **key**).
 
-3.  Compare it with elements on the left.
+- Compare it with elements on the left.
 
-4.  Shift larger elements one position right.
+- Shift larger elements one position right.
 
-5.  Insert the key into its correct position.
+- Insert the key into its correct position.
 
-6.  Repeat until the array is sorted.
+- Repeat until the array is sorted.
 
-**C# Implementation**
+C# Implementation
 
-void InsertionSort(int\[\] arr)
+- void InsertionSort(int\[\] arr)
 
 {
 
@@ -192,41 +192,41 @@ for(int i = 1; i \< n; i++)
 
 {
 
-int key = arr\[i\];
+- int key = arr\[i\];
 
 int j = i - 1;
 
-while(j \>= 0 && arr\[j\] \> key)
+- while(j \>= 0 && arr\[j\] \> key)
 
 {
 
-arr\[j + 1\] = arr\[j\];
+- arr\[j + 1\] = arr\[j\];
 
 j--;
 
 }
 
-arr\[j + 1\] = key;
+- arr\[j + 1\] = key;
 
 }
 
 }
 
-**Understanding the Code**
+Understanding the Code
 
-**Pick current element**
+Pick current element
 
-int key = arr\[i\];
+- int key = arr\[i\];
 
 Example:
 
-\[3,5,8,4,2\]
+- \[3,5,8,4,2\]
 
 key = 4
 
-**Move bigger elements**
+Move bigger elements
 
-while(arr\[j\] \> key)
+- while(arr\[j\] \> key)
 
 Example:
 
@@ -234,23 +234,23 @@ Example:
 
 Move 5 right:
 
-\[3,5,5,8,2\]
+- \[3,5,5,8,2\]
 
-**Insert key**
+Insert key
 
-arr\[j+1\] = key;
+- arr\[j+1\] = key;
 
 Result:
 
-\[3,4,5,8,2\]
+- \[3,4,5,8,2\]
 
-**Time Complexity**
+### Time Complexity
 
-**Best Case**
+Best Case
 
 Already sorted array:
 
-\[1,2,3,4,5\]
+- \[1,2,3,4,5\]
 
 Only comparisons are needed.
 
@@ -258,17 +258,17 @@ Complexity:
 
 O(n)
 
-**Average Case**
+Average Case
 
 Random order:
 
 O(n²)
 
-**Worst Case**
+Worst Case
 
 Reverse sorted:
 
-\[5,4,3,2,1\]
+- \[5,4,3,2,1\]
 
 Every element must move.
 
@@ -276,7 +276,7 @@ Complexity:
 
 O(n²)
 
-**Space Complexity**
+### Space Complexity
 
 Insertion Sort uses only a temporary variable:
 
@@ -288,7 +288,7 @@ Space Complexity = O(1)
 
 It is an **in-place sorting algorithm**.
 
-**Properties of Insertion Sort**
+Properties of Insertion Sort
 
 | **Property** | **Answer**           |
 |--------------|----------------------|
@@ -297,7 +297,7 @@ It is an **in-place sorting algorithm**.
 | Adaptive     | ✅ Yes               |
 | Recursive    | ❌ Usually iterative |
 
-**Why is Insertion Sort Adaptive?**
+### Why is Insertion Sort Adaptive?
 
 An adaptive algorithm performs better when data is already partially sorted.
 
@@ -305,7 +305,7 @@ Example:
 
 Already sorted:
 
-\[1,2,3,4,5\]
+- \[1,2,3,4,5\]
 
 Insertion Sort:
 
@@ -313,11 +313,11 @@ O(n)
 
 Almost sorted:
 
-\[1,2,3,5,4\]
+- \[1,2,3,5,4\]
 
 Only small adjustments are needed.
 
-**Insertion Sort vs Bubble Sort**
+Insertion Sort vs Bubble Sort
 
 | **Feature**     | **Insertion Sort**              | **Bubble Sort**        |
 |-----------------|---------------------------------|------------------------|
@@ -329,7 +329,7 @@ Only small adjustments are needed.
 | Stable          | Yes                             | Yes                    |
 | Practical speed | Usually faster                  | Slower                 |
 
-**Insertion Sort vs Merge/Quick Sort**
+Insertion Sort vs Merge/Quick Sort
 
 | **Algorithm**  | **Average Complexity** |
 |----------------|------------------------|
@@ -345,17 +345,17 @@ For small data:
 
 Insertion Sort can be faster
 
-**Real-World Usage**
+Real-World Usage
 
 Although it is not used for large datasets, Insertion Sort is useful in:
 
-**1. Small arrays**
+1. Small arrays
 
 For example:
 
 Sorting 10-50 elements
 
-**2. Hybrid sorting algorithms**
+2. Hybrid sorting algorithms
 
 Many high-performance sorting algorithms use Insertion Sort for small partitions.
 
@@ -369,7 +369,7 @@ Quick Sort
 
 because the overhead of recursion is not worth it for tiny arrays.
 
-**3. Nearly sorted data**
+3. Nearly sorted data
 
 Example:
 
@@ -377,19 +377,19 @@ A list of employees already sorted by name, with a few new employees added.
 
 Insertion Sort performs very well.
 
-**Interview Questions**
+Interview Questions
 
-**1. Why is Insertion Sort better than Bubble Sort?**
+1. Why is Insertion Sort better than Bubble Sort?
 
 Because it does fewer swaps and works by shifting elements efficiently.
 
-**2. Is Insertion Sort stable?**
+2. Is Insertion Sort stable?
 
 Yes.
 
 Equal elements keep their original order.
 
-**3. When would you use Insertion Sort?**
+3. When would you use Insertion Sort?
 
 Use it when:
 
@@ -399,11 +399,11 @@ Use it when:
 
 - Memory is limited.
 
-**4. Why is it called Insertion Sort?**
+4. Why is it called Insertion Sort?
 
 Because each new element is **inserted** into its correct position in the already sorted portion.
 
-**Summary**
+Summary
 
 Insertion Sort works like arranging playing cards:
 

@@ -1,30 +1,30 @@
 # Data Structures and Algorithms Heap Sort
 
-**Heap Sort**
+Heap Sort
 
 **Heap Sort** is a comparison-based sorting algorithm that uses a **Binary Heap** data structure.
 
 It is based on the idea:
 
-1.  Build a **Max Heap** from the array.
+- Build a **Max Heap** from the array.
 
-2.  The largest element will be at the root.
+- The largest element will be at the root.
 
-3.  Move the root element to the end.
+- Move the root element to the end.
 
-4.  Reduce the heap size and repeat.
+- Reduce the heap size and repeat.
 
 In simple terms:
 
 Heap Sort repeatedly extracts the largest element and places it in its correct position.
 
-**First Understand Heap**
+First Understand Heap
 
 A **Heap** is a special type of **complete binary tree**.
 
 There are two types:
 
-**1. Max Heap**
+1. Max Heap
 
 Parent node is greater than its children.
 
@@ -46,7 +46,7 @@ Parent \>= Children
 
 The largest element is always at the root.
 
-**2. Min Heap**
+2. Min Heap
 
 Parent node is smaller than its children.
 
@@ -62,19 +62,19 @@ The smallest element is at the root.
 
 For Heap Sort (ascending order), we use a **Max Heap**.
 
-**How Heap Sort Works**
+### How Heap Sort Works
 
 Suppose we have:
 
-\[4, 10, 3, 5, 1\]
+- \[4, 10, 3, 5, 1\]
 
-**Step 1: Build Max Heap**
+Step 1: Build Max Heap
 
 Convert array into a max heap.
 
 Before:
 
-\[4,10,3,5,1\]
+- \[4,10,3,5,1\]
 
 Tree representation:
 
@@ -106,19 +106,19 @@ After heapifying:
 
 Array:
 
-\[10,5,3,4,1\]
+- \[10,5,3,4,1\]
 
 Now the largest element is at index 0.
 
-**Step 2: Move Maximum to End**
+Step 2: Move Maximum to End
 
 Swap root with last element:
 
-\[10,5,3,4,1\]
+- \[10,5,3,4,1\]
 
 Swap 10 and 1
 
-\[1,5,3,4,10\]
+- \[1,5,3,4,10\]
 
 Now:
 
@@ -128,9 +128,9 @@ Ignore it.
 
 Heap size becomes:
 
-\[1,5,3,4\]
+- \[1,5,3,4\]
 
-**Step 3: Heapify Again**
+Step 3: Heapify Again
 
 The remaining heap:
 
@@ -160,25 +160,25 @@ Move the largest child up:
 
 Array:
 
-\[5,4,3,1,10\]
+- \[5,4,3,1,10\]
 
-**Step 4: Repeat**
+Step 4: Repeat
 
 Extract maximum:
 
-\[4,1,3,5,10\]
+- \[4,1,3,5,10\]
 
 Heapify:
 
-\[4,3,1,5,10\]
+- \[4,3,1,5,10\]
 
 Continue:
 
 Final sorted array:
 
-\[1,3,4,5,10\]
+- \[1,3,4,5,10\]
 
-**Algorithm Steps**
+### Algorithm Steps
 
 1\. Build Max Heap
 
@@ -190,9 +190,9 @@ Final sorted array:
 
 5\. Repeat until sorted
 
-**C# Implementation**
+C# Implementation
 
-void HeapSort(int\[\] arr)
+- void HeapSort(int\[\] arr)
 
 {
 
@@ -214,11 +214,11 @@ for(int i = n - 1; i \> 0; i--)
 
 {
 
-int temp = arr\[0\];
+- int temp = arr\[0\];
 
-arr\[0\] = arr\[i\];
+- arr\[0\] = arr\[i\];
 
-arr\[i\] = temp;
+- arr\[i\] = temp;
 
 Heapify(arr, i, 0);
 
@@ -226,7 +226,7 @@ Heapify(arr, i, 0);
 
 }
 
-void Heapify(int\[\] arr, int n, int i)
+- void Heapify(int\[\] arr, int n, int i)
 
 {
 
@@ -236,11 +236,11 @@ int left = 2 \* i + 1;
 
 int right = 2 \* i + 2;
 
-if(left \< n && arr\[left\] \> arr\[largest\])
+- if(left \< n && arr\[left\] \> arr\[largest\])
 
 largest = left;
 
-if(right \< n && arr\[right\] \> arr\[largest\])
+- if(right \< n && arr\[right\] \> arr\[largest\])
 
 largest = right;
 
@@ -248,11 +248,11 @@ if(largest != i)
 
 {
 
-int swap = arr\[i\];
+- int swap = arr\[i\];
 
-arr\[i\] = arr\[largest\];
+- arr\[i\] = arr\[largest\];
 
-arr\[largest\] = swap;
+- arr\[largest\] = swap;
 
 Heapify(arr, n, largest);
 
@@ -260,7 +260,7 @@ Heapify(arr, n, largest);
 
 }
 
-**Understanding Heap Indexing**
+Understanding Heap Indexing
 
 Heap is stored as an array.
 
@@ -298,15 +298,15 @@ Tree:
 
 10 20
 
-**Time Complexity**
+### Time Complexity
 
-**Building Heap**
+Building Heap
 
 Creating heap:
 
 O(n)
 
-**Extracting Elements**
+Extracting Elements
 
 Each extraction requires heapify:
 
@@ -326,7 +326,7 @@ Final complexity:
 
 Unlike Quick Sort, Heap Sort always guarantees O(n log n).
 
-**Space Complexity**
+### Space Complexity
 
 Heap Sort is an **in-place algorithm**.
 
@@ -336,7 +336,7 @@ O(1)
 
 Only a few variables are used.
 
-**Heap Sort Properties**
+Heap Sort Properties
 
 | **Property**          | **Answer**                   |
 |-----------------------|------------------------------|
@@ -345,7 +345,7 @@ Only a few variables are used.
 | Recursive?            | Usually heapify is recursive |
 | Worst case guarantee? | ✅ O(n log n)                |
 
-**Heap Sort vs Quick Sort vs Merge Sort**
+Heap Sort vs Quick Sort vs Merge Sort
 
 | **Feature** | **Heap Sort** | **Quick Sort**  | **Merge Sort** |
 |-------------|---------------|-----------------|----------------|
@@ -355,11 +355,11 @@ Only a few variables are used.
 | Stable      | No            | No              | Yes            |
 | Speed       | Good          | Usually fastest | Good           |
 
-**Real-World Usage**
+Real-World Usage
 
 Heap Sort is useful when:
 
-**1. Memory is limited**
+1. Memory is limited
 
 Because:
 
@@ -371,7 +371,7 @@ Example:
 
 - Memory-constrained applications
 
-**2. Priority Queue Implementation**
+2. Priority Queue Implementation
 
 Heaps are widely used for:
 
@@ -395,7 +395,7 @@ Heap
 
 Execute first
 
-**3. Finding K Largest Elements**
+3. Finding K Largest Elements
 
 Example:
 
@@ -409,13 +409,13 @@ Complexity:
 
 O(n log k)
 
-**Interview Questions**
+Interview Questions
 
-**Q1. Why does Heap Sort use Max Heap?**
+Q1. Why does Heap Sort use Max Heap?
 
 Because in ascending sorting, we need to repeatedly extract the largest element.
 
-**Q2. Why is Heap Sort better than Quick Sort in worst case?**
+Q2. Why is Heap Sort better than Quick Sort in worst case?
 
 Quick Sort can degrade to:
 
@@ -425,7 +425,7 @@ Heap Sort always remains:
 
 O(n log n)
 
-**Q3. Why is Heap Sort not stable?**
+Q3. Why is Heap Sort not stable?
 
 Because swapping elements can change the relative order of equal elements.
 
@@ -441,7 +441,7 @@ After swapping:
 
 Order changed.
 
-**Summary**
+Summary
 
 Heap Sort follows:
 

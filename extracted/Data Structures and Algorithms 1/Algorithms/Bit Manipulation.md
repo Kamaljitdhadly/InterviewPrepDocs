@@ -1,6 +1,6 @@
 # Data Structures and Algorithms Bit Manipulation
 
-**Bit Manipulation in Data Structures and Algorithms**
+Bit Manipulation in Data Structures and Algorithms
 
 **Bit manipulation** is a technique of directly working with the **binary representation of numbers** using bitwise operators.
 
@@ -20,7 +20,7 @@ A bit is a single binary digit:
 
 0 or 1
 
-**Why Learn Bit Manipulation?**
+### Why Learn Bit Manipulation?
 
 Bit manipulation is useful because:
 
@@ -44,7 +44,7 @@ Bit manipulation is useful because:
 
   - Interview problems
 
-**Binary Representation**
+Binary Representation
 
 A number is represented using powers of 2.
 
@@ -68,7 +68,7 @@ Meaning:
 
 = 13
 
-**Bitwise Operators**
+Bitwise Operators
 
 Most programming languages support these operators:
 
@@ -81,7 +81,7 @@ Most programming languages support these operators:
 | \<\<         | Left Shift  | 5 \<\< 1    |
 | \>\>         | Right Shift | 5 \>\> 1    |
 
-**1. Bitwise AND (&)**
+1. Bitwise AND (&)
 
 AND returns **1 only when both bits are 1**.
 
@@ -114,7 +114,7 @@ Result:
 
 1
 
-**Common Use: Check if a bit is set**
+Common Use: Check if a bit is set
 
 Example:
 
@@ -142,7 +142,7 @@ Since result is not zero:
 
 Bit is set
 
-**2. Bitwise OR (\|)**
+2. Bitwise OR (\|)
 
 OR returns 1 if **any bit is 1**.
 
@@ -162,7 +162,7 @@ Result:
 
 7
 
-**Common Use**
+Common Use
 
 Setting a particular bit.
 
@@ -186,7 +186,7 @@ OR:
 
 1010
 
-**3. Bitwise XOR (^)**
+3. Bitwise XOR (^)
 
 XOR returns 1 when bits are different.
 
@@ -215,9 +215,9 @@ Result:
 
 6
 
-**Important XOR Properties**
+Important XOR Properties
 
-**1. Same number XOR gives zero**
+1. Same number XOR gives zero
 
 5 ^ 5 = 0
 
@@ -231,17 +231,17 @@ Because:
 
 0000
 
-**2. XOR with zero gives same number**
+2. XOR with zero gives same number
 
 5 ^ 0 = 5
 
-**Famous Interview Problem**
+Famous Interview Problem
 
-**Find unique number**
+Find unique number
 
 Array:
 
-\[2,3,4,3,2\]
+- \[2,3,4,3,2\]
 
 Every number appears twice except one.
 
@@ -271,7 +271,7 @@ Space:
 
 O(1)
 
-**4. Bitwise NOT (~)**
+4. Bitwise NOT (~)
 
 Flips every bit.
 
@@ -287,7 +287,7 @@ NOT:
 
 For signed integers, this involves two's complement representation.
 
-**5. Left Shift (\<\<)**
+5. Left Shift (\<\<)
 
 Moves bits to the left.
 
@@ -323,7 +323,7 @@ Equivalent:
 
 5 \* 2^2
 
-**6. Right Shift (\>\>)**
+6. Right Shift (\>\>)
 
 Moves bits right.
 
@@ -347,9 +347,9 @@ Effect:
 
 number / 2
 
-**Common Bit Manipulation Tricks**
+Common Bit Manipulation Tricks
 
-**1. Check Odd or Even Number**
+1. Check Odd or Even Number
 
 Every odd number has last bit = 1.
 
@@ -379,7 +379,7 @@ Console.WriteLine("Even");
 
 }
 
-**2. Swap Two Numbers Without Temporary Variable**
+2. Swap Two Numbers Without Temporary Variable
 
 Using XOR:
 
@@ -401,7 +401,7 @@ a = 3
 
 b = 5
 
-**3. Count Number of Set Bits**
+3. Count Number of Set Bits
 
 Example:
 
@@ -445,7 +445,7 @@ Example:
 
 One bit removed.
 
-**4. Check Power of Two**
+4. Check Power of Two
 
 A power of two has exactly one set bit.
 
@@ -473,7 +473,7 @@ Example:
 
 True.
 
-**5. Get Lowest Set Bit**
+5. Get Lowest Set Bit
 
 Formula:
 
@@ -493,7 +493,7 @@ Result:
 
 4
 
-**Bit Masking**
+Bit Masking
 
 A **mask** is a number used to select or modify specific bits.
 
@@ -525,7 +525,7 @@ Used for:
 
 - Configuration settings
 
-**Real-World Example: Permissions**
+Real-World Example: Permissions
 
 Imagine permissions:
 
@@ -559,7 +559,7 @@ Check write permission:
 
 Permission exists.
 
-**Bit Manipulation Complexity**
+Bit Manipulation Complexity
 
 Most operations:
 
@@ -579,7 +579,7 @@ Counting bits:
 
 O(number of bits)
 
-**Common Interview Problems**
+Common Interview Problems
 
 | **Problem**         | **Technique**    |
 |---------------------|------------------|
@@ -593,7 +593,7 @@ O(number of bits)
 | Single number II    | Bit counting     |
 | Bit ranges          | Masking          |
 
-**Bit Manipulation vs Normal Arithmetic**
+Bit Manipulation vs Normal Arithmetic
 
 Example:
 
@@ -611,7 +611,7 @@ Divide by 2:
 
 x \>\> 1
 
-**Interview-Level Explanation**
+Interview-Level Explanation
 
 For a senior developer interview:
 

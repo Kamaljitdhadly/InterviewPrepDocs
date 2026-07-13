@@ -1,6 +1,6 @@
 # Data Structures and Algorithms Bubble Sort
 
-**Bubble Sort**
+Bubble Sort
 
 **Bubble Sort** is one of the simplest sorting algorithms. It repeatedly compares **adjacent elements** and swaps them if they are in the wrong order.
 
@@ -44,51 +44,51 @@ Sorting step
 
 ![](media/image1.wmf)
 
-**Example**
+### Example
 
 Given an array:
 
-\[5, 3, 8, 1, 2\]
+- \[5, 3, 8, 1, 2\]
 
 We want ascending order:
 
-\[1, 2, 3, 5, 8\]
+- \[1, 2, 3, 5, 8\]
 
-**How Bubble Sort Works**
+### How Bubble Sort Works
 
-**Pass 1**
+Pass 1
 
 Compare adjacent elements:
 
-**Compare 5 and 3**
+Compare 5 and 3
 
-\[5, 3, 8, 1, 2\]
+- \[5, 3, 8, 1, 2\]
 
 5 \> 3 → swap
 
-\[3, 5, 8, 1, 2\]
+- \[3, 5, 8, 1, 2\]
 
-**Compare 5 and 8**
+Compare 5 and 8
 
 5 \< 8 → no swap
 
-\[3, 5, 8, 1, 2\]
+- \[3, 5, 8, 1, 2\]
 
-**Compare 8 and 1**
+Compare 8 and 1
 
 8 \> 1 → swap
 
-\[3, 5, 1, 8, 2\]
+- \[3, 5, 1, 8, 2\]
 
-**Compare 8 and 2**
+Compare 8 and 2
 
 8 \> 2 → swap
 
-\[3, 5, 1, 2, 8\]
+- \[3, 5, 1, 2, 8\]
 
 After first pass:
 
-\[3,5,1,2,8\]
+- \[3,5,1,2,8\]
 
 ↑
 
@@ -96,11 +96,11 @@ Largest element fixed
 
 The largest element (8) has reached its correct position.
 
-**Pass 2**
+Pass 2
 
 Now ignore the last element because it is already sorted.
 
-\[3,5,1,2,8\]
+- \[3,5,1,2,8\]
 
 Compare:
 
@@ -108,43 +108,43 @@ Compare:
 
 5 and 1 → swap
 
-\[3,1,5,2,8\]
+- \[3,1,5,2,8\]
 
 5 and 2 → swap
 
-\[3,1,2,5,8\]
+- \[3,1,2,5,8\]
 
 Now:
 
-\[3,1,2,5,8\]
+- \[3,1,2,5,8\]
 
 ↑
 
 5 is fixed
 
-**Continue**
+Continue
 
 Pass 3:
 
-\[1,2,3,5,8\]
+- \[1,2,3,5,8\]
 
 Array is sorted.
 
-**Algorithm Steps**
+### Algorithm Steps
 
-1.  Start from the first element.
+- Start from the first element.
 
-2.  Compare each pair of adjacent elements.
+- Compare each pair of adjacent elements.
 
-3.  Swap if left element is greater than right element.
+- Swap if left element is greater than right element.
 
-4.  After one complete pass, the largest element reaches the end.
+- After one complete pass, the largest element reaches the end.
 
-5.  Repeat until the array is sorted.
+- Repeat until the array is sorted.
 
-**C# Implementation**
+C# Implementation
 
-void BubbleSort(int\[\] arr)
+- void BubbleSort(int\[\] arr)
 
 {
 
@@ -160,15 +160,15 @@ for(int j = 0; j \< n - i - 1; j++)
 
 {
 
-if(arr\[j\] \> arr\[j + 1\])
+- if(arr\[j\] \> arr\[j + 1\])
 
 {
 
-int temp = arr\[j\];
+- int temp = arr\[j\];
 
-arr\[j\] = arr\[j + 1\];
+- arr\[j\] = arr\[j + 1\];
 
-arr\[j + 1\] = temp;
+- arr\[j + 1\] = temp;
 
 swapped = true;
 
@@ -186,7 +186,7 @@ break;
 
 }
 
-**Understanding the Loops**
+Understanding the Loops
 
 Outer loop:
 
@@ -212,7 +212,7 @@ Example:
 
 After pass 1:
 
-\[3,5,1,2,8\]
+- \[3,5,1,2,8\]
 
 ↑
 
@@ -220,19 +220,19 @@ Ignore
 
 After pass 2:
 
-\[3,1,2,5,8\]
+- \[3,1,2,5,8\]
 
 ↑
 
 Ignore
 
-**Time Complexity**
+### Time Complexity
 
-**Worst Case**
+Worst Case
 
 Array is reverse sorted:
 
-\[5,4,3,2,1\]
+- \[5,4,3,2,1\]
 
 Every element must be swapped.
 
@@ -240,17 +240,17 @@ Complexity:
 
 O(n²)
 
-**Average Case**
+Average Case
 
 Random order:
 
 O(n²)
 
-**Best Case**
+Best Case
 
 Already sorted:
 
-\[1,2,3,4,5\]
+- \[1,2,3,4,5\]
 
 With optimization:
 
@@ -260,7 +260,7 @@ Without optimization:
 
 O(n²)
 
-**Space Complexity**
+### Space Complexity
 
 Bubble sort only uses a temporary variable:
 
@@ -272,7 +272,7 @@ Space Complexity = O(1)
 
 It is an **in-place sorting algorithm**.
 
-**Advantages**
+Advantages
 
 ✅ Very easy to understand\
 ✅ Simple implementation\
@@ -280,13 +280,13 @@ It is an **in-place sorting algorithm**.
 ✅ Good for learning sorting concepts\
 ✅ Good for very small datasets
 
-**Disadvantages**
+Disadvantages
 
 ❌ Very slow for large datasets\
 ❌ Performs many unnecessary comparisons\
 ❌ Not used in production systems for large data
 
-**Bubble Sort vs Other Sorts**
+Bubble Sort vs Other Sorts
 
 | **Algorithm**  | **Average Time** | **Space** |
 |----------------|------------------|-----------|
@@ -296,7 +296,7 @@ It is an **in-place sorting algorithm**.
 | Merge Sort     | O(n log n)       | O(n)      |
 | Quick Sort     | O(n log n)       | O(log n)  |
 
-**Real-world Example**
+Real-world Example
 
 Imagine students standing in a line according to height:
 
@@ -308,21 +308,21 @@ Each student compares with the neighbor and swaps if needed.
 
 After many rounds, the tallest students move to the end — just like bubbles rising in water.
 
-**Interview Perspective**
+Interview Perspective
 
 Common Bubble Sort questions:
 
-1.  Explain Bubble Sort algorithm.
+- Explain Bubble Sort algorithm.
 
-2.  Why is it called Bubble Sort?
+- Why is it called Bubble Sort?
 
-3.  What is the time complexity?
+- What is the time complexity?
 
-4.  Can Bubble Sort be optimized?
+- Can Bubble Sort be optimized?
 
-5.  Is Bubble Sort stable?
+- Is Bubble Sort stable?
 
-6.  Is Bubble Sort in-place?
+- Is Bubble Sort in-place?
 
 Answers:
 

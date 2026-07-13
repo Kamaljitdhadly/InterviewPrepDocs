@@ -1,6 +1,6 @@
 # Data Structures and Algorithms Shortest Path
 
-**Shortest Path in Data Structures and Algorithms**
+Shortest Path in Data Structures and Algorithms
 
 The **Shortest Path** problem is about finding the **minimum cost path between two nodes in a graph**.
 
@@ -52,11 +52,11 @@ A → C → D
 
 Cost = 3
 
-**Types of Shortest Path Problems**
+Types of Shortest Path Problems
 
 There are mainly four categories:
 
-1.  **Single Source Shortest Path**
+- **Single Source Shortest Path**
 
     - Find shortest paths from one source node to all other nodes.
 
@@ -64,7 +64,7 @@ There are mainly four categories:
 >
 > A → all nodes
 
-2.  **Single Pair Shortest Path**
+- **Single Pair Shortest Path**
 
     - Find shortest path between two specific nodes.
 
@@ -72,15 +72,15 @@ There are mainly four categories:
 >
 > A → D
 
-3.  **Single Destination Shortest Path**
+- **Single Destination Shortest Path**
 
     - Find shortest paths from all nodes to one destination.
 
-4.  **All Pairs Shortest Path**
+- **All Pairs Shortest Path**
 
     - Find shortest paths between every pair of nodes.
 
-**Graph Types Matter**
+Graph Types Matter
 
 The algorithm depends on graph properties.
 
@@ -92,7 +92,7 @@ The algorithm depends on graph properties.
 | All pairs        | Floyd-Warshall                |
 | DAG graph        | Topological Sort + Relaxation |
 
-**1. BFS Shortest Path (Unweighted Graph)**
+1. BFS Shortest Path (Unweighted Graph)
 
 If every edge has the same weight:
 
@@ -104,7 +104,7 @@ Each edge cost:
 
 BFS gives the shortest path because it explores level by level.
 
-**Example**
+### Example
 
 A
 
@@ -134,7 +134,7 @@ Distance:
 
 A → D = 2
 
-**BFS Complexity**
+BFS Complexity
 
 Time:
 
@@ -144,7 +144,7 @@ Space:
 
 O(V)
 
-**2. Dijkstra's Algorithm**
+2. Dijkstra's Algorithm
 
 The most famous shortest path algorithm.
 
@@ -172,15 +172,15 @@ C -------- D
 
 Find shortest paths from A.
 
-**Dijkstra Idea**
+Dijkstra Idea
 
 Dijkstra follows a greedy approach:
 
 Always choose the unvisited node with the smallest known distance.
 
-**Steps**
+Steps
 
-**Step 1: Initialize distances**
+Step 1: Initialize distances
 
 A = 0
 
@@ -190,7 +190,7 @@ C = ∞
 
 D = ∞
 
-**Step 2: Visit A**
+Step 2: Visit A
 
 Neighbors:
 
@@ -206,7 +206,7 @@ C = 2
 
 B = 5
 
-**Step 3: Pick C**
+Step 3: Pick C
 
 Because:
 
@@ -216,7 +216,7 @@ Update D:
 
 D = 2 + 3 = 5
 
-**Step 4: Pick B/D**
+Step 4: Pick B/D
 
 Final:
 
@@ -228,7 +228,7 @@ B = 5
 
 D = 5
 
-**Dijkstra Implementation Concept**
+Dijkstra Implementation Concept
 
 Usually uses:
 
@@ -240,7 +240,7 @@ Usually uses:
 
 Pseudo-code:
 
-distance\[source\] = 0
+- distance\[source\] = 0
 
 while nodes exist:
 
@@ -254,13 +254,13 @@ if new distance is smaller:
 
 update distance
 
-**Complexity**
+Complexity
 
 Using priority queue:
 
 O((V + E) log V)
 
-**Important Limitation of Dijkstra**
+Important Limitation of Dijkstra
 
 Dijkstra does NOT work with negative weights.
 
@@ -274,7 +274,7 @@ C → B = -10
 
 Dijkstra may incorrectly finalize B before discovering the cheaper path.
 
-**3. Bellman-Ford Algorithm**
+3. Bellman-Ford Algorithm
 
 Used when graph contains:
 
@@ -286,7 +286,7 @@ A → B = 5
 
 B → C = -3
 
-**Bellman-Ford Idea**
+Bellman-Ford Idea
 
 Relax all edges repeatedly.
 
@@ -296,9 +296,9 @@ Try improving distance.
 
 Formula:
 
-if(distance\[u\] + weight \< distance\[v\])
+- if(distance\[u\] + weight \< distance\[v\])
 
-update distance\[v\]
+- update distance\[v\]
 
 Example:
 
@@ -320,7 +320,7 @@ B = 5
 
 C = 8
 
-**Complexity**
+Complexity
 
 Time:
 
@@ -328,7 +328,7 @@ O(VE)
 
 Slower than Dijkstra.
 
-**Detecting Negative Cycles**
+Detecting Negative Cycles
 
 Bellman-Ford can detect:
 
@@ -350,7 +350,7 @@ Total:
 
 The path can decrease forever.
 
-**4. Floyd-Warshall Algorithm**
+4. Floyd-Warshall Algorithm
 
 Used for:
 
@@ -376,19 +376,19 @@ B → C
 
 ...
 
-**Idea**
+Idea
 
 Try every node as an intermediate point.
 
 Formula:
 
-distance\[i\]\[j\] =
+- distance\[i\]\[j\] =
 
 min(
 
-distance\[i\]\[j\],
+- distance\[i\]\[j\],
 
-distance\[i\]\[k\] + distance\[k\]\[j\]
+- distance\[i\]\[k\] + distance\[k\]\[j\]
 
 )
 
@@ -408,7 +408,7 @@ New:
 
 A → C = 7
 
-**Complexity**
+Complexity
 
 Time:
 
@@ -418,21 +418,21 @@ Space:
 
 O(V²)
 
-**5. Shortest Path in DAG**
+5. Shortest Path in DAG
 
 A Directed Acyclic Graph can be solved efficiently.
 
 Steps:
 
-1.  Perform topological sorting.
+- Perform topological sorting.
 
-2.  Relax edges in order.
+- Relax edges in order.
 
 Complexity:
 
 O(V + E)
 
-**BFS vs Dijkstra vs Bellman-Ford**
+BFS vs Dijkstra vs Bellman-Ford
 
 | **Feature**    | **BFS**         | **Dijkstra**     | **Bellman-Ford** |
 |----------------|-----------------|------------------|------------------|
@@ -442,9 +442,9 @@ O(V + E)
 | Negative edges | No              | No               | Yes              |
 | Complexity     | O(V+E)          | O((V+E)logV)     | O(VE)            |
 
-**Shortest Path Algorithms in Real Life**
+Shortest Path Algorithms in Real Life
 
-**Google Maps**
+Google Maps
 
 Uses:
 
@@ -454,7 +454,7 @@ Uses:
 
 - Road network optimizations
 
-**Internet Routing**
+Internet Routing
 
 Uses:
 
@@ -466,7 +466,7 @@ Example:
 
 Router A → Router B
 
-**Games**
+Games
 
 Finding path for characters:
 
@@ -506,7 +506,7 @@ Used in:
 
 - Robotics
 
-**Shortest Path Interview Patterns**
+Shortest Path Interview Patterns
 
 | **Problem**                | **Algorithm**  |
 |----------------------------|----------------|
@@ -518,7 +518,7 @@ Used in:
 | Word ladder                | BFS            |
 | Maze shortest route        | BFS            |
 
-**Interview Explanation (Senior Developer)**
+Interview Explanation (Senior Developer)
 
 "Shortest path algorithms find the minimum-cost path between vertices in a graph. The choice of algorithm depends on graph characteristics. BFS is used for unweighted graphs, Dijkstra handles positive weighted graphs using a priority queue, Bellman-Ford supports negative weights and detects negative cycles, while Floyd-Warshall solves all-pairs shortest path problems. The core concept in weighted algorithms is edge relaxation, where we repeatedly try to improve the known shortest distances."
 

@@ -1,6 +1,6 @@
 # Data Structures and Algorithms Graph Traversal
 
-**Graph Traversal in Data Structures**
+Graph Traversal in Data Structures
 
 **Graph traversal** is the process of **visiting every vertex (node) and edge of a graph systematically**.
 
@@ -34,7 +34,7 @@ A-B, A-C, B-D, B-E, C-F
 
 Graph traversal helps us explore this structure.
 
-**Why Do We Need Graph Traversal?**
+### Why Do We Need Graph Traversal?
 
 Graph traversal is used for:
 
@@ -64,15 +64,15 @@ Examples:
 
 - Finding friends of friends in social networks
 
-**Two Main Graph Traversal Algorithms**
+Two Main Graph Traversal Algorithms
 
 There are two fundamental ways to traverse a graph:
 
-1.  **Breadth First Search (BFS)**
+- **Breadth First Search (BFS)**
 
-2.  **Depth First Search (DFS)**
+- **Depth First Search (DFS)**
 
-**1. Breadth First Search (BFS)**
+1. Breadth First Search (BFS)
 
 BFS explores the graph **level by level**.
 
@@ -112,47 +112,47 @@ Level 2:
 
 E F
 
-**BFS Algorithm Steps**
+BFS Algorithm Steps
 
-1.  Add starting node to queue.
+- Add starting node to queue.
 
-2.  Mark it visited.
+- Mark it visited.
 
-3.  Remove node from queue.
+- Remove node from queue.
 
-4.  Visit all its neighbors.
+- Visit all its neighbors.
 
-5.  Add unvisited neighbors to queue.
+- Add unvisited neighbors to queue.
 
-6.  Repeat until queue is empty.
+- Repeat until queue is empty.
 
-**BFS Visualization**
+BFS Visualization
 
 Queue:
 
-\[A\]
+- \[A\]
 
 Remove A
 
 Queue:
 
-\[B,C,D\]
+- \[B,C,D\]
 
 Remove B
 
 Queue:
 
-\[C,D,E,F\]
+- \[C,D,E,F\]
 
 Remove C
 
 Queue:
 
-\[D,E,F\]
+- \[D,E,F\]
 
 ...
 
-**BFS Implementation (C#)**
+BFS Implementation (C#)
 
 Using adjacency list:
 
@@ -176,7 +176,7 @@ int node = queue.Dequeue();
 
 Console.WriteLine(node);
 
-foreach(var neighbor in graph\[node\])
+- foreach(var neighbor in graph\[node\])
 
 {
 
@@ -196,7 +196,7 @@ queue.Enqueue(neighbor);
 
 }
 
-**BFS Complexity**
+BFS Complexity
 
 For a graph:
 
@@ -212,9 +212,9 @@ Space:
 
 O(V)
 
-**Applications of BFS**
+Applications of BFS
 
-**1. Shortest Path in Unweighted Graph**
+1. Shortest Path in Unweighted Graph
 
 Example:
 
@@ -226,7 +226,7 @@ A → B → C → D
 
 because it explores nearest nodes first.
 
-**2. Level Order Traversal of Binary Tree**
+2. Level Order Traversal of Binary Tree
 
 Binary tree:
 
@@ -244,7 +244,7 @@ BFS output:
 
 1 2 3 4
 
-**2. Depth First Search (DFS)**
+2. Depth First Search (DFS)
 
 DFS explores as deep as possible before backtracking.
 
@@ -284,23 +284,23 @@ E
 
 Then backtracks.
 
-**DFS Algorithm Steps**
+DFS Algorithm Steps
 
-1.  Start from a node.
+- Start from a node.
 
-2.  Mark it visited.
+- Mark it visited.
 
-3.  Visit one neighbor.
+- Visit one neighbor.
 
-4.  Continue deeper.
+- Continue deeper.
 
-5.  When no more neighbors:
+- When no more neighbors:
 
     - Backtrack.
 
-6.  Visit remaining neighbors.
+- Visit remaining neighbors.
 
-**DFS Using Recursion**
+DFS Using Recursion
 
 void DFS(
 
@@ -316,7 +316,7 @@ visited.Add(node);
 
 Console.WriteLine(node);
 
-foreach(var neighbor in graph\[node\])
+- foreach(var neighbor in graph\[node\])
 
 {
 
@@ -332,7 +332,7 @@ DFS(neighbor, graph, visited);
 
 }
 
-**DFS Complexity**
+DFS Complexity
 
 Time:
 
@@ -344,7 +344,7 @@ O(V)
 
 (recursion stack + visited)
 
-**BFS vs DFS**
+BFS vs DFS
 
 | **Feature**         | **BFS**                | **DFS**                |
 |---------------------|------------------------|------------------------|
@@ -355,13 +355,13 @@ O(V)
 | Backtracking        | No                     | Yes                    |
 | Used for            | Shortest path          | Cycle detection        |
 
-**Graph Representation**
+Graph Representation
 
 Before traversal, graphs need to be stored.
 
 Two common ways:
 
-**1. Adjacency Matrix**
+1. Adjacency Matrix
 
 2D array.
 
@@ -397,7 +397,7 @@ Space:
 
 O(V²)
 
-**2. Adjacency List**
+2. Adjacency List
 
 Store neighbors.
 
@@ -415,9 +415,9 @@ Space:
 
 O(V + E)
 
-**Graph Traversal Problems**
+Graph Traversal Problems
 
-**1. Detect Cycle**
+1. Detect Cycle
 
 Example:
 
@@ -429,7 +429,7 @@ A → B → C
 
 DFS detects cycles using recursion stack.
 
-**2. Connected Components**
+2. Connected Components
 
 Graph:
 
@@ -441,7 +441,7 @@ There are:
 
 Run DFS/BFS from every unvisited node.
 
-**3. Topological Sorting**
+3. Topological Sorting
 
 Used for dependencies.
 
@@ -465,7 +465,7 @@ Database → Backend → Frontend
 
 Uses DFS.
 
-**4. Path Finding**
+4. Path Finding
 
 Find route:
 
@@ -473,7 +473,7 @@ A → B → C → D
 
 Uses BFS/DFS.
 
-**BFS vs DFS Example**
+BFS vs DFS Example
 
 Graph:
 
@@ -487,7 +487,7 @@ Graph:
 
 5
 
-**BFS:**
+BFS:
 
 1
 
@@ -495,11 +495,11 @@ Graph:
 
 5
 
-Output:
+- Output:
 
 1 2 3 4 5
 
-**DFS:**
+DFS:
 
 1
 
@@ -513,11 +513,11 @@ Output:
 
 then 3,4
 
-Output:
+- Output:
 
 1 2 5 3 4
 
-**Advanced Graph Traversal Algorithms**
+Advanced Graph Traversal Algorithms
 
 After BFS and DFS, many algorithms build on them:
 
@@ -531,7 +531,7 @@ After BFS and DFS, many algorithms build on them:
 | Tarjan           | Strongly connected components       |
 | Kahn's Algorithm | Topological sorting                 |
 
-**Interview Explanation (Senior Developer)**
+Interview Explanation (Senior Developer)
 
 A good interview answer:
 

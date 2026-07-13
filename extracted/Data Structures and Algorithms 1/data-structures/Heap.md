@@ -1,6 +1,6 @@
 # Data Structures and Algorithms Heap
 
-**Heap (Data Structure)**
+Heap (Data Structure)
 
 A **Heap** is a special type of **Complete Binary Tree** that satisfies the **Heap Property**.
 
@@ -8,11 +8,11 @@ Unlike a Binary Search Tree (BST), a heap is **not used for fast searching**. In
 
 There are two types of heaps:
 
-1.  **Max Heap** – The largest element is always at the root.
+- **Max Heap** – The largest element is always at the root.
 
-2.  **Min Heap** – The smallest element is always at the root.
+- **Min Heap** – The smallest element is always at the root.
 
-**Real-Life Example**
+### Real-Life Example
 
 Imagine a hospital emergency room.
 
@@ -34,7 +34,7 @@ The highest-priority patient is always treated first.
 
 A **heap** works exactly like this.
 
-**What is a Complete Binary Tree?**
+What is a Complete Binary Tree?
 
 A heap must first be a **Complete Binary Tree**.
 
@@ -72,9 +72,9 @@ Not complete:
 
 ❌ The left child is missing before the right child.
 
-**Heap Property**
+Heap Property
 
-**Max Heap**
+Max Heap
 
 Every parent is **greater than or equal to** its children.
 
@@ -104,7 +104,7 @@ Notice:
 
 The **largest element is always at the root**.
 
-**Min Heap**
+Min Heap
 
 Every parent is **less than or equal to** its children.
 
@@ -120,7 +120,7 @@ Every parent is **less than or equal to** its children.
 
 The **smallest element is always at the root**.
 
-**Important Point**
+Important Point
 
 Many beginners confuse Heap with BST.
 
@@ -146,7 +146,7 @@ Because
 
 The relationship between siblings **does not matter**.
 
-**How Heap is Stored**
+How Heap is Stored
 
 Unlike most trees, heaps are usually stored in an **array**, not with pointers.
 
@@ -168,13 +168,13 @@ Index : 0 1 2 3 4 5
 
 Value : 50 30 40 10 20 35
 
-**Why an Array?**
+### Why an Array?
 
 Because a Complete Binary Tree has a predictable layout.
 
 No pointers are needed.
 
-**Parent and Child Formula**
+Parent and Child Formula
 
 Suppose a node is at index **i**.
 
@@ -218,7 +218,7 @@ Right
 
 Perfect!
 
-**Heap Insertion**
+Heap Insertion
 
 Suppose we have
 
@@ -250,7 +250,7 @@ Because
 
 60 \> 30
 
-**Heapify Up**
+Heapify Up
 
 Swap with parent.
 
@@ -282,7 +282,7 @@ Swap again.
 
 Done.
 
-**Heap Deletion**
+Heap Deletion
 
 Deletion removes the **root**.
 
@@ -316,7 +316,7 @@ Replace root with the last node.
 
 Now heap property is broken.
 
-**Heapify Down**
+Heapify Down
 
 Compare with larger child.
 
@@ -336,9 +336,9 @@ Swap.
 
 Heap restored.
 
-**Heap Operations**
+Heap Operations
 
-**Peek**
+Peek
 
 Return root.
 
@@ -350,7 +350,7 @@ Time
 
 O(1)
 
-**Insert**
+Insert
 
 Add node
 
@@ -360,7 +360,7 @@ Time
 
 O(log n)
 
-**Delete Root**
+Delete Root
 
 Replace root
 
@@ -370,7 +370,7 @@ Time
 
 O(log n)
 
-**Search**
+Search
 
 Must visit many nodes because heaps are **not sorted**.
 
@@ -378,7 +378,7 @@ Time
 
 O(n)
 
-**Time Complexity**
+### Time Complexity
 
 | **Operation**  | **Complexity** |
 |----------------|----------------|
@@ -390,7 +390,7 @@ O(n)
 
 **Note:** Building a heap from an unsorted array using the bottom-up heap construction algorithm takes **O(n)** time, which is more efficient than inserting elements one by one (**O(n log n)**).
 
-**Why is Insert O(log n)?**
+### Why is Insert O(log n)?
 
 Because heap height is
 
@@ -406,7 +406,7 @@ Therefore
 
 O(log n)
 
-**C# Example**
+C# Example
 
 .NET provides a built-in priority queue rather than a direct Heap class.
 
@@ -444,7 +444,7 @@ Console.WriteLine(pq.Dequeue());
 
 }
 
-Output:
+- Output:
 
 High
 
@@ -454,7 +454,7 @@ Low
 
 PriorityQueue\<TElement, TPriority\> is implemented using a **binary min-heap** internally.
 
-**Heap vs Binary Search Tree**
+Heap vs Binary Search Tree
 
 | **Feature**  | **Heap**             | **Binary Search Tree**                  |
 |--------------|----------------------|-----------------------------------------|
@@ -466,7 +466,7 @@ PriorityQueue\<TElement, TPriority\> is implemented using a **binary min-heap** 
 | Sorted Order | ❌ No                | ✅ In-order traversal gives sorted data |
 | Main Purpose | Priority management  | Fast searching                          |
 
-**Max Heap vs Min Heap**
+Max Heap vs Min Heap
 
 | **Feature** | **Max Heap**           | **Min Heap**          |
 |-------------|------------------------|-----------------------|
@@ -474,7 +474,7 @@ PriorityQueue\<TElement, TPriority\> is implemented using a **binary min-heap** 
 | Parent Rule | Parent ≥ Children      | Parent ≤ Children     |
 | Use Cases   | Highest priority first | Lowest priority first |
 
-**Real-World Applications**
+Real-World Applications
 
 - **Priority Queues** (task scheduling, CPU scheduling).
 
@@ -490,27 +490,27 @@ PriorityQueue\<TElement, TPriority\> is implemented using a **binary min-heap** 
 
 - Job schedulers and event-driven systems.
 
-**Common Interview Questions**
+Common Interview Questions
 
-1.  What is a heap?
+- What is a heap?
 
-2.  Why must a heap be a **Complete Binary Tree**?
+- Why must a heap be a **Complete Binary Tree**?
 
-3.  What is the difference between a heap and a BST?
+- What is the difference between a heap and a BST?
 
-4.  Why is searching in a heap **O(n)**?
+- Why is searching in a heap **O(n)**?
 
-5.  Why are heaps stored in arrays?
+- Why are heaps stored in arrays?
 
-6.  Explain **Heapify Up** and **Heapify Down**.
+- Explain **Heapify Up** and **Heapify Down**.
 
-7.  Why does insertion take **O(log n)**?
+- Why does insertion take **O(log n)**?
 
-8.  What is the difference between a **Max Heap** and a **Min Heap**?
+- What is the difference between a **Max Heap** and a **Min Heap**?
 
-9.  Why does .NET's PriorityQueue\<TElement, TPriority\> use a **min-heap** internally?
+- Why does .NET's PriorityQueue\<TElement, TPriority\> use a **min-heap** internally?
 
-**Summary**
+Summary
 
 | **Feature** | **Heap**                                |
 |-------------|-----------------------------------------|
@@ -524,7 +524,7 @@ PriorityQueue\<TElement, TPriority\> is implemented using a **binary min-heap** 
 | Peek        | O(1)                                    |
 | Primary Use | Priority Queue                          |
 
-**Key Takeaways**
+Key Takeaways
 
 - A **Heap** is a **Complete Binary Tree** that satisfies the **Heap Property**.
 

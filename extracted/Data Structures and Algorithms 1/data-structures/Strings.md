@@ -1,16 +1,16 @@
-**Data Structures and Algorithms Strings**
+Data Structures and Algorithms Strings
 
-1.  How do you reverse a string or check if it is a palindrome?
+- How do you reverse a string or check if it is a palindrome?
 
-2.  How do you find the longest substring without repeating characters?
+- How do you find the longest substring without repeating characters?
 
-3.  How do you implement string matching algorithms (e.g., KMP)?
+- How do you implement string matching algorithms (e.g., KMP)?
 
-**How do you reverse a string or check if it is a palindrome?**
+How do you reverse a string or check if it is a palindrome?
 
 Here's how you can reverse a string and check if it is a palindrome using C#:
 
-**1. Reverse a String**
+1. Reverse a String
 
 **Problem**: Reverse the characters in a string.
 
@@ -26,7 +26,7 @@ public static string ReverseString(string s)
 
 {
 
-char\[\] array = s.ToCharArray();
+- char\[\] array = s.ToCharArray();
 
 Array.Reverse(array);
 
@@ -38,13 +38,13 @@ return new string(array);
 
 **Explanation**:
 
-1.  **Convert the string** to a character array.
+- **Convert the string** to a character array.
 
-2.  **Reverse the array** using Array.Reverse.
+- **Reverse the array** using Array.Reverse.
 
-3.  **Create a new string** from the reversed character array.
+- **Create a new string** from the reversed character array.
 
-**2. Check if a String is a Palindrome**
+2. Check if a String is a Palindrome
 
 **Problem**: Check if a string reads the same forward and backward (ignoring case and spaces).
 
@@ -72,7 +72,7 @@ private static string CleanString(string s)
 
 {
 
-char\[\] arr = s.ToCharArray();
+- char\[\] arr = s.ToCharArray();
 
 string cleaned = "";
 
@@ -98,13 +98,13 @@ return cleaned;
 
 **Explanation**:
 
-1.  **Clean the string**: Remove non-alphanumeric characters and convert to lowercase.
+- **Clean the string**: Remove non-alphanumeric characters and convert to lowercase.
 
-2.  **Reverse the cleaned string**.
+- **Reverse the cleaned string**.
 
-3.  **Compare the cleaned string** with its reversed version to check for palindrome properties.
+- **Compare the cleaned string** with its reversed version to check for palindrome properties.
 
-**Summary**
+Summary
 
 - **Reverse a String**: Convert the string to a character array, reverse the array, and convert it back to a string.
 
@@ -114,11 +114,11 @@ These methods provide efficient ways to handle string manipulation and palindrom
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-**How do you find the longest substring without repeating characters?**
+How do you find the longest substring without repeating characters?
 
 To find the longest substring without repeating characters, you can use the sliding window technique with a hash set to keep track of characters. This approach ensures that you efficiently find the maximum length substring in linear time. Here’s how you can implement it in C#:
 
-**Find the Longest Substring Without Repeating Characters**
+Find the Longest Substring Without Repeating Characters
 
 **Problem**: Given a string, find the length of the longest substring that does not contain repeating characters.
 
@@ -146,17 +146,17 @@ for (int right = 0; right \< s.Length; right++)
 
 {
 
-while (seen.Contains(s\[right\]))
+- while (seen.Contains(s\[right\]))
 
 {
 
-seen.Remove(s\[left\]);
+- seen.Remove(s\[left\]);
 
 left++;
 
 }
 
-seen.Add(s\[right\]);
+- seen.Add(s\[right\]);
 
 maxLength = Math.Max(maxLength, right - left + 1);
 
@@ -168,19 +168,19 @@ return maxLength;
 
 }
 
-**Explanation**
+Explanation
 
-1.  **Initialize a HashSet**: seen is used to store characters in the current window of the substring.
+- **Initialize a HashSet**: seen is used to store characters in the current window of the substring.
 
-2.  **Two Pointers**: Use left and right pointers to define the current window in the string.
+- **Two Pointers**: Use left and right pointers to define the current window in the string.
 
-3.  **Expand the Window**: Move the right pointer to expand the window by including new characters.
+- **Expand the Window**: Move the right pointer to expand the window by including new characters.
 
-4.  **Shrink the Window**: If a character is repeated (i.e., seen contains the character at right), move the left pointer to shrink the window until the repeated character is removed.
+- **Shrink the Window**: If a character is repeated (i.e., seen contains the character at right), move the left pointer to shrink the window until the repeated character is removed.
 
-5.  **Update Maximum Length**: After adjusting the window, update maxLength with the size of the current window if it's larger than the previous maximum length.
+- **Update Maximum Length**: After adjusting the window, update maxLength with the size of the current window if it's larger than the previous maximum length.
 
-6.  **Return Result**: The maxLength will be the length of the longest substring without repeating characters.
+- **Return Result**: The maxLength will be the length of the longest substring without repeating characters.
 
 **Example Usage**
 
@@ -208,13 +208,13 @@ This approach is efficient with a time complexity of O(n), where n is the length
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-**How do you implement string matching algorithms (e.g., KMP)?**
+How do you implement string matching algorithms (e.g., KMP)?
 
 The Knuth-Morris-Pratt (KMP) algorithm is a well-known string matching algorithm that efficiently finds occurrences of a "pattern" string within a "text" string. The KMP algorithm preprocesses the pattern to create a longest prefix suffix (LPS) array, which helps in skipping unnecessary comparisons.
 
 Here's a step-by-step implementation of the KMP algorithm in C#:
 
-**1. Compute the LPS Array**
+1. Compute the LPS Array
 
 The LPS (Longest Prefix which is also Suffix) array is used to skip characters while matching.
 
@@ -226,31 +226,31 @@ public class KMPAlgorithm
 
 {
 
-public static int\[\] ComputeLPSArray(string pattern)
+- public static int\[\] ComputeLPSArray(string pattern)
 
 {
 
 int length = pattern.Length;
 
-int\[\] lps = new int\[length\];
+- int\[\] lps = new int\[length\];
 
 int len = 0; // Length of the previous longest prefix suffix
 
 int i = 1;
 
-lps\[0\] = 0; // LPS\[0\] is always 0
+- lps\[0\] = 0; // LPS\[0\] is always 0
 
 while (i \< length)
 
 {
 
-if (pattern\[i\] == pattern\[len\])
+- if (pattern\[i\] == pattern\[len\])
 
 {
 
 len++;
 
-lps\[i\] = len;
+- lps\[i\] = len;
 
 i++;
 
@@ -264,7 +264,7 @@ if (len != 0)
 
 {
 
-len = lps\[len - 1\];
+- len = lps\[len - 1\];
 
 }
 
@@ -272,7 +272,7 @@ else
 
 {
 
-lps\[i\] = 0;
+- lps\[i\] = 0;
 
 i++;
 
@@ -288,7 +288,7 @@ return lps;
 
 }
 
-**2. Perform the KMP Search**
+2. Perform the KMP Search
 
 Use the LPS array to perform the actual search.
 
@@ -308,7 +308,7 @@ int textLength = text.Length;
 
 int patternLength = pattern.Length;
 
-int\[\] lps = ComputeLPSArray(pattern);
+- int\[\] lps = ComputeLPSArray(pattern);
 
 int i = 0; // Index for text
 
@@ -318,7 +318,7 @@ while (i \< textLength)
 
 {
 
-if (pattern\[j\] == text\[i\])
+- if (pattern\[j\] == text\[i\])
 
 {
 
@@ -334,11 +334,11 @@ if (j == patternLength)
 
 Console.WriteLine("Pattern found at index " + (i - j));
 
-j = lps\[j - 1\];
+- j = lps\[j - 1\];
 
 }
 
-else if (i \< textLength && pattern\[j\] != text\[i\])
+- else if (i \< textLength && pattern\[j\] != text\[i\])
 
 {
 
@@ -346,7 +346,7 @@ if (j != 0)
 
 {
 
-j = lps\[j - 1\];
+- j = lps\[j - 1\];
 
 }
 
@@ -364,31 +364,31 @@ i++;
 
 }
 
-public static int\[\] ComputeLPSArray(string pattern)
+- public static int\[\] ComputeLPSArray(string pattern)
 
 {
 
 int length = pattern.Length;
 
-int\[\] lps = new int\[length\];
+- int\[\] lps = new int\[length\];
 
 int len = 0; // Length of the previous longest prefix suffix
 
 int i = 1;
 
-lps\[0\] = 0; // LPS\[0\] is always 0
+- lps\[0\] = 0; // LPS\[0\] is always 0
 
 while (i \< length)
 
 {
 
-if (pattern\[i\] == pattern\[len\])
+- if (pattern\[i\] == pattern\[len\])
 
 {
 
 len++;
 
-lps\[i\] = len;
+- lps\[i\] = len;
 
 i++;
 
@@ -402,7 +402,7 @@ if (len != 0)
 
 {
 
-len = lps\[len - 1\];
+- len = lps\[len - 1\];
 
 }
 
@@ -410,7 +410,7 @@ else
 
 {
 
-lps\[i\] = 0;
+- lps\[i\] = 0;
 
 i++;
 
@@ -448,11 +448,11 @@ KMPAlgorithm.KMPSearch(text, pattern);
 
 **Explanation**:
 
-1.  **Compute LPS Array**: Preprocess the pattern to build the LPS array which will help to skip characters in the pattern.
+- **Compute LPS Array**: Preprocess the pattern to build the LPS array which will help to skip characters in the pattern.
 
-2.  **Search for Pattern**: Traverse the text using the KMP algorithm. Use the LPS array to skip characters and find matches efficiently.
+- **Search for Pattern**: Traverse the text using the KMP algorithm. Use the LPS array to skip characters and find matches efficiently.
 
-**Summary**
+Summary
 
 - **LPS Array**: Helps in skipping unnecessary comparisons by keeping track of the longest prefix that is also a suffix.
 

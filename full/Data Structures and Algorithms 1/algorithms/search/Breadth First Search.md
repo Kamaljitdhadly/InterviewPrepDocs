@@ -1,28 +1,28 @@
 # Data Structures and Algorithms Breadth First Search
 
-**Breadth First Search (BFS) in Data Structures and Algorithms**
+Breadth First Search (BFS) in Data Structures and Algorithms
 
 **Breadth First Search (BFS)** is a graph traversal algorithm that visits nodes **level by level**.
 
 The main idea:
 
-**Explore all neighboring nodes first before moving to the next level.**
+Explore all neighboring nodes first before moving to the next level.
 
 BFS uses a:
 
 Queue (FIFO - First In First Out)
 
-**Real-Life Example**
+### Real-Life Example
 
 Imagine you are searching for a person in a social network.
 
 You:
 
-1.  First check your direct friends.
+- First check your direct friends.
 
-2.  Then check your friends' friends.
+- Then check your friends' friends.
 
-3.  Then check the next level.
+- Then check the next level.
 
 Example:
 
@@ -42,7 +42,7 @@ You → Bob → Tom → Sam → John → Mike
 
 It explores by distance.
 
-**Graph Example**
+Graph Example
 
 Consider this graph:
 
@@ -58,17 +58,17 @@ D E F
 
 Starting from A.
 
-**BFS Traversal**
+BFS Traversal
 
-**Level 0:**
+Level 0:
 
 A
 
-**Level 1:**
+Level 1:
 
 B C
 
-**Level 2:**
+Level 2:
 
 D E F
 
@@ -76,13 +76,13 @@ Final BFS order:
 
 A → B → C → D → E → F
 
-**How BFS Works**
+### How BFS Works
 
 BFS maintains:
 
-1.  **Queue** → stores nodes to visit
+- **Queue** → stores nodes to visit
 
-2.  **Visited set** → prevents visiting the same node multiple times
+- **Visited set** → prevents visiting the same node multiple times
 
 Algorithm:
 
@@ -98,7 +98,7 @@ Algorithm:
 
 6\. Repeat until queue is empty
 
-**Step-by-Step Example**
+Step-by-Step Example
 
 Graph:
 
@@ -114,53 +114,53 @@ D E
 
 Start:
 
-Queue: \[A\]
+- Queue: \[A\]
 
 Visited: {A}
 
-**Remove A**
+Remove A
 
 Visit neighbors B and C.
 
-Queue: \[B,C\]
+- Queue: \[B,C\]
 
 Visited:
 
 {A,B,C}
 
-**Remove B**
+Remove B
 
 Add D and E.
 
 Queue:
 
-\[C,D,E\]
+- \[C,D,E\]
 
-**Remove C**
+Remove C
 
 No new nodes.
 
 Queue:
 
-\[D,E\]
+- \[D,E\]
 
-**Remove D**
-
-Queue:
-
-\[E\]
-
-**Remove E**
+Remove D
 
 Queue:
 
-\[\]
+- \[E\]
+
+Remove E
+
+Queue:
+
+- \[\]
 
 Traversal:
 
 A B C D E
 
-**BFS Using Adjacency List**
+BFS Using Adjacency List
 
 Graphs are commonly stored as:
 
@@ -174,7 +174,7 @@ D → B
 
 E → B
 
-**BFS Algorithm Pseudocode**
+BFS Algorithm Pseudocode
 
 BFS(graph, start)
 
@@ -200,7 +200,7 @@ mark visited
 
 add neighbor to queue
 
-**BFS Implementation in C#**
+BFS Implementation in C#
 
 void BFS(
 
@@ -226,7 +226,7 @@ int node = queue.Dequeue();
 
 Console.WriteLine(node);
 
-foreach(var neighbor in graph\[node\])
+- foreach(var neighbor in graph\[node\])
 
 {
 
@@ -246,7 +246,7 @@ queue.Enqueue(neighbor);
 
 }
 
-**Complexity Analysis**
+Complexity Analysis
 
 For a graph:
 
@@ -254,7 +254,7 @@ For a graph:
 
 - E = number of edges
 
-**Time Complexity**
+### Time Complexity
 
 Each node visited once:
 
@@ -268,7 +268,7 @@ Total:
 
 O(V + E)
 
-**Space Complexity**
+### Space Complexity
 
 Queue stores nodes:
 
@@ -282,7 +282,7 @@ Total:
 
 O(V)
 
-**BFS in Binary Trees**
+BFS in Binary Trees
 
 BFS is also called:
 
@@ -328,9 +328,9 @@ queue.Enqueue(node.Right);
 
 }
 
-**Applications of BFS**
+Applications of BFS
 
-**1. Shortest Path in Unweighted Graph**
+1. Shortest Path in Unweighted Graph
 
 Example:
 
@@ -358,7 +358,7 @@ Distance 2
 
 Distance 3
 
-**2. Finding Connected Components**
+2. Finding Connected Components
 
 Example:
 
@@ -376,7 +376,7 @@ Result:
 
 2 connected components
 
-**3. Cycle Detection in Undirected Graph**
+3. Cycle Detection in Undirected Graph
 
 Example:
 
@@ -388,7 +388,7 @@ C ----
 
 BFS can detect if a node is reached again through another path.
 
-**4. Web Crawlers**
+4. Web Crawlers
 
 Search engines:
 
@@ -404,7 +404,7 @@ Website A
 
 BFS discovers pages level by level.
 
-**5. GPS and Navigation**
+5. GPS and Navigation
 
 For simple maps:
 
@@ -420,7 +420,7 @@ Farther locations
 
 BFS finds minimum number of steps.
 
-**BFS vs DFS**
+BFS vs DFS
 
 | **Feature**         | **BFS**              | **DFS**                    |
 |---------------------|----------------------|----------------------------|
@@ -432,7 +432,7 @@ BFS finds minimum number of steps.
 | Backtracking        | No                   | Yes                        |
 | Common use          | Shortest path        | Cycle detection, traversal |
 
-**BFS vs Dijkstra**
+BFS vs Dijkstra
 
 | **BFS**                      | **Dijkstra**               |
 |------------------------------|----------------------------|
@@ -443,13 +443,13 @@ BFS finds minimum number of steps.
 
 Example:
 
-**BFS:**
+BFS:
 
 A -- B -- C
 
 Every edge cost = 1
 
-**Dijkstra:**
+Dijkstra:
 
 A --5-- B
 
@@ -463,9 +463,9 @@ C
 
 Different costs.
 
-**BFS Variations**
+BFS Variations
 
-**1. Multi-Source BFS**
+1. Multi-Source BFS
 
 Start BFS from multiple nodes.
 
@@ -477,7 +477,7 @@ Rotten oranges spread every minute
 
 All rotten oranges start together.
 
-**2. Bidirectional BFS**
+2. Bidirectional BFS
 
 Search from:
 
@@ -493,7 +493,7 @@ Used for:
 
 - Large graphs
 
-**Common BFS Interview Problems**
+Common BFS Interview Problems
 
 | **Problem**            | **Concept**            |
 |------------------------|------------------------|
@@ -505,7 +505,7 @@ Used for:
 | Course Schedule        | BFS + Topological Sort |
 | Binary Tree Right View | BFS                    |
 
-**Interview Explanation (Senior Developer)**
+Interview Explanation (Senior Developer)
 
 "Breadth First Search is a graph traversal algorithm that explores nodes level by level using a queue. It starts from a source node, visits all immediate neighbors, then moves to the next level. BFS guarantees the shortest path in an unweighted graph because nodes are explored in increasing distance order. Its time complexity is O(V+E) and space complexity is O(V). It is widely used in shortest path problems, tree level traversal, network analysis, and dependency problems."
 

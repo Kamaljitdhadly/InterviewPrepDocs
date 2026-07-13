@@ -1,6 +1,6 @@
 # Data Structures and Algorithms Selection Sort
 
-**Selection Sort**
+Selection Sort
 
 **Selection Sort** is a simple comparison-based sorting algorithm.
 
@@ -10,9 +10,9 @@ Find the smallest element from the unsorted part and place it at the beginning.
 
 It divides the array into two parts:
 
-1.  **Sorted part** → elements already placed correctly.
+- **Sorted part** → elements already placed correctly.
 
-2.  **Unsorted part** → elements that still need sorting.
+- **Unsorted part** → elements that still need sorting.
 
 Pass 1: scan the unsorted suffix
 
@@ -58,49 +58,49 @@ Selection step
 
 ![](media/image1.wmf)
 
-**Example**
+### Example
 
-Given:
+- Given:
 
-\[64, 25, 12, 22, 11\]
+- \[64, 25, 12, 22, 11\]
 
 We want ascending order:
 
-\[11, 12, 22, 25, 64\]
+- \[11, 12, 22, 25, 64\]
 
-**How Selection Sort Works**
+### How Selection Sort Works
 
 Initially:
 
 Sorted Unsorted
 
-\[\] \[64,25,12,22,11\]
+- \[\] \[64,25,12,22,11\]
 
-**Pass 1**
+Pass 1
 
 Find the smallest element in the unsorted part:
 
-\[64,25,12,22,11\]
+- \[64,25,12,22,11\]
 
 Minimum = 11
 
 Swap it with the first element:
 
-\[11,25,12,22,64\]
+- \[11,25,12,22,64\]
 
 Now:
 
 Sorted Unsorted
 
-\[11\] \[25,12,22,64\]
+- \[11\] \[25,12,22,64\]
 
 11 is in its final position.
 
-**Pass 2**
+Pass 2
 
 Find minimum in:
 
-\[25,12,22,64\]
+- \[25,12,22,64\]
 
 Minimum:
 
@@ -108,19 +108,19 @@ Minimum:
 
 Swap with first unsorted element:
 
-\[11,12,25,22,64\]
+- \[11,12,25,22,64\]
 
 Now:
 
 Sorted Unsorted
 
-\[11,12\] \[25,22,64\]
+- \[11,12\] \[25,22,64\]
 
-**Pass 3**
+Pass 3
 
 Find minimum:
 
-\[25,22,64\]
+- \[25,22,64\]
 
 Minimum:
 
@@ -128,13 +128,13 @@ Minimum:
 
 Swap:
 
-\[11,12,22,25,64\]
+- \[11,12,22,25,64\]
 
-**Pass 4**
+Pass 4
 
 Remaining:
 
-\[25,64\]
+- \[25,64\]
 
 Minimum:
 
@@ -144,23 +144,23 @@ Already correct.
 
 Final:
 
-\[11,12,22,25,64\]
+- \[11,12,22,25,64\]
 
-**Algorithm Steps**
+### Algorithm Steps
 
-1.  Start from the first index.
+- Start from the first index.
 
-2.  Search the smallest element in the remaining array.
+- Search the smallest element in the remaining array.
 
-3.  Swap it with the current position.
+- Swap it with the current position.
 
-4.  Move the boundary of the sorted section forward.
+- Move the boundary of the sorted section forward.
 
-5.  Repeat until the array is sorted.
+- Repeat until the array is sorted.
 
-**C# Implementation**
+C# Implementation
 
-void SelectionSort(int\[\] arr)
+- void SelectionSort(int\[\] arr)
 
 {
 
@@ -178,7 +178,7 @@ for(int j = i + 1; j \< n; j++)
 
 {
 
-if(arr\[j\] \< arr\[minIndex\])
+- if(arr\[j\] \< arr\[minIndex\])
 
 {
 
@@ -190,21 +190,21 @@ minIndex = j;
 
 // Swap minimum with current position
 
-int temp = arr\[i\];
+- int temp = arr\[i\];
 
-arr\[i\] = arr\[minIndex\];
+- arr\[i\] = arr\[minIndex\];
 
-arr\[minIndex\] = temp;
-
-}
+- arr\[minIndex\] = temp;
 
 }
 
-**Understanding the Code**
+}
+
+Understanding the Code
 
 Example:
 
-\[64,25,12,22,11\]
+- \[64,25,12,22,11\]
 
 First iteration:
 
@@ -238,17 +238,17 @@ Swap:
 
 Result:
 
-\[11,25,12,22,64\]
+- \[11,25,12,22,64\]
 
-**Time Complexity**
+### Time Complexity
 
 Selection Sort always searches the remaining elements.
 
-**Best Case**
+Best Case
 
 Already sorted:
 
-\[1,2,3,4,5\]
+- \[1,2,3,4,5\]
 
 Still checks all elements.
 
@@ -256,23 +256,23 @@ Complexity:
 
 O(n²)
 
-**Average Case**
+Average Case
 
 Random order:
 
 O(n²)
 
-**Worst Case**
+Worst Case
 
 Reverse order:
 
-\[5,4,3,2,1\]
+- \[5,4,3,2,1\]
 
 Complexity:
 
 O(n²)
 
-**Space Complexity**
+### Space Complexity
 
 Selection Sort only uses temporary variables:
 
@@ -286,7 +286,7 @@ Space Complexity = O(1)
 
 It is an **in-place sorting algorithm**.
 
-**Properties of Selection Sort**
+Properties of Selection Sort
 
 | **Property** | **Answer**    |
 |--------------|---------------|
@@ -295,7 +295,7 @@ It is an **in-place sorting algorithm**.
 | Adaptive     | ❌ No         |
 | Recursive    | ❌ Usually No |
 
-**Why is Selection Sort Not Stable?**
+### Why is Selection Sort Not Stable?
 
 Example:
 
@@ -315,7 +315,7 @@ Result:
 
 Therefore, it is not stable.
 
-**Selection Sort vs Bubble Sort vs Insertion Sort**
+Selection Sort vs Bubble Sort vs Insertion Sort
 
 | **Feature**    | **Selection Sort** | **Bubble Sort** | **Insertion Sort** |
 |----------------|--------------------|-----------------|--------------------|
@@ -327,7 +327,7 @@ Therefore, it is not stable.
 | Stable         | No                 | Yes             | Yes                |
 | Swaps          | Few                | Many            | Moderate           |
 
-**Advantages**
+Advantages
 
 ✅ Very simple to implement\
 ✅ Requires minimum memory\
@@ -337,33 +337,33 @@ Example:
 
 For:
 
-\[1000 elements\]
+- \[1000 elements\]
 
 Selection Sort performs at most:
 
 n-1 swaps
 
-**Disadvantages**
+Disadvantages
 
 ❌ Always performs O(n²) comparisons\
 ❌ Not suitable for large datasets\
 ❌ Slower than Merge Sort and Quick Sort
 
-**When is Selection Sort Useful?**
+When is Selection Sort Useful?
 
-**1. Small datasets**
+1. Small datasets
 
 Example:
 
 Sorting 10-20 items
 
-**2. Memory-constrained systems**
+2. Memory-constrained systems
 
 Because:
 
 Space = O(1)
 
-**3. When writes are expensive**
+3. When writes are expensive
 
 Because it performs fewer swaps.
 
@@ -371,9 +371,9 @@ Example:
 
 Flash memory where writing is costly.
 
-**Interview Questions**
+Interview Questions
 
-**Q1. Why is Selection Sort O(n²)?**
+Q1. Why is Selection Sort O(n²)?
 
 Because for every element, it scans the remaining elements.
 
@@ -389,7 +389,7 @@ Therefore:
 
 O(n²)
 
-**Q2. Selection Sort vs Insertion Sort?**
+Q2. Selection Sort vs Insertion Sort?
 
 Selection Sort:
 
@@ -403,7 +403,7 @@ Insertion Sort:
 
 - Better for nearly sorted data.
 
-**Q3. Is Selection Sort stable?**
+Q3. Is Selection Sort stable?
 
 Standard Selection Sort:
 
@@ -411,7 +411,7 @@ No
 
 A modified version can be made stable by shifting instead of swapping.
 
-**Summary**
+Summary
 
 Selection Sort follows:
 

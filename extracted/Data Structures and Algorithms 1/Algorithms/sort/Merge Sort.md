@@ -1,16 +1,16 @@
 # Data Structures and Algorithms Merge Sort
 
-**Merge Sort**
+Merge Sort
 
 **Merge Sort** is an efficient sorting algorithm based on the **Divide and Conquer** technique.
 
 The main idea:
 
-1.  **Divide** the array into smaller halves.
+- **Divide** the array into smaller halves.
 
-2.  **Conquer** by sorting each half recursively.
+- **Conquer** by sorting each half recursively.
 
-3.  **Merge** the sorted halves back together.
+- **Merge** the sorted halves back together.
 
 Unlike Bubble Sort, which compares neighboring elements repeatedly, Merge Sort breaks the problem into smaller problems and combines their solutions.
 
@@ -54,21 +54,21 @@ Insertion step
 
 *(Note: the visualization above is for insertion sort; for merge sort, focus on the divide → sort → merge process described below.)*
 
-**Example**
+### Example
 
-Given:
+- Given:
 
-\[8, 3, 5, 1, 9, 6, 2, 7\]
+- \[8, 3, 5, 1, 9, 6, 2, 7\]
 
 Goal:
 
-\[1,2,3,5,6,7,8,9\]
+- \[1,2,3,5,6,7,8,9\]
 
-**Step 1: Divide**
+Step 1: Divide
 
 Merge Sort repeatedly splits the array into halves.
 
-\[8,3,5,1,9,6,2,7\]
+- \[8,3,5,1,9,6,2,7\]
 
 \|
 
@@ -76,7 +76,7 @@ Merge Sort repeatedly splits the array into halves.
 
 \| \|
 
-\[8,3,5,1\] \[9,6,2,7\]
+- \[8,3,5,1\] \[9,6,2,7\]
 
 \| \|
 
@@ -84,29 +84,29 @@ Merge Sort repeatedly splits the array into halves.
 
 \| \| \| \|
 
-\[8,3\] \[5,1\] \[9,6\] \[2,7\]
+- \[8,3\] \[5,1\] \[9,6\] \[2,7\]
 
 Continue splitting:
 
-\[8,3\] → \[8\] \[3\]
+- \[8,3\] → \[8\] \[3\]
 
-\[5,1\] → \[5\] \[1\]
+- \[5,1\] → \[5\] \[1\]
 
-\[9,6\] → \[9\] \[6\]
+- \[9,6\] → \[9\] \[6\]
 
-\[2,7\] → \[2\] \[7\]
+- \[2,7\] → \[2\] \[7\]
 
 Now every piece has one element.
 
 A single element is already sorted.
 
-**Step 2: Merge**
+Step 2: Merge
 
 Now we combine sorted pieces.
 
-**Merge:**
+Merge:
 
-\[8\] and \[3\]
+- \[8\] and \[3\]
 
 Compare:
 
@@ -114,19 +114,19 @@ Compare:
 
 Result:
 
-\[3,8\]
+- \[3,8\]
 
-**Merge:**
+Merge:
 
-\[5\] and \[1\]
+- \[5\] and \[1\]
 
 Result:
 
-\[1,5\]
+- \[1,5\]
 
 Now:
 
-\[3,8\] \[1,5\]
+- \[3,8\] \[1,5\]
 
 Merge them:
 
@@ -142,29 +142,29 @@ take 8
 
 Result:
 
-\[1,3,5,8\]
+- \[1,3,5,8\]
 
 Similarly:
 
-\[9,6\] → \[6,9\]
+- \[9,6\] → \[6,9\]
 
-\[2,7\] → \[2,7\]
+- \[2,7\] → \[2,7\]
 
 Merge:
 
-\[6,9\] + \[2,7\]
+- \[6,9\] + \[2,7\]
 
 Result:
 
-\[2,6,7,9\]
+- \[2,6,7,9\]
 
 Final merge:
 
-\[1,3,5,8\]
+- \[1,3,5,8\]
 
 \+
 
-\[2,6,7,9\]
+- \[2,6,7,9\]
 
 Compare elements:
 
@@ -186,13 +186,13 @@ Compare elements:
 
 Final:
 
-\[1,2,3,5,6,7,8,9\]
+- \[1,2,3,5,6,7,8,9\]
 
-**How Merge Sort Works Internally**
+How Merge Sort Works Internally
 
 Merge Sort has two functions:
 
-**1. Divide function**
+1. Divide function
 
 Splits the array:
 
@@ -210,7 +210,7 @@ Merge(left, middle, right)
 
 }
 
-**2. Merge function**
+2. Merge function
 
 Combines two sorted arrays:
 
@@ -218,11 +218,11 @@ Example:
 
 Left:
 
-\[2,5,8\]
+- \[2,5,8\]
 
 Right:
 
-\[1,4,9\]
+- \[1,4,9\]
 
 Compare first elements:
 
@@ -234,11 +234,11 @@ Compare first elements:
 
 Result:
 
-\[1,2,4,5,8,9\]
+- \[1,2,4,5,8,9\]
 
-**C# Implementation**
+C# Implementation
 
-void MergeSort(int\[\] arr, int left, int right)
+- void MergeSort(int\[\] arr, int left, int right)
 
 {
 
@@ -258,11 +258,11 @@ Merge(arr, left, middle, right);
 
 }
 
-void Merge(int\[\] arr, int left, int middle, int right)
+- void Merge(int\[\] arr, int left, int middle, int right)
 
 {
 
-int\[\] temp = new int\[right - left + 1\];
+- int\[\] temp = new int\[right - left + 1\];
 
 int i = left;
 
@@ -274,11 +274,11 @@ while(i \<= middle && j \<= right)
 
 {
 
-if(arr\[i\] \<= arr\[j\])
+- if(arr\[i\] \<= arr\[j\])
 
 {
 
-temp\[k\] = arr\[i\];
+- temp\[k\] = arr\[i\];
 
 i++;
 
@@ -288,7 +288,7 @@ else
 
 {
 
-temp\[k\] = arr\[j\];
+- temp\[k\] = arr\[j\];
 
 j++;
 
@@ -302,7 +302,7 @@ while(i \<= middle)
 
 {
 
-temp\[k++\] = arr\[i++\];
+- temp\[k++\] = arr\[i++\];
 
 }
 
@@ -310,7 +310,7 @@ while(j \<= right)
 
 {
 
-temp\[k++\] = arr\[j++\];
+- temp\[k++\] = arr\[j++\];
 
 }
 
@@ -318,13 +318,13 @@ for(i = left; i \<= right; i++)
 
 {
 
-arr\[i\] = temp\[i - left\];
+- arr\[i\] = temp\[i - left\];
 
 }
 
 }
 
-**Time Complexity**
+### Time Complexity
 
 The array is divided into halves.
 
@@ -354,7 +354,7 @@ Final complexity:
 | Average  | O(n log n)     |
 | Worst    | O(n log n)     |
 
-**Space Complexity**
+### Space Complexity
 
 Merge Sort requires temporary arrays while merging.
 
@@ -362,17 +362,17 @@ Example:
 
 Original array:
 
-\[8,3,5,1\]
+- \[8,3,5,1\]
 
 Temporary:
 
-\[1,3,5,8\]
+- \[1,3,5,8\]
 
 Extra memory:
 
 O(n)
 
-**Merge Sort Properties**
+Merge Sort Properties
 
 | **Property**      | **Answer** |
 |-------------------|------------|
@@ -381,7 +381,7 @@ O(n)
 | Recursive?        | ✅ Usually |
 | Divide & Conquer? | ✅ Yes     |
 
-**Merge Sort vs Bubble Sort**
+Merge Sort vs Bubble Sort
 
 | **Feature** | **Bubble Sort**  | **Merge Sort**   |
 |-------------|------------------|------------------|
@@ -392,9 +392,9 @@ O(n)
 | Memory      | O(1)             | O(n)             |
 | Large data  | Poor             | Excellent        |
 
-**Where is Merge Sort Used?**
+Where is Merge Sort Used?
 
-**1. Sorting large datasets**
+1. Sorting large datasets
 
 Example:
 
@@ -402,7 +402,7 @@ Example:
 
 - Large files
 
-**2. External sorting**
+2. External sorting
 
 When data is too large to fit in memory:
 
@@ -416,7 +416,7 @@ Sort chunks
 
 Merge sorted chunks
 
-**3. Linked Lists**
+3. Linked Lists
 
 Merge Sort is very efficient for linked lists because:
 
@@ -424,7 +424,7 @@ Merge Sort is very efficient for linked lists because:
 
 - No random access is needed.
 
-**4. Distributed systems**
+4. Distributed systems
 
 Large datasets can be split across machines:
 
@@ -438,9 +438,9 @@ Machine C → sort part 3
 
 Merge results
 
-**Interview Questions**
+Interview Questions
 
-**Q1. Why is Merge Sort O(n log n)?**
+Q1. Why is Merge Sort O(n log n)?
 
 Because:
 
@@ -448,11 +448,11 @@ Because:
 
 - Each level processes all n elements during merging.
 
-**Q2. Why is Merge Sort preferred for linked lists?**
+Q2. Why is Merge Sort preferred for linked lists?
 
 Because linked lists don't support fast random access, but merging linked lists is efficient.
 
-**Q3. Merge Sort vs Quick Sort?**
+Q3. Merge Sort vs Quick Sort?
 
 |                 | **Merge Sort** | **Quick Sort** |
 |-----------------|----------------|----------------|
@@ -461,7 +461,7 @@ Because linked lists don't support fast random access, but merging linked lists 
 | Stable          | Yes            | Usually No     |
 | Practical speed | Good           | Usually faster |
 
-**Summary:**
+Summary:
 
 Merge Sort is a powerful sorting algorithm that uses **divide and conquer**:
 

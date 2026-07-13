@@ -1,6 +1,6 @@
 # Data Structures and Algorithms Array
 
-**Array (Data Structure)**
+Array (Data Structure)
 
 An **array** is one of the simplest and most important data structures. It stores **multiple elements of the same data type** in a **continuous block of memory**.
 
@@ -16,7 +16,7 @@ Think of it like a row of lockers:
 
 Each value has an **index**, starting from **0**.
 
-**Real-Life Example**
+### Real-Life Example
 
 Imagine a classroom with 5 students sitting in fixed seats.
 
@@ -32,23 +32,23 @@ If you want to find the student in seat **2**, you immediately know it is **Priy
 
 Arrays work exactly like this.
 
-**Definition**
+### Definition
 
 **Array** is a linear data structure that stores elements of the same type in contiguous memory locations and allows direct access using an index.
 
-**Characteristics**
+### Characteristics
 
-**1. Fixed Size**
+1. Fixed Size
 
 Once an array is created, its size cannot change (in most programming languages).
 
 Example:
 
-int numbers\[5\];
+- int numbers\[5\];
 
 Only 5 integers can be stored.
 
-**2. Same Data Type**
+2. Same Data Type
 
 An integer array stores only integers.
 
@@ -62,7 +62,7 @@ An integer array stores only integers.
 
 ✘ 5.6
 
-**3. Contiguous Memory**
+3. Contiguous Memory
 
 Elements are stored next to each other in memory.
 
@@ -80,7 +80,7 @@ Address
 
 Because memory is continuous, the computer can calculate any element's location instantly.
 
-**4. Indexed Access**
+4. Indexed Access
 
 Every element has an index.
 
@@ -90,15 +90,15 @@ Value : 7 5 1 9 6
 
 Accessing index 3:
 
-array\[3\] = 9
+- array\[3\] = 9
 
 This happens in constant time.
 
-**Why Arrays are Fast**
+### Why Arrays are Fast
 
 Suppose:
 
-array = \[10,20,30,40,50\]
+- array = \[10,20,30,40,50\]
 
 Want the 4th element?
 
@@ -124,13 +124,13 @@ No searching is required.
 
 This is why array access is **O(1)**.
 
-**Basic Operations**
+### Basic Operations
 
-**1. Access**
+1. Access
 
-array = \[5,10,15,20\]
+- array = \[5,10,15,20\]
 
-array\[2\]
+- array\[2\]
 
 Output
 
@@ -140,23 +140,23 @@ Time Complexity:
 
 O(1)
 
-**2. Update**
+2. Update
 
 Before
 
-\[5,10,15,20\]
+- \[5,10,15,20\]
 
-array\[2\] = 50
+- array\[2\] = 50
 
 After
 
-\[5,10,50,20\]
+- \[5,10,50,20\]
 
 Time Complexity
 
 O(1)
 
-**3. Traversal**
+3. Traversal
 
 Visit every element one by one.
 
@@ -178,11 +178,11 @@ Time Complexity
 
 O(n)
 
-**4. Searching**
+4. Searching
 
-**Linear Search**
+Linear Search
 
-\[10,20,30,40\]
+- \[10,20,30,40\]
 
 Find 40
 
@@ -198,23 +198,23 @@ Time
 
 O(n)
 
-**Binary Search**
+Binary Search
 
 Works only on a **sorted array**.
 
-\[10,20,30,40,50\]
+- \[10,20,30,40,50\]
 
 Time Complexity
 
 O(log n)
 
-**5. Insertion**
+5. Insertion
 
 Insert 25 at index 2.
 
 Before
 
-\[10,20,30,40\]
+- \[10,20,30,40\]
 
 Shift elements
 
@@ -224,19 +224,19 @@ Shift elements
 
 After
 
-\[10,20,25,30,40\]
+- \[10,20,25,30,40\]
 
 Time Complexity
 
 O(n)
 
-**6. Deletion**
+6. Deletion
 
 Delete 20
 
 Before
 
-\[10,20,30,40\]
+- \[10,20,30,40\]
 
 Shift left
 
@@ -246,17 +246,17 @@ Shift left
 
 After
 
-\[10,30,40\]
+- \[10,30,40\]
 
 Time Complexity
 
 O(n)
 
-**Memory Representation**
+Memory Representation
 
 Suppose
 
-int arr\[5\];
+- int arr\[5\];
 
 Memory
 
@@ -276,7 +276,7 @@ Index calculation
 
 Address = Base + Index × Size
 
-**Time Complexity**
+### Time Complexity
 
 | **Operation**                   | **Complexity** |
 |---------------------------------|----------------|
@@ -290,7 +290,7 @@ Address = Base + Index × Size
 | Insert in Middle                | O(n)           |
 | Delete                          | O(n)           |
 
-**Advantages**
+Advantages
 
 - Very fast random access.
 
@@ -302,7 +302,7 @@ Address = Base + Index × Size
 
 - Excellent when the size is known in advance.
 
-**Disadvantages**
+Disadvantages
 
 - Fixed size (traditional arrays).
 
@@ -314,7 +314,7 @@ Address = Base + Index × Size
 
 - Stores only one data type (in most statically typed languages).
 
-**C# Example**
+C# Example
 
 using System;
 
@@ -326,11 +326,11 @@ static void Main()
 
 {
 
-int\[\] numbers = {10, 20, 30, 40, 50};
+- int\[\] numbers = {10, 20, 30, 40, 50};
 
-Console.WriteLine(numbers\[2\]); // 30
+- Console.WriteLine(numbers\[2\]); // 30
 
-numbers\[2\] = 100;
+- numbers\[2\] = 100;
 
 foreach (int num in numbers)
 
@@ -344,7 +344,7 @@ Console.WriteLine(num);
 
 }
 
-Output:
+- Output:
 
 30
 
@@ -358,23 +358,23 @@ Output:
 
 50
 
-**Common Interview Questions**
+Common Interview Questions
 
-1.  Why is array access **O(1)**?
+- Why is array access **O(1)**?
 
-2.  Why are insertion and deletion **O(n)**?
+- Why are insertion and deletion **O(n)**?
 
-3.  What is contiguous memory?
+- What is contiguous memory?
 
-4.  What is the difference between an array and a linked list?
+- What is the difference between an array and a linked list?
 
-5.  Can an array grow in size? (Traditional arrays cannot; dynamic arrays can.)
+- Can an array grow in size? (Traditional arrays cannot; dynamic arrays can.)
 
-6.  What is the difference between linear search and binary search?
+- What is the difference between linear search and binary search?
 
-7.  When should you use an array instead of another data structure?
+- When should you use an array instead of another data structure?
 
-**Summary**
+Summary
 
 | **Feature** | **Array**                                               |
 |-------------|---------------------------------------------------------|
@@ -387,7 +387,7 @@ Output:
 | Delete      | O(n)                                                    |
 | Best Use    | Fast index-based access with a known number of elements |
 
-**Key Takeaways**
+Key Takeaways
 
 - Arrays store **same-type elements** in **contiguous memory**.
 

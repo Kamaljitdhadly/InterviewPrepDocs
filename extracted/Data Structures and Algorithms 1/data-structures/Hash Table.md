@@ -1,18 +1,18 @@
 # Data Structures and Algorithms Hash Table
 
-**Hash Table (Data Structure)**
+Hash Table (Data Structure)
 
 A **Hash Table** is a data structure that stores data in **key-value pairs** and provides very fast insertion, deletion, and searching.
 
 The main idea:
 
-**Use a hash function to convert a key into an index where the value is stored.**
+Use a hash function to convert a key into an index where the value is stored.
 
 Average time complexity for searching is:
 
 O(1)
 
-**Real-Life Example**
+### Real-Life Example
 
 Think of a dictionary.
 
@@ -28,17 +28,17 @@ Instead of checking every word one by one, you directly jump to the location.
 
 A hash table works similarly.
 
-**Hash Table Structure**
+Hash Table Structure
 
 A hash table contains:
 
-1.  **Keys** → Unique identifiers.
+- **Keys** → Unique identifiers.
 
-2.  **Values** → Data associated with keys.
+- **Values** → Data associated with keys.
 
-3.  **Hash Function** → Converts key into an index.
+- **Hash Function** → Converts key into an index.
 
-4.  **Buckets/Array** → Stores the data.
+- **Buckets/Array** → Stores the data.
 
 Example:
 
@@ -50,7 +50,7 @@ Key Value
 
 103 → Amit
 
-**How Hash Table Works?**
+How Hash Table Works?
 
 Suppose we want to store:
 
@@ -92,7 +92,7 @@ Index Value
 
 9
 
-**Searching in Hash Table**
+Searching in Hash Table
 
 Search:
 
@@ -110,7 +110,7 @@ John
 
 No need to scan the whole collection.
 
-**Hash Function**
+Hash Function
 
 A hash function converts a key into a numeric index.
 
@@ -122,7 +122,7 @@ Hash("CAT") = 7
 
 Store:
 
-Bucket\[7\] = CAT
+- Bucket\[7\] = CAT
 
 A good hash function should:
 
@@ -132,7 +132,7 @@ A good hash function should:
 
 - Minimize collisions.
 
-**Collision in Hash Table**
+Collision in Hash Table
 
 A collision happens when two keys produce the same index.
 
@@ -154,11 +154,11 @@ Index
 
 This is a collision.
 
-**Handling Collisions**
+Handling Collisions
 
 There are two common techniques.
 
-**1. Separate Chaining**
+1. Separate Chaining
 
 Each bucket stores a list.
 
@@ -172,7 +172,7 @@ Bucket 5
 
 Multiple values can exist at the same index.
 
-**2. Open Addressing**
+2. Open Addressing
 
 Find another empty location.
 
@@ -198,9 +198,9 @@ Types:
 
 - Double hashing
 
-**Hash Table Operations**
+Hash Table Operations
 
-**1. Insert**
+1. Insert
 
 Add key-value pair.
 
@@ -212,17 +212,17 @@ Add:
 
 Steps:
 
-1.  Calculate hash.
+- Calculate hash.
 
-2.  Find index.
+- Find index.
 
-3.  Store value.
+- Store value.
 
 Average complexity:
 
 O(1)
 
-**2. Search**
+2. Search
 
 Find value using key.
 
@@ -242,7 +242,7 @@ Average:
 
 O(1)
 
-**3. Delete**
+3. Delete
 
 Remove using key.
 
@@ -256,7 +256,7 @@ Average:
 
 O(1)
 
-**Time Complexity**
+### Time Complexity
 
 | **Operation** | **Average** | **Worst Case** |
 |---------------|-------------|----------------|
@@ -268,7 +268,7 @@ Why worst case?
 
 Because if many collisions happen, all items may end up in one bucket.
 
-**Hash Table vs Array**
+Hash Table vs Array
 
 | **Feature**    | **Array**  | **Hash Table** |
 |----------------|------------|----------------|
@@ -278,7 +278,7 @@ Because if many collisions happen, all items may end up in one bucket.
 | Ordering       | Maintained | Not guaranteed |
 | Duplicate Keys | Allowed    | Usually not    |
 
-**Hash Table vs Linked List**
+Hash Table vs Linked List
 
 | **Feature** | **Linked List**        | **Hash Table** |
 |-------------|------------------------|----------------|
@@ -287,7 +287,7 @@ Because if many collisions happen, all items may end up in one bucket.
 | Memory      | Low                    | Higher         |
 | Access      | Sequential             | Direct         |
 
-**Hash Table vs Tree**
+Hash Table vs Tree
 
 | **Feature**    | **Hash Table** | **Tree** |
 |----------------|----------------|----------|
@@ -296,11 +296,11 @@ Because if many collisions happen, all items may end up in one bucket.
 | Range Queries  | Poor           | Good     |
 | Implementation | Hash function  | Nodes    |
 
-**Hash Table in C#**
+Hash Table in C#
 
 In .NET, the common implementation is:
 
-**Dictionary\<TKey,TValue\>**
+Dictionary\<TKey,TValue\>
 
 using System;
 
@@ -322,13 +322,13 @@ users.Add(102, "Rahul");
 
 users.Add(103, "Amit");
 
-Console.WriteLine(users\[102\]);
+- Console.WriteLine(users\[102\]);
 
 }
 
 }
 
-Output:
+- Output:
 
 Rahul
 
@@ -342,7 +342,7 @@ Dictionary\<TKey,TValue\>
 
 Hash Table
 
-**HashSet**
+HashSet
 
 A HashSet is a hash table that stores only keys.
 
@@ -362,9 +362,9 @@ Result:
 
 Duplicate values are ignored.
 
-**Real-World Applications**
+Real-World Applications
 
-**1. Database Indexing**
+1. Database Indexing
 
 Databases use hash indexes for fast lookup.
 
@@ -372,7 +372,7 @@ Example:
 
 EmployeeId → Employee Record
 
-**2. Caching**
+2. Caching
 
 Example:
 
@@ -382,19 +382,19 @@ UserId → User Data
 
 Instead of querying database every time.
 
-**3. Authentication**
+3. Authentication
 
 Store:
 
 SessionId → User Information
 
-**4. Counting Frequency**
+4. Counting Frequency
 
 Example:
 
 Find character frequency:
 
-Input:
+- Input:
 
 banana
 
@@ -406,7 +406,7 @@ a → 3
 
 n → 2
 
-**5. Compiler Symbol Tables**
+5. Compiler Symbol Tables
 
 Programming languages store:
 
@@ -416,13 +416,13 @@ Example:
 
 count → address 1000
 
-**6. Duplicate Detection**
+6. Duplicate Detection
 
 Example:
 
 Check duplicate numbers:
 
-\[10,20,30,20\]
+- \[10,20,30,20\]
 
 Store:
 
@@ -432,7 +432,7 @@ When 20 appears again:
 
 Already exists
 
-**Hash Table Internals in .NET**
+Hash Table Internals in .NET
 
 Dictionary\<TKey,TValue\> internally maintains:
 
@@ -478,29 +478,29 @@ Bucket Index
 
 Store Entry
 
-**Common Interview Questions**
+Common Interview Questions
 
-1.  What is a hash table?
+- What is a hash table?
 
-2.  How does a hash table achieve O(1) lookup?
+- How does a hash table achieve O(1) lookup?
 
-3.  What is a hash function?
+- What is a hash function?
 
-4.  What is collision?
+- What is collision?
 
-5.  How do you handle collisions?
+- How do you handle collisions?
 
-6.  Difference between Dictionary and Hashtable in C#?
+- Difference between Dictionary and Hashtable in C#?
 
-7.  Difference between HashSet and Dictionary?
+- Difference between HashSet and Dictionary?
 
-8.  Why should keys be immutable?
+- Why should keys be immutable?
 
-9.  What happens when two objects have the same hash code?
+- What happens when two objects have the same hash code?
 
-10. Why is hash table search O(n) in the worst case?
+- Why is hash table search O(n) in the worst case?
 
-**Summary**
+Summary
 
 | **Feature**        | **Hash Table**                 |
 |--------------------|--------------------------------|
@@ -514,7 +514,7 @@ Store Entry
 | Collision Handling | Chaining / Open Addressing     |
 | C# Implementation  | Dictionary, Hashtable, HashSet |
 
-**Key Takeaways**
+Key Takeaways
 
 - A **Hash Table stores data using key-value pairs**.
 

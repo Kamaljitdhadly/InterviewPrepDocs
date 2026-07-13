@@ -1,12 +1,12 @@
 # Data Structures and Algorithms Greedy
 
-**Greedy Algorithm in Data Structures and Algorithms**
+Greedy Algorithm in Data Structures and Algorithms
 
 A **Greedy algorithm** is an algorithmic technique where we make the **best possible choice at each step** with the hope that these local choices will lead to the **globally optimal solution**.
 
 The idea:
 
-**"Take the best choice available right now, and never change it later."**
+"Take the best choice available right now, and never change it later."
 
 Unlike dynamic programming, greedy algorithms usually do not reconsider previous decisions.
 
@@ -38,7 +38,7 @@ Answer:
 
 We always choose the largest available denomination.
 
-**How Greedy Works**
+### How Greedy Works
 
 A greedy algorithm usually follows these steps:
 
@@ -52,7 +52,7 @@ A greedy algorithm usually follows these steps:
 
 5\. Repeat until complete
 
-**General Greedy Pattern**
+General Greedy Pattern
 
 while(solution is not complete)
 
@@ -70,11 +70,11 @@ add choice to solution;
 
 }
 
-**Characteristics of Greedy Algorithms**
+Characteristics of Greedy Algorithms
 
 A problem can often be solved using greedy when it has:
 
-**1. Greedy Choice Property**
+1. Greedy Choice Property
 
 A locally optimal choice leads toward a globally optimal solution.
 
@@ -82,7 +82,7 @@ Example:
 
 Selecting the highest-value activity first.
 
-**2. Optimal Substructure**
+2. Optimal Substructure
 
 The optimal solution contains optimal solutions to smaller problems.
 
@@ -90,9 +90,9 @@ Example:
 
 Minimum spanning tree.
 
-**Example 1: Activity Selection Problem**
+### Example 1: Activity Selection Problem
 
-**Problem**
+Problem
 
 You have activities with:
 
@@ -131,9 +131,9 @@ Why?
 
 Because finishing early leaves maximum room for future activities.
 
-**Example 2: Fractional Knapsack**
+### Example 2: Fractional Knapsack
 
-**Problem**
+Problem
 
 A thief has a bag capacity:
 
@@ -167,7 +167,7 @@ Take remaining from C
 
 Maximum value achieved.
 
-**Important:**
+Important:
 
 Greedy works for **Fractional Knapsack**.
 
@@ -183,7 +183,7 @@ or don't take it.
 
 Dynamic programming is needed.
 
-**Example 3: Huffman Coding**
+### Example 3: Huffman Coding
 
 Used in:
 
@@ -213,7 +213,7 @@ Result:
 
 Common characters require fewer bits.
 
-**Example 4: Dijkstra's Algorithm**
+### Example 4: Dijkstra's Algorithm
 
 Find shortest path in weighted graphs.
 
@@ -249,13 +249,13 @@ Choose D (distance 5)
 
 Choose B (distance 6)
 
-**Example 5: Minimum Spanning Tree**
+### Example 5: Minimum Spanning Tree
 
 A Minimum Spanning Tree connects all nodes with minimum total edge weight.
 
 Two greedy algorithms:
 
-**1. Kruskal's Algorithm**
+1. Kruskal's Algorithm
 
 Strategy:
 
@@ -283,13 +283,13 @@ A-C
 
 because it creates a cycle.
 
-**2. Prim's Algorithm**
+2. Prim's Algorithm
 
 Strategy:
 
 Start from a node and repeatedly add the cheapest edge connecting a new node.
 
-**Greedy vs Dynamic Programming**
+Greedy vs Dynamic Programming
 
 | **Feature**        | **Greedy**          | **Dynamic Programming** |
 |--------------------|---------------------|-------------------------|
@@ -300,7 +300,7 @@ Start from a node and repeatedly add the cheapest edge connecting a new node.
 | Guarantee optimal? | Only some problems  | Usually yes             |
 | Example            | Dijkstra            | Knapsack                |
 
-**Greedy vs Backtracking**
+Greedy vs Backtracking
 
 | **Greedy**       | **Backtracking**         |
 |------------------|--------------------------|
@@ -311,7 +311,7 @@ Start from a node and repeatedly add the cheapest edge connecting a new node.
 
 Example:
 
-**Greedy**
+Greedy
 
 Choose best path
 
@@ -321,7 +321,7 @@ X
 
 No going back
 
-**Backtracking**
+Backtracking
 
 Choose path
 
@@ -335,7 +335,7 @@ Go back
 
 Try another
 
-**Greedy Algorithm Complexity**
+Greedy Algorithm Complexity
 
 Most greedy algorithms are efficient.
 
@@ -349,7 +349,7 @@ Examples:
 | Prim                | O(E log V)     |
 | Dijkstra            | O((V+E) log V) |
 
-**Common Greedy Problems**
+Common Greedy Problems
 
 | **Problem**         | **Greedy Strategy**           |
 |---------------------|-------------------------------|
@@ -361,7 +361,7 @@ Examples:
 | Prim MST            | Pick cheapest connecting edge |
 | Job Scheduling      | Highest profit jobs first     |
 
-**When Should You Think About Greedy?**
+When Should You Think About Greedy?
 
 Look for keywords:
 
@@ -383,7 +383,7 @@ But always verify:
 
 Does the local best choice guarantee the global best answer?
 
-**Interview Explanation (Senior Developer)**
+Interview Explanation (Senior Developer)
 
 "Greedy algorithms solve optimization problems by making the locally optimal choice at each step without reconsidering previous decisions. They work when the problem satisfies the greedy choice property and optimal substructure. Common examples include activity selection, Huffman coding, Dijkstra's algorithm, and minimum spanning tree algorithms like Kruskal and Prim."
 

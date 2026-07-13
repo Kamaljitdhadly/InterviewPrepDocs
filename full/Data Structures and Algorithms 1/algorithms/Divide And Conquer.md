@@ -1,22 +1,22 @@
 # Data Structures and Algorithms Divide And Conquer
 
-**Divide and Conquer Algorithm Technique**
+Divide and Conquer Algorithm Technique
 
 **Divide and Conquer** is an algorithm design technique where a problem is broken into **smaller subproblems**, each subproblem is solved independently, and then their solutions are combined to solve the original problem.
 
 The approach has three main steps:
 
-1.  **Divide** → Break the problem into smaller parts.
+- **Divide** → Break the problem into smaller parts.
 
-2.  **Conquer** → Solve the smaller problems recursively.
+- **Conquer** → Solve the smaller problems recursively.
 
-3.  **Combine** → Merge the solutions to get the final answer.
+- **Combine** → Merge the solutions to get the final answer.
 
 **Real-Life Example: Searching a Dictionary**
 
 Suppose you want to find a word in a dictionary with 1000 pages.
 
-**Normal search:**
+Normal search:
 
 Check every page:
 
@@ -30,21 +30,21 @@ Page 3
 
 Time: O(n)
 
-**Divide and Conquer:**
+Divide and Conquer:
 
-1.  Open the middle page.
+- Open the middle page.
 
-2.  Check the word.
+- Check the word.
 
-3.  If the word comes before:
+- If the word comes before:
 
     - Ignore the second half.
 
-4.  If the word comes after:
+- If the word comes after:
 
     - Ignore the first half.
 
-5.  Repeat.
+- Repeat.
 
 Each step reduces the problem size by half.
 
@@ -54,7 +54,7 @@ Time:
 
 O(log n)
 
-**General Structure**
+General Structure
 
 A divide and conquer algorithm usually looks like this:
 
@@ -82,21 +82,21 @@ return answer;
 
 }
 
-**Example 1: Binary Search**
+### Example 1: Binary Search
 
 Problem:
 
 Find target 7 in:
 
-\[1,3,5,7,9,11,13\]
+- \[1,3,5,7,9,11,13\]
 
 Steps:
 
-**Divide**
+Divide
 
 Find middle:
 
-\[1,3,5,7,9,11,13\]
+- \[1,3,5,7,9,11,13\]
 
 ^
 
@@ -108,7 +108,7 @@ If target was 11:
 
 First:
 
-\[1,3,5,7,9,11,13\]
+- \[1,3,5,7,9,11,13\]
 
 Middle = 7
 
@@ -118,11 +118,11 @@ Since:
 
 Ignore left side:
 
-\[9,11,13\]
+- \[9,11,13\]
 
 Again divide:
 
-\[9,11,13\]
+- \[9,11,13\]
 
 Middle = 11
 
@@ -130,7 +130,7 @@ Found.
 
 Implementation:
 
-int BinarySearch(int\[\] arr, int left, int right, int target)
+- int BinarySearch(int\[\] arr, int left, int right, int target)
 
 {
 
@@ -140,11 +140,11 @@ return -1;
 
 int mid = left + (right - left) / 2;
 
-if(arr\[mid\] == target)
+- if(arr\[mid\] == target)
 
 return mid;
 
-if(target \< arr\[mid\])
+- if(target \< arr\[mid\])
 
 return BinarySearch(arr, left, mid - 1, target);
 
@@ -160,7 +160,7 @@ Space:
 
 O(log n) // recursion stack
 
-**Example 2: Merge Sort**
+### Example 2: Merge Sort
 
 Merge Sort is one of the most famous divide-and-conquer algorithms.
 
@@ -168,47 +168,47 @@ Problem:
 
 Sort:
 
-\[8,3,5,1,9,6\]
+- \[8,3,5,1,9,6\]
 
-**Divide**
+Divide
 
 Split repeatedly:
 
-\[8,3,5,1,9,6\]
+- \[8,3,5,1,9,6\]
 
 \|
 
 ----------------
 
-\[8,3,5\] \[1,9,6\]
+- \[8,3,5\] \[1,9,6\]
 
 \| \|
 
-\[8\] \[3,5\] \[1\] \[9,6\]
+- \[8\] \[3,5\] \[1\] \[9,6\]
 
 Continue until single elements:
 
-\[8\] \[3\] \[5\] \[1\] \[9\] \[6\]
+- \[8\] \[3\] \[5\] \[1\] \[9\] \[6\]
 
-**Conquer**
+Conquer
 
 Sort small pieces:
 
-\[3\] + \[5\]
+- \[3\] + \[5\]
 
-=\> \[3,5\]
+- =\> \[3,5\]
 
-**Combine**
+Combine
 
 Merge:
 
-\[3,5\] + \[8\]
+- \[3,5\] + \[8\]
 
-=\> \[3,5,8\]
+- =\> \[3,5,8\]
 
 Finally:
 
-\[1,3,5,6,8,9\]
+- \[1,3,5,6,8,9\]
 
 Complexity:
 
@@ -216,15 +216,15 @@ Time: O(n log n)
 
 Space: O(n)
 
-**Example 3: Quick Sort**
+### Example 3: Quick Sort
 
 Quick Sort also uses divide and conquer.
 
 Steps:
 
-1.  Select a pivot.
+- Select a pivot.
 
-2.  Divide array:
+- Divide array:
 
     - Smaller elements
 
@@ -232,11 +232,11 @@ Steps:
 
     - Larger elements
 
-3.  Recursively sort both sides.
+- Recursively sort both sides.
 
 Example:
 
-\[7,2,9,4,1\]
+- \[7,2,9,4,1\]
 
 Choose pivot:
 
@@ -244,15 +244,15 @@ Pivot = 7
 
 Partition:
 
-\[2,4,1\] 7 \[9\]
+- \[2,4,1\] 7 \[9\]
 
 Sort left and right:
 
-\[1,2,4\] 7 \[9\]
+- \[1,2,4\] 7 \[9\]
 
 Result:
 
-\[1,2,4,7,9\]
+- \[1,2,4,7,9\]
 
 Average complexity:
 
@@ -262,15 +262,15 @@ Worst case:
 
 O(n²)
 
-**Example 4: Finding Maximum Element**
+### Example 4: Finding Maximum Element
 
 Array:
 
-\[3,8,2,10,5\]
+- \[3,8,2,10,5\]
 
 Divide:
 
-\[3,8,2\] \[10,5\]
+- \[3,8,2\] \[10,5\]
 
 Find maximum:
 
@@ -282,7 +282,7 @@ Combine:
 
 max(8,10)=10
 
-**Divide and Conquer vs Dynamic Programming**
+Divide and Conquer vs Dynamic Programming
 
 They look similar because both break problems into smaller parts.
 
@@ -296,7 +296,7 @@ They look similar because both break problems into smaller parts.
 
 **Example Difference**
 
-**Divide and Conquer**
+Divide and Conquer
 
 Merge Sort:
 
@@ -308,7 +308,7 @@ Sort Sort
 
 Left and right halves are independent.
 
-**Dynamic Programming**
+Dynamic Programming
 
 Fibonacci:
 
@@ -326,7 +326,7 @@ F(3) is calculated multiple times.
 
 DP stores it.
 
-**Divide and Conquer Recurrence**
+Divide and Conquer Recurrence
 
 Many divide-and-conquer algorithms follow:
 
@@ -356,7 +356,7 @@ Result:
 
 O(n log n)
 
-**Common Divide and Conquer Algorithms**
+Common Divide and Conquer Algorithms
 
 | **Algorithm** | **Purpose** | **Complexity** |
 |----|----|----|
@@ -367,7 +367,7 @@ O(n log n)
 | Strassen Algorithm | Matrix multiplication | Faster matrix multiplication |
 | Closest Pair of Points | Geometry | O(n log n) |
 
-**When Should You Think About Divide and Conquer?**
+When Should You Think About Divide and Conquer?
 
 Look for problems where:
 
@@ -387,7 +387,7 @@ Common keywords:
 
 - "Recursive solution"
 
-**Interview Explanation (Senior Developer)**
+Interview Explanation (Senior Developer)
 
 "Divide and conquer is an algorithmic paradigm where we recursively divide a problem into smaller independent subproblems, solve each subproblem, and combine their results. Algorithms like binary search, merge sort, and quick sort use this approach. The efficiency comes from reducing the problem size at each recursive step."
 

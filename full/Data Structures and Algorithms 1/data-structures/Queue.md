@@ -1,18 +1,18 @@
 # Data Structures and Algorithms Queue
 
-**Queue (Data Structure)**
+Queue (Data Structure)
 
 A **Queue** is a **linear data structure** that follows the **FIFO (First In, First Out)** principle.
 
 This means:
 
-**The first element inserted is the first element removed.**
+The first element inserted is the first element removed.
 
 Think of it as standing in a line at a ticket counter.
 
 The person who arrives first gets served first.
 
-**Real-Life Example**
+### Real-Life Example
 
 Imagine people waiting at a movie ticket counter.
 
@@ -20,7 +20,7 @@ Front
 
 ↓
 
-\[Aman\] \[Rahul\] \[Priya\] \[Neha\]
+- \[Aman\] \[Rahul\] \[Priya\] \[Neha\]
 
 ↑
 
@@ -32,7 +32,7 @@ Rear
 
 This is **FIFO**.
 
-**Queue Terminology**
+Queue Terminology
 
 A queue has two important ends.
 
@@ -42,9 +42,9 @@ Front ---------------------------- Rear
 
 - **Rear** → New elements are added here.
 
-**Basic Operations**
+### Basic Operations
 
-**1. Enqueue (Insert)**
+1. Enqueue (Insert)
 
 Adds an element at the **rear**.
 
@@ -54,7 +54,7 @@ Front
 
 ↓
 
-\[10\]
+- \[10\]
 
 ↑
 
@@ -66,7 +66,7 @@ Front
 
 ↓
 
-\[10\] \[20\]
+- \[10\] \[20\]
 
 ↑
 
@@ -78,7 +78,7 @@ Front
 
 ↓
 
-\[10\] \[20\] \[30\]
+- \[10\] \[20\] \[30\]
 
 ↑
 
@@ -88,7 +88,7 @@ Time Complexity
 
 O(1)
 
-**2. Dequeue (Remove)**
+2. Dequeue (Remove)
 
 Removes the element from the **front**.
 
@@ -98,7 +98,7 @@ Front
 
 ↓
 
-\[10\] \[20\] \[30\]
+- \[10\] \[20\] \[30\]
 
 ↑
 
@@ -112,7 +112,7 @@ Front
 
 ↓
 
-\[20\] \[30\]
+- \[20\] \[30\]
 
 ↑
 
@@ -122,13 +122,13 @@ Time Complexity
 
 O(1)
 
-**3. Peek (Front)**
+3. Peek (Front)
 
 Returns the first element without removing it.
 
 Queue
 
-\[20\] \[30\] \[40\]
+- \[20\] \[30\] \[40\]
 
 Peek
 
@@ -138,11 +138,11 @@ Time Complexity
 
 O(1)
 
-**4. IsEmpty**
+4. IsEmpty
 
 Checks whether the queue contains elements.
 
-Queue = \[\]
+- Queue = \[\]
 
 Result = True
 
@@ -150,43 +150,43 @@ Time Complexity
 
 O(1)
 
-**Step-by-Step Example**
+Step-by-Step Example
 
 Start with an empty queue.
 
-**Enqueue 10**
+Enqueue 10
 
 Front Rear
 
 ↓ ↓
 
-\[10\]
+- \[10\]
 
-**Enqueue 20**
-
-Front
-
-↓
-
-\[10\] \[20\]
-
-↑
-
-Rear
-
-**Enqueue 30**
+Enqueue 20
 
 Front
 
 ↓
 
-\[10\] \[20\] \[30\]
+- \[10\] \[20\]
 
 ↑
 
 Rear
 
-**Dequeue**
+Enqueue 30
+
+Front
+
+↓
+
+- \[10\] \[20\] \[30\]
+
+↑
+
+Rear
+
+Dequeue
 
 Remove 10
 
@@ -194,25 +194,25 @@ Front
 
 ↓
 
-\[20\] \[30\]
+- \[20\] \[30\]
 
 ↑
 
 Rear
 
-**Enqueue 40**
+Enqueue 40
 
 Front
 
 ↓
 
-\[20\] \[30\] \[40\]
+- \[20\] \[30\] \[40\]
 
 ↑
 
 Rear
 
-**Dequeue**
+Dequeue
 
 Remove 20
 
@@ -220,19 +220,19 @@ Front
 
 ↓
 
-\[30\] \[40\]
+- \[30\] \[40\]
 
 ↑
 
 Rear
 
-**Queue Using an Array**
+Queue Using an Array
 
 Index
 
 0 1 2 3 4
 
-\[10\]\[20\]\[30\]\[ \]\[ \]
+- \[10\]\[20\]\[30\]\[ \]\[ \]
 
 Two variables are maintained:
 
@@ -246,17 +246,17 @@ Front = 1
 
 Rear = 2
 
-**Problem**
+Problem
 
 If you keep dequeuing and enqueuing, empty spaces appear at the beginning.
 
-\[ \]\[ \]\[30\]\[40\]\[50\]
+- \[ \]\[ \]\[30\]\[40\]\[50\]
 
 Even though there is free space, a simple array-based queue may think it's full if Rear has reached the end.
 
 This is solved using a **Circular Queue**.
 
-**Queue Using a Linked List**
+Queue Using a Linked List
 
 A queue can also be implemented using a linked list.
 
@@ -276,7 +276,7 @@ Rear
 
 Both operations are **O(1)** when both Front and Rear pointers are maintained.
 
-**Time Complexity**
+### Time Complexity
 
 | **Operation** | **Complexity** |
 |---------------|----------------|
@@ -286,7 +286,7 @@ Both operations are **O(1)** when both Front and Rear pointers are maintained.
 | IsEmpty       | O(1)           |
 | Search        | O(n)           |
 
-**C# Example**
+C# Example
 
 The .NET framework provides a built-in generic queue.
 
@@ -328,7 +328,7 @@ Output
 
 20
 
-**Queue vs Stack**
+Queue vs Stack
 
 | **Feature**    | **Queue**     | **Stack**    |
 |----------------|---------------|--------------|
@@ -357,7 +357,7 @@ Top
 
 Pop → 30
 
-**Queue vs Array**
+Queue vs Array
 
 | **Feature**     | **Queue** | **Array**   |
 |-----------------|-----------|-------------|
@@ -367,19 +367,19 @@ Pop → 30
 | Delete          | Front     | Anywhere    |
 | Random Access   | No        | Yes         |
 
-**Types of Queues**
+Types of Queues
 
-**1. Simple Queue**
+1. Simple Queue
 
 FIFO.
 
 10 → 20 → 30
 
-**2. Circular Queue**
+2. Circular Queue
 
 The last position connects back to the first.
 
-\[ \]\[ \]\[30\]\[40\]\[50\]
+- \[ \]\[ \]\[30\]\[40\]\[50\]
 
 ↓
 
@@ -387,7 +387,7 @@ Reuse empty spaces at the beginning.
 
 Efficient use of array space.
 
-**3. Priority Queue**
+3. Priority Queue
 
 Elements are removed based on **priority**, not insertion order.
 
@@ -409,13 +409,13 @@ Low
 
 A **heap** is commonly used to implement a priority queue efficiently.
 
-**4. Double-Ended Queue (Deque)**
+4. Double-Ended Queue (Deque)
 
 Insertion and deletion are allowed at **both the front and rear**.
 
 Front ⇄ 10 ⇄ 20 ⇄ 30 ⇄ Rear
 
-**Real-World Applications**
+Real-World Applications
 
 - Printer job scheduling.
 
@@ -431,25 +431,25 @@ Front ⇄ 10 ⇄ 20 ⇄ 30 ⇄ Rear
 
 - Streaming and buffering systems.
 
-**Common Interview Questions**
+Common Interview Questions
 
-1.  What is a queue?
+- What is a queue?
 
-2.  Why is a queue called **FIFO**?
+- Why is a queue called **FIFO**?
 
-3.  What is the difference between a queue and a stack?
+- What is the difference between a queue and a stack?
 
-4.  What are **Front** and **Rear**?
+- What are **Front** and **Rear**?
 
-5.  Why are enqueue and dequeue **O(1)**?
+- Why are enqueue and dequeue **O(1)**?
 
-6.  What problem does a circular queue solve?
+- What problem does a circular queue solve?
 
-7.  How is a queue implemented using a linked list?
+- How is a queue implemented using a linked list?
 
-8.  What is the difference between a simple queue and a priority queue?
+- What is the difference between a simple queue and a priority queue?
 
-**Summary**
+Summary
 
 | **Feature** | **Queue**                  |
 |-------------|----------------------------|
@@ -463,7 +463,7 @@ Front ⇄ 10 ⇄ 20 ⇄ 30 ⇄ Rear
 | Search      | O(n)                       |
 | C# Class    | Queue\<T\>                 |
 
-**Key Takeaways**
+Key Takeaways
 
 - A **Queue** processes elements in the order they arrive (**FIFO**).
 

@@ -1,12 +1,12 @@
 # Data Structures and Algorithms Backtracking
 
-**Backtracking in Data Structures and Algorithms**
+Backtracking in Data Structures and Algorithms
 
 **Backtracking** is an algorithmic technique used to solve problems by **trying different choices, exploring possible solutions, and undoing choices when they lead to an invalid solution**.
 
 It is based on the idea:
 
-**"Choose → Explore → Undo → Try another choice"**
+"Choose → Explore → Undo → Try another choice"
 
 Backtracking is commonly used for problems where we need to find **all possible solutions** or **the best solution among many possibilities**.
 
@@ -14,11 +14,11 @@ Backtracking is commonly used for problems where we need to find **all possible 
 
 Imagine you are solving a maze.
 
-1.  You choose a path.
+- You choose a path.
 
-2.  You continue walking.
+- You continue walking.
 
-3.  If you reach a dead end:
+- If you reach a dead end:
 
     - You go back to the previous point.
 
@@ -34,7 +34,7 @@ This going back and trying another option is **backtracking**.
 
 4
 
-**How Backtracking Works**
+### How Backtracking Works
 
 Backtracking usually uses **recursion**.
 
@@ -64,13 +64,13 @@ undo choice
 
 This allows us to return to the previous state and try another possibility.
 
-**Example 1: Generate All Permutations**
+### Example 1: Generate All Permutations
 
-Given:
+- Given:
 
-Input: \[1,2,3\]
+- Input: \[1,2,3\]
 
-Possible arrangements:
+- Possible arrangements:
 
 123
 
@@ -86,9 +86,9 @@ Possible arrangements:
 
 We can solve this using backtracking.
 
-**Decision Tree:**
+Decision Tree:
 
-\[\]
+- \[\]
 
 / \| \\
 
@@ -130,7 +130,7 @@ Found 213
 
 The removal step is backtracking.
 
-**Example 2: N-Queens Problem**
+### Example 2: N-Queens Problem
 
 Problem:
 
@@ -156,17 +156,17 @@ A queen attacks:
 
 Approach:
 
-1.  Put queen in first row.
+- Put queen in first row.
 
-2.  Move to next row.
+- Move to next row.
 
-3.  If placement is invalid:
+- If placement is invalid:
 
     - Remove queen.
 
     - Try next position.
 
-**Example 3: Sudoku Solver**
+### Example 3: Sudoku Solver
 
 A Sudoku has empty cells.
 
@@ -204,11 +204,11 @@ Valid ✅
 
 Continue
 
-**Backtracking vs Brute Force**
+Backtracking vs Brute Force
 
 Both explore possibilities, but backtracking is smarter.
 
-**Brute Force**
+Brute Force
 
 Try everything:
 
@@ -228,7 +228,7 @@ F
 
 Even invalid paths are explored.
 
-**Backtracking**
+Backtracking
 
 Stops invalid paths early:
 
@@ -246,13 +246,13 @@ No need to explore further.
 
 This is called:
 
-**Pruning**
+Pruning
 
-**Backtracking Components**
+Backtracking Components
 
 A backtracking solution usually has:
 
-**1. State**
+1. State
 
 Current situation.
 
@@ -264,7 +264,7 @@ Current Sudoku board
 
 Current path in maze
 
-**2. Choices**
+2. Choices
 
 Possible options.
 
@@ -280,7 +280,7 @@ Column 3
 
 Column 4
 
-**3. Constraint**
+3. Constraint
 
 Rules that decide if choice is valid.
 
@@ -288,7 +288,7 @@ Example:
 
 Two queens cannot attack each other
 
-**4. Goal**
+4. Goal
 
 When solution is complete.
 
@@ -296,7 +296,7 @@ Example:
 
 All queens placed
 
-**Common Backtracking Problems**
+Common Backtracking Problems
 
 | **Problem**    | **Technique**                |
 |----------------|------------------------------|
@@ -310,7 +310,7 @@ All queens placed
 | Rat in Maze    | Path finding                 |
 | Graph Coloring | Assign colors                |
 
-**Backtracking Complexity**
+Backtracking Complexity
 
 Usually exponential because it explores many possibilities.
 
@@ -334,11 +334,11 @@ Time complexity:
 
 O(2^n)
 
-**Backtracking vs Recursion**
+Backtracking vs Recursion
 
 They are related but different.
 
-**Recursion**
+Recursion
 
 A function calls itself.
 
@@ -348,7 +348,7 @@ factorial(5)
 
 5 \* factorial(4)
 
-**Backtracking**
+Backtracking
 
 Uses recursion **plus undoing decisions**.
 
@@ -362,7 +362,7 @@ Undo path
 
 Try another path
 
-**Backtracking vs Dynamic Programming**
+Backtracking vs Dynamic Programming
 
 | **Backtracking**    | **Dynamic Programming**         |
 |---------------------|---------------------------------|
@@ -372,29 +372,29 @@ Try another path
 | Uses recursion      | Uses memoization/tabulation     |
 | Example: Sudoku     | Example: Fibonacci optimization |
 
-**Simple C# Example: Generate Subsets**
+Simple C# Example: Generate Subsets
 
-Given:
+- Given:
 
-\[1,2,3\]
+- \[1,2,3\]
 
-Output:
+- Output:
 
-\[\]
+- \[\]
 
-\[1\]
+- \[1\]
 
-\[2\]
+- \[2\]
 
-\[3\]
+- \[3\]
 
-\[1,2\]
+- \[1,2\]
 
-\[1,3\]
+- \[1,3\]
 
-\[2,3\]
+- \[2,3\]
 
-\[1,2,3\]
+- \[1,2,3\]
 
 void Backtrack(int index, List\<int\> current)
 
@@ -408,7 +408,7 @@ for(int i=index; i\<nums.Length; i++)
 
 // choose
 
-current.Add(nums\[i\]);
+- current.Add(nums\[i\]);
 
 // explore
 
@@ -428,7 +428,7 @@ current.RemoveAt(current.Count - 1);
 
 is the **backtracking step**.
 
-**When Should You Think About Backtracking?**
+When Should You Think About Backtracking?
 
 Use backtracking when the problem contains words like:
 
@@ -448,7 +448,7 @@ Use backtracking when the problem contains words like:
 
 - "Find a path..."
 
-**Interview Tip (Senior Developer)**
+Interview Tip (Senior Developer)
 
 A good way to explain backtracking:
 

@@ -1,20 +1,20 @@
 # Data Structures and Algorithms Binary Tree
 
-**Binary Tree (Data Structure)**
+Binary Tree (Data Structure)
 
 A **Binary Tree** is a type of **tree data structure** where each node can have **at most two children**.
 
 The two children are called:
 
-1.  **Left Child**
+- **Left Child**
 
-2.  **Right Child**
+- **Right Child**
 
 The main rule:
 
 A node in a binary tree can have 0, 1, or 2 children.
 
-**Basic Structure**
+Basic Structure
 
 Example:
 
@@ -36,15 +36,15 @@ Here:
 
 - 40, 50, 60 → Leaf nodes
 
-**Binary Tree Terminology**
+Binary Tree Terminology
 
-**1. Node**
+1. Node
 
 A single element of a tree.
 
 Example:
 
-\[10\]
+- \[10\]
 
 A node contains:
 
@@ -54,7 +54,7 @@ A node contains:
 
 - Reference to right child
 
-**2. Root Node**
+2. Root Node
 
 The first/top node of the tree.
 
@@ -68,7 +68,7 @@ Example:
 
 A binary tree has only one root.
 
-**3. Parent Node**
+3. Parent Node
 
 A node that has child nodes.
 
@@ -82,7 +82,7 @@ Example:
 
 10 is the parent of 20 and 30.
 
-**4. Child Node**
+4. Child Node
 
 A node connected below another node.
 
@@ -96,7 +96,7 @@ Example:
 
 20 is the child of 10.
 
-**5. Leaf Node**
+5. Leaf Node
 
 A node with no children.
 
@@ -110,7 +110,7 @@ Example:
 
 20 and 30 are leaf nodes.
 
-**6. Edge**
+6. Edge
 
 The connection between two nodes.
 
@@ -120,7 +120,7 @@ Example:
 
 The line is an edge.
 
-**7. Height of Tree**
+7. Height of Tree
 
 The longest path from root to a leaf.
 
@@ -142,7 +142,7 @@ Height:
 
 (counting edges)
 
-**Binary Tree Node Representation**
+Binary Tree Node Representation
 
 A binary tree node usually contains:
 
@@ -186,7 +186,7 @@ Right = null;
 
 }
 
-**Creating a Binary Tree in C#**
+Creating a Binary Tree in C#
 
 Example:
 
@@ -212,9 +212,9 @@ Creates:
 
 40 50
 
-**Types of Binary Trees**
+Types of Binary Trees
 
-**1. Full Binary Tree**
+1. Full Binary Tree
 
 A binary tree where every node has either:
 
@@ -236,7 +236,7 @@ Example:
 
 All nodes have either 0 or 2 children.
 
-**2. Complete Binary Tree**
+2. Complete Binary Tree
 
 A binary tree where:
 
@@ -260,7 +260,7 @@ Used in:
 
 - Heap data structure
 
-**3. Perfect Binary Tree**
+3. Perfect Binary Tree
 
 Every internal node has exactly two children, and all leaf nodes are at the same level.
 
@@ -284,7 +284,7 @@ Number of nodes:
 
 2^(h+1) - 1
 
-**4. Balanced Binary Tree**
+4. Balanced Binary Tree
 
 Height of left and right subtrees is almost equal.
 
@@ -302,11 +302,11 @@ Examples:
 
 - Red-Black Tree
 
-**5. Skewed Binary Tree**
+5. Skewed Binary Tree
 
 All nodes are on one side.
 
-**Left Skewed**
+Left Skewed
 
 10
 
@@ -318,7 +318,7 @@ All nodes are on one side.
 
 30
 
-**Right Skewed**
+Right Skewed
 
 10
 
@@ -332,17 +332,17 @@ All nodes are on one side.
 
 It behaves like a linked list.
 
-**Binary Tree Traversal**
+Binary Tree Traversal
 
 Traversal means visiting every node.
 
 There are two main approaches:
 
-1.  Depth First Search (DFS)
+- Depth First Search (DFS)
 
-2.  Breadth First Search (BFS)
+- Breadth First Search (BFS)
 
-**1. Depth First Traversal (DFS)**
+1. Depth First Traversal (DFS)
 
 Uses:
 
@@ -352,7 +352,7 @@ Uses:
 
 There are three types.
 
-**A. Inorder Traversal**
+A. Inorder Traversal
 
 Order:
 
@@ -374,7 +374,7 @@ Used in:
 
 - Binary Search Tree (gives sorted order)
 
-**B. Preorder Traversal**
+B. Preorder Traversal
 
 Order:
 
@@ -382,7 +382,7 @@ Root → Left → Right
 
 Example:
 
-Output:
+- Output:
 
 10 → 20 → 30
 
@@ -392,7 +392,7 @@ Used for:
 
 - Serialization
 
-**C. Postorder Traversal**
+C. Postorder Traversal
 
 Order:
 
@@ -400,7 +400,7 @@ Left → Right → Root
 
 Example:
 
-Output:
+- Output:
 
 20 → 30 → 10
 
@@ -408,7 +408,7 @@ Used for:
 
 - Deleting a tree
 
-**2. Breadth First Traversal (Level Order)**
+2. Breadth First Traversal (Level Order)
 
 Uses:
 
@@ -430,9 +430,9 @@ Traversal:
 
 10 → 20 → 30 → 40
 
-**Binary Tree Operations**
+Binary Tree Operations
 
-**1. Insert**
+1. Insert
 
 Adding a new node.
 
@@ -456,7 +456,7 @@ Insert 30:
 
 20 30
 
-**2. Search**
+2. Search
 
 Find a value.
 
@@ -476,13 +476,13 @@ Complexity:
 
 O(n)
 
-**3. Delete**
+3. Delete
 
 Remove a node.
 
 Cases:
 
-**Case 1: Leaf Node**
+Case 1: Leaf Node
 
 10
 
@@ -492,7 +492,7 @@ Cases:
 
 Remove 20.
 
-**Case 2: One Child**
+Case 2: One Child
 
 10
 
@@ -506,7 +506,7 @@ Remove 20.
 
 Replace node with child.
 
-**Case 3: Two Children**
+Case 3: Two Children
 
 Replace with:
 
@@ -514,11 +514,11 @@ Replace with:
 
 - Inorder predecessor
 
-**Binary Tree vs Binary Search Tree**
+Binary Tree vs Binary Search Tree
 
 Many people confuse these.
 
-**Binary Tree**
+Binary Tree
 
 Only rule:
 
@@ -534,7 +534,7 @@ Example:
 
 Valid binary tree.
 
-**Binary Search Tree**
+Binary Search Tree
 
 Additional ordering rule:
 
@@ -548,7 +548,7 @@ Example:
 
 30 70
 
-**Binary Tree vs BST**
+Binary Tree vs BST
 
 | **Feature**      | **Binary Tree** | **BST**               |
 |------------------|-----------------|-----------------------|
@@ -557,9 +557,9 @@ Example:
 | Search           | O(n)            | O(log n) average      |
 | Sorted Traversal | No              | Yes (Inorder)         |
 
-**Applications of Binary Trees**
+Applications of Binary Trees
 
-**1. Expression Trees**
+1. Expression Trees
 
 Mathematical expressions:
 
@@ -577,7 +577,7 @@ Tree:
 
 5 3
 
-**2. Binary Search Trees**
+2. Binary Search Trees
 
 Used for:
 
@@ -587,15 +587,15 @@ Used for:
 
 - Maintaining ordered data
 
-**3. Heaps**
+3. Heaps
 
 Priority queues use complete binary trees.
 
-**4. File Systems**
+4. File Systems
 
 Hierarchical folder structures.
 
-**5. Artificial Intelligence**
+5. Artificial Intelligence
 
 Decision trees.
 
@@ -607,7 +607,7 @@ Weather
 
 Rain Sunny
 
-**Time Complexity**
+### Time Complexity
 
 For a normal binary tree:
 
@@ -626,29 +626,29 @@ For a balanced BST:
 | Insert        | O(log n)       |
 | Delete        | O(log n)       |
 
-**Common Interview Questions**
+Common Interview Questions
 
-1.  What is a binary tree?
+- What is a binary tree?
 
-2.  Difference between binary tree and BST?
+- Difference between binary tree and BST?
 
-3.  Difference between full and complete binary tree?
+- Difference between full and complete binary tree?
 
-4.  Explain tree traversal algorithms.
+- Explain tree traversal algorithms.
 
-5.  What is height of binary tree?
+- What is height of binary tree?
 
-6.  How many nodes can a binary tree have?
+- How many nodes can a binary tree have?
 
-7.  Difference between BFS and DFS?
+- Difference between BFS and DFS?
 
-8.  How do you find the depth of a binary tree?
+- How do you find the depth of a binary tree?
 
-9.  How do you check if two binary trees are identical?
+- How do you check if two binary trees are identical?
 
-10. How do you find the lowest common ancestor?
+- How do you find the lowest common ancestor?
 
-**Summary**
+Summary
 
 | **Feature**      | **Binary Tree**           |
 |------------------|---------------------------|
@@ -661,7 +661,7 @@ For a balanced BST:
 | Storage          | Nodes + References        |
 | Search           | O(n)                      |
 
-**Key Takeaways**
+Key Takeaways
 
 - A **Binary Tree is a tree where each node has at most two children**.
 

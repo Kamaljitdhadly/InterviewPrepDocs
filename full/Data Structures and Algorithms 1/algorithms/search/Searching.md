@@ -1,6 +1,6 @@
 # Data Structures and Algorithms Searching
 
-**Searching Algorithms**
+Searching Algorithms
 
 **Searching** is the process of finding a specific element (called a **target/key**) in a collection of data such as an array, list, tree, or graph.
 
@@ -8,7 +8,7 @@ Example:
 
 Given an array:
 
-\[10, 25, 30, 45, 60, 80\]
+- \[10, 25, 30, 45, 60, 80\]
 
 Find:
 
@@ -16,29 +16,29 @@ Find:
 
 A searching algorithm determines **whether the element exists** and often returns its position/index.
 
-**Types of Searching Algorithms**
+Types of Searching Algorithms
 
 The most common searching algorithms are:
 
-1.  Linear Search
+- Linear Search
 
-2.  Binary Search
+- Binary Search
 
-3.  Hash Table Search
+- Hash Table Search
 
-4.  Depth First Search (DFS)
+- Depth First Search (DFS)
 
-5.  Breadth First Search (BFS)
+- Breadth First Search (BFS)
 
-**1. Linear Search**
+1. Linear Search
 
 Linear search checks each element one by one until it finds the target.
 
-**Example**
+### Example
 
 Array:
 
-\[15, 8, 20, 35, 50\]
+- \[15, 8, 20, 35, 50\]
 
 Find 35.
 
@@ -52,9 +52,9 @@ Check 20 → No
 
 Check 35 → Found
 
-**Implementation (C#)**
+Implementation (C#)
 
-int LinearSearch(int\[\] arr, int target)
+- int LinearSearch(int\[\] arr, int target)
 
 {
 
@@ -62,7 +62,7 @@ for(int i = 0; i \< arr.Length; i++)
 
 {
 
-if(arr\[i\] == target)
+- if(arr\[i\] == target)
 
 return i;
 
@@ -72,7 +72,7 @@ return -1;
 
 }
 
-**Complexity**
+Complexity
 
 | **Case**     | **Complexity** |
 |--------------|----------------|
@@ -80,16 +80,16 @@ return -1;
 | Average case | O(n)           |
 | Worst case   | O(n)           |
 
-**Advantages**
+Advantages
 
 ✅ Simple\
 ✅ Works on sorted and unsorted data
 
-**Disadvantages**
+Disadvantages
 
 ❌ Slow for large datasets
 
-**2. Binary Search**
+2. Binary Search
 
 Binary search is much faster, but the data **must be sorted**.
 
@@ -99,17 +99,17 @@ Example:
 
 Sorted array:
 
-\[10,20,30,40,50,60,70\]
+- \[10,20,30,40,50,60,70\]
 
 Find 60.
 
-**Step 1**
+Step 1
 
 Check middle:
 
 \|
 
-\[10,20,30,40,50,60,70\]
+- \[10,20,30,40,50,60,70\]
 
 40
 
@@ -119,13 +119,13 @@ Ignore left half.
 
 Remaining:
 
-\[50,60,70\]
+- \[50,60,70\]
 
-**Step 2**
+Step 2
 
 Check middle:
 
-\[50,60,70\]
+- \[50,60,70\]
 
 \|
 
@@ -133,9 +133,9 @@ Check middle:
 
 Found.
 
-**Implementation**
+Implementation
 
-int BinarySearch(int\[\] arr, int target)
+- int BinarySearch(int\[\] arr, int target)
 
 {
 
@@ -149,11 +149,11 @@ while(left \<= right)
 
 int mid = left + (right - left) / 2;
 
-if(arr\[mid\] == target)
+- if(arr\[mid\] == target)
 
 return mid;
 
-if(arr\[mid\] \< target)
+- if(arr\[mid\] \< target)
 
 left = mid + 1;
 
@@ -167,7 +167,7 @@ return -1;
 
 }
 
-**Complexity**
+Complexity
 
 | **Case**     | **Complexity** |
 |--------------|----------------|
@@ -175,7 +175,7 @@ return -1;
 | Average case | O(log n)       |
 | Worst case   | O(log n)       |
 
-**Linear Search vs Binary Search**
+Linear Search vs Binary Search
 
 | **Feature**     | **Linear Search** | **Binary Search**  |
 |-----------------|-------------------|--------------------|
@@ -188,17 +188,17 @@ Example:
 
 Searching 1 million records:
 
-**Linear Search**
+Linear Search
 
 1,000,000 checks
 
-**Binary Search**
+Binary Search
 
 log2(1,000,000)
 
 ≈ 20 checks
 
-**3. Hash Table Searching**
+3. Hash Table Searching
 
 Hash tables use a **hash function** to directly locate data.
 
@@ -224,7 +224,7 @@ Hash function calculates location:
 
 Direct access.
 
-**Complexity**
+Complexity
 
 Average:
 
@@ -248,11 +248,11 @@ Examples:
 
 - Python Dictionary
 
-**4. Tree Searching**
+4. Tree Searching
 
 Searching in trees depends on the tree type.
 
-**Binary Search Tree (BST)**
+Binary Search Tree (BST)
 
 Example:
 
@@ -286,7 +286,7 @@ Worst case:
 
 O(n)
 
-**5. Graph Searching**
+5. Graph Searching
 
 Graphs contain nodes connected by edges.
 
@@ -300,7 +300,7 @@ C --- D
 
 Two major algorithms:
 
-**Breadth First Search (BFS)**
+Breadth First Search (BFS)
 
 Search level by level.
 
@@ -336,7 +336,7 @@ Applications:
 
 - Social network connections
 
-**Depth First Search (DFS)**
+Depth First Search (DFS)
 
 Explore as deep as possible before backtracking.
 
@@ -372,7 +372,7 @@ Applications:
 
 - Topological sorting
 
-**Searching Algorithm Comparison**
+Searching Algorithm Comparison
 
 | **Algorithm** | **Data Structure** | **Time Complexity** |
 |---------------|--------------------|---------------------|
@@ -383,21 +383,21 @@ Applications:
 | BFS           | Graph              | O(V+E)              |
 | DFS           | Graph              | O(V+E)              |
 
-**How to choose a searching algorithm?**
+How to choose a searching algorithm?
 
-**Small unsorted data**
+Small unsorted data
 
 Use:
 
 Linear Search
 
-**Large sorted array**
+Large sorted array
 
 Use:
 
 Binary Search
 
-**Need fastest lookup by key**
+Need fastest lookup by key
 
 Use:
 
@@ -407,7 +407,7 @@ Example:
 
 Dictionary\<int, User\>
 
-**Searching relationships/networks**
+Searching relationships/networks
 
 Use:
 
@@ -421,26 +421,26 @@ Example:
 
 - Dependency graphs
 
-**Interview perspective**
+Interview perspective
 
 For senior developers, common searching questions are:
 
-1.  Difference between Linear and Binary Search?
+- Difference between Linear and Binary Search?
 
-2.  Why does Binary Search require sorted data?
+- Why does Binary Search require sorted data?
 
-3.  How does Dictionary achieve O(1) lookup?
+- How does Dictionary achieve O(1) lookup?
 
-4.  How does HashMap handle collisions?
+- How does HashMap handle collisions?
 
-5.  Implement Binary Search recursively.
+- Implement Binary Search recursively.
 
-6.  Find first/last occurrence using Binary Search.
+- Find first/last occurrence using Binary Search.
 
-7.  Search in a rotated sorted array.
+- Search in a rotated sorted array.
 
-8.  BFS vs DFS — when to use which?
+- BFS vs DFS — when to use which?
 
-9.  Find shortest path in a graph.
+- Find shortest path in a graph.
 
 Searching is one of the fundamental algorithm categories because many real-world systems are essentially **efficient ways of finding information quickly**.

@@ -1,18 +1,18 @@
 # Data Structures and Algorithms Recursion
 
-**Recursion in Data Structures and Algorithms**
+Recursion in Data Structures and Algorithms
 
 **Recursion** is a programming technique where a function **calls itself** to solve a smaller version of the same problem.
 
 The main idea:
 
-**"Solve a big problem by breaking it into smaller identical problems until reaching a simple case."**
+"Solve a big problem by breaking it into smaller identical problems until reaching a simple case."
 
 A recursive function has two important parts:
 
-1.  **Base Case** → Condition where recursion stops.
+- **Base Case** → Condition where recursion stops.
 
-2.  **Recursive Case** → Function calls itself with a smaller input.
+- **Recursive Case** → Function calls itself with a smaller input.
 
 **Real-Life Example: Climbing Stairs**
 
@@ -52,7 +52,7 @@ Step 1 → Stop
 
 That stopping condition is the **base case**.
 
-**Basic Structure of Recursion**
+Basic Structure of Recursion
 
 void RecursiveFunction(parameters)
 
@@ -74,7 +74,7 @@ RecursiveFunction(smaller problem);
 
 }
 
-**Example 1: Factorial Using Recursion**
+### Example 1: Factorial Using Recursion
 
 Problem:
 
@@ -94,7 +94,7 @@ Base case:
 
 1! = 1
 
-**Execution**
+Execution
 
 factorial(5)
 
@@ -124,7 +124,7 @@ Answer:
 
 120
 
-**C# Code**
+C# Code
 
 int Factorial(int n)
 
@@ -142,11 +142,11 @@ Calling:
 
 Factorial(5);
 
-Output:
+- Output:
 
 120
 
-**How Recursion Uses Memory**
+How Recursion Uses Memory
 
 Recursion uses a **call stack**.
 
@@ -192,7 +192,7 @@ Bottom
 
 When the base case is reached, functions return and are removed from the stack.
 
-**Example 2: Fibonacci Series**
+### Example 2: Fibonacci Series
 
 Fibonacci:
 
@@ -250,9 +250,9 @@ Time complexity:
 
 O(2^n)
 
-**Recursion vs Iteration**
+Recursion vs Iteration
 
-**Iteration**
+Iteration
 
 Uses loops:
 
@@ -262,7 +262,7 @@ for(int i=0;i\<n;i++)
 
 }
 
-**Recursion**
+Recursion
 
 Uses function calls:
 
@@ -281,13 +281,13 @@ Function();
 | Easier for tree/graph problems | Usually faster          |
 | Can cause stack overflow       | No recursion limit      |
 
-**Example 3: Reverse a String**
+### Example 3: Reverse a String
 
-Input:
+- Input:
 
 hello
 
-Output:
+- Output:
 
 olleh
 
@@ -303,11 +303,11 @@ Reverse("lo") + l + e + h
 
 Reverse("o") + l + l + e + h
 
-**Recursion in Data Structures**
+Recursion in Data Structures
 
 Recursion is naturally used in:
 
-**1. Binary Trees**
+1. Binary Trees
 
 Example:
 
@@ -345,7 +345,7 @@ Traverse(node.Right);
 
 }
 
-**2. Graph DFS**
+2. Graph DFS
 
 Graph:
 
@@ -359,7 +359,7 @@ Visit B
 
 Visit C
 
-**3. Backtracking**
+3. Backtracking
 
 Examples:
 
@@ -381,7 +381,7 @@ Recurse
 
 Undo
 
-**4. Divide and Conquer**
+4. Divide and Conquer
 
 Examples:
 
@@ -399,9 +399,9 @@ Sort(left)
 
 Sort(right)
 
-**Types of Recursion**
+Types of Recursion
 
-**1. Direct Recursion**
+1. Direct Recursion
 
 Function calls itself.
 
@@ -415,7 +415,7 @@ Print(n-1);
 
 }
 
-**2. Indirect Recursion**
+2. Indirect Recursion
 
 Function A calls B, and B calls A.
 
@@ -437,7 +437,7 @@ A();
 
 }
 
-**3. Tail Recursion**
+3. Tail Recursion
 
 Recursive call is the last operation.
 
@@ -457,7 +457,7 @@ Print(n-1);
 
 Nothing happens after recursive call.
 
-**Recursion Problems in Interviews**
+Recursion Problems in Interviews
 
 Common questions:
 
@@ -473,7 +473,7 @@ Common questions:
 | Permutations          | Backtracking      |
 | Tower of Hanoi        | Classic recursion |
 
-**Recursion Complexity**
+Recursion Complexity
 
 Depends on number of recursive calls.
 
@@ -505,9 +505,9 @@ Space:
 
 O(n)
 
-**Common Recursion Mistakes**
+Common Recursion Mistakes
 
-**1. Missing Base Case**
+1. Missing Base Case
 
 Wrong:
 
@@ -525,7 +525,7 @@ Result:
 
 StackOverflowException
 
-**2. Not Reducing the Problem**
+2. Not Reducing the Problem
 
 Wrong:
 
@@ -539,7 +539,7 @@ Function(n);
 
 The input never changes.
 
-**3. Too Many Recursive Calls**
+3. Too Many Recursive Calls
 
 Example:
 
@@ -557,11 +557,11 @@ Use:
 
 - Dynamic Programming
 
-**Recursion vs Backtracking**
+Recursion vs Backtracking
 
 They are related but different.
 
-**Recursion**
+Recursion
 
 Solve smaller problem
 
@@ -569,7 +569,7 @@ Example:
 
 factorial(5)
 
-**Backtracking**
+Backtracking
 
 Try choice
 
@@ -587,7 +587,7 @@ Sudoku
 
 N-Queens
 
-**Interview Explanation (Senior Developer)**
+Interview Explanation (Senior Developer)
 
 "Recursion is a technique where a function solves a problem by calling itself with a smaller input until reaching a base condition. Each recursive call is stored in the call stack. It is commonly used in tree traversal, graph DFS, divide-and-conquer algorithms, and backtracking problems. The key considerations are defining a correct base case, reducing the input size, and analyzing stack space complexity."
 

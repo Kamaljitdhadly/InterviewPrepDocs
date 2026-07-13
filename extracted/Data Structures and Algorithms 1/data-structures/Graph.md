@@ -4,9 +4,9 @@ A **Graph** is a **non-linear data structure** that represents relationships bet
 
 A graph consists of:
 
-1.  **Vertices (Nodes)** → The entities.
+- **Vertices (Nodes)** → The entities.
 
-2.  **Edges** → The connections between entities.
+- **Edges** → The connections between entities.
 
 # Real-Life Example
 
@@ -184,7 +184,7 @@ Checking:
 
 "Is A connected to C?"
 
-matrix\[A\]\[C\]
+- matrix\[A\]\[C\]
 
 Time:
 
@@ -425,13 +425,13 @@ A → B → C → D
 
 ### BFS Algorithm
 
-1.  Start from a node.
+- Start from a node.
 
-2.  Add it to queue.
+- Add it to queue.
 
-3.  Visit neighbors.
+- Visit neighbors.
 
-4.  Repeat.
+- Repeat.
 
 Complexity:
 
@@ -561,9 +561,9 @@ public void AddEdge(int source, int destination)
 
 if (!adj.ContainsKey(source))
 
-adj\[source\] = new List\<int\>();
+- adj\[source\] = new List\<int\>();
 
-adj\[source\].Add(destination);
+- adj\[source\].Add(destination);
 
 }
 
@@ -649,25 +649,25 @@ Services and communication channels can be represented as graphs.
 
 # Common Interview Questions
 
-1.  What is a graph data structure?
+- What is a graph data structure?
 
-2.  Difference between tree and graph?
+- Difference between tree and graph?
 
-3.  Difference between BFS and DFS?
+- Difference between BFS and DFS?
 
-4.  What is adjacency matrix?
+- What is adjacency matrix?
 
-5.  What is adjacency list?
+- What is adjacency list?
 
-6.  When would you use BFS over DFS?
+- When would you use BFS over DFS?
 
-7.  How do you detect cycles in a graph?
+- How do you detect cycles in a graph?
 
-8.  Explain Dijkstra's algorithm.
+- Explain Dijkstra's algorithm.
 
-9.  What is a weighted graph?
+- What is a weighted graph?
 
-10. What is a directed graph?
+- What is a directed graph?
 
 # Summary
 

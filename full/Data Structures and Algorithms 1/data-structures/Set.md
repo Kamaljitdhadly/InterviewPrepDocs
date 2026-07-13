@@ -1,12 +1,12 @@
 # Data Structures and Algorithms Set
 
-**Set (Data Structure)**
+Set (Data Structure)
 
 A **Set** is a data structure that stores a collection of **unique elements**.
 
 The main property of a set is:
 
-**A set does not allow duplicate values.**
+A set does not allow duplicate values.
 
 For example:
 
@@ -20,7 +20,7 @@ The set will ignore it:
 
 Set = {10, 20, 30, 40}
 
-**Real-Life Example**
+### Real-Life Example
 
 Imagine a list of registered email addresses.
 
@@ -40,23 +40,23 @@ again, the system checks:
 
 A Set is perfect for this because it automatically prevents duplicates.
 
-**Characteristics of a Set**
+Characteristics of a Set
 
-**1. Unique Elements**
+1. Unique Elements
 
 A set stores only one copy of each value.
 
 Example:
 
-Input:
+- Input:
 
-\[10, 20, 20, 30, 30, 40\]
+- \[10, 20, 20, 30, 30, 40\]
 
 Set:
 
 {10, 20, 30, 40}
 
-**2. No Index**
+2. No Index
 
 Unlike arrays:
 
@@ -74,9 +74,9 @@ Set:
 
 You cannot do:
 
-set\[2\]
+- set\[2\]
 
-**3. Order May Not Be Maintained**
+3. Order May Not Be Maintained
 
 Many sets do not guarantee insertion order.
 
@@ -98,9 +98,9 @@ The set may store:
 
 or another order.
 
-**Common Set Operations**
+Common Set Operations
 
-**1. Add / Insert**
+1. Add / Insert
 
 Adds an element.
 
@@ -122,7 +122,7 @@ O(1)
 
 (for hash-based sets)
 
-**2. Remove**
+2. Remove
 
 Removes an element.
 
@@ -144,7 +144,7 @@ Usually:
 
 O(1)
 
-**3. Contains / Search**
+3. Contains / Search
 
 Check whether an element exists.
 
@@ -168,7 +168,7 @@ Hash Set:
 
 O(1)
 
-**4. Size**
+4. Size
 
 Returns number of elements.
 
@@ -182,7 +182,7 @@ Time:
 
 O(1)
 
-**How Does a Set Work Internally?**
+How Does a Set Work Internally?
 
 Most modern sets are implemented using a **Hash Table**.
 
@@ -222,11 +222,11 @@ Bucket 8 → 25
 
 This allows very fast lookup.
 
-**HashSet vs SortedSet**
+HashSet vs SortedSet
 
 In C#, there are two common set implementations.
 
-**1. HashSet\<T\>**
+1. HashSet\<T\>
 
 Uses a hash table.
 
@@ -262,7 +262,7 @@ Complexity:
 | Remove        | O(1)     |
 | Contains      | O(1)     |
 
-**2. SortedSet\<T\>**
+2. SortedSet\<T\>
 
 Stores elements in sorted order.
 
@@ -278,7 +278,7 @@ numbers.Add(10);
 
 numbers.Add(20);
 
-Output:
+- Output:
 
 {10,20,30}
 
@@ -292,7 +292,7 @@ Complexity:
 | Remove        | O(log n) |
 | Search        | O(log n) |
 
-**Set Operations (Mathematical)**
+Set Operations (Mathematical)
 
 Sets support operations from mathematics.
 
@@ -302,7 +302,7 @@ A = {1,2,3,4}
 
 B = {3,4,5,6}
 
-**1. Union**
+1. Union
 
 All elements from both sets.
 
@@ -310,7 +310,7 @@ A ∪ B
 
 = {1,2,3,4,5,6}
 
-**2. Intersection**
+2. Intersection
 
 Common elements.
 
@@ -318,7 +318,7 @@ A ∩ B
 
 = {3,4}
 
-**3. Difference**
+3. Difference
 
 Elements in A but not B.
 
@@ -326,7 +326,7 @@ A - B
 
 = {1,2}
 
-**4. Symmetric Difference**
+4. Symmetric Difference
 
 Elements present in either set but not both.
 
@@ -334,7 +334,7 @@ A △ B
 
 = {1,2,5,6}
 
-**Set vs Array**
+Set vs Array
 
 | **Feature**  | **Array**          | **Set**                |
 |--------------|--------------------|------------------------|
@@ -345,7 +345,7 @@ A △ B
 | Insert       | O(n) sometimes     | O(1) average           |
 | Use Case     | Store ordered data | Store unique values    |
 
-**Set vs List**
+Set vs List
 
 | **Feature**      | **List**       | **Set**                   |
 |------------------|----------------|---------------------------|
@@ -355,21 +355,21 @@ A △ B
 | Ordering         | Maintained     | Depends on implementation |
 | Example          | Shopping items | Unique user IDs           |
 
-**Real-World Applications**
+Real-World Applications
 
-**1. Removing Duplicates**
+1. Removing Duplicates
 
 Example:
 
-Input:
+- Input:
 
-\[1,2,2,3,3,4\]
+- \[1,2,2,3,3,4\]
 
 Convert to set:
 
 {1,2,3,4}
 
-**2. User Permissions**
+2. User Permissions
 
 Example:
 
@@ -387,7 +387,7 @@ Viewer
 
 A user should not have duplicate roles.
 
-**3. Unique Visitors**
+3. Unique Visitors
 
 Website analytics:
 
@@ -405,7 +405,7 @@ Set:
 
 {User1, User2, User3}
 
-**4. Database Unique Constraints**
+4. Database Unique Constraints
 
 Database columns like:
 
@@ -417,7 +417,7 @@ Employee ID
 
 behave like sets.
 
-**5. Graph Algorithms**
+5. Graph Algorithms
 
 Sets are used for:
 
@@ -431,7 +431,7 @@ Example:
 
 Visited = {A,B,C,D}
 
-**C# Example**
+C# Example
 
 using System;
 
@@ -469,7 +469,7 @@ Console.WriteLine(numbers.Contains(20));
 
 }
 
-Output:
+- Output:
 
 10
 
@@ -485,25 +485,25 @@ Notice:
 
 was added twice but stored once.
 
-**Common Interview Questions**
+Common Interview Questions
 
-1.  What is a Set data structure?
+- What is a Set data structure?
 
-2.  Why does a Set not allow duplicates?
+- Why does a Set not allow duplicates?
 
-3.  Difference between Set and List?
+- Difference between Set and List?
 
-4.  How does HashSet achieve O(1) lookup?
+- How does HashSet achieve O(1) lookup?
 
-5.  What happens when two values have the same hash?
+- What happens when two values have the same hash?
 
-6.  Difference between HashSet and SortedSet?
+- Difference between HashSet and SortedSet?
 
-7.  When should you use a Set instead of an Array?
+- When should you use a Set instead of an Array?
 
-8.  Explain Union, Intersection, and Difference operations.
+- Explain Union, Intersection, and Difference operations.
 
-**Summary**
+Summary
 
 | **Feature**       | **Set**                      |
 |-------------------|------------------------------|
@@ -515,7 +515,7 @@ was added twice but stored once.
 | Sorted Version    | SortedSet                    |
 | C# Implementation | HashSet\<T\>, SortedSet\<T\> |
 
-**Key Takeaways**
+Key Takeaways
 
 - A **Set stores unique values only**.
 

@@ -1,6 +1,6 @@
 # Data Structures and Algorithms Avl
 
-**AVL Tree (Adelson-Velsky and Landis Tree)**
+AVL Tree (Adelson-Velsky and Landis Tree)
 
 An **AVL Tree** is a **self-balancing Binary Search Tree (BST)**.
 
@@ -8,9 +8,9 @@ It automatically keeps the tree balanced after every insertion and deletion so t
 
 The main idea:
 
-**The height difference between the left and right subtrees of any node can never be more than 1.**
+The height difference between the left and right subtrees of any node can never be more than 1.
 
-**Why Do We Need AVL Tree?**
+### Why Do We Need AVL Tree?
 
 First, understand the problem with a normal BST.
 
@@ -52,7 +52,7 @@ Searching becomes like a linked list:
 
 Search = O(n)
 
-**AVL Tree Solution**
+AVL Tree Solution
 
 AVL automatically rotates nodes to maintain balance.
 
@@ -78,7 +78,7 @@ Search:
 
 O(log n)
 
-**AVL Balance Property**
+AVL Balance Property
 
 Every node has a **Balance Factor**.
 
@@ -134,21 +134,21 @@ Not allowed.
 
 Tree is unbalanced.
 
-**AVL Rotations**
+AVL Rotations
 
 To balance the tree, AVL uses rotations.
 
 There are four cases:
 
-1.  Left Left (LL)
+- Left Left (LL)
 
-2.  Right Right (RR)
+- Right Right (RR)
 
-3.  Left Right (LR)
+- Left Right (LR)
 
-4.  Right Left (RL)
+- Right Left (RL)
 
-**1. Left Left (LL) Rotation**
+1. Left Left (LL) Rotation
 
 Occurs when insertion happens in the left subtree of the left child.
 
@@ -188,7 +188,7 @@ After rotation:
 
 10 30
 
-**2. Right Right (RR) Rotation**
+2. Right Right (RR) Rotation
 
 Occurs when insertion happens in the right subtree of the right child.
 
@@ -222,13 +222,13 @@ After:
 
 10 30
 
-**3. Left Right (LR) Rotation**
+3. Left Right (LR) Rotation
 
 Combination of:
 
-1.  Left rotation
+- Left rotation
 
-2.  Right rotation
+- Right rotation
 
 Example:
 
@@ -272,13 +272,13 @@ Step 2: Right rotate 30
 
 10 30
 
-**4. Right Left (RL) Rotation**
+4. Right Left (RL) Rotation
 
 Combination of:
 
-1.  Right rotation
+- Right rotation
 
-2.  Left rotation
+- Left rotation
 
 Example:
 
@@ -326,11 +326,11 @@ Left rotate 10
 
 10 30
 
-**AVL Insertion Steps**
+AVL Insertion Steps
 
 When inserting a value:
 
-**Step 1**
+Step 1
 
 Perform normal BST insertion.
 
@@ -360,7 +360,7 @@ Result:
 
 25
 
-**Step 2**
+Step 2
 
 Calculate balance factors.
 
@@ -370,7 +370,7 @@ Balance Factor = 2
 
 Unbalanced.
 
-**Step 3**
+Step 3
 
 Perform appropriate rotation.
 
@@ -384,21 +384,21 @@ After rotation:
 
 Balanced.
 
-**AVL Deletion**
+AVL Deletion
 
 Deletion is more complex.
 
 Steps:
 
-1.  Delete like BST.
+- Delete like BST.
 
-2.  Update heights.
+- Update heights.
 
-3.  Calculate balance factors.
+- Calculate balance factors.
 
-4.  Perform rotations if needed.
+- Perform rotations if needed.
 
-**Time Complexity**
+### Time Complexity
 
 | **Operation** | **AVL Tree** |
 |---------------|--------------|
@@ -413,7 +413,7 @@ Because height is always:
 
 O(log n)
 
-**AVL Tree vs Binary Search Tree**
+AVL Tree vs Binary Search Tree
 
 | **Feature** | **BST**         | **AVL**         |
 |-------------|-----------------|-----------------|
@@ -423,7 +423,7 @@ O(log n)
 | Rotations   | No              | Yes             |
 | Complexity  | Simpler         | More complex    |
 
-**AVL Tree vs Red-Black Tree**
+AVL Tree vs Red-Black Tree
 
 Another self-balancing tree is the **Red-Black Tree**.
 
@@ -440,7 +440,7 @@ Examples:
 
 - Red-Black Tree → Many standard libraries.
 
-**AVL Tree Implementation Concept in C#**
+AVL Tree Implementation Concept in C#
 
 A node needs extra information:
 
@@ -484,9 +484,9 @@ public Node Right;
 
 AVL stores the **height** to calculate balance.
 
-**Real-World Applications**
+Real-World Applications
 
-**1. Database Indexing**
+1. Database Indexing
 
 Used in systems where fast searching is required.
 
@@ -494,11 +494,11 @@ Example:
 
 Employee ID → Employee Record
 
-**2. Memory Management**
+2. Memory Management
 
 Used in some memory allocation systems.
 
-**3. Searching Applications**
+3. Searching Applications
 
 When:
 
@@ -506,33 +506,33 @@ When:
 
 - Searches happen frequently.
 
-**4. Dictionaries and Maps**
+4. Dictionaries and Maps
 
 Balanced trees can maintain sorted key-value data.
 
-**Common Interview Questions**
+Common Interview Questions
 
-1.  What is an AVL tree?
+- What is an AVL tree?
 
-2.  Why is AVL called a self-balancing tree?
+- Why is AVL called a self-balancing tree?
 
-3.  What is balance factor?
+- What is balance factor?
 
-4.  What values are allowed for balance factor?
+- What values are allowed for balance factor?
 
-5.  Explain LL, RR, LR, RL rotations.
+- Explain LL, RR, LR, RL rotations.
 
-6.  Difference between BST and AVL tree?
+- Difference between BST and AVL tree?
 
-7.  Why is searching O(log n) in AVL?
+- Why is searching O(log n) in AVL?
 
-8.  Why does AVL store height?
+- Why does AVL store height?
 
-9.  AVL vs Red-Black Tree?
+- AVL vs Red-Black Tree?
 
-10. What happens after insertion causes imbalance?
+- What happens after insertion causes imbalance?
 
-**Summary**
+Summary
 
 | **Feature**      | **AVL Tree**          |
 |------------------|-----------------------|
@@ -546,7 +546,7 @@ Balanced trees can maintain sorted key-value data.
 | Balancing Method | Rotations             |
 | Rotations        | LL, RR, LR, RL        |
 
-**Key Takeaways**
+Key Takeaways
 
 - An **AVL Tree is a balanced Binary Search Tree**.
 

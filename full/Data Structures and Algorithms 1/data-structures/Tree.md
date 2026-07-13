@@ -1,12 +1,12 @@
 # Data Structures and Algorithms Tree
 
-**Tree (Data Structure)**
+Tree (Data Structure)
 
 A **Tree** is a **non-linear hierarchical data structure** that stores data in a structure similar to a real-world tree.
 
 Unlike arrays, linked lists, stacks, and queues (which are linear), a tree represents **parent-child relationships**.
 
-**Real-Life Example**
+### Real-Life Example
 
 Think about a company's organization structure:
 
@@ -32,7 +32,7 @@ Employee1 Employee2
 
 A tree data structure works in the same way.
 
-**Basic Tree Structure**
+Basic Tree Structure
 
 Example:
 
@@ -54,15 +54,15 @@ Here:
 
 - 40, 50, 60, 70 are leaf nodes.
 
-**Important Terminology**
+Important Terminology
 
-**1. Node**
+1. Node
 
 A single element in a tree.
 
 Example:
 
-\[10\]
+- \[10\]
 
 A node stores:
 
@@ -70,7 +70,7 @@ A node stores:
 
 - References to child nodes
 
-**2. Root**
+2. Root
 
 The topmost node.
 
@@ -84,7 +84,7 @@ Example:
 
 A tree has only **one root**.
 
-**3. Parent**
+3. Parent
 
 A node that has child nodes.
 
@@ -98,7 +98,7 @@ Example:
 
 10 is the parent of 20.
 
-**4. Child**
+4. Child
 
 A node connected below another node.
 
@@ -112,7 +112,7 @@ Example:
 
 20 is the child of 10.
 
-**5. Sibling**
+5. Sibling
 
 Nodes having the same parent.
 
@@ -126,7 +126,7 @@ Example:
 
 20 and 30 are siblings.
 
-**6. Leaf Node**
+6. Leaf Node
 
 A node with no children.
 
@@ -140,7 +140,7 @@ Example:
 
 20 and 30 are leaf nodes.
 
-**7. Edge**
+7. Edge
 
 The connection between two nodes.
 
@@ -150,7 +150,7 @@ Example:
 
 The connection is an edge.
 
-**8. Height of Tree**
+8. Height of Tree
 
 The longest path from root to leaf.
 
@@ -168,7 +168,7 @@ Example:
 
 Height = 2 edges
 
-**9. Depth of Node**
+9. Depth of Node
 
 Distance from root to that node.
 
@@ -184,9 +184,9 @@ Example:
 
 30 depth 2
 
-**Types of Trees**
+Types of Trees
 
-**1. General Tree**
+1. General Tree
 
 A node can have any number of children.
 
@@ -198,7 +198,7 @@ A
 
 B C D E
 
-**2. Binary Tree**
+2. Binary Tree
 
 A node can have at most **two children**.
 
@@ -216,7 +216,7 @@ Example:
 
 20 30
 
-**3. Binary Search Tree (BST)**
+3. Binary Search Tree (BST)
 
 A binary tree with a special ordering rule:
 
@@ -240,7 +240,7 @@ Average:
 
 O(log n)
 
-**4. AVL Tree**
+4. AVL Tree
 
 A self-balancing Binary Search Tree.
 
@@ -262,7 +262,7 @@ Insert: O(log n)
 
 Delete: O(log n)
 
-**5. Heap**
+5. Heap
 
 A complete binary tree used for priority operations.
 
@@ -284,7 +284,7 @@ Used in:
 
 - Heap Sort
 
-**6. Trie**
+6. Trie
 
 A tree used for storing strings.
 
@@ -316,19 +316,19 @@ Used in:
 
 - Dictionary search
 
-**Tree Traversal**
+Tree Traversal
 
 Traversal means visiting every node in a tree.
 
 There are two major categories:
 
-**1. Depth First Traversal (DFS)**
+1. Depth First Traversal (DFS)
 
 Go deep before moving sideways.
 
 Three types:
 
-**Inorder Traversal**
+Inorder Traversal
 
 Order:
 
@@ -342,19 +342,19 @@ Example:
 
 5 20
 
-Output:
+- Output:
 
 5 10 20
 
 For BST, inorder gives sorted values.
 
-**Preorder Traversal**
+Preorder Traversal
 
 Order:
 
 Root → Left → Right
 
-Output:
+- Output:
 
 10 5 20
 
@@ -364,13 +364,13 @@ Used for:
 
 - Creating tree structure
 
-**Postorder Traversal**
+Postorder Traversal
 
 Order:
 
 Left → Right → Root
 
-Output:
+- Output:
 
 5 20 10
 
@@ -380,7 +380,7 @@ Used for:
 
 - Expression evaluation
 
-**2. Breadth First Traversal (BFS)**
+2. Breadth First Traversal (BFS)
 
 Visit level by level.
 
@@ -396,13 +396,13 @@ Example:
 
 40 50
 
-Output:
+- Output:
 
 10 20 30 40 50
 
 Uses a **Queue** internally.
 
-**Tree Implementation in C#**
+Tree Implementation in C#
 
 A simple binary tree node:
 
@@ -454,7 +454,7 @@ Structure:
 
 40 50
 
-**Time Complexity**
+### Time Complexity
 
 Depends on the type of tree.
 
@@ -474,7 +474,7 @@ For a balanced BST:
 | Insert        | O(log n)       |
 | Delete        | O(log n)       |
 
-**Tree vs Linear Data Structures**
+Tree vs Linear Data Structures
 
 | **Feature**  | **Linear Structures** | **Tree**        |
 |--------------|-----------------------|-----------------|
@@ -483,9 +483,9 @@ For a balanced BST:
 | Traversal    | Simple                | Multiple ways   |
 | Examples     | Array, Stack, Queue   | BST, Heap, Trie |
 
-**Applications of Trees**
+Applications of Trees
 
-**File Systems**
+File Systems
 
 Example:
 
@@ -499,7 +499,7 @@ C:
 
 Users Program Files
 
-**Databases**
+Databases
 
 Database indexes use trees:
 
@@ -515,7 +515,7 @@ Used by:
 
 - PostgreSQL
 
-**Compilers**
+Compilers
 
 Expression trees:
 
@@ -529,7 +529,7 @@ Represents:
 
 5 + 3
 
-**Artificial Intelligence**
+Artificial Intelligence
 
 Decision trees:
 
@@ -539,33 +539,33 @@ Weather
 
 Rain Sunny
 
-**Networks**
+Networks
 
 Routing tables and hierarchical structures.
 
-**Common Interview Questions**
+Common Interview Questions
 
-1.  What is a tree data structure?
+- What is a tree data structure?
 
-2.  Difference between tree and graph?
+- Difference between tree and graph?
 
-3.  What is a binary tree?
+- What is a binary tree?
 
-4.  Difference between binary tree and BST?
+- Difference between binary tree and BST?
 
-5.  What is tree traversal?
+- What is tree traversal?
 
-6.  Difference between DFS and BFS?
+- Difference between DFS and BFS?
 
-7.  What is tree height?
+- What is tree height?
 
-8.  What is a balanced tree?
+- What is a balanced tree?
 
-9.  Why are trees used in databases?
+- Why are trees used in databases?
 
-10. Difference between BST and Heap?
+- Difference between BST and Heap?
 
-**Summary**
+Summary
 
 | **Feature**  | **Tree**                  |
 |--------------|---------------------------|
@@ -578,7 +578,7 @@ Routing tables and hierarchical structures.
 | Traversal    | DFS and BFS               |
 | Examples     | BST, AVL, Heap, Trie      |
 
-**Key Takeaways**
+Key Takeaways
 
 - A **tree** represents hierarchical relationships using **nodes and edges**.
 

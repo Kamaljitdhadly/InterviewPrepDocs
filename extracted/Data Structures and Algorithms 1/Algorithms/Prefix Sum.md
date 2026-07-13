@@ -1,6 +1,6 @@
 # Data Structures and Algorithms Prefix Sum
 
-**Prefix Sum in Data Structures and Algorithms**
+Prefix Sum in Data Structures and Algorithms
 
 **Prefix Sum** is a technique used to efficiently calculate the **sum of elements in a range of an array**.
 
@@ -8,11 +8,11 @@ The main idea:
 
 Instead of repeatedly calculating sums, precompute cumulative sums once and use them to answer range queries quickly.
 
-**Why Do We Need Prefix Sum?**
+### Why Do We Need Prefix Sum?
 
 Consider an array:
 
-arr = \[2, 4, 6, 8, 10\]
+- arr = \[2, 4, 6, 8, 10\]
 
 Suppose we need to find:
 
@@ -22,7 +22,7 @@ Meaning:
 
 4 + 6 + 8 = 18
 
-**Normal Approach**
+Normal Approach
 
 Loop every time:
 
@@ -32,7 +32,7 @@ for(i=start; i\<=end; i++)
 
 {
 
-sum += arr\[i\];
+- sum += arr\[i\];
 
 }
 
@@ -52,7 +52,7 @@ Query 3 → O(n)
 
 This becomes slow.
 
-**Prefix Sum Idea**
+Prefix Sum Idea
 
 Create a new array where each element stores the sum of all previous elements.
 
@@ -74,39 +74,39 @@ Value: 2 6 12 20 30
 
 Meaning:
 
-prefix\[0\] = 2
+- prefix\[0\] = 2
 
-prefix\[1\] = 2 + 4 = 6
+- prefix\[1\] = 2 + 4 = 6
 
-prefix\[2\] = 2 + 4 + 6 = 12
+- prefix\[2\] = 2 + 4 + 6 = 12
 
-prefix\[3\] = 2 + 4 + 6 + 8 = 20
+- prefix\[3\] = 2 + 4 + 6 + 8 = 20
 
-prefix\[4\] = 2 + 4 + 6 + 8 + 10 = 30
+- prefix\[4\] = 2 + 4 + 6 + 8 + 10 = 30
 
-**Range Sum Using Prefix Sum**
+Range Sum Using Prefix Sum
 
 Formula:
 
-sum(left, right) = prefix\[right\] - prefix\[left-1\]
+- sum(left, right) = prefix\[right\] - prefix\[left-1\]
 
 Example:
 
 Find:
 
-arr\[1\] to arr\[3\]
+- arr\[1\] to arr\[3\]
 
 Array:
 
-\[2,4,6,8,10\]
+- \[2,4,6,8,10\]
 
 Prefix:
 
-\[2,6,12,20,30\]
+- \[2,6,12,20,30\]
 
 Formula:
 
-prefix\[3\] - prefix\[0\]
+- prefix\[3\] - prefix\[0\]
 
 20 - 2
 
@@ -116,7 +116,7 @@ Answer:
 
 4 + 6 + 8 = 18
 
-**Handling When Left Index is 0**
+Handling When Left Index is 0
 
 If:
 
@@ -126,43 +126,43 @@ There is no left-1.
 
 So:
 
-sum(0,right) = prefix\[right\]
+- sum(0,right) = prefix\[right\]
 
 Example:
 
 sum(0,2)
 
-prefix\[2\]
+- prefix\[2\]
 
 =12
 
-**Prefix Sum Construction**
+Prefix Sum Construction
 
 Algorithm:
 
-prefix\[0\] = arr\[0\];
+- prefix\[0\] = arr\[0\];
 
 for(int i=1; i\<arr.Length; i++)
 
 {
 
-prefix\[i\] = prefix\[i-1\] + arr\[i\];
+- prefix\[i\] = prefix\[i-1\] + arr\[i\];
 
 }
 
-**C# Example**
+C# Example
 
-int\[\] arr = {2,4,6,8,10};
+- int\[\] arr = {2,4,6,8,10};
 
-int\[\] prefix = new int\[arr.Length\];
+- int\[\] prefix = new int\[arr.Length\];
 
-prefix\[0\] = arr\[0\];
+- prefix\[0\] = arr\[0\];
 
 for(int i=1; i\<arr.Length; i++)
 
 {
 
-prefix\[i\] = prefix\[i-1\] + arr\[i\];
+- prefix\[i\] = prefix\[i-1\] + arr\[i\];
 
 }
 
@@ -170,17 +170,17 @@ int left = 1;
 
 int right = 3;
 
-int result = prefix\[right\] - prefix\[left-1\];
+- int result = prefix\[right\] - prefix\[left-1\];
 
 Console.WriteLine(result);
 
-Output:
+- Output:
 
 18
 
-**Complexity Analysis**
+Complexity Analysis
 
-**Without Prefix Sum**
+Without Prefix Sum
 
 For each query:
 
@@ -190,7 +190,7 @@ For Q queries:
 
 O(Q × n)
 
-**With Prefix Sum**
+With Prefix Sum
 
 Building prefix array:
 
@@ -204,11 +204,11 @@ Total:
 
 O(n + Q)
 
-**Prefix Sum Example: Range Frequency**
+Prefix Sum Example: Range Frequency
 
 Array:
 
-\[1,2,1,3,1,2\]
+- \[1,2,1,3,1,2\]
 
 Question:
 
@@ -228,9 +228,9 @@ Query:
 
 Answer:
 
-prefix\[4\] = 3
+- prefix\[4\] = 3
 
-**2D Prefix Sum (Matrix)**
+2D Prefix Sum (Matrix)
 
 Prefix sum also works on matrices.
 
@@ -258,9 +258,9 @@ O(1)
 
 instead of scanning all cells.
 
-**Applications of Prefix Sum**
+Applications of Prefix Sum
 
-**1. Range Sum Queries**
+1. Range Sum Queries
 
 Example:
 
@@ -274,7 +274,7 @@ Used in:
 
 - Reporting systems
 
-**2. Subarray Sum Problems**
+2. Subarray Sum Problems
 
 Example:
 
@@ -282,11 +282,11 @@ Find subarray with sum = K.
 
 Array:
 
-\[1,2,3,-2,5\]
+- \[1,2,3,-2,5\]
 
 Prefix sums help track previous sums.
 
-**3. Difference Array**
+3. Difference Array
 
 Prefix sum is the reverse concept of difference arrays.
 
@@ -300,7 +300,7 @@ Example:
 
 Increase all values from index 2 to 5 by 10.
 
-**4. Counting Subarrays**
+4. Counting Subarrays
 
 Problems like:
 
@@ -312,7 +312,7 @@ Use:
 
 Prefix Sum + HashMap
 
-**Prefix Sum + HashMap Example**
+Prefix Sum + HashMap Example
 
 Problem:
 
@@ -320,15 +320,15 @@ Find number of subarrays whose sum equals K.
 
 Array:
 
-\[1,2,3\]
+- \[1,2,3\]
 
 K = 3
 
 Subarrays:
 
-\[1,2\]
+- \[1,2\]
 
-\[3\]
+- \[3\]
 
 Answer:
 
@@ -346,7 +346,7 @@ currentSum - K
 
 exists in hashmap, a valid subarray exists.
 
-**Prefix Sum vs Sliding Window**
+Prefix Sum vs Sliding Window
 
 | **Prefix Sum**              | **Sliding Window**                |
 |-----------------------------|-----------------------------------|
@@ -355,11 +355,11 @@ exists in hashmap, a valid subarray exists.
 | Good for many queries       | Good for continuous ranges        |
 | Query can be O(1)           | Dynamic movement                  |
 
-**Prefix Sum vs Dynamic Programming**
+Prefix Sum vs Dynamic Programming
 
 They are related but different.
 
-**Prefix Sum:**
+Prefix Sum:
 
 Stores cumulative values.
 
@@ -367,7 +367,7 @@ Example:
 
 sum of previous elements
 
-**Dynamic Programming:**
+Dynamic Programming:
 
 Stores solutions to subproblems.
 
@@ -375,7 +375,7 @@ Example:
 
 minimum cost path
 
-**Common Interview Problems**
+Common Interview Problems
 
 | **Problem**           | **Technique**        |
 |-----------------------|----------------------|
@@ -386,7 +386,7 @@ minimum cost path
 | 2D Matrix Sum         | 2D Prefix Sum        |
 | Range Updates         | Difference Array     |
 
-**Interview Explanation (Senior Developer)**
+Interview Explanation (Senior Developer)
 
 "Prefix sum is a preprocessing technique where we store cumulative sums of an array. It allows us to answer range sum queries in O(1) time after O(n) preprocessing. The technique is widely used in subarray problems, frequency counting, matrix queries, and optimization problems."
 

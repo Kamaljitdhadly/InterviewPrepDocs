@@ -1,12 +1,12 @@
 # Data Structures and Algorithms Sliding Window
 
-**Sliding Window in Data Structures and Algorithms**
+Sliding Window in Data Structures and Algorithms
 
 **Sliding Window** is a technique used to solve problems involving **continuous subarrays or substrings** by maintaining a window (a range of elements) and moving it through the data instead of repeatedly recalculating results.
 
 The main idea:
 
-**Maintain a window of elements, expand when needed, shrink when the condition is violated.**
+Maintain a window of elements, expand when needed, shrink when the condition is violated.
 
 It is mainly used with:
 
@@ -18,25 +18,25 @@ It is mainly used with:
 
 - Substrings
 
-**Why Do We Need Sliding Window?**
+### Why Do We Need Sliding Window?
 
 Suppose we have an array:
 
-arr = \[2, 1, 5, 1, 3, 2\]
+- arr = \[2, 1, 5, 1, 3, 2\]
 
 Find the maximum sum of a subarray of size 3.
 
-**Brute Force Approach**
+Brute Force Approach
 
 Check every possible group:
 
-\[2,1,5\] → 8
+- \[2,1,5\] → 8
 
-\[1,5,1\] → 7
+- \[1,5,1\] → 7
 
-\[5,1,3\] → 9
+- \[5,1,3\] → 9
 
-\[1,3,2\] → 6
+- \[1,3,2\] → 6
 
 Maximum:
 
@@ -54,13 +54,13 @@ where:
 
 - k = window size
 
-**Sliding Window Approach**
+Sliding Window Approach
 
 Instead of recalculating:
 
 Initial window:
 
-\[2,1,5\] = 8
+- \[2,1,5\] = 8
 
 Move window by one:
 
@@ -82,15 +82,15 @@ Time:
 
 O(n)
 
-**Types of Sliding Window**
+Types of Sliding Window
 
 There are two main types:
 
-1.  **Fixed Size Sliding Window**
+- **Fixed Size Sliding Window**
 
-2.  **Variable Size Sliding Window**
+- **Variable Size Sliding Window**
 
-**1. Fixed Size Sliding Window**
+1. Fixed Size Sliding Window
 
 The window size remains constant.
 
@@ -98,37 +98,37 @@ Example:
 
 Find maximum sum of k consecutive elements
 
-Given:
+- Given:
 
-\[2,1,5,1,3,2\]
+- \[2,1,5,1,3,2\]
 
 k = 3
 
 Windows:
 
-\[2,1,5\]
+- \[2,1,5\]
 
-\[1,5,1\]
+- \[1,5,1\]
 
-\[5,1,3\]
+- \[5,1,3\]
 
-\[1,3,2\]
+- \[1,3,2\]
 
-**Algorithm**
+Algorithm
 
-1.  Create window of size k.
+- Create window of size k.
 
-2.  Calculate initial result.
+- Calculate initial result.
 
-3.  Move window one step.
+- Move window one step.
 
-4.  Remove left element.
+- Remove left element.
 
-5.  Add right element.
+- Add right element.
 
-**C# Example**
+C# Example
 
-int MaxSum(int\[\] arr, int k)
+- int MaxSum(int\[\] arr, int k)
 
 {
 
@@ -142,7 +142,7 @@ for(int i = 0; i \< k; i++)
 
 {
 
-windowSum += arr\[i\];
+- windowSum += arr\[i\];
 
 }
 
@@ -154,9 +154,9 @@ for(int i = k; i \< arr.Length; i++)
 
 {
 
-windowSum += arr\[i\];
+- windowSum += arr\[i\];
 
-windowSum -= arr\[i-k\];
+- windowSum -= arr\[i-k\];
 
 maxSum = Math.Max(maxSum, windowSum);
 
@@ -172,7 +172,7 @@ Time: O(n)
 
 Space: O(1)
 
-**2. Variable Size Sliding Window**
+2. Variable Size Sliding Window
 
 Window size changes dynamically.
 
@@ -188,7 +188,7 @@ Used for problems like:
 
 Array:
 
-\[2,1,5,1,3,2\]
+- \[2,1,5,1,3,2\]
 
 K = 7
 
@@ -200,11 +200,11 @@ right = 0
 
 Expand:
 
-\[2\] sum=2
+- \[2\] sum=2
 
-\[2,1\] sum=3
+- \[2,1\] sum=3
 
-\[2,1,5\] sum=8
+- \[2,1,5\] sum=8
 
 Sum exceeds K.
 
@@ -212,13 +212,13 @@ Shrink:
 
 Remove left:
 
-\[1,5\]
+- \[1,5\]
 
 sum=6
 
 Continue.
 
-**General Variable Window Pattern**
+General Variable Window Pattern
 
 int left = 0;
 
@@ -226,13 +226,13 @@ for(int right = 0; right \< arr.Length; right++)
 
 {
 
-// Add arr\[right\] to window
+- // Add arr\[right\] to window
 
 while(condition is invalid)
 
 {
 
-// Remove arr\[left\]
+- // Remove arr\[left\]
 
 left++;
 
@@ -246,7 +246,7 @@ left++;
 
 Problem:
 
-Input:
+- Input:
 
 abcabcbb
 
@@ -280,7 +280,7 @@ Length:
 
 3
 
-**C# Implementation**
+C# Implementation
 
 int LengthOfLongestSubstring(string s)
 
@@ -296,17 +296,17 @@ for(int right = 0; right \< s.Length; right++)
 
 {
 
-while(set.Contains(s\[right\]))
+- while(set.Contains(s\[right\]))
 
 {
 
-set.Remove(s\[left\]);
+- set.Remove(s\[left\]);
 
 left++;
 
 }
 
-set.Add(s\[right\]);
+- set.Add(s\[right\]);
 
 maxLength = Math.Max(
 
@@ -328,7 +328,7 @@ Time: O(n)
 
 Space: O(k)
 
-**Sliding Window with HashMap**
+Sliding Window with HashMap
 
 Many advanced problems use:
 
@@ -364,7 +364,7 @@ Dictionary\<char,int\>
 
 to track frequencies.
 
-**Fixed vs Variable Sliding Window**
+Fixed vs Variable Sliding Window
 
 | **Feature** | **Fixed Window**      | **Variable Window**      |
 |-------------|-----------------------|--------------------------|
@@ -373,7 +373,7 @@ to track frequencies.
 | Uses        | k-size problems       | Condition-based problems |
 | Example     | Max sum of k elements | Longest substring        |
 
-**Sliding Window vs Prefix Sum**
+Sliding Window vs Prefix Sum
 
 | **Sliding Window**          | **Prefix Sum**               |
 |-----------------------------|------------------------------|
@@ -384,15 +384,15 @@ to track frequencies.
 
 Example:
 
-**Sliding Window:**
+Sliding Window:
 
 "Find longest substring"
 
-**Prefix Sum:**
+Prefix Sum:
 
 "Find sum between index 100 and 500"
 
-**Sliding Window vs Two Pointer**
+Sliding Window vs Two Pointer
 
 They are closely related.
 
@@ -402,11 +402,11 @@ left → ← right
 
 Sliding window:
 
-\[left ........ right\]
+- \[left ........ right\]
 
 A sliding window is usually a **special case of two pointers**.
 
-**Common Sliding Window Problems**
+Common Sliding Window Problems
 
 | **Problem**                                    | **Technique**        |
 |------------------------------------------------|----------------------|
@@ -418,13 +418,13 @@ A sliding window is usually a **special case of two pointers**.
 | Anagram detection                              | Frequency comparison |
 | Maximum in every window                        | Deque                |
 
-**Advanced Example: Minimum Window Substring**
+Advanced Example: Minimum Window Substring
 
 Problem:
 
 Find smallest substring containing all characters.
 
-Input:
+- Input:
 
 ADOBECODEBANC
 
@@ -438,17 +438,17 @@ BANC
 
 Approach:
 
-1.  Expand right pointer.
+- Expand right pointer.
 
-2.  Include required characters.
+- Include required characters.
 
-3.  When valid, shrink from left.
+- When valid, shrink from left.
 
-4.  Keep minimum window.
+- Keep minimum window.
 
-**Common Mistakes**
+Common Mistakes
 
-**1. Forgetting to remove elements**
+1. Forgetting to remove elements
 
 Wrong:
 
@@ -456,7 +456,7 @@ Expand only
 
 The window grows forever.
 
-**2. Incorrect window size**
+2. Incorrect window size
 
 For fixed window:
 
@@ -464,7 +464,7 @@ right - left + 1
 
 is the current size.
 
-**3. Not handling duplicates**
+3. Not handling duplicates
 
 Use:
 
@@ -472,7 +472,7 @@ Use:
 
 - Dictionary frequency
 
-**Interview Explanation (Senior Developer)**
+Interview Explanation (Senior Developer)
 
 "Sliding window is an optimization technique used for problems involving contiguous sequences. It maintains a range using two pointers and avoids recalculating information by adding new elements when expanding and removing old elements when shrinking. Fixed-size windows are used when the window length is known, while variable-size windows dynamically adjust based on constraints. It reduces many O(n²) brute-force solutions to O(n)."
 

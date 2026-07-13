@@ -1,12 +1,12 @@
 # Data Structures and Algorithms Depth First Search
 
-**Depth First Search (DFS) in Data Structures and Algorithms**
+Depth First Search (DFS) in Data Structures and Algorithms
 
 **Depth First Search (DFS)** is a graph traversal algorithm that explores a graph by going **as deep as possible along one path before backtracking**.
 
 The main idea:
 
-**Go deep first, then come back and explore other branches.**
+Go deep first, then come back and explore other branches.
 
 DFS uses:
 
@@ -14,7 +14,7 @@ DFS uses:
 
 - Or **Recursion** (which internally uses the call stack)
 
-**Real-Life Example**
+### Real-Life Example
 
 Imagine exploring a maze.
 
@@ -42,7 +42,7 @@ and try another path.
 
 This is exactly how DFS works.
 
-**Graph Example**
+Graph Example
 
 Consider:
 
@@ -58,7 +58,7 @@ D E
 
 Starting from A.
 
-**DFS Traversal**
+DFS Traversal
 
 Follow one branch completely:
 
@@ -90,13 +90,13 @@ Final DFS order:
 
 A → B → D → E → C
 
-**How DFS Works**
+### How DFS Works
 
 DFS maintains:
 
-1.  **Visited set** → tracks visited nodes
+- **Visited set** → tracks visited nodes
 
-2.  **Stack** → remembers nodes to explore
+- **Stack** → remembers nodes to explore
 
 Algorithm:
 
@@ -112,7 +112,7 @@ Algorithm:
 
 6\. Continue until all nodes are visited
 
-**DFS Using Recursion**
+DFS Using Recursion
 
 The recursive idea:
 
@@ -130,7 +130,7 @@ DFS(neighbor)
 
 }
 
-**DFS Example Step-by-Step**
+DFS Example Step-by-Step
 
 Graph:
 
@@ -188,7 +188,7 @@ Final:
 
 A → B → D → E → C
 
-**DFS Implementation in C#**
+DFS Implementation in C#
 
 Using adjacency list:
 
@@ -206,7 +206,7 @@ visited.Add(node);
 
 Console.WriteLine(node);
 
-foreach(var neighbor in graph\[node\])
+- foreach(var neighbor in graph\[node\])
 
 {
 
@@ -222,7 +222,7 @@ DFS(neighbor, graph, visited);
 
 }
 
-**Iterative DFS Using Stack**
+Iterative DFS Using Stack
 
 Instead of recursion:
 
@@ -254,7 +254,7 @@ visited.Add(node);
 
 Console.WriteLine(node);
 
-foreach(var neighbor in graph\[node\])
+- foreach(var neighbor in graph\[node\])
 
 {
 
@@ -266,7 +266,7 @@ stack.Push(neighbor);
 
 }
 
-**Complexity Analysis**
+Complexity Analysis
 
 For graph:
 
@@ -274,7 +274,7 @@ For graph:
 
 - E = number of edges
 
-**Time Complexity**
+### Time Complexity
 
 Every node visited once:
 
@@ -288,7 +288,7 @@ Total:
 
 O(V + E)
 
-**Space Complexity**
+### Space Complexity
 
 Visited set:
 
@@ -302,7 +302,7 @@ Total:
 
 O(V)
 
-**DFS in Binary Trees**
+DFS in Binary Trees
 
 DFS is commonly used for tree traversal.
 
@@ -320,39 +320,39 @@ Tree:
 
 DFS traversals:
 
-**1. Preorder**
+1. Preorder
 
 Order:
 
 Root → Left → Right
 
-Output:
+- Output:
 
 1 2 4 5 3
 
-**2. Inorder**
+2. Inorder
 
 Order:
 
 Left → Root → Right
 
-Output:
+- Output:
 
 4 2 5 1 3
 
-**3. Postorder**
+3. Postorder
 
 Order:
 
 Left → Right → Root
 
-Output:
+- Output:
 
 4 5 2 3 1
 
-**Applications of DFS**
+Applications of DFS
 
-**1. Cycle Detection**
+1. Cycle Detection
 
 Example:
 
@@ -372,7 +372,7 @@ Used in:
 
 - Package managers
 
-**2. Topological Sorting**
+2. Topological Sorting
 
 Used for:
 
@@ -398,7 +398,7 @@ DFS order:
 
 Database → Backend → Frontend
 
-**3. Finding Connected Components**
+3. Finding Connected Components
 
 Graph:
 
@@ -420,7 +420,7 @@ Result:
 
 2 connected components
 
-**4. Maze Solving**
+4. Maze Solving
 
 Maze:
 
@@ -440,7 +440,7 @@ Backtrack
 
 DFS tries paths recursively.
 
-**5. Finding Islands in Matrix**
+5. Finding Islands in Matrix
 
 Example:
 
@@ -458,7 +458,7 @@ Used in:
 
 - Image processing
 
-**DFS vs BFS**
+DFS vs BFS
 
 | **Feature**    | **DFS**               | **BFS**              |
 |----------------|-----------------------|----------------------|
@@ -470,11 +470,11 @@ Used in:
 | Memory         | Lower for wide graphs | Higher               |
 | Backtracking   | Yes                   | No                   |
 
-**DFS vs Backtracking**
+DFS vs Backtracking
 
 They look similar but differ.
 
-**DFS**
+DFS
 
 Traversal:
 
@@ -488,7 +488,7 @@ Example:
 
 Graph traversal
 
-**Backtracking**
+Backtracking
 
 Decision making:
 
@@ -510,7 +510,7 @@ N-Queens
 
 Permutations
 
-**DFS vs Dijkstra**
+DFS vs Dijkstra
 
 | **DFS**         | **Dijkstra**        |
 |-----------------|---------------------|
@@ -519,7 +519,7 @@ Permutations
 | Uses stack      | Uses priority queue |
 | O(V+E)          | O((V+E)logV)        |
 
-**Common DFS Interview Problems**
+Common DFS Interview Problems
 
 | **Problem**           | **Concept**         |
 |-----------------------|---------------------|
@@ -531,7 +531,7 @@ Permutations
 | Path Sum              | Tree DFS            |
 | Generate Permutations | DFS + Backtracking  |
 
-**DFS with Three States (Advanced)**
+DFS with Three States (Advanced)
 
 Used for cycle detection in directed graphs.
 
@@ -553,7 +553,7 @@ A → B → C
 
 If DFS finds a node with state 1, there is a cycle.
 
-**Interview Explanation (Senior Developer)**
+Interview Explanation (Senior Developer)
 
 "Depth First Search is a graph traversal algorithm that explores as far as possible along each branch before backtracking. It can be implemented using recursion or an explicit stack. DFS is commonly used for cycle detection, topological sorting, connected components, path finding, and tree traversal. Its time complexity is O(V+E) and space complexity is O(V)."
 
